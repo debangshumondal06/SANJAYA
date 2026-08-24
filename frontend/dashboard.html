@@ -1,0 +1,32 @@
+<main class="dashboard-shell">
+         <section class="dashboard-heading">
+                  <div>
+                           <p class="eyebrow">Authority workspace</p>
+                           <h1>Focus response where it matters.</h1>
+                  </div>
+                  <a class="text-link" href="index.html">Citizen reporting</a>
+         </section>
+
+         <section class="metric-grid" aria-label="Incident summary">
+                  <article><span>Total incidents</span><strong id="total-count">—</strong></article>
+                  <article><span>Unresolved</span><strong id="unresolved-count">—</strong></article>
+                  <article><span>High priority</span><strong id="high-count">—</strong></article>
+         </section>
+
+         <section class="workspace">
+                  <div class="queue-column">
+                           <div class="filters">
+                                    <select id="status-filter">
+                                             <option value="">All statuses</option>
+                                    </select>
+                                    <select id="category-filter">
+                                             <option value="">All categories</option>
+                                    </select>
+                           </div>
+                           <div id="incident-list" aria-live="polite"></div>
+                  </div>
+                  <aside id="incident-detail" class="detail-column">Select an incident to review it.</aside>
+         </section>
+</main>
+<script src="js/api.js"></script>
+<script src="js/dashboard.js"></script>

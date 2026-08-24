@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+         <meta charset="UTF-8" />
+         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+         <title>SANJAYA — Report a civic issue</title>
+         <link rel="stylesheet" href="css/styles.css" />
+</head>
+
+<body class="citizen-page">
+         <header class="site-header">
+                  <a class="brand" href="index.html">SANJAYA <span>Civic intelligence</span></a>
+                  <a class="text-link" href="dashboard.html">Authority workspace</a>
+         </header>
+
+         <main class="report-layout">
+                  <section class="hero-copy">
+                           <p class="eyebrow">Civic reporting, made clear</p>
+                           <h1>See a problem?
+                                    <em>Set action in motion.</em>
+                           </h1>
+                           <p>Report potholes, garbage overflow, or waterlogging. SANJAYA turns your report into an
+                                    incident the appropriate team can review.</p>
+                  </section>
+
+                  <form id="incident-form" class="card" enctype="multipart/form-data">
+                           <h2>Make a report</h2>
+                           <label>Issue type
+                                    <select name="category" required>
+                                             <option value="pothole">Pothole</option>
+                                             <option value="garbage_overflow">Garbage overflow</option>
+                                             <option value="waterlogging">Waterlogging</option>
+                                    </select>
+                           </label>
+                           <label>Description
+                                    <textarea name="description" minlength="10" maxlength="1000" required
+                                             placeholder="Describe the location, visible problem, and public impact."></textarea>
+                           </label>
+                           <label>Urgency
+                                    <select name="severity">
+                                             <option value="low">Low</option>
+                                             <option value="medium" selected>Medium</option>
+                                             <option value="high">High</option>
+                                             <option value="critical">Critical</option>
+                                    </select>
+                           </label>
+                           <div class="field-row">
+                                    <label>Latitude<input name="latitude" type="number" step="any" required /></label>
+                                    <label>Longitude<input name="longitude" type="number" step="any" required /></label>
+                           </div>
+                           <button type="button" id="location-button" class="secondary-button">Use my current
+                                    location</button>
+                           <label>Evidence image <span class="optional">optional</span>
+                                    <input name="evidence" type="file" accept="image/jpeg,image/png,image/webp" />
+                           </label>
+                           <button class="primary-button" type="submit">Submit incident report</button>
+                           <p id="form-message" class="form-message" role="status"></p>
+                  </form>
+         </main>
+         <script src="js/api.js"></script>
+         <script src="js/report.js"></script>
+</body>
+
+</html>

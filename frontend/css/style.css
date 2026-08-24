@@ -1,0 +1,130 @@
+:root {
+         --ink: #18312d;
+         --deep-green: #0f4d43;
+         --mint: #e7f4ee;
+         --paper: #fffdf9;
+         --line: #d7e0da;
+         --accent: #d96d4c;
+         font-family: Arial, sans-serif;
+}
+
+* {
+         box-sizing: border-box;
+}
+
+body {
+         margin: 0;
+         color: var(--ink);
+         background: var(--paper);
+}
+
+.site-header {
+         display: flex;
+         justify-content: space-between;
+         padding: 1rem 6vw;
+         border-bottom: 1px solid var(--line);
+}
+
+.brand {
+         color: var(--deep-green);
+         font-weight: 800;
+         letter-spacing: .08em;
+         text-decoration: none;
+}
+
+.brand span {
+         display: block;
+         font-size: .63rem;
+         font-weight: 500;
+         letter-spacing: .1em;
+}
+
+.report-layout {
+         width: min(1100px, 90vw);
+         min-height: calc(100vh - 76px);
+         margin: auto;
+         display: grid;
+         grid-template-columns: 1fr 1fr;
+         align-items: center;
+         gap: 4rem;
+}
+
+h1 {
+         font-family: Georgia, serif;
+         font-size: clamp(2.6rem, 6vw, 5rem);
+         line-height: 1;
+}
+
+h1 em {
+         color: #287462;
+}
+
+.card {
+         padding: 1.5rem;
+         border: 1px solid var(--line);
+         box-shadow: 0 14px 35px rgba(15, 77, 67, .12);
+}
+
+label {
+         display: grid;
+         gap: .4rem;
+         margin: 1rem 0;
+         font-weight: 700;
+}
+
+input,
+select,
+textarea {
+         width: 100%;
+         padding: .7rem;
+         border: 1px solid #aebfb7;
+         border-radius: 3px;
+         font: inherit;
+}
+
+textarea {
+         min-height: 120px;
+         resize: vertical;
+}
+
+.field-row {
+         display: grid;
+         grid-template-columns: 1fr 1fr;
+         gap: .7rem;
+}
+
+.primary-button,
+.secondary-button {
+         padding: .75rem 1rem;
+         border: 0;
+         font-weight: 700;
+         cursor: pointer;
+}
+
+.primary-button {
+         width: 100%;
+         color: #fff;
+         background: var(--deep-green);
+}
+
+.secondary-button {
+         color: var(--deep-green);
+         background: var(--mint);
+}
+
+.form-message {
+         min-height: 1.5rem;
+         font-size: .88rem;
+}
+
+@media (max-width: 720px) {
+         .report-layout {
+                  grid-template-columns: 1fr;
+                  gap: 1.5rem;
+                  padding: 2.5rem 0;
+         }
+
+         .field-row {
+                  grid-template-columns: 1fr;
+         }
+}
