@@ -1,32 +1,1445 @@
-<main class="dashboard-shell">
-         <section class="dashboard-heading">
-                  <div>
-                           <p class="eyebrow">Authority workspace</p>
-                           <h1>Focus response where it matters.</h1>
-                  </div>
-                  <a class="text-link" href="index.html">Citizen reporting</a>
-         </section>
+<!doctype html>
+<html lang="en">
 
-         <section class="metric-grid" aria-label="Incident summary">
-                  <article><span>Total incidents</span><strong id="total-count">—</strong></article>
-                  <article><span>Unresolved</span><strong id="unresolved-count">—</strong></article>
-                  <article><span>High priority</span><strong id="high-count">—</strong></article>
-         </section>
+<head>
+         <meta charset="UTF-8" />
+         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+         <meta name="description" content="SANJAYA civic operations dashboard prototype." />
+         <meta name="theme-color" content="#07101f" />
+         <title>SANJAYA — Civic Operations</title>
+         <link rel="preconnect" href="https://fonts.googleapis.com" />
+         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+         <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Instrument+Serif:ital@0;1&display=swap"
+                  rel="stylesheet" />
+         <style>
+                  :root {
+                           --ink: #07101f;
+                           --deep: #0b1730;
+                           --panel: #101d36;
+                           --panel-2: #132545;
+                           --blue: #377bff;
+                           --sky: #b5d1ff;
+                           --white: #fff;
+                           --muted: #8da0bf;
+                           --line: rgba(193, 217, 255, .16);
+                           --green: #70d5ae;
+                           --amber: #ffbf6c;
+                           --red: #ff8975;
+                           --serif: "Instrument Serif", Georgia, serif;
+                           --sans: "DM Sans", Arial, sans-serif;
+                           --mono: "DM Mono", monospace;
+                           --ease: cubic-bezier(.2, .8, .2, 1);
+                  }
 
-         <section class="workspace">
-                  <div class="queue-column">
-                           <div class="filters">
-                                    <select id="status-filter">
-                                             <option value="">All statuses</option>
-                                    </select>
-                                    <select id="category-filter">
-                                             <option value="">All categories</option>
-                                    </select>
+                  * {
+                           box-sizing: border-box;
+                  }
+
+                  body {
+                           min-width: 320px;
+                           margin: 0;
+                           overflow-x: hidden;
+                           color: #f8fbff;
+                           background: radial-gradient(circle at 86% -7%, #1b477f 0, transparent 27%), var(--ink);
+                           font-family: var(--sans);
+                  }
+
+                  button,
+                  input {
+                           font: inherit;
+                  }
+
+                  button {
+                           cursor: pointer;
+                  }
+
+                  a {
+                           color: inherit;
+                           text-decoration: none;
+                  }
+
+                  ::selection {
+                           color: white;
+                           background: var(--blue);
+                  }
+
+                  .noise {
+                           position: fixed;
+                           z-index: 20;
+                           inset: 0;
+                           pointer-events: none;
+                           opacity: .036;
+                           background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.72' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.65'/%3E%3C/svg%3E");
+                  }
+
+                  .app {
+                           display: grid;
+                           grid-template-columns: 238px minmax(0, 1fr);
+                           min-height: 100vh;
+                  }
+
+                  .sidebar {
+                           position: sticky;
+                           top: 0;
+                           display: flex;
+                           min-height: 100vh;
+                           flex-direction: column;
+                           padding: 1.45rem 1rem;
+                           border-right: 1px solid var(--line);
+                           background: rgba(5, 11, 24, .63);
+                           backdrop-filter: blur(18px);
+                  }
+
+                  .brand {
+                           display: flex;
+                           align-items: center;
+                           gap: .72rem;
+                           padding: 0 .45rem;
+                  }
+
+                  .mark {
+                           display: grid;
+                           width: 34px;
+                           height: 34px;
+                           place-items: center;
+                           border: 1px solid rgba(255, 255, 255, .32);
+                           border-radius: 10px 10px 2px 10px;
+                           color: #0a1530;
+                           background: linear-gradient(145deg, #d4e4ff, #6097ff);
+                           font: 1.25rem var(--serif);
+                  }
+
+                  .brand-text {
+                           font-size: .82rem;
+                           font-weight: 700;
+                           letter-spacing: .14em;
+                  }
+
+                  .brand-text small {
+                           display: block;
+                           margin-top: .12rem;
+                           color: #8497b7;
+                           font: .49rem var(--mono);
+                           letter-spacing: .09em;
+                  }
+
+                  .workspace-tag {
+                           margin: 2.2rem .45rem .7rem;
+                           color: #6f83a5;
+                           font: .54rem var(--mono);
+                           letter-spacing: .1em;
+                           text-transform: uppercase;
+                  }
+
+                  .side-nav {
+                           display: grid;
+                           gap: .26rem;
+                  }
+
+                  .side-nav a {
+                           display: flex;
+                           align-items: center;
+                           gap: .65rem;
+                           padding: .62rem .7rem;
+                           border: 1px solid transparent;
+                           border-radius: 4px;
+                           color: #9eb0ce;
+                           font-size: .72rem;
+                           transition: .2s var(--ease);
+                  }
+
+                  .side-nav a:hover {
+                           color: #fff;
+                           background: rgba(96, 151, 255, .1);
+                  }
+
+                  .side-nav a.active {
+                           border-color: rgba(120, 167, 255, .22);
+                           color: white;
+                           background: linear-gradient(135deg, rgba(57, 123, 255, .25), rgba(57, 123, 255, .07));
+                  }
+
+                  .nav-icon {
+                           width: 17px;
+                           color: #8fbbff;
+                           text-align: center;
+                           font-size: .88rem;
+                  }
+
+                  .nav-badge {
+                           margin-left: auto;
+                           padding: .16rem .35rem;
+                           border-radius: 99px;
+                           color: #9bc2ff;
+                           background: rgba(87, 145, 255, .14);
+                           font: .49rem var(--mono);
+                  }
+
+                  .side-summary {
+                           margin-top: auto;
+                           padding: .85rem;
+                           border: 1px solid rgba(177, 209, 255, .16);
+                           border-radius: 6px;
+                           background: linear-gradient(145deg, rgba(26, 54, 108, .52), rgba(12, 23, 46, .85));
+                  }
+
+                  .side-summary p {
+                           margin: 0 0 .5rem;
+                           color: #9ab9eb;
+                           font: .52rem var(--mono);
+                           letter-spacing: .08em;
+                           text-transform: uppercase;
+                  }
+
+                  .side-summary strong {
+                           display: block;
+                           font: 1.62rem var(--serif);
+                  }
+
+                  .side-summary small {
+                           display: block;
+                           margin-top: .28rem;
+                           color: #aebed7;
+                           font-size: .58rem;
+                           line-height: 1.5;
+                  }
+
+                  .side-summary .mini-track {
+                           height: 4px;
+                           margin-top: .7rem;
+                           overflow: hidden;
+                           border-radius: 99px;
+                           background: #273c64;
+                  }
+
+                  .side-summary .mini-track i {
+                           display: block;
+                           width: 74%;
+                           height: 100%;
+                           border-radius: inherit;
+                           background: linear-gradient(90deg, #427fff, #b7d5ff);
+                  }
+
+                  .content {
+                           position: relative;
+                           padding: 0 clamp(1rem, 3vw, 2.65rem) 2.7rem;
+                  }
+
+                  .topbar {
+                           display: flex;
+                           align-items: center;
+                           gap: 1rem;
+                           min-height: 80px;
+                           border-bottom: 1px solid var(--line);
+                  }
+
+                  .crumb {
+                           color: #8da0be;
+                           font: .58rem var(--mono);
+                           letter-spacing: .08em;
+                           text-transform: uppercase;
+                  }
+
+                  .crumb b {
+                           color: #d9e6fa;
+                           font-weight: 500;
+                  }
+
+                  .top-actions {
+                           display: flex;
+                           align-items: center;
+                           gap: .65rem;
+                           margin-left: auto;
+                  }
+
+                  .search {
+                           display: flex;
+                           align-items: center;
+                           gap: .45rem;
+                           min-width: min(240px, 25vw);
+                           padding: 0 .7rem;
+                           border: 1px solid var(--line);
+                           border-radius: 4px;
+                           color: #7c90b2;
+                           background: rgba(3, 9, 20, .3);
+                  }
+
+                  .search span {
+                           font-size: .85rem;
+                  }
+
+                  .search input {
+                           width: 100%;
+                           min-height: 36px;
+                           border: 0;
+                           outline: 0;
+                           color: #dbe8ff;
+                           background: transparent;
+                           font-size: .68rem;
+                  }
+
+                  .search input::placeholder {
+                           color: #7488a8;
+                  }
+
+                  .icon-button {
+                           display: grid;
+                           width: 36px;
+                           height: 36px;
+                           place-items: center;
+                           border: 1px solid var(--line);
+                           border-radius: 4px;
+                           color: #bad0f4;
+                           background: rgba(255, 255, 255, .025);
+                  }
+
+                  .operator {
+                           display: flex;
+                           align-items: center;
+                           gap: .5rem;
+                           padding-left: .3rem;
+                           color: #cbd9ed;
+                           font-size: .66rem;
+                  }
+
+                  .operator b {
+                           display: grid;
+                           width: 29px;
+                           height: 29px;
+                           place-items: center;
+                           border-radius: 50%;
+                           color: #ddebff;
+                           background: #244d9e;
+                           font: .52rem var(--mono);
+                  }
+
+                  .page-head {
+                           display: flex;
+                           align-items: end;
+                           justify-content: space-between;
+                           gap: 1rem;
+                           padding: 2.3rem 0 1.45rem;
+                  }
+
+                  .eyebrow {
+                           display: flex;
+                           align-items: center;
+                           gap: .45rem;
+                           margin: 0 0 .62rem;
+                           color: #a6c8ff;
+                           font: .55rem var(--mono);
+                           letter-spacing: .12em;
+                           text-transform: uppercase;
+                  }
+
+                  .eyebrow::before {
+                           width: 18px;
+                           height: 1px;
+                           background: #4f8dff;
+                           content: "";
+                  }
+
+                  .page-head h1 {
+                           margin: 0;
+                           letter-spacing: -.035em;
+                           font: clamp(2.25rem, 4vw, 3.8rem)/.9 var(--serif);
+                  }
+
+                  .page-head h1 em {
+                           color: #a9c9ff;
+                  }
+
+                  .page-head p {
+                           max-width: 365px;
+                           margin: 0 0 .15rem;
+                           color: #a4b4cd;
+                           font-size: .72rem;
+                           line-height: 1.65;
+                  }
+
+                  .metric-grid {
+                           display: grid;
+                           grid-template-columns: repeat(4, 1fr);
+                           gap: .75rem;
+                  }
+
+                  .metric {
+                           position: relative;
+                           min-height: 110px;
+                           padding: .9rem;
+                           overflow: hidden;
+                           border: 1px solid var(--line);
+                           border-radius: 6px;
+                           background: linear-gradient(145deg, rgba(21, 38, 72, .86), rgba(11, 20, 39, .96));
+                  }
+
+                  .metric::after {
+                           position: absolute;
+                           top: -40px;
+                           right: -35px;
+                           width: 110px;
+                           height: 110px;
+                           border-radius: 50%;
+                           background: radial-gradient(circle, rgba(72, 135, 255, .18), transparent 68%);
+                           content: "";
+                  }
+
+                  .metric-label {
+                           display: flex;
+                           align-items: center;
+                           justify-content: space-between;
+                           color: #9eb0ce;
+                           font-size: .58rem;
+                  }
+
+                  .metric-label i {
+                           color: #85b1ff;
+                           font-style: normal;
+                  }
+
+                  .metric strong {
+                           display: block;
+                           margin: .72rem 0 .24rem;
+                           font: 2rem var(--serif);
+                  }
+
+                  .metric small {
+                           position: relative;
+                           z-index: 1;
+                           color: #7ee0b7;
+                           font-size: .57rem;
+                  }
+
+                  .metric small.warn {
+                           color: #ffc36f;
+                  }
+
+                  .metric small b {
+                           font-weight: 700;
+                  }
+
+                  .dashboard-grid {
+                           display: grid;
+                           grid-template-columns: minmax(0, 1.03fr) minmax(340px, .97fr);
+                           gap: .85rem;
+                           margin-top: .85rem;
+                  }
+
+                  .card {
+                           border: 1px solid var(--line);
+                           border-radius: 7px;
+                           background: linear-gradient(145deg, rgba(18, 32, 60, .94), rgba(10, 19, 37, .97));
+                           box-shadow: 0 18px 42px rgba(0, 0, 0, .1);
+                  }
+
+                  .card-head {
+                           display: flex;
+                           align-items: center;
+                           justify-content: space-between;
+                           gap: 1rem;
+                           padding: 1rem 1rem .85rem;
+                           border-bottom: 1px solid var(--line);
+                  }
+
+                  .card-head h2 {
+                           margin: 0;
+                           font: 1.08rem var(--serif);
+                  }
+
+                  .card-head p {
+                           margin: .2rem 0 0;
+                           color: #93a6c5;
+                           font-size: .6rem;
+                  }
+
+                  .filter-row {
+                           display: flex;
+                           gap: .35rem;
+                  }
+
+                  .filter {
+                           padding: .36rem .5rem;
+                           border: 1px solid rgba(181, 207, 251, .16);
+                           border-radius: 99px;
+                           color: #a6b6cf;
+                           background: transparent;
+                           font-size: .55rem;
+                           transition: .2s var(--ease);
+                  }
+
+                  .filter:hover,
+                  .filter.active {
+                           border-color: rgba(124, 172, 255, .45);
+                           color: #dbe9ff;
+                           background: rgba(66, 126, 255, .15);
+                  }
+
+                  .priority-queue {
+                           overflow: hidden;
+                  }
+
+                  .queue-list {
+                           display: grid;
+                  }
+
+                  .queue-item {
+                           display: grid;
+                           grid-template-columns: 34px 1fr auto;
+                           align-items: center;
+                           gap: .7rem;
+                           padding: .78rem 1rem;
+                           border-bottom: 1px solid rgba(192, 215, 255, .1);
+                           transition: background .2s var(--ease);
+                  }
+
+                  .queue-item:last-child {
+                           border: 0;
+                  }
+
+                  .queue-item:hover {
+                           background: rgba(96, 151, 255, .06);
+                  }
+
+                  .queue-item.hidden {
+                           display: none;
+                  }
+
+                  .priority {
+                           display: grid;
+                           width: 29px;
+                           height: 29px;
+                           place-items: center;
+                           border-radius: 50%;
+                           color: #dce9ff;
+                           background: #21458b;
+                           font: .51rem var(--mono);
+                  }
+
+                  .priority.high {
+                           color: #fff0ea;
+                           background: #a94b48;
+                  }
+
+                  .priority.mid {
+                           color: #fff0db;
+                           background: #9c6d33;
+                  }
+
+                  .queue-item strong,
+                  .queue-item small {
+                           display: block;
+                  }
+
+                  .queue-item strong {
+                           color: #e7f0ff;
+                           font-size: .66rem;
+                  }
+
+                  .queue-item small {
+                           margin-top: .16rem;
+                           color: #8fa2c1;
+                           font-size: .55rem;
+                  }
+
+                  .queue-item time {
+                           color: #8094b7;
+                           font: .5rem var(--mono);
+                  }
+
+                  .queue-item .state {
+                           padding: .22rem .34rem;
+                           border-radius: 99px;
+                           color: #a9caff;
+                           background: rgba(68, 128, 255, .14);
+                           font: .48rem var(--mono);
+                  }
+
+                  .queue-item .state.green {
+                           color: #9be3c5;
+                           background: rgba(101, 206, 166, .12);
+                  }
+
+                  .queue-footer {
+                           display: flex;
+                           align-items: center;
+                           justify-content: space-between;
+                           padding: .72rem 1rem;
+                           border-top: 1px solid var(--line);
+                           color: #8498bb;
+                           font-size: .57rem;
+                  }
+
+                  .queue-footer a {
+                           color: #9cc3ff;
+                           font-weight: 700;
+                  }
+
+                  .showcase {
+                           overflow: hidden;
+                  }
+
+                  .showcase-head {
+                           display: flex;
+                           align-items: center;
+                           justify-content: space-between;
+                           padding: 1rem;
+                  }
+
+                  .showcase-head h2 {
+                           margin: 0;
+                           font: 1.08rem var(--serif);
+                  }
+
+                  .showcase-head .label {
+                           color: #91a7ca;
+                           font: .54rem var(--mono);
+                           letter-spacing: .08em;
+                           text-transform: uppercase;
+                  }
+
+                  .slide-wrap {
+                           position: relative;
+                           margin: 0 1rem;
+                           overflow: hidden;
+                           border-radius: 6px;
+                           background: #07101f;
+                           aspect-ratio: 1.57/1;
+                  }
+
+                  .slide {
+                           position: absolute;
+                           inset: 0;
+                           opacity: 0;
+                           transform: scale(1.04);
+                           pointer-events: none;
+                           transition: opacity .45s var(--ease), transform .7s var(--ease);
+                  }
+
+                  .slide.active {
+                           z-index: 1;
+                           opacity: 1;
+                           transform: scale(1);
+                           pointer-events: auto;
+                  }
+
+                  .slide img {
+                           width: 100%;
+                           height: 100%;
+                           object-fit: cover;
+                           filter: saturate(.8) contrast(1.05);
+                  }
+
+                  .slide::after {
+                           position: absolute;
+                           inset: 0;
+                           background: linear-gradient(180deg, transparent 38%, rgba(3, 9, 19, .86));
+                           content: "";
+                  }
+
+                  .slide-caption {
+                           position: absolute;
+                           z-index: 2;
+                           right: 0;
+                           bottom: 0;
+                           left: 0;
+                           padding: 1rem;
+                  }
+
+                  .slide-caption .caption-top {
+                           display: flex;
+                           justify-content: space-between;
+                           margin-bottom: .35rem;
+                           color: #b8d0f5;
+                           font: .5rem var(--mono);
+                           letter-spacing: .1em;
+                  }
+
+                  .slide-caption h3 {
+                           margin: 0;
+                           font-size: .83rem;
+                  }
+
+                  .slide-caption p {
+                           margin: .2rem 0 0;
+                           color: #c4d2e9;
+                           font-size: .58rem;
+                  }
+
+                  .slideshow-controls {
+                           display: flex;
+                           align-items: center;
+                           justify-content: space-between;
+                           padding: .8rem 1rem 1rem;
+                  }
+
+                  .dots {
+                           display: flex;
+                           gap: .35rem;
+                  }
+
+                  .slide-dot {
+                           width: 6px;
+                           height: 6px;
+                           padding: 0;
+                           border: 0;
+                           border-radius: 50%;
+                           background: #506a95;
+                  }
+
+                  .slide-dot.active {
+                           width: 19px;
+                           border-radius: 99px;
+                           background: #8bb8ff;
+                  }
+
+                  .arrows {
+                           display: flex;
+                           gap: .35rem;
+                  }
+
+                  .arrow {
+                           display: grid;
+                           width: 28px;
+                           height: 28px;
+                           place-items: center;
+                           border: 1px solid var(--line);
+                           border-radius: 3px;
+                           color: #bdd2f3;
+                           background: transparent;
+                  }
+
+                  .arrow:hover {
+                           border-color: #719ee5;
+                           color: white;
+                           background: rgba(79, 139, 255, .12);
+                  }
+
+                  .lower-grid {
+                           display: grid;
+                           grid-template-columns: 1.1fr .9fr;
+                           gap: .85rem;
+                           margin-top: .85rem;
+                  }
+
+                  .resolved {
+                           overflow: hidden;
+                  }
+
+                  .resolved-grid {
+                           display: grid;
+                           grid-template-columns: repeat(3, 1fr);
+                           gap: .65rem;
+                           padding: 1rem;
+                  }
+
+                  .resolved-card {
+                           overflow: hidden;
+                           border: 1px solid rgba(186, 211, 255, .14);
+                           border-radius: 5px;
+                           background: rgba(255, 255, 255, .025);
+                  }
+
+                  .resolved-card img {
+                           display: block;
+                           width: 100%;
+                           aspect-ratio: 1.5/1;
+                           object-fit: cover;
+                           filter: saturate(.72);
+                  }
+
+                  .resolved-card div {
+                           padding: .58rem;
+                  }
+
+                  .resolved-card strong {
+                           display: block;
+                           color: #e2ecfc;
+                           font-size: .6rem;
+                  }
+
+                  .resolved-card span {
+                           display: block;
+                           margin-top: .18rem;
+                           color: #79d9ae;
+                           font-size: .5rem;
+                  }
+
+                  .resolved-card span::before {
+                           margin-right: .28rem;
+                           content: "✓";
+                  }
+
+                  .workload {
+                           display: grid;
+                           grid-template-columns: 125px 1fr;
+                           align-items: center;
+                           gap: .5rem;
+                           padding: 1rem;
+                  }
+
+                  .donut {
+                           position: relative;
+                           display: grid;
+                           width: 112px;
+                           height: 112px;
+                           place-items: center;
+                           border-radius: 50%;
+                           background: conic-gradient(#4c86ff 0 40%, #7cd5b2 40% 66%, #ffbc65 66% 84%, #485f88 84% 100%);
+                  }
+
+                  .donut::before {
+                           position: absolute;
+                           width: 77px;
+                           height: 77px;
+                           border-radius: 50%;
+                           background: #0e1b34;
+                           content: "";
+                  }
+
+                  .donut div {
+                           position: relative;
+                           text-align: center;
+                  }
+
+                  .donut strong {
+                           display: block;
+                           font: 1.55rem var(--serif);
+                  }
+
+                  .donut small {
+                           display: block;
+                           color: #91a5c5;
+                           font-size: .48rem;
+                  }
+
+                  .dept-list {
+                           display: grid;
+                           gap: .55rem;
+                  }
+
+                  .dept-row {
+                           display: grid;
+                           grid-template-columns: 8px 1fr auto;
+                           align-items: center;
+                           gap: .45rem;
+                           color: #a4b5cd;
+                           font-size: .57rem;
+                  }
+
+                  .dept-row i {
+                           width: 7px;
+                           height: 7px;
+                           border-radius: 50%;
+                           background: #4c86ff;
+                  }
+
+                  .dept-row:nth-child(2) i {
+                           background: #7cd5b2;
+                  }
+
+                  .dept-row:nth-child(3) i {
+                           background: #ffbc65;
+                  }
+
+                  .dept-row:nth-child(4) i {
+                           background: #485f88;
+                  }
+
+                  .dept-row b {
+                           color: #dce8f9;
+                           font: .55rem var(--mono);
+                  }
+
+                  .metric-note {
+                           display: flex;
+                           align-items: center;
+                           gap: .5rem;
+                           padding: 0 1rem 1rem;
+                           color: #879ab8;
+                           font-size: .55rem;
+                  }
+
+                  .metric-note i {
+                           color: #91baff;
+                           font-style: normal;
+                  }
+
+                  .mobile-nav {
+                           display: none;
+                  }
+
+                  @media (max-width:1100px) {
+                           .app {
+                                    grid-template-columns: 205px minmax(0, 1fr);
+                           }
+
+                           .metric-grid {
+                                    grid-template-columns: repeat(2, 1fr);
+                           }
+
+                           .dashboard-grid {
+                                    grid-template-columns: 1fr;
+                           }
+
+                           .showcase {
+                                    order: -1;
+                           }
+
+                           .lower-grid {
+                                    grid-template-columns: 1fr;
+                           }
+
+                           .resolved-grid {
+                                    grid-template-columns: repeat(3, 1fr);
+                           }
+                  }
+
+                  @media (max-width:760px) {
+                           .app {
+                                    display: block;
+                                    padding-bottom: 63px;
+                           }
+
+                           .sidebar {
+                                    display: none;
+                           }
+
+                           .content {
+                                    padding: 0 1rem 1.4rem;
+                           }
+
+                           .topbar {
+                                    min-height: 66px;
+                           }
+
+                           .crumb {
+                                    display: none;
+                           }
+
+                           .search {
+                                    min-width: 0;
+                                    flex: 1;
+                           }
+
+                           .operator span {
+                                    display: none;
+                           }
+
+                           .page-head {
+                                    display: block;
+                                    padding: 2.2rem 0 1.2rem;
+                           }
+
+                           .page-head p {
+                                    margin-top: .85rem;
+                           }
+
+                           .metric-grid {
+                                    grid-template-columns: repeat(2, 1fr);
+                           }
+
+                           .metric {
+                                    min-height: 95px;
+                           }
+
+                           .dashboard-grid,
+                           .lower-grid {
+                                    gap: .7rem;
+                                    margin-top: .7rem;
+                           }
+
+                           .showcase {
+                                    order: initial;
+                           }
+
+                           .resolved-grid {
+                                    gap: .5rem;
+                                    padding: .7rem;
+                           }
+
+                           .queue-item {
+                                    padding: .72rem .8rem;
+                           }
+
+                           .workload {
+                                    grid-template-columns: 108px 1fr;
+                           }
+
+                           .donut {
+                                    width: 98px;
+                                    height: 98px;
+                           }
+
+                           .donut::before {
+                                    width: 67px;
+                                    height: 67px;
+                           }
+
+                           .mobile-nav {
+                                    position: fixed;
+                                    z-index: 15;
+                                    right: 0;
+                                    bottom: 0;
+                                    left: 0;
+                                    display: flex;
+                                    justify-content: space-around;
+                                    padding: .55rem .4rem calc(.55rem + env(safe-area-inset-bottom));
+                                    border-top: 1px solid var(--line);
+                                    background: rgba(7, 16, 31, .92);
+                                    backdrop-filter: blur(16px);
+                           }
+
+                           .mobile-nav a {
+                                    display: grid;
+                                    gap: .18rem;
+                                    place-items: center;
+                                    color: #94a7c7;
+                                    font-size: .49rem;
+                           }
+
+                           .mobile-nav a.active {
+                                    color: #d8e7ff;
+                           }
+
+                           .mobile-nav b {
+                                    color: #86b5ff;
+                                    font-size: .9rem;
+                           }
+
+                           .footer {
+                                    padding-bottom: 2.7rem;
+                           }
+                  }
+
+                  @media (max-width:430px) {
+                           .top-actions .icon-button {
+                                    display: none;
+                           }
+
+                           .metric-grid {
+                                    grid-template-columns: 1fr 1fr;
+                           }
+
+                           .metric strong {
+                                    font-size: 1.7rem;
+                           }
+
+                           .card-head {
+                                    align-items: flex-start;
+                                    flex-direction: column;
+                           }
+
+                           .filter-row {
+                                    width: 100%;
+                                    overflow-x: auto;
+                           }
+
+                           .slide-wrap {
+                                    margin: 0 .7rem;
+                           }
+
+                           .slideshow-controls {
+                                    padding: .7rem;
+                           }
+
+                           .resolved-grid {
+                                    grid-template-columns: 1fr 1fr;
+                           }
+
+                           .resolved-card:last-child {
+                                    display: none;
+                           }
+
+                           .workload {
+                                    grid-template-columns: 1fr;
+                           }
+
+                           .donut {
+                                    margin: auto;
+                           }
+
+                           .dept-list {
+                                    grid-template-columns: 1fr 1fr;
+                           }
+
+                           .metric-note {
+                                    padding: .7rem;
+                           }
+
+                           .operator b {
+                                    width: 27px;
+                                    height: 27px;
+                           }
+                  }
+
+                  @media (prefers-reduced-motion:reduce) {
+
+                           *,
+                           *::before,
+                           *::after {
+                                    scroll-behavior: auto !important;
+                                    transition-duration: .01ms !important;
+                                    animation: none !important;
+                           }
+                  }
+
+                  .operator {
+                           min-width: 138px;
+                  }
+
+                  .operator .member-copy {
+                           display: grid;
+                           gap: .1rem;
+                  }
+
+                  .operator .member-name {
+                           overflow: hidden;
+                           max-width: 150px;
+                           color: #dce9fd;
+                           font-size: .63rem;
+                           font-weight: 700;
+                           text-overflow: ellipsis;
+                           white-space: nowrap;
+                  }
+
+                  .operator .member-meta {
+                           overflow: hidden;
+                           max-width: 150px;
+                           color: #8fa4c5;
+                           font-size: .5rem;
+                           text-overflow: ellipsis;
+                           white-space: nowrap;
+                  }
+
+                  .logout-button {
+                           color: #ffb5a9;
+                  }
+
+                  .logout-button:hover {
+                           border-color: rgba(255, 147, 126, .55);
+                           background: rgba(255, 129, 103, .09);
+                  }
+         </style>
+</head>
+
+<body>
+         <div class="noise" aria-hidden="true"></div>
+         <div class="app">
+                  <aside class="sidebar">
+                           <a class="brand" href="#overview"><span class="mark">S</span><span
+                                             class="brand-text">SANJAYA<small>CIVIC INTELLIGENCE</small></span></a>
+                           <p class="workspace-tag">Operations workspace</p>
+                           <nav class="side-nav" aria-label="Dashboard navigation"><a class="active"
+                                             href="#overview"><span class="nav-icon">◫</span>Overview</a><a
+                                             href="#queue"><span class="nav-icon">◎</span>Incident queue <span
+                                                      class="nav-badge">146</span></a><a href="#slideshow"><span
+                                                      class="nav-icon">▣</span>Evidence review</a><a
+                                             href="#resolved"><span class="nav-icon">✓</span>Resolved work</a><a
+                                             href="#departments"><span class="nav-icon">◇</span>Departments</a></nav>
+                           <div class="side-summary">
+                                    <p>Today’s service level</p><strong>74%</strong><small>High-priority reports
+                                             reviewed within the agreed response window.</small>
+                                    <div class="mini-track"><i></i></div>
                            </div>
-                           <div id="incident-list" aria-live="polite"></div>
-                  </div>
-                  <aside id="incident-detail" class="detail-column">Select an incident to review it.</aside>
-         </section>
-</main>
-<script src="js/api.js"></script>
-<script src="js/dashboard.js"></script>
+                  </aside>
+
+                  <main class="content" id="overview">
+                           <header class="topbar">
+                                    <div class="crumb">SANJAYA / <b>Operations overview</b></div>
+                                    <div class="top-actions"><label class="search"><span>⌕</span><input id="search"
+                                                               type="search" placeholder="Search complaint or ward"
+                                                               aria-label="Search complaint or ward" /></label><button
+                                                      class="icon-button" type="button"
+                                                      title="Notifications">♧</button><button class="icon-button"
+                                                      type="button" title="Export queue">⇩</button>
+                                             <div class="operator" aria-label="Verified SANJAYA member"><b
+                                                               id="member-initials">··</b><span
+                                                               class="member-copy"><span class="member-name"
+                                                                        id="member-name">Verifying member…</span><span
+                                                                        class="member-meta" id="member-meta">Session
+                                                                        check in progress</span></span></div><button
+                                                      class="icon-button logout-button" id="logout-button" type="button"
+                                                      title="Sign out">↗</button>
+                                    </div>
+                           </header>
+                           <section class="page-head">
+                                    <div>
+                                             <p class="eyebrow">Live civic pulse · Today</p>
+                                             <h1>Move the right issue <em>first.</em></h1>
+                                    </div>
+                                    <p>One operational view for what is arriving, what needs attention, and what your
+                                             teams have already made better.</p>
+                           </section>
+
+                           <section class="metric-grid" aria-label="Operational metrics">
+                                    <article class="metric">
+                                             <div class="metric-label"><span>Open in queue</span><i>◎</i></div>
+                                             <strong>146</strong><small><b>+11</b> since yesterday</small>
+                                    </article>
+                                    <article class="metric">
+                                             <div class="metric-label"><span>High-priority</span><i>◉</i></div>
+                                             <strong>18</strong><small class="warn"><b>6</b> due inside 4 hours</small>
+                                    </article>
+                                    <article class="metric">
+                                             <div class="metric-label"><span>Resolved this week</span><i>✓</i></div>
+                                             <strong>52</strong><small><b>+18%</b> versus last week</small>
+                                    </article>
+                                    <article class="metric">
+                                             <div class="metric-label"><span>Reports grouped</span><i>⊹</i></div>
+                                             <strong>31</strong><small><b>12%</b> fewer duplicate tasks</small>
+                                    </article>
+                           </section>
+
+                           <section class="dashboard-grid">
+                                    <article class="card priority-queue" id="queue">
+                                             <div class="card-head">
+                                                      <div>
+                                                               <h2>Priority incident queue</h2>
+                                                               <p>Sorted by impact, response window, and report cluster.
+                                                               </p>
+                                                      </div>
+                                                      <div class="filter-row" aria-label="Queue filter"><button
+                                                                        class="filter active" type="button"
+                                                                        data-filter="all">All</button><button
+                                                                        class="filter" type="button"
+                                                                        data-filter="high">High</button><button
+                                                                        class="filter" type="button"
+                                                                        data-filter="municipal">Municipal</button><button
+                                                                        class="filter" type="button"
+                                                                        data-filter="tehsildar">Tehsildar</button></div>
+                                             </div>
+                                             <div class="queue-list" id="queue-list">
+                                                      <article class="queue-item"
+                                                               data-tags="high municipal roads pothole ward 07"><span
+                                                                        class="priority high">92</span>
+                                                               <div><strong>Road surface collapse</strong><small>Ward 07
+                                                                                 · Roads &amp; Public Works · 15 linked
+                                                                                 reports</small></div>
+                                                               <div><span class="state">Assigned</span><time>48m</time>
+                                                               </div>
+                                                      </article>
+                                                      <article class="queue-item"
+                                                               data-tags="high municipal drainage water ward 05"><span
+                                                                        class="priority high">88</span>
+                                                               <div><strong>Waterlogging near clinic</strong><small>Ward
+                                                                                 05 · Storm Water &amp; Drainage · 8
+                                                                                 linked reports</small></div>
+                                                               <div><span class="state">Review</span><time>1h</time>
+                                                               </div>
+                                                      </article>
+                                                      <article class="queue-item"
+                                                               data-tags="municipal sanitation garbage ward 09"><span
+                                                                        class="priority mid">76</span>
+                                                               <div><strong>Waste overflow at collection
+                                                                                 point</strong><small>Ward 09 ·
+                                                                                 Sanitation · public access
+                                                                                 affected</small></div>
+                                                               <div><span class="state">Routed</span><time>2h</time>
+                                                               </div>
+                                                      </article>
+                                                      <article class="queue-item"
+                                                               data-tags="tehsildar revenue land village 07"><span
+                                                                        class="priority">69</span>
+                                                               <div><strong>Survey boundary record
+                                                                                 concern</strong><small>Revenue Village
+                                                                                 07 · Tehsildar Office · document
+                                                                                 review</small></div>
+                                                               <div><span class="state">Review</span><time>3h</time>
+                                                               </div>
+                                                      </article>
+                                                      <article class="queue-item"
+                                                               data-tags="municipal electrical streetlight ward 02">
+                                                               <span class="priority">63</span>
+                                                               <div><strong>Streetlight outage on pedestrian
+                                                                                 lane</strong><small>Ward 02 ·
+                                                                                 Electrical Maintenance · 3 linked
+                                                                                 reports</small></div>
+                                                               <div><span
+                                                                                 class="state green">Scheduled</span><time>4h</time>
+                                                               </div>
+                                                      </article>
+                                             </div>
+                                             <div class="queue-footer"><span id="queue-count">Showing 5 priority
+                                                               incidents</span><a href="#queue">Open full queue →</a>
+                                             </div>
+                                    </article>
+
+                                    <article class="card showcase" id="slideshow">
+                                             <div class="showcase-head">
+                                                      <div>
+                                                               <h2>Evidence review</h2>
+                                                      </div><span class="label">Complaint image stream</span>
+                                             </div>
+                                             <div class="slide-wrap" aria-live="polite">
+                                                      <article class="slide active"><img
+                                                                        src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663882698401/tSKzQycxbDelJIzf.jpg"
+                                                                        alt="Pothole near a school crossing" />
+                                                               <div class="slide-caption">
+                                                                        <div class="caption-top"><span>INCIDENT #04827 ·
+                                                                                          WARD 07</span><span>92 /
+                                                                                          100</span></div>
+                                                                        <h3>Road surface collapse near school crossing
+                                                                        </h3>
+                                                                        <p>Municipal Corporation · Roads &amp; Public
+                                                                                 Works</p>
+                                                               </div>
+                                                      </article>
+                                                      <article class="slide"><img
+                                                                        src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663882698401/kcvSMLDjSNrapNqP.jpg"
+                                                                        alt="Overflowing civic garbage collection point" />
+                                                               <div class="slide-caption">
+                                                                        <div class="caption-top"><span>INCIDENT #04852 ·
+                                                                                          WARD 09</span><span>76 /
+                                                                                          100</span></div>
+                                                                        <h3>Waste overflow at a collection point</h3>
+                                                                        <p>Municipal Corporation · Sanitation &amp;
+                                                                                 Solid Waste</p>
+                                                               </div>
+                                                      </article>
+                                                      <article class="slide"><img
+                                                                        src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663882698401/pxfmjMbUWrHvPdmE.jpg"
+                                                                        alt="Waterlogging around a blocked drain" />
+                                                               <div class="slide-caption">
+                                                                        <div class="caption-top"><span>INCIDENT #04844 ·
+                                                                                          WARD 05</span><span>88 /
+                                                                                          100</span></div>
+                                                                        <h3>Waterlogging around blocked drainage</h3>
+                                                                        <p>Municipal Corporation · Storm Water &amp;
+                                                                                 Drainage</p>
+                                                               </div>
+                                                      </article>
+                                                      <article class="slide"><img
+                                                                        src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663882698401/cwjXIJtqnOhHCFHx.jpg"
+                                                                        alt="Freshly repaired city road" />
+                                                               <div class="slide-caption">
+                                                                        <div class="caption-top"><span>RESOLVED #04791 ·
+                                                                                          WARD
+                                                                                          03</span><span>COMPLETED</span>
+                                                                        </div>
+                                                                        <h3>Road repair closed with field evidence</h3>
+                                                                        <p>Municipal Corporation · Roads &amp; Public
+                                                                                 Works</p>
+                                                               </div>
+                                                      </article>
+                                             </div>
+                                             <div class="slideshow-controls">
+                                                      <div class="dots" aria-label="Complaint image slides"><button
+                                                                        class="slide-dot active" type="button"
+                                                                        aria-label="View pothole complaint"></button><button
+                                                                        class="slide-dot" type="button"
+                                                                        aria-label="View waste-overflow complaint"></button><button
+                                                                        class="slide-dot" type="button"
+                                                                        aria-label="View waterlogging complaint"></button><button
+                                                                        class="slide-dot" type="button"
+                                                                        aria-label="View resolved road repair"></button>
+                                                      </div>
+                                                      <div class="arrows"><button class="arrow" id="prev-slide"
+                                                                        type="button"
+                                                                        aria-label="Previous image">←</button><button
+                                                                        class="arrow" id="next-slide" type="button"
+                                                                        aria-label="Next image">→</button></div>
+                                             </div>
+                                    </article>
+                           </section>
+
+                           <section class="lower-grid">
+                                    <article class="card resolved" id="resolved">
+                                             <div class="card-head">
+                                                      <div>
+                                                               <h2>Recently resolved</h2>
+                                                               <p>Completion evidence and verified field outcomes.</p>
+                                                      </div>
+                                                      <div class="filter-row"><button class="filter active"
+                                                                        type="button">This week</button></div>
+                                             </div>
+                                             <div class="resolved-grid">
+                                                      <article class="resolved-card"><img
+                                                                        src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663882698401/cwjXIJtqnOhHCFHx.jpg"
+                                                                        alt="Completed road repair" />
+                                                               <div><strong>Road repair · Ward 03</strong><span>Field
+                                                                                 evidence verified</span></div>
+                                                      </article>
+                                                      <article class="resolved-card"><img
+                                                                        src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663882698401/kcvSMLDjSNrapNqP.jpg"
+                                                                        alt="Municipal waste collection context" />
+                                                               <div><strong>Waste clearance · Ward
+                                                                                 09</strong><span>Collection closure
+                                                                                 logged</span></div>
+                                                      </article>
+                                                      <article class="resolved-card"><img
+                                                                        src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663882698401/pxfmjMbUWrHvPdmE.jpg"
+                                                                        alt="Drainage maintenance context" />
+                                                               <div><strong>Drain clearance · Ward 05</strong><span>Flow
+                                                                                 restored after work</span></div>
+                                                      </article>
+                                             </div>
+                                    </article>
+                                    <article class="card" id="departments">
+                                             <div class="card-head">
+                                                      <div>
+                                                               <h2>Department workload</h2>
+                                                               <p>Open work by routing authority.</p>
+                                                      </div><span class="label"
+                                                               style="color:#91a7ca;font:.54rem var(--mono);letter-spacing:.08em;text-transform:uppercase">146
+                                                               open</span>
+                                             </div>
+                                             <div class="workload">
+                                                      <div class="donut">
+                                                               <div><strong>146</strong><small>open</small></div>
+                                                      </div>
+                                                      <div class="dept-list">
+                                                               <div class="dept-row"><i></i><span>Municipal Roads &amp;
+                                                                                 Works</span><b>58</b></div>
+                                                               <div class="dept-row"><i></i><span>Sanitation &amp;
+                                                                                 Drainage</span><b>39</b></div>
+                                                               <div class="dept-row"><i></i><span>Electrical
+                                                                                 Maintenance</span><b>26</b></div>
+                                                               <div class="dept-row"><i></i><span>Tehsildar /
+                                                                                 Revenue</span><b>23</b></div>
+                                                      </div>
+                                             </div>
+                                             <p class="metric-note"><i>✦</i> Municipal roads have the highest cluster
+                                                      density today.</p>
+                                    </article>
+                           </section>
+                  </main>
+         </div>
+         <nav class="mobile-nav" aria-label="Mobile dashboard navigation"><a class="active"
+                           href="#overview"><b>◫</b>Overview</a><a href="#queue"><b>◎</b>Queue</a><a
+                           href="#slideshow"><b>▣</b>Evidence</a><a href="#resolved"><b>✓</b>Resolved</a></nav>
+         <script>
+                  async function loadVerifiedMember() {
+                           try {
+                                    const response = await fetch('/api/auth/me', { credentials: 'same-origin' });
+                                    if (!response.ok) { window.location.replace('/login'); return; }
+                                    const { member } = await response.json();
+                                    const words = member.display_name.trim().split(/\s+/);
+                                    document.getElementById('member-initials').textContent = words.map((word) => word[0]).slice(0, 2).join('').toUpperCase();
+                                    document.getElementById('member-name').textContent = member.display_name;
+                                    document.getElementById('member-meta').textContent = `${member.access_role.replaceAll('_', ' ')} · ${member.department}`;
+                           } catch (_) { window.location.replace('/login'); }
+                  }
+                  document.getElementById('logout-button').addEventListener('click', async () => {
+                           await fetch('/api/auth/logout', { method: 'POST', credentials: 'same-origin' });
+                           window.location.replace('/login');
+                  });
+                  loadVerifiedMember();
+                  const slides = [...document.querySelectorAll('.slide')];
+                  const dots = [...document.querySelectorAll('.slide-dot')];
+                  let activeSlide = 0;
+                  let slideTimer;
+                  function showSlide(next) { activeSlide = (next + slides.length) % slides.length; slides.forEach((slide, index) => slide.classList.toggle('active', index === activeSlide)); dots.forEach((dot, index) => dot.classList.toggle('active', index === activeSlide)); }
+                  function resetTimer() { clearInterval(slideTimer); slideTimer = setInterval(() => showSlide(activeSlide + 1), 5200); }
+                  document.getElementById('next-slide').addEventListener('click', () => { showSlide(activeSlide + 1); resetTimer(); });
+                  document.getElementById('prev-slide').addEventListener('click', () => { showSlide(activeSlide - 1); resetTimer(); });
+                  dots.forEach((dot, index) => dot.addEventListener('click', () => { showSlide(index); resetTimer(); }));
+                  resetTimer();
+                  const filters = document.querySelectorAll('.filter[data-filter]');
+                  const complaints = document.querySelectorAll('.queue-item');
+                  const count = document.getElementById('queue-count');
+                  filters.forEach((button) => button.addEventListener('click', () => { const filter = button.dataset.filter; filters.forEach((item) => item.classList.toggle('active', item === button)); let visible = 0; complaints.forEach((item) => { const show = filter === 'all' || item.dataset.tags.includes(filter); item.classList.toggle('hidden', !show); if (show) visible++; }); count.textContent = `Showing ${visible} priority incident${visible === 1 ? '' : 's'}`; }));
+                  document.getElementById('search').addEventListener('input', (event) => { const query = event.target.value.trim().toLowerCase(); let visible = 0; complaints.forEach((item) => { const show = !query || item.textContent.toLowerCase().includes(query); item.classList.toggle('hidden', !show); if (show) visible++; }); filters.forEach((item) => item.classList.remove('active')); count.textContent = `Showing ${visible} matching incident${visible === 1 ? '' : 's'}`; });
+         </script>
+</body>
+
+</html>
