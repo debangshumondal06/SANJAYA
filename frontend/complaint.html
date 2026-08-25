@@ -1185,7 +1185,61 @@
                   const evidence = document.getElementById('evidence'); evidence.addEventListener('change', () => document.getElementById('upload-name').textContent = evidence.files[0] ? evidence.files[0].name : 'Evidence image (optional)');
                   function showToast(message) { const toast = document.getElementById('toast'); toast.innerHTML = message; toast.classList.add('show'); window.setTimeout(() => toast.classList.remove('show'), 4600); }
                   document.getElementById('location-button').addEventListener('click', () => { const field = document.getElementById('location'); if (!navigator.geolocation) { showToast('Location services are unavailable. Please enter an address or landmark.'); return; } field.placeholder = 'Finding your location…'; navigator.geolocation.getCurrentPosition((position) => { field.value = `${position.coords.latitude.toFixed(5)}, ${position.coords.longitude.toFixed(5)}`; }, () => { field.placeholder = 'Location unavailable — enter a landmark'; showToast('Location could not be retrieved. You can still enter a landmark manually.'); }, { enableHighAccuracy: true, timeout: 10000 }); });
-                  document.getElementById('report-form').addEventListener('submit', (event) => { event.preventDefault(); if (!event.currentTarget.checkValidity()) { event.currentTarget.reportValidity(); return; } const reference = `SNY-2026-${String(Math.floor(48000 + Math.random() * 999)).padStart(5, '0')}`; document.getElementById('reference').textContent = reference; document.getElementById('state-pill').textContent = 'RECEIVED'; document.getElementById('current-state').textContent = 'Report received'; document.getElementById('current-detail').textContent = 'Your submission is recorded and ready for department routing.'; document.getElementById('current-time').textContent = 'Now'; showToast(`<b>Report submitted.</b><br />Reference ${reference} has been created. The routing panel now shows the recommended government department.`); });
+                  document.getElementById('report-form').addEventListener('submit', async (event) => {
+                                    event.preventDefault();
+                                    const form = event.currentTarget;
+                                    if (!form.checkValidity()) {
+                                             form.reportValidity();
+                                             return;
+                                    }
+
+                                    const selectedIssue = document.querySelector('input[name="issue"]:checked').value;
+                                    const categoryMap = {
+                                             pothole: 'pothole',
+                                             garbage: 'garbage_overflow',
+                                             water: 'waterlogging'
+                                    };
+
+                                    const category = categoryMap[selectedIssue];
+                                    if (!category) {
+                                             showToast('<b>Choose a supported category.</b>  Pothole, garbage overflow, and waterlogging are currently available.');
+                                          return;
+                                    }
+
+                                    const coordinateParts = document.getElementById('location').value.split(',').map((part) => Number(part.trim()));
+                                    const [latitude, longitude] = coordinateParts;
+                                    if (!Number.isFinite(latitude) || !Number.isFinite(longitude)) {
+                                             showToast('<b>Enter coordinates.</b>  Use the location button or enter latitude, longitude such as 19.06325, 72.85110.');
+                                        return;
+                                    }
+
+                                    const payload = new FormData();
+                                    payload.append('category', category);
+                                    payload.append('description', document.getElementById('description').value);
+                                    payload.append('ward', document.getElementById('ward').value);
+                                    payload.append('latitude', String(latitude));
+                                    payload.append('longitude', String(longitude));
+                                    payload.append('severity', selectedIssue === 'water' ? 'high' : 'medium');
+
+                                    const file = document.getElementById('evidence').files[0];
+                                    if (file) payload.append('evidence', file);
+
+                                    try {
+                                             const response = await fetch('/api/incidents', { method: 'POST', body: payload });
+                                             const data = await response.json();
+                                             if (!response.ok) throw new Error(data.detail || 'Report submission failed.');
+
+                                             const reference = `SNY-${String(data.incident_id).padStart(6, '0')}`;
+                                             document.getElementById('reference').textContent = reference;
+                                             document.getElementById('state-pill').textContent = 'RECEIVED';
+                                             document.getElementById('current-state').textContent = 'Report received';
+                                             document.getElementById('current-detail').textContent = 'Your report has been stored and is ready for department routing.';
+                                             document.getElementById('current-time').textContent = 'Now';
+                                             showToast(`<b>Report submitted.</b>  Reference ${reference} was created successfully.`);
+                                    } catch (error) {
+                                             showToast(`<b>Report not submitted.</b>  ${error.message}`);
+                                    }
+                           });
                   document.getElementById('review-button').addEventListener('click', () => showToast('<b>Routing review noted.</b><br />In a live system, a duty officer would recheck the category and jurisdiction.'));
          </script>
 </body>

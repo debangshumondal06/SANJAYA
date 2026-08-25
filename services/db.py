@@ -19,5 +19,6 @@ def initialise_database() -> None:
     seed = (ROOT / "database" / "seed.sql").read_text(encoding="utf-8")
     with connect() as connection:
         connection.executescript(schema)
-        if connection.execute("SELECT COUNT(*) FROM departments").fetchone()[0] == 0:
+        department_count = connection.execute("SELECT COUNT(*) FROM departments").fetchone()[0]
+        if department_count == 0:
             connection.executescript(seed)

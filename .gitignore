@@ -6,3 +6,5 @@ __pycache__/
 data/*.db
 uploads/*
 !uploads/.gitkeep
+.venv/
+__pycache__/
