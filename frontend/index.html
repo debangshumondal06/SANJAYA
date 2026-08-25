@@ -1318,6 +1318,401 @@
         transition-duration: .01ms !important;
       }
     }
+
+
+    /* SANJAYA civic-confidence enhancement: opening section only. Existing routes are unchanged. */
+    .hero.hero-enhanced {
+      grid-template-rows: auto auto;
+      align-items: start;
+      gap: 2.8rem clamp(2rem, 6vw, 7rem);
+    }
+
+    .hero-proof {
+      position: relative;
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: 1.12fr .88fr;
+      align-items: center;
+      gap: 2rem;
+      overflow: hidden;
+      min-height: 137px;
+      padding: 1rem 1.15rem;
+      border: 1px solid rgba(190, 217, 255, .2);
+      border-radius: 9px;
+      background: linear-gradient(105deg, rgba(8, 18, 40, .96), rgba(19, 53, 104, .72));
+      box-shadow: 0 26px 70px rgba(0, 0, 0, .2);
+    }
+
+    .hero-proof::before {
+      position: absolute;
+      z-index: 0;
+      inset: 0;
+      background-image: linear-gradient(90deg, rgba(7, 11, 23, .97) 0%, rgba(7, 16, 37, .82) 42%, rgba(7, 16, 37, .2) 100%), url("https://files.manuscdn.com/user_upload_by_module/session_file/310519663882698401/cwjXIJtqnOhHCFHx.jpg");
+      background-position: center;
+      background-size: cover;
+      content: "";
+      opacity: .58;
+    }
+
+    .hero-proof-copy,
+    .proof-gallery {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-proof-copy {
+      padding: .7rem 0 .7rem .35rem;
+    }
+
+    .hero-proof-kicker {
+      margin: 0 0 .5rem;
+      color: #91bdff;
+      font: .54rem var(--mono);
+      letter-spacing: .13em;
+      text-transform: uppercase;
+    }
+
+    .hero-proof h2 {
+      max-width: 530px;
+      margin: 0;
+      color: #f6f9ff;
+      letter-spacing: -.025em;
+      font: 1.35rem/1.05 var(--serif);
+    }
+
+    .hero-proof h2 em {
+      color: #aed0ff;
+    }
+
+    .hero-proof-copy p {
+      max-width: 540px;
+      margin: .55rem 0 0;
+      color: #b4c7e7;
+      font-size: .66rem;
+      line-height: 1.55;
+    }
+
+    .proof-gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: .55rem;
+      align-self: stretch;
+      padding: .2rem 0;
+    }
+
+    .proof-photo {
+      position: relative;
+      min-height: 100px;
+      overflow: hidden;
+      border: 1px solid rgba(228, 239, 255, .3);
+      border-radius: 6px;
+      background-position: center;
+      background-size: cover;
+      box-shadow: 0 12px 24px rgba(0, 0, 0, .28);
+    }
+
+    .proof-photo::after {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(0deg, rgba(5, 13, 27, .87), transparent 65%);
+      content: "";
+    }
+
+    .proof-photo span {
+      position: absolute;
+      z-index: 1;
+      right: .45rem;
+      bottom: .45rem;
+      left: .45rem;
+      color: #f2f7ff;
+      font: .47rem var(--mono);
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    .proof-photo.one {
+      background-image: url("https://files.manuscdn.com/user_upload_by_module/session_file/310519663882698401/cwjXIJtqnOhHCFHx.jpg");
+    }
+
+    .proof-photo.two {
+      background-image: url("https://files.manuscdn.com/user_upload_by_module/session_file/310519663882698401/kcvSMLDjSNrapNqP.jpg");
+    }
+
+    .proof-photo.three {
+      background-image: url("https://files.manuscdn.com/user_upload_by_module/session_file/310519663882698401/pxfmjMbUWrHvPdmE.jpg");
+    }
+
+    .proof-badge {
+      position: absolute;
+      z-index: 2;
+      top: .75rem;
+      right: .9rem;
+      display: inline-flex;
+      align-items: center;
+      gap: .35rem;
+      padding: .38rem .5rem;
+      border: 1px solid rgba(160, 221, 192, .33);
+      border-radius: 99px;
+      color: #9de2bd;
+      background: rgba(10, 46, 42, .7);
+      font: .49rem var(--mono);
+      text-transform: uppercase;
+    }
+
+    .proof-badge::before {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #75dda9;
+      box-shadow: 0 0 12px #75dda9;
+      content: "";
+    }
+
+    @media (max-width: 850px) {
+      .hero.hero-enhanced {
+        gap: 2.2rem;
+      }
+
+      .hero-proof {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        padding: 1.2rem;
+      }
+
+      .proof-gallery {
+        max-width: 560px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .hero-proof {
+        min-height: 0;
+        padding: 1rem;
+      }
+
+      .hero-proof h2 {
+        font-size: 1.2rem;
+      }
+
+      .proof-gallery {
+        gap: .4rem;
+      }
+
+      .proof-photo {
+        min-height: 82px;
+      }
+
+      .proof-photo span {
+        font-size: .43rem;
+      }
+
+      .proof-badge {
+        position: relative;
+        top: auto;
+        right: auto;
+        margin-bottom: .45rem;
+      }
+    }
+
+    .impact-panel {
+      position: relative;
+      display: grid;
+      gap: .75rem;
+      align-self: center;
+      min-height: 460px;
+      padding: .75rem;
+      overflow: hidden;
+      border: 1px solid rgba(168, 201, 255, .2);
+      border-radius: 18px 7px 48px 7px;
+      background: linear-gradient(145deg, rgba(24, 54, 111, .84), rgba(6, 13, 30, .96));
+      box-shadow: inset 0 1px rgba(255, 255, 255, .08), 0 35px 75px rgba(0, 0, 0, .28);
+      animation: rise .8s .12s both var(--ease);
+    }
+
+    .impact-panel::after {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background: radial-gradient(circle at 85% 12%, rgba(85, 143, 255, .2), transparent 36%);
+      content: "";
+      pointer-events: none;
+    }
+
+    .impact-panel-head,
+    .impact-feature,
+    .impact-row,
+    .impact-panel-foot {
+      position: relative;
+      z-index: 1;
+    }
+
+    .impact-panel-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      padding: .2rem .2rem .1rem;
+    }
+
+    .impact-panel-head span,
+    .impact-feature-copy small,
+    .impact-panel-foot {
+      color: #8eb8f5;
+      font: .5rem var(--mono);
+      letter-spacing: .09em;
+      text-transform: uppercase;
+    }
+
+    .impact-panel-head strong {
+      color: #f5f8ff;
+      font: .82rem var(--serif);
+    }
+
+    .impact-feature {
+      display: grid;
+      grid-template-rows: minmax(245px, 1fr) auto;
+      overflow: hidden;
+      border: 1px solid rgba(210, 228, 255, .2);
+      border-radius: 10px 4px 26px 4px;
+      background: #0a142b;
+    }
+
+    .impact-image {
+      position: relative;
+      min-height: 245px;
+      background-position: center;
+      background-size: cover;
+    }
+
+    .impact-image::after,
+    .impact-tile::after {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(0deg, rgba(4, 10, 24, .9), rgba(7, 16, 36, .03) 72%);
+      content: "";
+    }
+
+    .impact-road {
+      background-image: url("https://files.manuscdn.com/user_upload_by_module/session_file/310519663882698401/cwjXIJtqnOhHCFHx.jpg");
+    }
+
+    .impact-image span,
+    .impact-tile span {
+      position: absolute;
+      z-index: 1;
+      right: .75rem;
+      bottom: .7rem;
+      left: .75rem;
+      color: #eff5ff;
+      font: .5rem var(--mono);
+      letter-spacing: .07em;
+      text-transform: uppercase;
+    }
+
+    .impact-feature-copy {
+      display: grid;
+      gap: .35rem;
+      padding: .8rem .9rem .9rem;
+    }
+
+    .impact-feature-copy small {
+      color: #8fd1aa;
+      letter-spacing: .06em;
+    }
+
+    .impact-feature-copy strong {
+      color: #fff;
+      font-size: .83rem;
+      line-height: 1.2;
+    }
+
+    .impact-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: .75rem;
+      min-height: 112px;
+    }
+
+    .impact-tile {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(210, 228, 255, .18);
+      border-radius: 6px;
+      background-position: center;
+      background-size: cover;
+    }
+
+    .impact-waste {
+      background-image: url("https://files.manuscdn.com/user_upload_by_module/session_file/310519663882698401/kcvSMLDjSNrapNqP.jpg");
+    }
+
+    .impact-drain {
+      background-image: url("https://files.manuscdn.com/user_upload_by_module/session_file/310519663882698401/pxfmjMbUWrHvPdmE.jpg");
+    }
+
+    .impact-panel-foot {
+      display: flex;
+      align-items: center;
+      gap: .45rem;
+      padding: .05rem .2rem .1rem;
+      color: #abdaba;
+    }
+
+    .impact-panel-foot i {
+      width: 5px;
+      height: 5px;
+      flex: 0 0 5px;
+      border-radius: 50%;
+      background: #79daa5;
+      box-shadow: 0 0 12px #79daa5;
+    }
+
+    @media (max-width: 850px) {
+      .impact-panel {
+        width: min(100%, 620px);
+        min-height: 415px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .impact-panel {
+        min-height: 345px;
+        padding: .5rem;
+        border-radius: 12px 5px 31px 5px;
+      }
+
+      .impact-panel-head strong {
+        font-size: .7rem;
+      }
+
+      .impact-feature {
+        grid-template-rows: minmax(185px, 1fr) auto;
+      }
+
+      .impact-image {
+        min-height: 185px;
+      }
+
+      .impact-feature-copy {
+        padding: .6rem .7rem .7rem;
+      }
+
+      .impact-feature-copy strong {
+        font-size: .68rem;
+      }
+
+      .impact-panel-head span,
+      .impact-feature-copy small,
+      .impact-panel-foot,
+      .impact-image span,
+      .impact-tile span {
+        font-size: .42rem;
+      }
+
+      .impact-row {
+        min-height: 82px;
+        gap: .5rem;
+      }
+    }
   </style>
 </head>
 
@@ -1327,42 +1722,50 @@
     <header class="site-header">
       <a class="brand" href="#top" aria-label="SANJAYA home"><span class="brand-mark">S</span><span
           class="brand-type">SANJAYA<small>CIVIC INTELLIGENCE</small></span></a>
-      <nav class="nav" aria-label="Main navigation"><a href="#workflow">How it works</a><a
-          href="#intelligence">Intelligence</a><a href="#authority">For authorities</a></nav>
-      <a class="nav-cta" href="/complaint">Report an issue <span>↗</span></a>
+      <nav class="nav" aria-label="Main navigation"><a href="#workflow">How it works</a><a href="#intelligence">Your
+          Voice</a><a href="#authority">For authorities</a></nav>
+      <a class="nav-cta" href="complaint.html">Report an issue <span>↗</span></a>
     </header>
 
     <main id="top">
-      <section class="hero">
+      <section class="hero hero-enhanced">
+        <div class="hero-proof" aria-label="Verified civic improvements">
+          <span class="proof-badge">Verified field outcomes</span>
+          <div class="hero-proof-copy">
+            <p class="hero-proof-kicker">From report to resolved street</p>
+            <h2>Every signal has a path to <em>visible improvement.</em></h2>
+            <p>Follow issues from a citizen’s first report to the field evidence that confirms the work is complete.</p>
+          </div>
+          <div class="proof-gallery" aria-label="Examples of completed civic work">
+            <div class="proof-photo one"><span>Road repair · Ward 03</span></div>
+            <div class="proof-photo two"><span>Waste clearance · Ward 09</span></div>
+            <div class="proof-photo three"><span>Drain restored · Ward 05</span></div>
+          </div>
+        </div>
+
         <div>
           <p class="eyebrow"><span class="dot"></span> Civic response, reimagined</p>
           <h1>Turn every signal into <em>meaningful</em> action.</h1>
           <p class="hero-lede">SANJAYA gives citizens a clearer way to report what matters, and civic teams the context
             to decide what happens next.</p>
-          <div class="hero-actions"><a class="button-primary" href="/complaint">Start a civic report <span>→</span></a><a
-              class="button-secondary" href="#workflow">See the response loop <span>↓</span></a></div>
+          <div class="hero-actions"><a class="button-primary" href="complaint.html">Start a civic report
+              <span>→</span></a></div>
           <div class="status-line"><span><i></i> Evidence-aware intake</span><span><i></i> Explainable
               priority</span><span><i></i> Accountable routing</span></div>
         </div>
 
-        <div class="signal-stage" aria-label="Illustration of an incident being prioritised and routed">
-          <div class="pulse-ring"></div>
-          <div class="map-route route-a"></div>
-          <div class="map-route route-b"></div>
-          <div class="map-route route-c"></div>
-          <span class="pin pin-one"></span><span class="pin pin-main"></span><span class="pin pin-two"></span>
-          <span class="floating-status status-top">Routed to Roads</span><span class="floating-status status-bottom">+12
-            related reports</span>
-          <article class="signal-card">
-            <div class="card-kicker"><span>LIVE INCIDENT</span><span>#04827</span></div>
-            <div class="card-title"><span class="hazard-icon">◇</span>
-              <div><small>ROADS &amp; PUBLIC WORKS</small><strong>Road surface hazard</strong></div>
-            </div>
-            <p>School crossing · Ward 07</p>
-            <div class="score-meta"><span>Priority score</span><b>86 <small>/ 100</small></b></div>
-            <div class="score-bar"><i></i></div>
-            <div class="reason-list"><span>High public exposure</span><span>Cluster detected</span></div>
-          </article>
+        <div class="impact-panel" aria-label="Examples of completed civic improvements">
+          <div class="impact-panel-head"><span>FIELD EVIDENCE</span><strong>Visible improvements</strong></div>
+          <div class="impact-feature">
+            <div class="impact-image impact-road"><span>Road repair · Ward 03</span></div>
+            <div class="impact-feature-copy"><small>Resolved with community visibility</small><strong>Safer streets
+                start with a clear signal.</strong></div>
+          </div>
+          <div class="impact-row">
+            <div class="impact-tile impact-waste"><span>Waste clearance · Ward 09</span></div>
+            <div class="impact-tile impact-drain"><span>Drain restored · Ward 05</span></div>
+          </div>
+          <div class="impact-panel-foot"><i></i> Reported problems can become documented progress.</div>
         </div>
       </section>
     </main>
@@ -1415,7 +1818,7 @@
         <h2>Not another<br />complaint <em>box.</em></h2>
         <p>SANJAYA structures the information that civic teams need before it reaches the queue. The result is a more
           useful report, a more defensible priority, and a faster handoff.</p><a class="inline-link"
-          href="/login">Explore the authority view <span>→</span></a>
+          href="complaint.html">File your complaint Now <span>→</span></a>
       </div>
       <div class="insight-stack">
         <article class="insight-row"><span>01</span>
@@ -1446,7 +1849,7 @@
         <p class="eyebrow">Authority workspace</p>
         <h2>Know what matters.<br /><em>Move on it.</em></h2>
         <p>Give operations teams a calm, decisive view of the queue: what is urgent, where it is happening, who owns it,
-          and what changed last.</p><a class="button-dark" href="/login">Open the operations view <span>→</span></a>
+          and what changed last.</p><a class="button-dark" href="login.html">Open the operations view <span>→</span></a>
       </div>
       <div class="dashboard" aria-label="Example civic operations dashboard">
         <div class="dash-top"><span>SANJAYA / OPERATIONS</span><span class="dash-user">AB</span></div>
@@ -1474,8 +1877,7 @@
       <p class="eyebrow"><span class="dot"></span> Begin with one report</p>
       <h2>A clearer city starts<br />with a <em>clearer signal.</em></h2>
       <p>Report a pothole, overflow, or waterlogging issue and create a direct path from a local problem to a civic
-        response.</p><a class="button-primary" href="index.html">Open reporting prototype <span>→</span></a>
-    </div>
+        response.</p>
   </section>
 
   <footer class="site-footer">
