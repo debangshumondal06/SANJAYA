@@ -1324,7 +1324,8 @@
     .hero.hero-enhanced {
       grid-template-rows: auto auto;
       align-items: start;
-      gap: 2.8rem clamp(2rem, 6vw, 7rem);
+      gap: 2rem clamp(2rem, 6vw, 7rem);
+      padding-top: 1.35rem;
     }
 
     .hero-proof {
@@ -1365,19 +1366,19 @@
     }
 
     .hero-proof-kicker {
-      margin: 0 0 .5rem;
+      margin: 0 0 .55rem;
       color: #91bdff;
-      font: .54rem var(--mono);
+      font: .66rem var(--mono);
       letter-spacing: .13em;
       text-transform: uppercase;
     }
 
     .hero-proof h2 {
-      max-width: 530px;
+      max-width: 560px;
       margin: 0;
       color: #f6f9ff;
       letter-spacing: -.025em;
-      font: 1.35rem/1.05 var(--serif);
+      font: 1.68rem/1.05 var(--serif);
     }
 
     .hero-proof h2 em {
@@ -1385,10 +1386,10 @@
     }
 
     .hero-proof-copy p {
-      max-width: 540px;
-      margin: .55rem 0 0;
+      max-width: 570px;
+      margin: .62rem 0 0;
       color: #b4c7e7;
-      font-size: .66rem;
+      font-size: .78rem;
       line-height: 1.55;
     }
 
@@ -1470,7 +1471,8 @@
 
     @media (max-width: 850px) {
       .hero.hero-enhanced {
-        gap: 2.2rem;
+        gap: 1.65rem;
+        padding-top: 1rem;
       }
 
       .hero-proof {
@@ -1491,7 +1493,15 @@
       }
 
       .hero-proof h2 {
-        font-size: 1.2rem;
+        font-size: 1.35rem;
+      }
+
+      .hero-proof-kicker {
+        font-size: .58rem;
+      }
+
+      .hero-proof-copy p {
+        font-size: .68rem;
       }
 
       .proof-gallery {
@@ -1748,7 +1758,7 @@
           <h1>Turn every signal into <em>meaningful</em> action.</h1>
           <p class="hero-lede">SANJAYA gives citizens a clearer way to report what matters, and civic teams the context
             to decide what happens next.</p>
-          <div class="hero-actions"><a class="button-primary" href="complaint.html">Start a civic report
+          <div class="hero-actions"><a class="button-primary" href="civic_report.html">Start a civic report
               <span>→</span></a></div>
           <div class="status-line"><span><i></i> Evidence-aware intake</span><span><i></i> Explainable
               priority</span><span><i></i> Accountable routing</span></div>
@@ -1815,10 +1825,9 @@
     <div class="shell intelligence-inner">
       <div class="intelligence-copy">
         <p class="eyebrow">The SANJAYA layer</p>
-        <h2>Not another<br />complaint <em>box.</em></h2>
+        <h2>Not another<br />complaint <em>box!</em></h2>
         <p>SANJAYA structures the information that civic teams need before it reaches the queue. The result is a more
-          useful report, a more defensible priority, and a faster handoff.</p><a class="inline-link"
-          href="complaint.html">File your complaint Now <span>→</span></a>
+          useful report, a more defensible priority, and a faster handoff.</p>
       </div>
       <div class="insight-stack">
         <article class="insight-row"><span>01</span>
@@ -1870,14 +1879,6 @@
         </div>
       </div>
     </div>
-  </section>
-
-  <section class="shell final-cta" id="report">
-    <div class="final-panel">
-      <p class="eyebrow"><span class="dot"></span> Begin with one report</p>
-      <h2>A clearer city starts<br />with a <em>clearer signal.</em></h2>
-      <p>Report a pothole, overflow, or waterlogging issue and create a direct path from a local problem to a civic
-        response.</p>
   </section>
 
   <footer class="site-footer">

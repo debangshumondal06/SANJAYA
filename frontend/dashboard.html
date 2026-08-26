@@ -4,9 +4,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="SANJAYA civic operations dashboard prototype." />
+  <meta name="description" content="SANJAYA civic report-action dashboard." />
   <meta name="theme-color" content="#07101f" />
-  <title>SANJAYA — Civic Operations</title>
+  <title>SANJAYA — Civic Report Action Desk</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
@@ -16,42 +16,60 @@
     :root {
       --ink: #07101f;
       --deep: #0b1730;
-      --panel: #101d36;
+      --panel: #0d1b34;
       --panel-2: #132545;
       --blue: #377bff;
-      --sky: #b5d1ff;
-      --white: #fff;
+      --blue-soft: #b5d1ff;
+      --white: #f8fbff;
       --muted: #8da0bf;
-      --line: rgba(193, 217, 255, .16);
+      --line: rgba(193, 217, 255, 0.16);
       --green: #70d5ae;
       --amber: #ffbf6c;
       --red: #ff8975;
       --serif: "Instrument Serif", Georgia, serif;
       --sans: "DM Sans", Arial, sans-serif;
       --mono: "DM Mono", monospace;
-      --ease: cubic-bezier(.2, .8, .2, 1);
+      --ease: cubic-bezier(0.23, 1, 0.32, 1);
     }
 
     * {
       box-sizing: border-box;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       min-width: 320px;
       margin: 0;
       overflow-x: hidden;
-      color: #f8fbff;
-      background: radial-gradient(circle at 86% -7%, #1b477f 0, transparent 27%), var(--ink);
+      color: var(--white);
+      background:
+        radial-gradient(circle at 85% -10%, #15253c 0, transparent 27%),
+        var(--ink);
       font-family: var(--sans);
     }
 
     button,
-    input {
+    input,
+    select {
       font: inherit;
+    }
+
+    button,
+    a,
+    select {
+      -webkit-tap-highlight-color: transparent;
     }
 
     button {
       cursor: pointer;
+    }
+
+    button:disabled {
+      cursor: not-allowed;
+      opacity: 0.55;
     }
 
     a {
@@ -59,23 +77,31 @@
       text-decoration: none;
     }
 
+    button:focus-visible,
+    a:focus-visible,
+    input:focus-visible,
+    select:focus-visible {
+      outline: 2px solid #9fc2ff;
+      outline-offset: 3px;
+    }
+
     ::selection {
-      color: white;
+      color: #fff;
       background: var(--blue);
     }
 
-    .noise {
+    .page-noise {
       position: fixed;
       z-index: 20;
       inset: 0;
       pointer-events: none;
-      opacity: .036;
+      opacity: 0.035;
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.72' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.65'/%3E%3C/svg%3E");
     }
 
     .app {
       display: grid;
-      grid-template-columns: 238px minmax(0, 1fr);
+      grid-template-columns: 244px minmax(0, 1fr);
       min-height: 100vh;
     }
 
@@ -83,147 +109,189 @@
       position: sticky;
       top: 0;
       display: flex;
-      min-height: 100vh;
+      height: 100vh;
       flex-direction: column;
       padding: 1.45rem 1rem;
       border-right: 1px solid var(--line);
-      background: rgba(5, 11, 24, .63);
+      background: rgba(5, 11, 24, 0.67);
       backdrop-filter: blur(18px);
     }
 
     .brand {
       display: flex;
       align-items: center;
-      gap: .72rem;
-      padding: 0 .45rem;
+      gap: 0.72rem;
+      padding: 0 0.45rem;
     }
 
-    .mark {
+    .brand-mark {
       display: grid;
-      width: 34px;
-      height: 34px;
+      width: 36px;
+      height: 36px;
       place-items: center;
-      border: 1px solid rgba(255, 255, 255, .32);
-      border-radius: 10px 10px 2px 10px;
+      border: 1px solid rgba(255, 255, 255, 0.46);
+      border-radius: 10px 10px 3px 10px;
       color: #0a1530;
       background: linear-gradient(145deg, #d4e4ff, #6097ff);
-      font: 1.25rem var(--serif);
+      box-shadow: 0 6px 12px rgba(55, 123, 255, 0.25);
+      font: 1.42rem/1 var(--serif);
     }
 
     .brand-text {
-      font-size: .82rem;
+      color: #f1f6ff;
+      font-size: 0.82rem;
       font-weight: 700;
-      letter-spacing: .14em;
+      letter-spacing: 0.14em;
     }
 
     .brand-text small {
       display: block;
-      margin-top: .12rem;
+      margin-top: 0.12rem;
       color: #8497b7;
-      font: .49rem var(--mono);
-      letter-spacing: .09em;
+      font: 0.49rem var(--mono);
+      letter-spacing: 0.09em;
     }
 
-    .workspace-tag {
-      margin: 2.2rem .45rem .7rem;
+    .workspace-label {
+      margin: 2.2rem 0.45rem 0.7rem;
       color: #6f83a5;
-      font: .54rem var(--mono);
-      letter-spacing: .1em;
+      font: 0.54rem var(--mono);
+      letter-spacing: 0.1em;
       text-transform: uppercase;
     }
 
     .side-nav {
       display: grid;
-      gap: .26rem;
+      gap: 0.3rem;
     }
 
-    .side-nav a {
+    .nav-action {
       display: flex;
+      width: 100%;
       align-items: center;
-      gap: .65rem;
-      padding: .62rem .7rem;
+      gap: 0.62rem;
+      padding: 0.65rem 0.7rem;
       border: 1px solid transparent;
-      border-radius: 4px;
+      border-radius: 5px;
       color: #9eb0ce;
-      font-size: .72rem;
-      transition: .2s var(--ease);
+      background: transparent;
+      text-align: left;
+      font-size: 0.71rem;
+      transition:
+        border-color 0.18s var(--ease),
+        background 0.18s var(--ease),
+        color 0.18s var(--ease),
+        transform 0.16s var(--ease);
     }
 
-    .side-nav a:hover {
-      color: #fff;
-      background: rgba(96, 151, 255, .1);
-    }
-
-    .side-nav a.active {
-      border-color: rgba(120, 167, 255, .22);
-      color: white;
-      background: linear-gradient(135deg, rgba(57, 123, 255, .25), rgba(57, 123, 255, .07));
-    }
-
-    .nav-icon {
-      width: 17px;
+    .nav-action .nav-icon {
+      display: grid;
+      width: 16px;
+      place-items: center;
       color: #8fbbff;
-      text-align: center;
-      font-size: .88rem;
+      font-size: 0.82rem;
     }
 
-    .nav-badge {
+    .nav-action b {
       margin-left: auto;
-      padding: .16rem .35rem;
+      padding: 0.16rem 0.35rem;
       border-radius: 99px;
       color: #9bc2ff;
-      background: rgba(87, 145, 255, .14);
-      font: .49rem var(--mono);
+      background: rgba(87, 145, 255, 0.14);
+      font: 0.49rem var(--mono);
     }
 
-    .side-summary {
+    .nav-action:hover {
+      border-color: rgba(120, 167, 255, 0.22);
+      color: #fff;
+      background: rgba(96, 151, 255, 0.1);
+    }
+
+    .nav-action:active,
+    .metric-card:active,
+    .primary-action:active,
+    .secondary-action:active,
+    .confirmation-button:active {
+      transform: scale(0.97);
+    }
+
+    .nav-action.active {
+      border-color: rgba(120, 167, 255, 0.26);
+      color: #fff;
+      background: linear-gradient(135deg,
+          rgba(57, 123, 255, 0.25),
+          rgba(57, 123, 255, 0.07));
+    }
+
+    .home-link {
+      margin-top: 0.45rem;
+    }
+
+    .sidebar-control {
       margin-top: auto;
-      padding: .85rem;
-      border: 1px solid rgba(177, 209, 255, .16);
-      border-radius: 6px;
-      background: linear-gradient(145deg, rgba(26, 54, 108, .52), rgba(12, 23, 46, .85));
+      padding: 0.85rem;
+      border: 1px solid rgba(177, 209, 255, 0.16);
+      border-radius: 7px;
+      background: linear-gradient(145deg,
+          rgba(26, 54, 108, 0.5),
+          rgba(12, 23, 46, 0.9));
     }
 
-    .side-summary p {
-      margin: 0 0 .5rem;
-      color: #9ab9eb;
-      font: .52rem var(--mono);
-      letter-spacing: .08em;
+    .control-kicker,
+    .panel-kicker {
+      display: block;
+      color: #a6c8ff;
+      font: 0.51rem var(--mono);
+      letter-spacing: 0.1em;
       text-transform: uppercase;
     }
 
-    .side-summary strong {
+    .sidebar-control strong {
       display: block;
-      font: 1.62rem var(--serif);
+      margin: 0.56rem 0 0.34rem;
+      color: #eff6ff;
+      font: 1.26rem/1 var(--serif);
     }
 
-    .side-summary small {
-      display: block;
-      margin-top: .28rem;
+    .sidebar-control p {
+      margin: 0;
       color: #aebed7;
-      font-size: .58rem;
-      line-height: 1.5;
+      font-size: 0.58rem;
+      line-height: 1.55;
     }
 
-    .side-summary .mini-track {
-      height: 4px;
-      margin-top: .7rem;
-      overflow: hidden;
-      border-radius: 99px;
-      background: #273c64;
+    .control-legend {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.32rem;
+      margin-top: 0.72rem;
+      color: #a9bad4;
+      font-size: 0.5rem;
     }
 
-    .side-summary .mini-track i {
-      display: block;
-      width: 74%;
-      height: 100%;
-      border-radius: inherit;
-      background: linear-gradient(90deg, #427fff, #b7d5ff);
+    .dot {
+      width: 6px;
+      height: 6px;
+      margin-left: 0.28rem;
+      border-radius: 50%;
+    }
+
+    .dot:first-child {
+      margin-left: 0;
+    }
+
+    .dot-amber {
+      background: var(--amber);
+    }
+
+    .dot-blue {
+      background: var(--blue);
     }
 
     .content {
       position: relative;
-      padding: 0 clamp(1rem, 3vw, 2.65rem) 2.7rem;
+      padding: 0 clamp(1rem, 3vw, 2.65rem) 3.2rem;
     }
 
     .topbar {
@@ -236,8 +304,8 @@
 
     .crumb {
       color: #8da0be;
-      font: .58rem var(--mono);
-      letter-spacing: .08em;
+      font: 0.58rem var(--mono);
+      letter-spacing: 0.08em;
       text-transform: uppercase;
     }
 
@@ -249,37 +317,33 @@
     .top-actions {
       display: flex;
       align-items: center;
-      gap: .65rem;
+      gap: 0.65rem;
       margin-left: auto;
     }
 
-    .search {
+    .search-box {
       display: flex;
+      min-width: min(260px, 25vw);
       align-items: center;
-      gap: .45rem;
-      min-width: min(240px, 25vw);
-      padding: 0 .7rem;
+      gap: 0.45rem;
+      padding: 0 0.7rem;
       border: 1px solid var(--line);
       border-radius: 4px;
       color: #7c90b2;
-      background: rgba(3, 9, 20, .3);
+      background: rgba(3, 9, 20, 0.3);
     }
 
-    .search span {
-      font-size: .85rem;
-    }
-
-    .search input {
+    .search-box input {
       width: 100%;
       min-height: 36px;
       border: 0;
       outline: 0;
       color: #dbe8ff;
       background: transparent;
-      font-size: .68rem;
+      font-size: 0.68rem;
     }
 
-    .search input::placeholder {
+    .search-box input::placeholder {
       color: #7488a8;
     }
 
@@ -291,27 +355,48 @@
       border: 1px solid var(--line);
       border-radius: 4px;
       color: #bad0f4;
-      background: rgba(255, 255, 255, .025);
+      background: rgba(255, 255, 255, 0.025);
+      transition: 0.18s var(--ease);
+    }
+
+    .icon-button:hover {
+      border-color: rgba(148, 188, 255, 0.5);
+      color: #fff;
+      background: rgba(55, 123, 255, 0.1);
     }
 
     .operator {
       display: flex;
+      min-width: 142px;
       align-items: center;
-      gap: .5rem;
-      padding-left: .3rem;
-      color: #cbd9ed;
-      font-size: .66rem;
+      gap: 0.5rem;
+      padding-left: 0.25rem;
     }
 
     .operator b {
       display: grid;
-      width: 29px;
-      height: 29px;
+      width: 30px;
+      height: 30px;
       place-items: center;
       border-radius: 50%;
       color: #ddebff;
       background: #244d9e;
-      font: .52rem var(--mono);
+      font: 0.52rem var(--mono);
+    }
+
+    .operator span {
+      display: grid;
+      gap: 0.1rem;
+    }
+
+    .operator strong {
+      color: #dce9fd;
+      font-size: 0.61rem;
+    }
+
+    .operator small {
+      color: #8fa4c5;
+      font-size: 0.5rem;
     }
 
     .page-head {
@@ -319,193 +404,244 @@
       align-items: end;
       justify-content: space-between;
       gap: 1rem;
-      padding: 2.3rem 0 1.45rem;
+      padding: 1.85rem 0 1.25rem;
+      border-bottom: 1px solid rgba(193, 217, 255, 0.09);
     }
 
     .eyebrow {
       display: flex;
       align-items: center;
-      gap: .45rem;
-      margin: 0 0 .62rem;
+      gap: 0.45rem;
+      margin: 0 0 0.5rem;
       color: #a6c8ff;
-      font: .55rem var(--mono);
-      letter-spacing: .12em;
+      font: 0.55rem var(--mono);
+      letter-spacing: 0.12em;
       text-transform: uppercase;
     }
 
     .eyebrow::before {
       width: 18px;
       height: 1px;
-      background: #4f8dff;
+      background: #8da0bf;
       content: "";
     }
 
     .page-head h1 {
       margin: 0;
-      letter-spacing: -.035em;
-      font: clamp(2.25rem, 4vw, 3.8rem)/.9 var(--serif);
+      letter-spacing: -0.035em;
+      font: clamp(2.05rem, 3.25vw, 3.1rem) / 0.94 var(--serif);
     }
 
     .page-head h1 em {
-      color: #a9c9ff;
+      color: #d4e3fb;
     }
 
-    .page-head p {
-      max-width: 365px;
-      margin: 0 0 .15rem;
+    .page-head>p {
+      max-width: 390px;
+      margin: 0 0 0.15rem;
       color: #a4b4cd;
-      font-size: .72rem;
+      font-size: 0.69rem;
       line-height: 1.65;
     }
 
-    .metric-grid {
+    .action-metrics {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: .75rem;
+      gap: 0.75rem;
+      margin-top: 0.85rem;
     }
 
-    .metric {
+    .metric-card {
       position: relative;
-      min-height: 110px;
-      padding: .9rem;
+      min-height: 108px;
+      padding: 0.82rem 0.9rem;
       overflow: hidden;
       border: 1px solid var(--line);
-      border-radius: 6px;
-      background: linear-gradient(145deg, rgba(21, 38, 72, .86), rgba(11, 20, 39, .96));
+      border-radius: 7px;
+      color: inherit;
+      background:
+        repeating-linear-gradient(180deg,
+          rgba(255, 255, 255, 0.014) 0,
+          rgba(255, 255, 255, 0.014) 1px,
+          transparent 1px,
+          transparent 27px),
+        linear-gradient(145deg, rgba(18, 31, 56, 0.94), rgba(9, 18, 34, 0.98));
+      text-align: left;
+      transition:
+        border-color 0.18s var(--ease),
+        transform 0.16s var(--ease),
+        background 0.18s var(--ease);
     }
 
-    .metric::after {
+    .metric-card::after {
       position: absolute;
-      top: -40px;
-      right: -35px;
-      width: 110px;
-      height: 110px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(72, 135, 255, .18), transparent 68%);
+      top: 0.65rem;
+      right: 0.75rem;
+      width: 18px;
+      height: 18px;
+      border-top: 1px solid rgba(173, 197, 233, 0.23);
+      border-right: 1px solid rgba(173, 197, 233, 0.23);
       content: "";
     }
 
-    .metric-label {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      color: #9eb0ce;
-      font-size: .58rem;
+    .metric-card:hover {
+      border-color: rgba(172, 193, 225, 0.45);
     }
 
-    .metric-label i {
-      color: #85b1ff;
-      font-style: normal;
-    }
-
-    .metric strong {
-      display: block;
-      margin: .72rem 0 .24rem;
-      font: 2rem var(--serif);
-    }
-
-    .metric small {
+    .metric-card span {
       position: relative;
       z-index: 1;
-      color: #7ee0b7;
-      font-size: .57rem;
+      display: block;
+      color: #aabbd4;
+      font-size: 0.58rem;
     }
 
-    .metric small.warn {
-      color: #ffc36f;
+    .metric-card strong {
+      position: relative;
+      z-index: 1;
+      display: block;
+      margin: 0.62rem 0 0.18rem;
+      color: #fff;
+      font: 1.9rem var(--serif);
     }
 
-    .metric small b {
-      font-weight: 700;
+    .metric-card small {
+      position: relative;
+      z-index: 1;
+      color: #c0ccdd;
+      font-size: 0.54rem;
     }
 
-    .dashboard-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.03fr) minmax(340px, .97fr);
-      gap: .85rem;
-      margin-top: .85rem;
+    .metric-amber {
+      border-left: 2px solid rgba(255, 191, 108, 0.66);
     }
 
-    .card {
+    .metric-amber small {
+      color: #ffd18a;
+    }
+
+    .metric-slate {
+      border-left: 2px solid rgba(169, 185, 209, 0.5);
+    }
+
+    .metric-green {
+      border-left: 2px solid rgba(112, 213, 174, 0.65);
+    }
+
+    .metric-green small {
+      color: #98e6c5;
+    }
+
+    .panel {
       border: 1px solid var(--line);
-      border-radius: 7px;
-      background: linear-gradient(145deg, rgba(18, 32, 60, .94), rgba(10, 19, 37, .97));
-      box-shadow: 0 18px 42px rgba(0, 0, 0, .1);
+      border-radius: 8px;
+      background-color: var(--panel);
+      background-size: cover;
+      background-position: center;
+      box-shadow: 0 16px 34px rgba(0, 0, 0, 0.08);
     }
 
-    .card-head {
+    .action-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.16fr) minmax(350px, 0.84fr);
+      gap: 0.85rem;
+      margin-top: 0.85rem;
+    }
+
+    .acute-queue {
+      overflow: hidden;
+      background-image: repeating-linear-gradient(180deg,
+          rgba(255, 255, 255, 0.012) 0,
+          rgba(255, 255, 255, 0.012) 1px,
+          transparent 1px,
+          transparent 32px);
+    }
+
+    .panel-head {
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 1rem;
-      padding: 1rem 1rem .85rem;
+      padding: 1rem 1rem 0.85rem;
       border-bottom: 1px solid var(--line);
     }
 
-    .card-head h2 {
-      margin: 0;
-      font: 1.08rem var(--serif);
+    .panel-head h2,
+    .brief-title h2,
+    .decision-heading h2,
+    .handoff-top h2,
+    .evidence-head h2 {
+      margin: 0.23rem 0 0;
+      color: #f1f6ff;
+      font: 1.18rem var(--serif);
     }
 
-    .card-head p {
-      margin: .2rem 0 0;
+    .panel-head span,
+    .decision-heading span,
+    .handoff-top span {
+      display: block;
+      margin-top: 0.22rem;
       color: #93a6c5;
-      font-size: .6rem;
+      font-size: 0.59rem;
     }
 
     .filter-row {
       display: flex;
-      gap: .35rem;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      justify-content: flex-end;
     }
 
     .filter {
-      padding: .36rem .5rem;
-      border: 1px solid rgba(181, 207, 251, .16);
+      padding: 0.36rem 0.5rem;
+      border: 1px solid rgba(181, 207, 251, 0.16);
       border-radius: 99px;
       color: #a6b6cf;
       background: transparent;
-      font-size: .55rem;
-      transition: .2s var(--ease);
+      font-size: 0.54rem;
+      transition: 0.18s var(--ease);
     }
 
     .filter:hover,
     .filter.active {
-      border-color: rgba(124, 172, 255, .45);
+      border-color: rgba(124, 172, 255, 0.45);
       color: #dbe9ff;
-      background: rgba(66, 126, 255, .15);
-    }
-
-    .priority-queue {
-      overflow: hidden;
+      background: rgba(66, 126, 255, 0.15);
     }
 
     .queue-list {
       display: grid;
     }
 
-    .queue-item {
+    .queue-row {
       display: grid;
-      grid-template-columns: 34px 1fr auto;
+      width: 100%;
+      grid-template-columns: 34px minmax(0, 1fr) minmax(115px, 0.4fr) 15px;
       align-items: center;
-      gap: .7rem;
-      padding: .78rem 1rem;
-      border-bottom: 1px solid rgba(192, 215, 255, .1);
-      transition: background .2s var(--ease);
-    }
-
-    .queue-item:last-child {
+      gap: 0.72rem;
+      padding: 0.76rem 1rem;
       border: 0;
+      border-bottom: 1px solid rgba(192, 215, 255, 0.1);
+      color: inherit;
+      background: transparent;
+      text-align: left;
+      transition:
+        background 0.18s var(--ease),
+        box-shadow 0.18s var(--ease);
     }
 
-    .queue-item:hover {
-      background: rgba(96, 151, 255, .06);
+    .queue-row:hover {
+      background: rgba(96, 151, 255, 0.06);
     }
 
-    .queue-item.hidden {
-      display: none;
+    .queue-row.selected {
+      background: linear-gradient(90deg,
+          rgba(55, 123, 255, 0.17),
+          rgba(55, 123, 255, 0.035));
+      box-shadow: inset 3px 0 0 var(--blue);
     }
 
-    .priority {
+    .score {
       display: grid;
       width: 29px;
       height: 29px;
@@ -513,172 +649,702 @@
       border-radius: 50%;
       color: #dce9ff;
       background: #21458b;
-      font: .51rem var(--mono);
+      font: 0.51rem var(--mono);
     }
 
-    .priority.high {
+    .score-high {
       color: #fff0ea;
       background: #a94b48;
     }
 
-    .priority.mid {
+    .score-medium {
       color: #fff0db;
       background: #9c6d33;
     }
 
-    .queue-item strong,
-    .queue-item small {
+    .score-standard {
+      color: #dce9ff;
+      background: #21458b;
+    }
+
+    .queue-copy {
+      min-width: 0;
+    }
+
+    .queue-copy strong,
+    .queue-copy small {
       display: block;
     }
 
-    .queue-item strong {
+    .queue-copy strong {
+      overflow: hidden;
       color: #e7f0ff;
-      font-size: .66rem;
+      font-size: 0.66rem;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
-    .queue-item small {
-      margin-top: .16rem;
+    .queue-copy small {
+      overflow: hidden;
+      margin-top: 0.16rem;
       color: #8fa2c1;
-      font-size: .55rem;
+      font-size: 0.54rem;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
-    .queue-item time {
-      color: #8094b7;
-      font: .5rem var(--mono);
-    }
-
-    .queue-item .state {
-      padding: .22rem .34rem;
-      border-radius: 99px;
+    .queue-state {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      align-items: center;
+      gap: 0.32rem;
       color: #a9caff;
-      background: rgba(68, 128, 255, .14);
-      font: .48rem var(--mono);
+      font: 0.48rem var(--mono);
     }
 
-    .queue-item .state.green {
-      color: #9be3c5;
-      background: rgba(101, 206, 166, .12);
+    .queue-state time {
+      grid-column: 2;
+      margin-top: 0.08rem;
+      color: #8094b7;
+      font: 0.48rem var(--mono);
+    }
+
+    .status-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--blue);
+    }
+
+    .status-dot.pending {
+      background: var(--amber);
+    }
+
+    .status-dot.ready {
+      background: #7caeff;
+    }
+
+    .status-dot.confirmed {
+      background: var(--green);
     }
 
     .queue-footer {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: .72rem 1rem;
-      border-top: 1px solid var(--line);
+      padding: 0.72rem 1rem;
       color: #8498bb;
-      font-size: .57rem;
+      font-size: 0.56rem;
     }
 
-    .queue-footer a {
+    .queue-footer button {
+      border: 0;
       color: #9cc3ff;
+      background: transparent;
+      font-size: 0.56rem;
       font-weight: 700;
     }
 
-    .showcase {
+    .report-brief {
+      min-height: 100%;
+      padding: 1rem;
       overflow: hidden;
+      border-top: 2px solid rgba(170, 190, 222, 0.42);
+      background-image:
+        linear-gradient(90deg,
+          rgba(11, 23, 48, 0.98) 0%,
+          rgba(11, 23, 48, 0.92) 56%,
+          rgba(11, 23, 48, 0.73) 100%),
+        url("https://images.unsplash.com/photo-1523966211575-eb4a01e7dd51?auto=format&fit=crop&w=1200&q=80");
+      background-repeat: no-repeat;
     }
 
-    .showcase-head {
+    .brief-top {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 1rem;
+      gap: 0.5rem;
     }
 
-    .showcase-head h2 {
-      margin: 0;
-      font: 1.08rem var(--serif);
+    .report-id {
+      color: #adc6ec;
+      font: 0.52rem var(--mono);
+      letter-spacing: 0.08em;
     }
 
-    .showcase-head .label {
-      color: #91a7ca;
-      font: .54rem var(--mono);
-      letter-spacing: .08em;
+    .status-pill {
+      max-width: 156px;
+      padding: 0.26rem 0.45rem;
+      border-radius: 3px;
+      font: 0.48rem var(--mono);
+      text-align: center;
+    }
+
+    .status-pill.pending {
+      color: #ffd89d;
+      background: rgba(255, 191, 108, 0.13);
+    }
+
+    .status-pill.forwarded {
+      color: #afccff;
+      background: rgba(55, 123, 255, 0.18);
+    }
+
+    .status-pill.confirmed {
+      color: #a9ebcd;
+      background: rgba(112, 213, 174, 0.14);
+    }
+
+    .brief-title {
+      display: grid;
+      grid-template-columns: 56px 1fr;
+      gap: 0.74rem;
+      align-items: start;
+      margin-top: 1.05rem;
+    }
+
+    .score.large {
+      width: 43px;
+      height: 43px;
+      font-size: 0.64rem;
+    }
+
+    .score-caption {
+      display: block;
+      width: 48px;
+      margin-top: 0.28rem;
+      color: #8fa4c5;
+      font-size: 0.43rem;
+      line-height: 1.2;
+      text-align: center;
+    }
+
+    .brief-title p {
+      margin: 0.35rem 0 0;
+      color: #b7c6de;
+      font-size: 0.62rem;
+      line-height: 1.6;
+    }
+
+    .brief-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.48rem 0.72rem;
+      margin-top: 1.2rem;
+      padding-top: 0.7rem;
+      border-top: 1px solid rgba(197, 218, 255, 0.14);
+    }
+
+    .brief-meta span {
+      display: flex;
+      align-items: center;
+      gap: 0.28rem;
+      color: #b3c3dd;
+      font-size: 0.55rem;
+    }
+
+    .custody-heading {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 0.5rem;
+      margin-top: 1.1rem;
+      padding: 0.44rem 0.55rem;
+      border-top: 1px solid rgba(187, 207, 238, 0.22);
+      border-bottom: 1px solid rgba(187, 207, 238, 0.22);
+      color: #b5c5dc;
+      background: rgba(3, 11, 26, 0.38);
+    }
+
+    .custody-heading span {
+      color: #92a6c3;
+      font: 0.47rem var(--mono);
+      letter-spacing: 0.08em;
       text-transform: uppercase;
     }
 
-    .slide-wrap {
+    .custody-heading b {
+      color: #d5dfed;
+      font: 0.49rem var(--mono);
+      font-weight: 500;
+    }
+
+    .stage-rail {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      margin-top: 0;
+      padding: 0.82rem 0.2rem 0.18rem;
+      border-bottom: 1px solid rgba(187, 207, 238, 0.17);
+      background: repeating-linear-gradient(180deg,
+          rgba(255, 255, 255, 0.017) 0,
+          rgba(255, 255, 255, 0.017) 1px,
+          transparent 1px,
+          transparent 26px);
+    }
+
+    .stage {
       position: relative;
-      margin: 0 1rem;
-      overflow: hidden;
-      border-radius: 6px;
-      background: #07101f;
-      aspect-ratio: 1.57/1;
+      display: grid;
+      justify-items: center;
+      gap: 0.32rem;
+      color: #9aabc4;
+      font-size: 0.48rem;
     }
 
-    .slide {
+    .stage::before {
       position: absolute;
-      inset: 0;
-      opacity: 0;
-      transform: scale(1.04);
-      pointer-events: none;
-      transition: opacity .45s var(--ease), transform .7s var(--ease);
-    }
-
-    .slide.active {
-      z-index: 1;
-      opacity: 1;
-      transform: scale(1);
-      pointer-events: auto;
-    }
-
-    .slide img {
+      top: 14px;
+      left: -50%;
       width: 100%;
-      height: 100%;
-      object-fit: cover;
-      filter: saturate(.8) contrast(1.05);
-    }
-
-    .slide::after {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, transparent 38%, rgba(3, 9, 19, .86));
+      height: 1px;
+      background: #394c6b;
       content: "";
     }
 
-    .slide-caption {
-      position: absolute;
-      z-index: 2;
-      right: 0;
-      bottom: 0;
-      left: 0;
+    .stage:first-child::before {
+      display: none;
+    }
+
+    .stage i {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      width: 29px;
+      height: 29px;
+      place-items: center;
+      border: 1px solid #52647f;
+      border-radius: 4px 12px 4px 4px;
+      color: #b1c0d6;
+      background: #14223d;
+      font: 0.55rem var(--mono);
+      font-style: normal;
+    }
+
+    .stage.complete {
+      color: #b9ebd2;
+    }
+
+    .stage.complete i {
+      border-color: #54a97f;
+      color: #e0fff0;
+      background: #297254;
+    }
+
+    .stage.active {
+      color: #c9dcff;
+    }
+
+    .stage.active i {
+      border-color: var(--blue);
+      color: #fff;
+      background: #1f4fa9;
+      box-shadow: 0 0 0 3px rgba(55, 123, 255, 0.13);
+    }
+
+    .decision-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.85rem;
+      margin-top: 0.85rem;
+    }
+
+    .decision-card {
+      min-height: 304px;
+      padding: 1rem;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    .validation {
+      background-image:
+        linear-gradient(115deg,
+          rgba(13, 26, 53, 0.96),
+          rgba(13, 26, 53, 0.73)),
+        url("https://images.unsplash.com/photo-1456324504439-367cee3b3c32?auto=format&fit=crop&w=1200&q=80");
+    }
+
+    .redundancy {
+      background-image:
+        linear-gradient(115deg,
+          rgba(12, 25, 50, 0.97),
+          rgba(12, 25, 50, 0.76)),
+        url("https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80");
+    }
+
+    .decision-icon {
+      display: grid;
+      width: 33px;
+      height: 33px;
+      place-items: center;
+      border-radius: 6px;
+      font-size: 0.9rem;
+    }
+
+    .decision-icon.amber {
+      color: #ffe0a8;
+      background: rgba(255, 191, 108, 0.16);
+    }
+
+    .decision-icon.blue {
+      color: #c9dcff;
+      background: rgba(55, 123, 255, 0.19);
+    }
+
+    .decision-heading {
+      margin-top: 0.76rem;
+    }
+
+    .decision-heading h2 {
+      max-width: 325px;
+      font-size: 1.17rem;
+    }
+
+    .check-list {
+      display: grid;
+      gap: 0.52rem;
+      margin: 1rem 0;
+    }
+
+    .check-list span {
+      display: flex;
+      align-items: center;
+      gap: 0.46rem;
+      color: #c4d0e3;
+      font-size: 0.57rem;
+    }
+
+    .check {
+      display: grid;
+      width: 15px;
+      height: 15px;
+      flex: 0 0 15px;
+      place-items: center;
+      border: 1px solid #587094;
+      border-radius: 4px;
+      color: #fff;
+      font: 0.54rem var(--mono);
+    }
+
+    .check.done {
+      border-color: #54a97f;
+      background: #297254;
+    }
+
+    .check.amber-check {
+      border-color: #c58a37;
+      color: #ffe0a8;
+      background: rgba(156, 109, 51, 0.55);
+    }
+
+    .duplicate-box {
+      margin: 1rem 0;
+      padding: 0.63rem 0.7rem;
+      border: 1px solid rgba(183, 207, 248, 0.14);
+      border-radius: 5px;
+      background: rgba(4, 12, 27, 0.42);
+    }
+
+    .duplicate-box>span {
+      display: block;
+      margin-bottom: 0.4rem;
+      color: #98b3d9;
+      font: 0.49rem var(--mono);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .duplicate-box div {
+      display: flex;
+      gap: 0.35rem;
+    }
+
+    .duplicate-box button {
+      padding: 0.26rem 0.36rem;
+      border: 1px solid rgba(97, 153, 255, 0.35);
+      border-radius: 4px;
+      color: #c6dbff;
+      background: rgba(55, 123, 255, 0.12);
+      font: 0.5rem var(--mono);
+    }
+
+    .duplicate-box p {
+      margin: 0;
+      color: #b4c2d7;
+      font-size: 0.57rem;
+    }
+
+    .decision-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.45rem 0.75rem;
+      margin-top: auto;
+    }
+
+    .secondary-action,
+    .primary-action,
+    .confirmation-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      min-height: 34px;
+      padding: 0.52rem 0.68rem;
+      border: 1px solid transparent;
+      border-radius: 4px;
+      font-size: 0.57rem;
+      font-weight: 700;
+      transition:
+        transform 0.16s var(--ease),
+        background 0.18s var(--ease),
+        border-color 0.18s var(--ease);
+    }
+
+    .secondary-action {
+      border-color: rgba(136, 178, 255, 0.42);
+      color: #e2edff;
+      background: rgba(55, 123, 255, 0.15);
+    }
+
+    .secondary-action:hover {
+      background: rgba(55, 123, 255, 0.28);
+    }
+
+    .text-action {
+      padding: 0;
+      border: 0;
+      color: #b8d4ff;
+      background: transparent;
+      font-size: 0.56rem;
+      font-weight: 700;
+    }
+
+    .text-action:hover {
+      color: #fff;
+    }
+
+    .decision-complete {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      color: #9fe6c3;
+      font-size: 0.58rem;
+    }
+
+    .handoff-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.04fr) minmax(340px, 0.96fr);
+      gap: 0.85rem;
+      margin-top: 0.85rem;
+    }
+
+    .final-handoff {
       padding: 1rem;
     }
 
-    .slide-caption .caption-top {
+    .handoff-top {
       display: flex;
+      align-items: flex-start;
       justify-content: space-between;
-      margin-bottom: .35rem;
-      color: #b8d0f5;
-      font: .5rem var(--mono);
-      letter-spacing: .1em;
+      gap: 0.8rem;
     }
 
-    .slide-caption h3 {
-      margin: 0;
-      font-size: .83rem;
+    .handoff-top h2 {
+      max-width: 420px;
     }
 
-    .slide-caption p {
-      margin: .2rem 0 0;
-      color: #c4d2e9;
-      font-size: .58rem;
+    .destination-chip {
+      display: flex;
+      max-width: 160px;
+      align-items: center;
+      gap: 0.32rem;
+      padding: 0.4rem 0.5rem;
+      border: 1px solid rgba(128, 174, 255, 0.28);
+      border-radius: 5px;
+      color: #c5daff;
+      background: rgba(55, 123, 255, 0.1);
+      font-size: 0.52rem;
+      line-height: 1.3;
     }
 
-    .slideshow-controls {
+    .handoff-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .primary-action {
+      color: #07101f;
+      background: linear-gradient(135deg, #b8d4ff, #5992ff);
+    }
+
+    .primary-action:hover {
+      background: linear-gradient(135deg, #d2e4ff, #73a5ff);
+    }
+
+    .confirmation-button {
+      border-color: rgba(119, 215, 174, 0.43);
+      color: #cbfae3;
+      background: rgba(84, 166, 126, 0.16);
+    }
+
+    .confirmation-button:hover {
+      background: rgba(84, 166, 126, 0.28);
+    }
+
+    .handoff-receipt {
+      position: relative;
+      display: grid;
+      gap: 0.28rem;
+      margin-top: 1rem;
+      padding: 0.72rem 0.8rem;
+      overflow: hidden;
+      border-top: 1px solid rgba(163, 187, 221, 0.27);
+      border-bottom: 1px solid rgba(163, 187, 221, 0.27);
+      border-left: 2px solid var(--blue);
+      background:
+        repeating-linear-gradient(180deg,
+          rgba(255, 255, 255, 0.018) 0,
+          rgba(255, 255, 255, 0.018) 1px,
+          transparent 1px,
+          transparent 22px),
+        rgba(4, 12, 27, 0.48);
+    }
+
+    .handoff-receipt::after {
+      position: absolute;
+      right: 0.55rem;
+      bottom: 0.38rem;
+      color: rgba(164, 189, 225, 0.22);
+      content: "SANJAYA\A ACTION LEDGER";
+      font: 0.42rem/1.45 var(--mono);
+      letter-spacing: 0.12em;
+      text-align: right;
+      white-space: pre;
+    }
+
+    .handoff-receipt>span,
+    .handoff-receipt strong,
+    .handoff-receipt small {
+      position: relative;
+      z-index: 1;
+    }
+
+    .handoff-receipt>span {
+      color: #8eabd3;
+      font: 0.49rem var(--mono);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .handoff-receipt strong {
+      color: #e5efff;
+      font-size: 0.63rem;
+    }
+
+    .handoff-receipt small {
+      max-width: 78%;
+      color: #99acc7;
+      font-size: 0.55rem;
+      line-height: 1.5;
+    }
+
+    .evidence-panel {
+      overflow: hidden;
+    }
+
+    .evidence-head {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: .8rem 1rem 1rem;
+      gap: 0.8rem;
+      padding: 1rem;
+      border-bottom: 1px solid var(--line);
     }
 
-    .dots {
+    .evidence-head a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      color: #b7d3ff;
+      font-size: 0.54rem;
+    }
+
+    .evidence-stage {
+      position: relative;
+      min-height: 178px;
+      overflow: hidden;
+      background: #07101f;
+    }
+
+    .evidence-stage img {
+      width: 100%;
+      height: 198px;
+      object-fit: cover;
+      filter: saturate(0.76) contrast(1.06);
+    }
+
+    .evidence-stage::after {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg,
+          transparent 32%,
+          rgba(3, 9, 19, 0.91));
+      content: "";
+    }
+
+    .evidence-stage div {
+      position: absolute;
+      z-index: 1;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      padding: 0.85rem 1rem;
+    }
+
+    .evidence-stage span {
+      color: #b8d0f5;
+      font: 0.49rem var(--mono);
+      letter-spacing: 0.09em;
+    }
+
+    .evidence-stage h3 {
+      margin: 0.32rem 0 0;
+      color: #fff;
+      font-size: 0.72rem;
+    }
+
+    .evidence-stage p {
+      margin: 0.2rem 0 0;
+      color: #c4d2e9;
+      font-size: 0.54rem;
+    }
+
+    .evidence-controls {
       display: flex;
-      gap: .35rem;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.65rem 1rem 0.75rem;
     }
 
-    .slide-dot {
+    .evidence-controls>button {
+      display: grid;
+      width: 26px;
+      height: 26px;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 3px;
+      color: #bdd2f3;
+      background: transparent;
+    }
+
+    .evidence-controls>div {
+      display: flex;
+      gap: 0.35rem;
+    }
+
+    .evidence-dot {
       width: 6px;
       height: 6px;
       padding: 0;
@@ -687,218 +1353,162 @@
       background: #506a95;
     }
 
-    .slide-dot.active {
-      width: 19px;
+    .evidence-dot.active {
+      width: 18px;
       border-radius: 99px;
       background: #8bb8ff;
     }
 
-    .arrows {
-      display: flex;
-      gap: .35rem;
-    }
-
-    .arrow {
-      display: grid;
-      width: 28px;
-      height: 28px;
-      place-items: center;
-      border: 1px solid var(--line);
-      border-radius: 3px;
-      color: #bdd2f3;
-      background: transparent;
-    }
-
-    .arrow:hover {
-      border-color: #719ee5;
-      color: white;
-      background: rgba(79, 139, 255, .12);
-    }
-
-    .lower-grid {
-      display: grid;
-      grid-template-columns: 1.1fr .9fr;
-      gap: .85rem;
-      margin-top: .85rem;
-    }
-
-    .resolved {
-      overflow: hidden;
-    }
-
-    .resolved-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: .65rem;
-      padding: 1rem;
-    }
-
-    .resolved-card {
-      overflow: hidden;
-      border: 1px solid rgba(186, 211, 255, .14);
+    .toast {
+      position: fixed;
+      z-index: 50;
+      right: 1.2rem;
+      bottom: 1.2rem;
+      max-width: min(360px, calc(100vw - 2.4rem));
+      padding: 0.76rem 0.9rem;
+      border: 1px solid rgba(154, 202, 255, 0.37);
       border-radius: 5px;
-      background: rgba(255, 255, 255, .025);
+      color: #e8f2ff;
+      background: #14294c;
+      box-shadow: 0 20px 48px rgba(0, 0, 0, 0.35);
+      font-size: 0.64rem;
+      opacity: 0;
+      transform: translateY(10px);
+      pointer-events: none;
+      transition:
+        opacity 0.18s var(--ease),
+        transform 0.18s var(--ease);
     }
 
-    .resolved-card img {
-      display: block;
-      width: 100%;
-      aspect-ratio: 1.5/1;
-      object-fit: cover;
-      filter: saturate(.72);
-    }
-
-    .resolved-card div {
-      padding: .58rem;
-    }
-
-    .resolved-card strong {
-      display: block;
-      color: #e2ecfc;
-      font-size: .6rem;
-    }
-
-    .resolved-card span {
-      display: block;
-      margin-top: .18rem;
-      color: #79d9ae;
-      font-size: .5rem;
-    }
-
-    .resolved-card span::before {
-      margin-right: .28rem;
-      content: "✓";
-    }
-
-    .workload {
-      display: grid;
-      grid-template-columns: 125px 1fr;
-      align-items: center;
-      gap: .5rem;
-      padding: 1rem;
-    }
-
-    .donut {
-      position: relative;
-      display: grid;
-      width: 112px;
-      height: 112px;
-      place-items: center;
-      border-radius: 50%;
-      background: conic-gradient(#4c86ff 0 40%, #7cd5b2 40% 66%, #ffbc65 66% 84%, #485f88 84% 100%);
-    }
-
-    .donut::before {
-      position: absolute;
-      width: 77px;
-      height: 77px;
-      border-radius: 50%;
-      background: #0e1b34;
-      content: "";
-    }
-
-    .donut div {
-      position: relative;
-      text-align: center;
-    }
-
-    .donut strong {
-      display: block;
-      font: 1.55rem var(--serif);
-    }
-
-    .donut small {
-      display: block;
-      color: #91a5c5;
-      font-size: .48rem;
-    }
-
-    .dept-list {
-      display: grid;
-      gap: .55rem;
-    }
-
-    .dept-row {
-      display: grid;
-      grid-template-columns: 8px 1fr auto;
-      align-items: center;
-      gap: .45rem;
-      color: #a4b5cd;
-      font-size: .57rem;
-    }
-
-    .dept-row i {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: #4c86ff;
-    }
-
-    .dept-row:nth-child(2) i {
-      background: #7cd5b2;
-    }
-
-    .dept-row:nth-child(3) i {
-      background: #ffbc65;
-    }
-
-    .dept-row:nth-child(4) i {
-      background: #485f88;
-    }
-
-    .dept-row b {
-      color: #dce8f9;
-      font: .55rem var(--mono);
-    }
-
-    .metric-note {
-      display: flex;
-      align-items: center;
-      gap: .5rem;
-      padding: 0 1rem 1rem;
-      color: #879ab8;
-      font-size: .55rem;
-    }
-
-    .metric-note i {
-      color: #91baff;
-      font-style: normal;
+    .toast.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .mobile-nav {
       display: none;
     }
 
-    @media (max-width:1100px) {
-      .app {
-        grid-template-columns: 205px minmax(0, 1fr);
+    .route-overlay {
+      position: fixed;
+      z-index: 40;
+      inset: 0;
+      display: none;
+      place-items: center;
+      padding: 1rem;
+      background: rgba(1, 7, 17, 0.72);
+      backdrop-filter: blur(6px);
+    }
+
+    .route-overlay.open {
+      display: grid;
+    }
+
+    .route-dialog {
+      position: relative;
+      width: min(100%, 460px);
+      padding: 1.25rem;
+      border: 1px solid rgba(159, 194, 255, 0.3);
+      border-radius: 9px;
+      background: linear-gradient(145deg, #172c51, #0d1930);
+      box-shadow: 0 28px 80px rgba(0, 0, 0, 0.45);
+      animation: dialog-in 0.2s var(--ease);
+    }
+
+    .route-dialog h2 {
+      max-width: 355px;
+      margin: 0.45rem 0;
+      color: #fff;
+      font: 1.52rem/1 var(--serif);
+    }
+
+    .route-dialog>p:not(.panel-kicker) {
+      margin: 0;
+      color: #aebed7;
+      font-size: 0.64rem;
+      line-height: 1.65;
+    }
+
+    .close-dialog {
+      position: absolute;
+      top: 0.85rem;
+      right: 0.85rem;
+      display: grid;
+      width: 28px;
+      height: 28px;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      color: #bcd0f0;
+      background: transparent;
+    }
+
+    .route-select-label {
+      display: block;
+      margin: 1rem 0 0.4rem;
+      color: #b9cdf0;
+      font-size: 0.57rem;
+      font-weight: 700;
+    }
+
+    .route-dialog select {
+      width: 100%;
+      min-height: 37px;
+      padding: 0 0.6rem;
+      border: 1px solid rgba(159, 194, 255, 0.25);
+      border-radius: 4px;
+      color: #edf5ff;
+      background: #0b1730;
+      font-size: 0.62rem;
+    }
+
+    .dialog-actions {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 0.85rem;
+      margin-top: 1rem;
+    }
+
+    @keyframes dialog-in {
+      from {
+        opacity: 0;
+        transform: translateY(10px) scale(0.98);
       }
 
-      .metric-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .dashboard-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .showcase {
-        order: -1;
-      }
-
-      .lower-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .resolved-grid {
-        grid-template-columns: repeat(3, 1fr);
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
       }
     }
 
-    @media (max-width:760px) {
+    @media (max-width: 1100px) {
+      .app {
+        grid-template-columns: 215px minmax(0, 1fr);
+      }
+
+      .action-metrics {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .action-layout,
+      .handoff-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .report-brief {
+        min-height: 280px;
+      }
+
+      .evidence-stage img {
+        height: 220px;
+      }
+    }
+
+    @media (max-width: 760px) {
       .app {
         display: block;
-        padding-bottom: 63px;
+        padding-bottom: 67px;
       }
 
       .sidebar {
@@ -906,20 +1516,29 @@
       }
 
       .content {
-        padding: 0 1rem 1.4rem;
+        padding: 0 1rem 1.5rem;
       }
 
       .topbar {
         min-height: 66px;
       }
 
-      .crumb {
+      .crumb,
+      .top-actions .icon-button {
         display: none;
       }
 
-      .search {
+      .top-actions {
+        width: 100%;
+      }
+
+      .search-box {
         min-width: 0;
         flex: 1;
+      }
+
+      .operator {
+        min-width: auto;
       }
 
       .operator span {
@@ -928,52 +1547,52 @@
 
       .page-head {
         display: block;
-        padding: 2.2rem 0 1.2rem;
+        padding: 2rem 0 1.2rem;
       }
 
-      .page-head p {
-        margin-top: .85rem;
+      .page-head>p {
+        margin-top: 0.85rem;
       }
 
-      .metric-grid {
-        grid-template-columns: repeat(2, 1fr);
+      .action-layout,
+      .decision-grid,
+      .handoff-grid {
+        gap: 0.7rem;
+        margin-top: 0.7rem;
       }
 
-      .metric {
-        min-height: 95px;
+      .decision-grid {
+        grid-template-columns: 1fr;
       }
 
-      .dashboard-grid,
-      .lower-grid {
-        gap: .7rem;
-        margin-top: .7rem;
+      .action-metrics {
+        gap: 0.6rem;
       }
 
-      .showcase {
-        order: initial;
+      .panel-head {
+        align-items: flex-start;
+        flex-direction: column;
       }
 
-      .resolved-grid {
-        gap: .5rem;
-        padding: .7rem;
+      .filter-row {
+        justify-content: flex-start;
       }
 
-      .queue-item {
-        padding: .72rem .8rem;
+      .queue-row {
+        grid-template-columns: 32px minmax(0, 1fr) 15px;
       }
 
-      .workload {
-        grid-template-columns: 108px 1fr;
+      .queue-state {
+        display: none;
       }
 
-      .donut {
-        width: 98px;
-        height: 98px;
+      .handoff-top {
+        align-items: flex-start;
+        flex-direction: column;
       }
 
-      .donut::before {
-        width: 67px;
-        height: 67px;
+      .destination-chip {
+        max-width: 100%;
       }
 
       .mobile-nav {
@@ -984,481 +1603,897 @@
         left: 0;
         display: flex;
         justify-content: space-around;
-        padding: .55rem .4rem calc(.55rem + env(safe-area-inset-bottom));
+        padding: 0.52rem 0.3rem calc(0.52rem + env(safe-area-inset-bottom));
         border-top: 1px solid var(--line);
-        background: rgba(7, 16, 31, .92);
+        background: rgba(7, 16, 31, 0.94);
         backdrop-filter: blur(16px);
       }
 
-      .mobile-nav a {
+      .mobile-nav button {
         display: grid;
-        gap: .18rem;
+        gap: 0.17rem;
         place-items: center;
-        color: #94a7c7;
-        font-size: .49rem;
+        min-width: 55px;
+        border: 0;
+        color: #a7bbda;
+        background: transparent;
+        font-size: 0.46rem;
       }
 
-      .mobile-nav a.active {
-        color: #d8e7ff;
-      }
-
-      .mobile-nav b {
-        color: #86b5ff;
-        font-size: .9rem;
-      }
-
-      .footer {
-        padding-bottom: 2.7rem;
+      .mobile-nav .nav-icon {
+        color: #8db9ff;
+        font-size: 0.85rem;
       }
     }
 
-    @media (max-width:430px) {
-      .top-actions .icon-button {
-        display: none;
-      }
-
-      .metric-grid {
+    @media (max-width: 460px) {
+      .action-metrics {
         grid-template-columns: 1fr 1fr;
       }
 
-      .metric strong {
-        font-size: 1.7rem;
+      .metric-card {
+        min-height: 103px;
+        padding: 0.75rem;
       }
 
-      .card-head {
+      .metric-card strong {
+        margin-top: 0.5rem;
+        font-size: 1.65rem;
+      }
+
+      .brief-meta {
+        gap: 0.4rem;
+      }
+
+      .stage span {
+        font-size: 0.42rem;
+      }
+
+      .decision-card {
+        min-height: 0;
+      }
+
+      .evidence-head {
         align-items: flex-start;
         flex-direction: column;
       }
 
-      .filter-row {
+      .handoff-actions {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .primary-action,
+      .confirmation-button {
         width: 100%;
-        overflow-x: auto;
-      }
-
-      .slide-wrap {
-        margin: 0 .7rem;
-      }
-
-      .slideshow-controls {
-        padding: .7rem;
-      }
-
-      .resolved-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .resolved-card:last-child {
-        display: none;
-      }
-
-      .workload {
-        grid-template-columns: 1fr;
-      }
-
-      .donut {
-        margin: auto;
-      }
-
-      .dept-list {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .metric-note {
-        padding: .7rem;
-      }
-
-      .operator b {
-        width: 27px;
-        height: 27px;
       }
     }
 
-    @media (prefers-reduced-motion:reduce) {
+    @media (prefers-reduced-motion: reduce) {
 
       *,
       *::before,
       *::after {
         scroll-behavior: auto !important;
-        transition-duration: .01ms !important;
-        animation: none !important;
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
       }
-    }
-
-    .operator {
-      min-width: 138px;
-    }
-
-    .operator .member-copy {
-      display: grid;
-      gap: .1rem;
-    }
-
-    .operator .member-name {
-      overflow: hidden;
-      max-width: 150px;
-      color: #dce9fd;
-      font-size: .63rem;
-      font-weight: 700;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-    .operator .member-meta {
-      overflow: hidden;
-      max-width: 150px;
-      color: #8fa4c5;
-      font-size: .5rem;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-    .logout-button {
-      color: #ffb5a9;
-    }
-
-    .logout-button:hover {
-      border-color: rgba(255, 147, 126, .55);
-      background: rgba(255, 129, 103, .09);
     }
   </style>
 </head>
 
 <body>
-  <div class="noise" aria-hidden="true"></div>
+  <div class="page-noise" aria-hidden="true"></div>
   <div class="app">
     <aside class="sidebar">
-      <a class="brand" href="#overview"><span class="mark">S</span><span class="brand-text">SANJAYA<small>CIVIC
-            INTELLIGENCE</small></span></a>
-      <p class="workspace-tag">Operations workspace</p>
-      <nav class="side-nav" aria-label="Dashboard navigation"><a class="active" href="#overview"><span
-            class="nav-icon">◫</span>Overview</a><a href="#queue"><span class="nav-icon">◎</span>Incident queue <span
-            class="nav-badge">146</span></a><a href="#slideshow"><span class="nav-icon">▣</span>Evidence review</a><a
-          href="#resolved"><span class="nav-icon">✓</span>Resolved work</a><a href="index.html"><span
-            class="nav-icon">◇</span>Back to Home</a></nav>
-      <div class="side-summary">
-        <p>Today’s service level</p><strong>74%</strong><small>High-priority reports
-          reviewed within the agreed response window.</small>
-        <div class="mini-track"><i></i></div>
+      <a class="brand" href="#overview" aria-label="SANJAYA operations overview">
+        <span class="brand-mark" aria-hidden="true">S</span>
+        <span class="brand-text">SANJAYA<small>CIVIC INTELLIGENCE</small></span>
+      </a>
+      <p class="workspace-label">Operations workspace</p>
+      <nav class="side-nav" aria-label="Operational actions">
+        <button class="nav-action active" type="button" data-jump="overview">
+          <span class="nav-icon">☷</span>Action desk
+        </button>
+        <button class="nav-action" type="button" data-jump="acute-queue">
+          <span class="nav-icon">⌕</span>Queued reports
+          <b id="queue-badge">5</b>
+        </button>
+        <button class="nav-action" type="button" data-jump="priority-check">
+          <span class="nav-icon">♢</span>Priority validation
+          <b id="priority-badge">2</b>
+        </button>
+        <button class="nav-action" type="button" data-jump="redundancy-check">
+          <span class="nav-icon">▣</span>Redundancy control
+          <b id="redundancy-badge">2</b>
+        </button>
+        <button class="nav-action" type="button" data-jump="final-handoff">
+          <span class="nav-icon">➤</span>Final hand-off
+          <b id="route-badge">1</b>
+        </button>
+        <button class="nav-action" type="button" data-jump="confirmation">
+          <span class="nav-icon">✓</span>Confirm actions
+          <b id="confirm-badge">1</b>
+        </button>
+        <a class="nav-action home-link" href="index.html"><span class="nav-icon">↗</span>Back to Home</a>
+      </nav>
+      <div class="sidebar-control">
+        <span class="control-kicker">Control state</span><strong>Review before route.</strong>
+        <p>
+          Every report needs a traceable validation, duplication decision,
+          destination, and confirmation.
+        </p>
+        <div class="control-legend">
+          <i class="dot dot-amber"></i> Check pending
+          <i class="dot dot-blue"></i> Action ready
+        </div>
       </div>
     </aside>
 
     <main class="content" id="overview">
       <header class="topbar">
-        <div class="crumb">SANJAYA / <b>Operations overview</b></div>
-        <div class="top-actions"><label class="search"><span>⌕</span><input id="search" type="search"
+        <div class="crumb">SANJAYA / <b>Report action desk</b></div>
+        <div class="top-actions">
+          <label class="search-box"><span>⌕</span><input id="search" type="search"
               placeholder="Search complaint or ward" aria-label="Search complaint or ward" /></label><button
-            class="icon-button" type="button" title="Notifications">🔔</button><button class="icon-button" type="button"
-            title="Export queue">⇩</button>
-          <div class="operator" aria-label="Verified SANJAYA member"><b id="member-initials">··</b><span
-              class="member-copy"><span class="member-name" id="member-name">Verifying member…</span><span
-                class="member-meta" id="member-meta">Session
-                check in progress</span></span></div><button class="icon-button logout-button" id="logout-button"
-            type="button" title="Sign out">↗</button>
+            class="icon-button" id="notifications" type="button" title="Notifications">
+            ♧</button><button class="icon-button" id="export" type="button" title="Export queue">
+            ⇩
+          </button>
+          <div class="operator">
+            <b>SA</b><span><strong>Action administrator</strong><small>Routing authority</small></span>
+          </div>
         </div>
       </header>
       <section class="page-head">
         <div>
-          <p class="eyebrow">Live civic pulse · Today</p>
-          <h1>Move the right issue <em>first.</em></h1>
+          <p class="eyebrow">Accountable public-service action</p>
+          <h1>Take a verified <em>action.</em></h1>
         </div>
-        <p>One operational view for what is arriving, what needs attention, and what your
-          teams have already made better.</p>
+        <p>
+          Review the report, verify whether it is urgent and credible, check
+          for duplicates, then route it to the responsible office with a
+          visible confirmation trail.
+        </p>
+      </section>
+      <section class="action-metrics" aria-label="Action workload">
+        <button class="metric-card" data-filter="needs-action" type="button">
+          <span>Needs administrator review</span><strong id="review-count">4</strong><small>Open reports requiring a
+            decision</small></button><button class="metric-card metric-amber" data-jump="priority-check" type="button">
+          <span>Priority truth checks</span><strong id="priority-count">2</strong><small>Confirm urgency before
+            escalation</small></button><button class="metric-card metric-slate" data-jump="redundancy-check"
+          type="button">
+          <span>Redundancy checks</span><strong id="redundancy-count">2</strong><small>Prevent parallel work on the same
+            issue</small></button><button class="metric-card metric-green" data-filter="ready" type="button">
+          <span>Ready for final hand-off</span><strong id="ready-count">1</strong><small>Validated reports awaiting
+            destination</small>
+        </button>
       </section>
 
-      <section class="metric-grid" aria-label="Operational metrics">
-        <article class="metric">
-          <div class="metric-label"><span>Open in queue</span><i>◎</i></div>
-          <strong>146</strong><small><b>+11</b> since yesterday</small>
-        </article>
-        <article class="metric">
-          <div class="metric-label"><span>High-priority</span><i>◉</i></div>
-          <strong>18</strong><small class="warn"><b>6</b> due inside 4 hours</small>
-        </article>
-        <article class="metric">
-          <div class="metric-label"><span>Resolved this week</span><i>✓</i></div>
-          <strong>52</strong><small><b>+18%</b> versus last week</small>
-        </article>
-        <article class="metric">
-          <div class="metric-label"><span>Reports grouped</span><i>⊹</i></div>
-          <strong>31</strong><small><b>12%</b> fewer duplicate tasks</small>
-        </article>
-      </section>
-
-      <section class="dashboard-grid">
-        <article class="card priority-queue" id="queue">
-          <div class="card-head">
+      <section class="action-layout">
+        <article class="panel acute-queue" id="acute-queue">
+          <div class="panel-head">
             <div>
+              <p class="panel-kicker">Acute panel</p>
               <h2>Priority incident queue</h2>
-              <p>Sorted by impact, response window, and report cluster.
+              <span>Choose one report, then complete its checks before routing
+                it.</span>
+            </div>
+            <div class="filter-row" aria-label="Queue filter">
+              <button class="filter active" type="button" data-filter="all">
+                All</button><button class="filter" type="button" data-filter="needs-action">
+                Needs action</button><button class="filter" type="button" data-filter="priority">
+                Priority</button><button class="filter" type="button" data-filter="ready">
+                Ready
+              </button>
+            </div>
+          </div>
+          <div class="queue-list" id="queue-list"></div>
+          <div class="queue-footer">
+            <span id="queue-count">Showing 5 reports</span><button id="clear-filters" type="button">
+              Clear queue filters
+            </button>
+          </div>
+        </article>
+        <article class="panel report-brief">
+          <div class="brief-top">
+            <span class="report-id" id="brief-id">REPORT #04827</span><span class="status-pill pending"
+              id="brief-status">Awaiting review</span>
+          </div>
+          <div class="brief-title">
+            <div>
+              <span class="score large score-high" id="brief-score">92</span><span class="score-caption">Action
+                score</span>
+            </div>
+            <div>
+              <h2 id="brief-title">Road surface collapse</h2>
+              <p id="brief-description">
+                Damage is reported beside a school crossing. Fifteen linked
+                public reports indicate an immediate pedestrian-safety
+                concern.
               </p>
             </div>
-            <div class="filter-row" aria-label="Queue filter"><button class="filter active" type="button"
-                data-filter="all">All</button><button class="filter" type="button"
-                data-filter="high">High</button><button class="filter" type="button"
-                data-filter="municipal">Municipal</button><button class="filter" type="button"
-                data-filter="tehsildar">Tehsildar</button></div>
           </div>
-          <div class="queue-list" id="queue-list">
-            <article class="queue-item" data-tags="high municipal roads pothole ward 07"><span
-                class="priority high">92</span>
-              <div><strong>Road surface collapse</strong><small>Ward 07
-                  · Roads &amp; Public Works · 15 linked
-                  reports</small></div>
-              <div><span class="state">Assigned</span><time>48m</time>
-              </div>
-            </article>
-            <article class="queue-item" data-tags="high municipal drainage water ward 05"><span
-                class="priority high">88</span>
-              <div><strong>Waterlogging near clinic</strong><small>Ward
-                  05 · Storm Water &amp; Drainage · 8
-                  linked reports</small></div>
-              <div><span class="state">Review</span><time>1h</time>
-              </div>
-            </article>
-            <article class="queue-item" data-tags="municipal sanitation garbage ward 09"><span
-                class="priority mid">76</span>
-              <div><strong>Waste overflow at collection
-                  point</strong><small>Ward 09 ·
-                  Sanitation · public access
-                  affected</small></div>
-              <div><span class="state">Routed</span><time>2h</time>
-              </div>
-            </article>
-            <article class="queue-item" data-tags="tehsildar revenue land village 07"><span class="priority">69</span>
-              <div><strong>Survey boundary record
-                  concern</strong><small>Revenue Village
-                  07 · Tehsildar Office · document
-                  review</small></div>
-              <div><span class="state">Review</span><time>3h</time>
-              </div>
-            </article>
-            <article class="queue-item" data-tags="municipal electrical streetlight ward 02">
-              <span class="priority">63</span>
-              <div><strong>Streetlight outage on pedestrian
-                  lane</strong><small>Ward 02 ·
-                  Electrical Maintenance · 3 linked
-                  reports</small></div>
-              <div><span class="state green">Scheduled</span><time>4h</time>
-              </div>
-            </article>
+          <div class="brief-meta">
+            <span id="brief-ward">⌖ Ward 07</span><span id="brief-department">▤ Roads &amp; Public Works</span><span
+              id="brief-evidence">⌇ 4 attachments</span>
           </div>
-          <div class="queue-footer"><span id="queue-count">Showing 5 priority
-              incidents</span><a href="#queue">Open full queue →</a>
+          <div class="custody-heading">
+            <span>Chain of custody</span><b>One report · one accountable route</b>
           </div>
-        </article>
-
-        <article class="card showcase" id="slideshow">
-          <div class="showcase-head">
-            <div>
-              <h2>Evidence review</h2>
-            </div><span class="label">Complaint image stream</span>
-          </div>
-          <div class="slide-wrap" aria-live="polite">
-            <article class="slide active"><img
-                src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663882698401/tSKzQycxbDelJIzf.jpg"
-                alt="Pothole near a school crossing" />
-              <div class="slide-caption">
-                <div class="caption-top"><span>INCIDENT #04827 ·
-                    WARD 07</span><span>92 /
-                    100</span></div>
-                <h3>Road surface collapse near school crossing
-                </h3>
-                <p>Municipal Corporation · Roads &amp; Public
-                  Works</p>
-              </div>
-            </article>
-            <article class="slide"><img
-                src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663882698401/kcvSMLDjSNrapNqP.jpg"
-                alt="Overflowing civic garbage collection point" />
-              <div class="slide-caption">
-                <div class="caption-top"><span>INCIDENT #04852 ·
-                    WARD 09</span><span>76 /
-                    100</span></div>
-                <h3>Waste overflow at a collection point</h3>
-                <p>Municipal Corporation · Sanitation &amp;
-                  Solid Waste</p>
-              </div>
-            </article>
-            <article class="slide"><img
-                src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663882698401/pxfmjMbUWrHvPdmE.jpg"
-                alt="Waterlogging around a blocked drain" />
-              <div class="slide-caption">
-                <div class="caption-top"><span>INCIDENT #04844 ·
-                    WARD 05</span><span>88 /
-                    100</span></div>
-                <h3>Waterlogging around blocked drainage</h3>
-                <p>Municipal Corporation · Storm Water &amp;
-                  Drainage</p>
-              </div>
-            </article>
-            <article class="slide"><img
-                src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663882698401/cwjXIJtqnOhHCFHx.jpg"
-                alt="Freshly repaired city road" />
-              <div class="slide-caption">
-                <div class="caption-top"><span>RESOLVED #04791 ·
-                    WARD
-                    03</span><span>COMPLETED</span>
-                </div>
-                <h3>Road repair closed with field evidence</h3>
-                <p>Municipal Corporation · Roads &amp; Public
-                  Works</p>
-              </div>
-            </article>
-          </div>
-          <div class="slideshow-controls">
-            <div class="dots" aria-label="Complaint image slides"><button class="slide-dot active" type="button"
-                aria-label="View pothole complaint"></button><button class="slide-dot" type="button"
-                aria-label="View waste-overflow complaint"></button><button class="slide-dot" type="button"
-                aria-label="View waterlogging complaint"></button><button class="slide-dot" type="button"
-                aria-label="View resolved road repair"></button>
-            </div>
-            <div class="arrows"><button class="arrow" id="prev-slide" type="button"
-                aria-label="Previous image">←</button><button class="arrow" id="next-slide" type="button"
-                aria-label="Next image">→</button></div>
-          </div>
+          <div class="stage-rail" id="stage-rail" aria-label="Report action stages"></div>
         </article>
       </section>
 
-      <section class="lower-grid">
-        <article class="card resolved" id="resolved">
-          <div class="card-head">
-            <div>
-              <h2>Recently resolved</h2>
-              <p>Completion evidence and verified field outcomes.</p>
-            </div>
-            <div class="filter-row"><button class="filter active" type="button">This week</button></div>
+      <section class="decision-grid">
+        <article class="panel decision-card validation" id="priority-check">
+          <div class="decision-icon amber">♢</div>
+          <div class="decision-heading">
+            <p class="panel-kicker">Priority truth check</p>
+            <h2>Is this report specific, credible, and urgent?</h2>
+            <span>Use this step before sending a high-impact report to a final
+              authority.</span>
           </div>
-          <div class="resolved-grid">
-            <article class="resolved-card"><img
-                src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663882698401/cwjXIJtqnOhHCFHx.jpg"
-                alt="Completed road repair" />
-              <div><strong>Road repair · Ward 03</strong><span>Field
-                  evidence verified</span></div>
-            </article>
-            <article class="resolved-card"><img
-                src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663882698401/kcvSMLDjSNrapNqP.jpg"
-                alt="Municipal waste collection context" />
-              <div><strong>Waste clearance · Ward
-                  09</strong><span>Collection closure
-                  logged</span></div>
-            </article>
-            <article class="resolved-card"><img
-                src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663882698401/pxfmjMbUWrHvPdmE.jpg"
-                alt="Drainage maintenance context" />
-              <div><strong>Drain clearance · Ward 05</strong><span>Flow
-                  restored after work</span></div>
-            </article>
+          <div class="check-list">
+            <span><i class="check" id="priority-proof"></i> Evidence supports the
+              stated problem</span><span><i class="check amber-check" id="priority-impact">!</i>
+              Immediate public impact has been considered</span><span><i class="check" id="priority-vague"></i> Vague or
+              unsubstantiated claims need verification</span>
+          </div>
+          <div class="decision-actions" id="priority-actions"></div>
+        </article>
+        <article class="panel decision-card redundancy" id="redundancy-check">
+          <div class="decision-icon blue">▣</div>
+          <div class="decision-heading">
+            <p class="panel-kicker">Redundancy check</p>
+            <h2>Check whether this is already being handled.</h2>
+            <span>Link related reports instead of forwarding duplicate tasks to
+              the same office.</span>
+          </div>
+          <div class="duplicate-box">
+            <span>Related reports</span>
+            <div id="related-reports"></div>
+          </div>
+          <div class="decision-actions" id="redundancy-actions"></div>
+        </article>
+      </section>
+
+      <section class="handoff-grid">
+        <article class="panel final-handoff" id="final-handoff">
+          <div class="handoff-top">
+            <div>
+              <p class="panel-kicker">Final action and confirmation</p>
+              <h2>Send the reviewed report to the responsible office.</h2>
+              <span>The destination is recorded with the selected report and can
+                be confirmed when that office accepts action.</span>
+            </div>
+            <div class="destination-chip">
+              ▤
+              <span id="destination-label">Municipal Roads &amp; Works</span>
+            </div>
+          </div>
+          <div class="handoff-actions" id="handoff-actions"></div>
+          <div class="handoff-receipt">
+            <span>Handoff record</span><strong id="receipt-title">Awaiting validation before department
+              route</strong><small id="receipt-copy">Complete priority and redundancy checks to make the final route
+              defensible.</small>
           </div>
         </article>
-        <article class="card" id="departments">
-          <div class="card-head">
+        <article class="panel evidence-panel">
+          <div class="evidence-head">
             <div>
-              <h2>Department workload</h2>
-              <p>Open work by routing authority.</p>
-            </div><span class="label"
-              style="color:#91a7ca;font:.54rem var(--mono);letter-spacing:.08em;text-transform:uppercase">146
-              open</span>
-          </div>
-          <div class="workload">
-            <div class="donut">
-              <div><strong>146</strong><small>open</small></div>
+              <p class="panel-kicker">Attachments preserved</p>
+              <h2>Report evidence</h2>
             </div>
-            <div class="dept-list">
-              <div class="dept-row"><i></i><span>Municipal Roads &amp;
-                  Works</span><b>58</b></div>
-              <div class="dept-row"><i></i><span>Sanitation &amp;
-                  Drainage</span><b>39</b></div>
-              <div class="dept-row"><i></i><span>Electrical
-                  Maintenance</span><b>26</b></div>
-              <div class="dept-row"><i></i><span>Tehsildar /
-                  Revenue</span><b>23</b></div>
+            <a id="attachment-link" href="#" target="_blank" rel="noreferrer">⌇ Open attachment</a>
+          </div>
+          <div class="evidence-stage">
+            <img id="evidence-image" alt="" />
+            <div>
+              <span id="evidence-id">INCIDENT #04827</span>
+              <h3 id="evidence-title">
+                Road surface collapse near school crossing
+              </h3>
+              <p id="evidence-note">
+                Municipal Corporation · Roads &amp; Public Works
+              </p>
             </div>
           </div>
-          <p class="metric-note"><i>✦</i> Municipal roads have the highest cluster
-            density today.</p>
+          <div class="evidence-controls">
+            <button id="previous-evidence" type="button" aria-label="Previous attachment">
+              ←
+            </button>
+            <div id="evidence-dots"></div>
+            <button id="next-evidence" type="button" aria-label="Next attachment">
+              →
+            </button>
+          </div>
         </article>
       </section>
     </main>
   </div>
-  <nav class="mobile-nav" aria-label="Mobile dashboard navigation"><a class="active"
-      href="#overview"><b>◫</b>Overview</a><a href="#queue"><b>◎</b>Queue</a><a href="#slideshow"><b>▣</b>Evidence</a><a
-      href="#resolved"><b>✓</b>Resolved</a></nav>
+  <nav class="mobile-nav" aria-label="Mobile operational actions">
+    <button type="button" data-jump="acute-queue">
+      <span class="nav-icon">⌕</span>Queue</button><button type="button" data-jump="priority-check">
+      <span class="nav-icon">♢</span>Validate</button><button type="button" data-jump="redundancy-check">
+      <span class="nav-icon">▣</span>Duplicates</button><button type="button" data-jump="final-handoff">
+      <span class="nav-icon">➤</span>Route
+    </button>
+  </nav>
+  <div class="route-overlay" id="route-overlay" role="presentation">
+    <div class="route-dialog" role="dialog" aria-modal="true" aria-labelledby="route-title">
+      <button class="close-dialog" id="close-route" type="button" aria-label="Close final hand-off dialog">
+        ×
+      </button>
+      <p class="panel-kicker">Confirm final hand-off</p>
+      <h2 id="route-title">Route report to the responsible office.</h2>
+      <p id="route-copy">
+        The selected report will be marked as forwarded in the action ledger.
+        Choose the final department before confirming.
+      </p>
+      <label class="route-select-label" for="final-department">Final department</label><select id="final-department">
+        <option>Municipal Roads &amp; Works</option>
+        <option>Storm Water &amp; Drainage</option>
+        <option>Sanitation &amp; Solid Waste</option>
+        <option>Electrical Maintenance</option>
+        <option>Tehsildar Office</option>
+        <option>Revenue Records Office</option>
+        <option>District Emergency Control</option>
+      </select>
+      <div class="dialog-actions">
+        <button class="text-action" id="cancel-route" type="button">
+          Cancel</button><button class="primary-action" id="confirm-route" type="button">
+          ➤ Confirm and forward
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
   <script>
-    async function loadLiveIncidents() {
-      const response = await fetch('/api/incidents');
-      if (!response.ok) throw new Error('Could not load incident records.');
-
-      const { items } = await response.json();
-      const queue = document.getElementById('queue-list');
-      const queueCount = document.getElementById('queue-count');
-
-      queue.innerHTML = items.slice(0, 8).map((incident) => {
-        const priorityClass = incident.priority_score >= 85
-          ? 'high'
-          : incident.priority_score >= 65
-            ? 'mid'
-            : '';
-
-        const stateText = incident.status.replaceAll('_', ' ');
-        const department = incident.department_name || 'Routing review';
-
-        return `
-         <article class="queue-item" data-tags="${incident.category} ${department.toLowerCase()} ${incident.ward.toLowerCase()}">
-         <span class="priority ${priorityClass}">${incident.priority_score}</span>
-        <div>
-          <strong>${incident.category.replaceAll('_', ' ')}</strong>
-          <small>${incident.ward} · ${department}</small>
-        </div>
-        <div>
-          <span class="state">${stateText}</span>
-          <time>${new Date(incident.created_at + 'Z').toLocaleDateString()}</time>
-        </div>
-      </article>`;
-      }).join('');
-
-      queueCount.textContent = `Showing ${Math.min(items.length, 8)} of ${items.length} incidents`;
+    /* Legacy deployment endpoints retained unchanged. This standalone file works with local data when the endpoint is unavailable. */
+    const BACKEND_LINKS = {
+      incidents: "/api/incidents",
+      authMember: "/api/auth/me",
+      authLogout: "/api/auth/logout",
+    };
+    const evidenceAttachments = [
+      {
+        id: "04827",
+        src: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663882698401/tSKzQycxbDelJIzf.jpg",
+        alt: "Pothole near a school crossing",
+        title: "Road surface collapse near school crossing",
+        note: "Municipal Corporation · Roads & Public Works",
+      },
+      {
+        id: "04852",
+        src: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663882698401/kcvSMLDjSNrapNqP.jpg",
+        alt: "Overflowing civic garbage collection point",
+        title: "Waste overflow at a collection point",
+        note: "Municipal Corporation · Sanitation & Solid Waste",
+      },
+      {
+        id: "04844",
+        src: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663882698401/pxfmjMbUWrHvPdmE.jpg",
+        alt: "Waterlogging around a blocked drain",
+        title: "Waterlogging around blocked drainage",
+        note: "Municipal Corporation · Storm Water & Drainage",
+      },
+      {
+        id: "04791",
+        src: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663882698401/cwjXIJtqnOhHCFHx.jpg",
+        alt: "Freshly repaired city road",
+        title: "Road repair closed with field evidence",
+        note: "Municipal Corporation · Roads & Public Works",
+      },
+    ];
+    let reports = [
+      {
+        id: "04827",
+        title: "Road surface collapse",
+        score: 92,
+        priority: "high",
+        ward: "Ward 07",
+        department: "Roads & Public Works",
+        destination: "Municipal Roads & Works",
+        age: "48m",
+        evidenceCount: 4,
+        tags: ["high", "municipal", "roads", "pothole", "ward 07"],
+        status: "Awaiting review",
+        description:
+          "Damage is reported beside a school crossing. Fifteen linked public reports indicate an immediate pedestrian-safety concern.",
+        priorityCheck: "not-started",
+        redundancyCheck: "not-started",
+        relatedReports: ["#04822", "#04819", "#04803"],
+        forwarded: false,
+        confirmed: false,
+      },
+      {
+        id: "04844",
+        title: "Waterlogging near clinic",
+        score: 88,
+        priority: "high",
+        ward: "Ward 05",
+        department: "Storm Water & Drainage",
+        destination: "Storm Water & Drainage",
+        age: "1h",
+        evidenceCount: 3,
+        tags: ["high", "municipal", "drainage", "water", "ward 05"],
+        status: "Priority check requested",
+        description:
+          "Standing water is restricting access to a public clinic. Eight reports were received from the same drainage corridor.",
+        priorityCheck: "requested",
+        redundancyCheck: "cleared",
+        relatedReports: ["#04840"],
+        forwarded: false,
+        confirmed: false,
+      },
+      {
+        id: "04852",
+        title: "Waste overflow at collection point",
+        score: 76,
+        priority: "medium",
+        ward: "Ward 09",
+        department: "Sanitation",
+        destination: "Sanitation & Solid Waste",
+        age: "2h",
+        evidenceCount: 2,
+        tags: ["municipal", "sanitation", "garbage", "ward 09"],
+        status: "Potential duplicate",
+        description:
+          "Overflow from a public collection point is affecting the pedestrian path and nearby shopfronts.",
+        priorityCheck: "cleared",
+        redundancyCheck: "requested",
+        relatedReports: ["#04849", "#04847"],
+        forwarded: false,
+        confirmed: false,
+      },
+      {
+        id: "04861",
+        title: "Survey boundary record concern",
+        score: 69,
+        priority: "standard",
+        ward: "Revenue Village 07",
+        department: "Tehsildar Office",
+        destination: "Tehsildar Office",
+        age: "3h",
+        evidenceCount: 5,
+        tags: ["tehsildar", "revenue", "land", "village 07"],
+        status: "Ready to forward",
+        description:
+          "The report requests a documentary review of a survey-boundary record and includes the referenced field documents.",
+        priorityCheck: "cleared",
+        redundancyCheck: "cleared",
+        relatedReports: [],
+        forwarded: false,
+        confirmed: false,
+      },
+      {
+        id: "04864",
+        title: "Streetlight outage on pedestrian lane",
+        score: 63,
+        priority: "standard",
+        ward: "Ward 02",
+        department: "Electrical Maintenance",
+        destination: "Electrical Maintenance",
+        age: "4h",
+        evidenceCount: 2,
+        tags: ["municipal", "electrical", "streetlight", "ward 02"],
+        status: "Forwarded for final action",
+        description:
+          "Three reports identify a dark pedestrian lane with an outage affecting evening access.",
+        priorityCheck: "cleared",
+        redundancyCheck: "cleared",
+        relatedReports: ["#04863", "#04858"],
+        forwarded: true,
+        confirmed: false,
+      },
+    ];
+    let selectedId = reports[0].id,
+      activeFilter = "all",
+      query = "",
+      evidenceIndex = 0,
+      toastTimer;
+    const $ = selector => document.querySelector(selector);
+    function selected() {
+      return reports.find(report => report.id === selectedId) || reports[0];
     }
-    /* LOGIN AUTHENTICATION GATE DISABLED FOR LOCAL/VSCODE RUN
-    async function loadVerifiedMember() {
-               try {
-                        const response = await fetch('/api/auth/me', { credentials: 'same-origin' });
-                        if (!response.ok) { window.location.replace('login.html'); return; }
-                        const { member } = await response.json();
-                        const words = member.display_name.trim().split(/\s+/);
-                        document.getElementById('member-initials').textContent = words.map((word) => word[0]).slice(0, 2).join('').toUpperCase();
-                        document.getElementById('member-name').textContent = member.display_name;
-                        document.getElementById('member-meta').textContent = `${member.access_role.replaceAll('_', ' ')} · ${member.department}`;
-               } catch (_) { window.location.replace('login.html'); }
+    function scoreClass(report) {
+      return report.priority === "high"
+        ? "score-high"
+        : report.priority === "medium"
+          ? "score-medium"
+          : "score-standard";
+    }
+    function stepState(report, step) {
+      if (step === "review") return "complete";
+      if (step === "priority")
+        return report.priorityCheck === "cleared"
+          ? "complete"
+          : report.priorityCheck === "requested"
+            ? "active"
+            : "pending";
+      if (step === "redundancy")
+        return report.redundancyCheck === "cleared"
+          ? "complete"
+          : report.redundancyCheck === "requested"
+            ? "active"
+            : "pending";
+      if (step === "route")
+        return report.forwarded
+          ? "complete"
+          : report.priorityCheck === "cleared" &&
+            report.redundancyCheck === "cleared"
+            ? "active"
+            : "pending";
+      return report.confirmed
+        ? "complete"
+        : report.forwarded
+          ? "active"
+          : "pending";
+    }
+    function showToast(message) {
+      const element = $("#toast");
+      element.textContent = message;
+      element.classList.add("visible");
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(
+        () => element.classList.remove("visible"),
+        3200
+      );
+    }
+    function updateReport(id, changes) {
+      reports = reports.map(report =>
+        report.id === id ? { ...report, ...changes } : report
+      );
+      render();
+    }
+    function matchesFilter(report) {
+      const text =
+        `${report.title} ${report.ward} ${report.department} ${report.id}`.toLowerCase();
+      const searchMatch = !query || text.includes(query);
+      const filterMatch =
+        activeFilter === "all" ||
+        (activeFilter === "needs-action" &&
+          !report.forwarded &&
+          !report.confirmed) ||
+        (activeFilter === "priority" &&
+          (report.priorityCheck !== "cleared" ||
+            report.priority === "high")) ||
+        (activeFilter === "ready" &&
+          report.priorityCheck === "cleared" &&
+          report.redundancyCheck === "cleared" &&
+          !report.forwarded);
+      return searchMatch && filterMatch;
+    }
+    function renderQueue() {
+      const visible = reports.filter(matchesFilter);
+      $("#queue-list").innerHTML =
+        visible
+          .map(
+            report =>
+              `<button class="queue-row ${report.id === selectedId ? "selected" : ""}" type="button" data-report-id="${report.id}"><span class="score ${scoreClass(report)}">${report.score}</span><span class="queue-copy"><strong>${report.title}</strong><small>${report.ward} · ${report.department} · ${report.evidenceCount} evidence item${report.evidenceCount === 1 ? "" : "s"}</small></span><span class="queue-state"><i class="status-dot ${report.forwarded ? "confirmed" : report.priorityCheck !== "cleared" || report.redundancyCheck !== "cleared" ? "pending" : "ready"}"></i>${report.status}<time>${report.age}</time></span><span>›</span></button>`
+          )
+          .join("") ||
+        `<div class="queue-footer">No reports match this search.</div>`;
+      $("#queue-count").textContent = visible.length
+        ? `Showing ${visible.length} report${visible.length === 1 ? "" : "s"}`
+        : "No reports match this search";
+      document.querySelectorAll("[data-report-id]").forEach(button =>
+        button.addEventListener("click", () => {
+          selectedId = button.dataset.reportId;
+          render();
+        })
+      );
+    }
+    function renderBrief() {
+      const report = selected();
+      $("#brief-id").textContent = `REPORT #${report.id}`;
+      const status = $("#brief-status");
+      status.textContent = report.status;
+      status.className = `status-pill ${report.confirmed ? "confirmed" : report.forwarded ? "forwarded" : "pending"}`;
+      const score = $("#brief-score");
+      score.textContent = report.score;
+      score.className = `score large ${scoreClass(report)}`;
+      $("#brief-title").textContent = report.title;
+      $("#brief-description").textContent = report.description;
+      $("#brief-ward").textContent = `⌖ ${report.ward}`;
+      $("#brief-department").textContent = `▤ ${report.department}`;
+      $("#brief-evidence").textContent =
+        `⌇ ${report.evidenceCount} attachment${report.evidenceCount === 1 ? "" : "s"}`;
+      const steps = [
+        ["review", "Review"],
+        ["priority", "Priority"],
+        ["redundancy", "Redundancy"],
+        ["route", "Route"],
+        ["confirm", "Confirm"],
+      ];
+      $("#stage-rail").innerHTML = steps
+        .map(([key, label], index) => {
+          const state = stepState(report, key);
+          return `<div class="stage ${state}"><i>${state === "complete" ? "✓" : index + 1}</i><span>${label}</span></div>`;
+        })
+        .join("");
+    }
+    function renderChecks() {
+      const report = selected();
+      $("#priority-proof").className =
+        `check ${report.priorityCheck === "cleared" ? "done" : ""}`;
+      $("#priority-proof").textContent =
+        report.priorityCheck === "cleared" ? "✓" : "";
+      $("#priority-vague").className =
+        `check ${report.priorityCheck === "requested" ? "amber-check" : ""}`;
+      $("#priority-vague").textContent =
+        report.priorityCheck === "requested" ? "!" : "";
+      $("#priority-impact").style.opacity =
+        report.priority === "high" ? "1" : ".35";
+      $("#priority-actions").innerHTML =
+        report.priorityCheck === "cleared"
+          ? `<span class="decision-complete">✓ Priority check complete</span>`
+          : `<button class="secondary-action" id="send-priority" type="button">Send priority check</button><button class="text-action" id="clear-priority" type="button">Mark check complete</button>`;
+      if (!report.priorityCheck || report.priorityCheck !== "cleared") {
+        $("#send-priority")?.addEventListener("click", () => {
+          updateReport(report.id, {
+            priorityCheck: "requested",
+            status: "Priority check requested",
+          });
+          showToast(`Priority truth check requested for #${report.id}.`);
+        });
+        $("#clear-priority")?.addEventListener("click", () => {
+          updateReport(report.id, {
+            priorityCheck: "cleared",
+            status:
+              report.redundancyCheck === "cleared"
+                ? "Ready to forward"
+                : "Awaiting review",
+          });
+          showToast(`Priority check cleared for #${report.id}.`);
+        });
       }
-      document.getElementById('logout-button').addEventListener('click', async () => {
-               await fetch('/api/auth/logout', { method: 'POST', credentials: 'same-origin' });
-               window.location.replace('login.html');
+      $("#related-reports").innerHTML = report.relatedReports.length
+        ? report.relatedReports
+          .map(
+            id =>
+              `<button type="button" data-related="${id}">${id}</button>`
+          )
+          .join("")
+        : `<p>No matching public report is currently linked.</p>`;
+      document
+        .querySelectorAll("[data-related]")
+        .forEach(button =>
+          button.addEventListener("click", () =>
+            showToast(
+              `${button.dataset.related} remains linked to this report cluster.`
+            )
+          )
+        );
+      $("#redundancy-actions").innerHTML =
+        report.redundancyCheck === "cleared"
+          ? `<span class="decision-complete">✓ No duplicate action required</span>`
+          : `<button class="secondary-action" id="run-redundancy" type="button">Run redundancy check</button><button class="text-action" id="clear-redundancy" type="button">Clear for routing</button>`;
+      $("#run-redundancy")?.addEventListener("click", () => {
+        updateReport(report.id, {
+          redundancyCheck: "requested",
+          status: "Potential duplicate",
+        });
+        showToast(`Redundancy check started for #${report.id}.`);
       });
-      loadVerifiedMember();
-    */
-    const slides = [...document.querySelectorAll('.slide')];
-    const dots = [...document.querySelectorAll('.slide-dot')];
-    let activeSlide = 0;
-    let slideTimer;
-    function showSlide(next) { activeSlide = (next + slides.length) % slides.length; slides.forEach((slide, index) => slide.classList.toggle('active', index === activeSlide)); dots.forEach((dot, index) => dot.classList.toggle('active', index === activeSlide)); }
-    function resetTimer() { clearInterval(slideTimer); slideTimer = setInterval(() => showSlide(activeSlide + 1), 5200); }
-    document.getElementById('next-slide').addEventListener('click', () => { showSlide(activeSlide + 1); resetTimer(); });
-    document.getElementById('prev-slide').addEventListener('click', () => { showSlide(activeSlide - 1); resetTimer(); });
-    dots.forEach((dot, index) => dot.addEventListener('click', () => { showSlide(index); resetTimer(); }));
-    resetTimer();
-    const filters = document.querySelectorAll('.filter[data-filter]');
-    const complaints = document.querySelectorAll('.queue-item');
-    const count = document.getElementById('queue-count');
-    filters.forEach((button) => button.addEventListener('click', () => { const filter = button.dataset.filter; filters.forEach((item) => item.classList.toggle('active', item === button)); let visible = 0; complaints.forEach((item) => { const show = filter === 'all' || item.dataset.tags.includes(filter); item.classList.toggle('hidden', !show); if (show) visible++; }); count.textContent = `Showing ${visible} priority incident${visible === 1 ? '' : 's'}`; }));
-    document.getElementById('search').addEventListener('input', (event) => { const query = event.target.value.trim().toLowerCase(); let visible = 0; complaints.forEach((item) => { const show = !query || item.textContent.toLowerCase().includes(query); item.classList.toggle('hidden', !show); if (show) visible++; }); filters.forEach((item) => item.classList.remove('active')); count.textContent = `Showing ${visible} matching incident${visible === 1 ? '' : 's'}`; });
-
-    loadLiveIncidents().catch((error) => {
-      console.error(error);
-      document.getElementById('queue-count').textContent = 'Live incident queue could not be loaded.';
-
+      $("#clear-redundancy")?.addEventListener("click", () => {
+        updateReport(report.id, {
+          redundancyCheck: "cleared",
+          status:
+            report.priorityCheck === "cleared"
+              ? "Ready to forward"
+              : "Awaiting review",
+        });
+        showToast(`Redundancy check cleared for #${report.id}.`);
+      });
+    }
+    function renderHandoff() {
+      const report = selected();
+      $("#destination-label").textContent = report.destination;
+      $("#handoff-actions").innerHTML = report.forwarded
+        ? `<button class="confirmation-button" id="confirmation" type="button" ${report.confirmed ? "disabled" : ""}>✓ ${report.confirmed ? "Action confirmation logged" : "Log department confirmation"}</button>`
+        : `<button class="primary-action" id="open-route" type="button">➤ Forward to final department</button>`;
+      $("#receipt-title").textContent = report.forwarded
+        ? `Forwarded to ${report.destination}`
+        : "Awaiting validation before department route";
+      $("#receipt-copy").textContent = report.confirmed
+        ? "Final acceptance recorded by the action administrator."
+        : report.forwarded
+          ? "Awaiting confirmation from the final action team."
+          : "Complete priority and redundancy checks to make the final route defensible.";
+      $("#open-route")?.addEventListener("click", () => {
+        $("#final-department").value = report.destination;
+        $("#route-title").textContent =
+          `Route #${report.id} to the responsible office.`;
+        $("#route-overlay").classList.add("open");
+      });
+      $("#confirmation")?.addEventListener("click", () => {
+        updateReport(report.id, {
+          confirmed: true,
+          status: "Final confirmation logged",
+        });
+        showToast(`Final action confirmation logged for #${report.id}.`);
+      });
+    }
+    function renderCounts() {
+      const priority = reports.filter(
+        r => r.priorityCheck !== "cleared"
+      ).length,
+        redundancy = reports.filter(
+          r => r.redundancyCheck !== "cleared"
+        ).length,
+        ready = reports.filter(
+          r =>
+            r.priorityCheck === "cleared" &&
+            r.redundancyCheck === "cleared" &&
+            !r.forwarded
+        ).length,
+        confirmation = reports.filter(
+          r => r.forwarded && !r.confirmed
+        ).length,
+        review = reports.filter(r => !r.forwarded && !r.confirmed).length;
+      $("#review-count").textContent = review;
+      $("#priority-count").textContent = priority;
+      $("#redundancy-count").textContent = redundancy;
+      $("#ready-count").textContent = ready;
+      $("#queue-badge").textContent = reports.length;
+      $("#priority-badge").textContent = priority;
+      $("#redundancy-badge").textContent = redundancy;
+      $("#route-badge").textContent = ready;
+      $("#confirm-badge").textContent = confirmation;
+    }
+    function renderEvidence() {
+      const item = evidenceAttachments[evidenceIndex];
+      $("#evidence-image").src = item.src;
+      $("#evidence-image").alt = item.alt;
+      $("#evidence-id").textContent = `INCIDENT #${item.id}`;
+      $("#evidence-title").textContent = item.title;
+      $("#evidence-note").textContent = item.note;
+      $("#attachment-link").href = item.src;
+      $("#evidence-dots").innerHTML = evidenceAttachments
+        .map(
+          (item, index) =>
+            `<button class="evidence-dot ${index === evidenceIndex ? "active" : ""}" type="button" data-evidence-index="${index}" aria-label="View attachment ${item.id}"></button>`
+        )
+        .join("");
+      document.querySelectorAll("[data-evidence-index]").forEach(button =>
+        button.addEventListener("click", () => {
+          evidenceIndex = Number(button.dataset.evidenceIndex);
+          renderEvidence();
+        })
+      );
+    }
+    function render() {
+      renderQueue();
+      renderBrief();
+      renderChecks();
+      renderHandoff();
+      renderCounts();
+    }
+    document
+      .querySelectorAll("[data-jump]")
+      .forEach(button =>
+        button.addEventListener("click", () =>
+          document
+            .getElementById(button.dataset.jump)
+            ?.scrollIntoView({ behavior: "smooth", block: "start" })
+        )
+      );
+    document.querySelectorAll(".filter").forEach(button =>
+      button.addEventListener("click", () => {
+        activeFilter = button.dataset.filter;
+        document
+          .querySelectorAll(".filter")
+          .forEach(item => item.classList.toggle("active", item === button));
+        renderQueue();
+      })
+    );
+    document.querySelectorAll("[data-filter]").forEach(button => {
+      if (!button.classList.contains("filter"))
+        button.addEventListener("click", () => {
+          activeFilter = button.dataset.filter;
+          document
+            .querySelectorAll(".filter")
+            .forEach(item =>
+              item.classList.toggle(
+                "active",
+                item.dataset.filter === activeFilter
+              )
+            );
+          renderQueue();
+          document
+            .getElementById("acute-queue")
+            ?.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
     });
+    $("#search").addEventListener("input", event => {
+      query = event.target.value.trim().toLowerCase();
+      renderQueue();
+    });
+    $("#clear-filters").addEventListener("click", () => {
+      activeFilter = "all";
+      query = "";
+      $("#search").value = "";
+      document
+        .querySelectorAll(".filter")
+        .forEach(item =>
+          item.classList.toggle("active", item.dataset.filter === "all")
+        );
+      renderQueue();
+    });
+    $("#previous-evidence").addEventListener("click", () => {
+      evidenceIndex =
+        (evidenceIndex + evidenceAttachments.length - 1) %
+        evidenceAttachments.length;
+      renderEvidence();
+    });
+    $("#next-evidence").addEventListener("click", () => {
+      evidenceIndex = (evidenceIndex + 1) % evidenceAttachments.length;
+      renderEvidence();
+    });
+    $("#notifications").addEventListener("click", () =>
+      showToast("No new routing notifications.")
+    );
+    $("#export").addEventListener("click", () =>
+      showToast("Queue export is ready for the connected workflow.")
+    );
+    $("#close-route").addEventListener("click", () =>
+      $("#route-overlay").classList.remove("open")
+    );
+    $("#cancel-route").addEventListener("click", () =>
+      $("#route-overlay").classList.remove("open")
+    );
+    $("#confirm-route").addEventListener("click", () => {
+      const report = selected(),
+        destination = $("#final-department").value;
+      updateReport(report.id, {
+        destination,
+        department: destination,
+        forwarded: true,
+        status: "Forwarded for final action",
+      });
+      $("#route-overlay").classList.remove("open");
+      showToast(`#${report.id} was forwarded to ${destination}.`);
+    });
+    async function loadLiveIncidents() {
+      try {
+        const response = await fetch(BACKEND_LINKS.incidents);
+        if (!response.ok) throw new Error("Endpoint unavailable");
+        const { items } = await response.json();
+        if (!Array.isArray(items) || !items.length) return;
+        reports = items.slice(0, 8).map((item, index) => {
+          const fallback = reports[index] || reports[0],
+            score = Number(item.priority_score) || fallback.score;
+          return {
+            ...fallback,
+            id: String(item.id || fallback.id),
+            title: String(item.category || fallback.title).replaceAll(
+              "_",
+              " "
+            ),
+            score,
+            priority:
+              score >= 85 ? "high" : score >= 65 ? "medium" : "standard",
+            ward: String(item.ward || fallback.ward),
+            department: String(item.department_name || fallback.department),
+            destination: String(item.department_name || fallback.destination),
+            age: item.created_at
+              ? new Date(`${item.created_at}Z`).toLocaleDateString()
+              : fallback.age,
+          };
+        });
+        selectedId = reports[0].id;
+        render();
+      } catch (_) {
+        /* Static/local fallback data remains active by design. */
+      }
+    }
+    render();
+    renderEvidence();
+    loadLiveIncidents();
   </script>
-
 </body>
 
 </html>

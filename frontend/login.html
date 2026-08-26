@@ -390,9 +390,27 @@
                   </section>
          </main>
          <script>
-                  const form = document.getElementById('login-form'), message = document.getElementById('message'), button = document.getElementById('submit-button');
-                  fetch('/api/auth/me').then((response) => { if (response.ok) window.location.replace('dashboard.html') }).catch(() => { });
-                  form.addEventListener('submit', async (event) => { event.preventDefault(); message.className = 'message'; message.textContent = 'Verifying your active member record…'; button.disabled = true; const payload = { member_id: document.getElementById('member-id').value, member_name: document.getElementById('member-name').value }; try { const response = await fetch('/api/auth/login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) }); const data = await response.json(); if (!response.ok) throw new Error(data.detail || 'We could not verify those details.'); message.textContent = 'Verified. Opening your operations workspace…'; window.location.assign('dashboard.html') } catch (error) { message.className = 'message error'; message.textContent = error.message; button.disabled = false } });
+                  const form = document.getElementById('login-form'),
+                           message = document.getElementById('message'),
+                           button = document.getElementById('submit-button');
+
+                  // Backend permission check temporarily disabled
+                  // fetch('/api/auth/me').then((response) => {
+                  //     if (response.ok) window.location.replace('dashboard.html')
+                  // }).catch(() => { });
+
+                  form.addEventListener('submit', async (event) => {
+                           event.preventDefault();
+
+                           // Backend login/authentication temporarily disabled
+                           // const payload = {
+                           //     member_id: document.getElementById('member-id').value,
+                           //     member_name: document.getElementById('member-name').value
+                           // };
+
+                           // Directly open dashboard for prototype testing
+                           window.location.assign('dashboard.html');
+                  });
          </script>
 </body>
 
