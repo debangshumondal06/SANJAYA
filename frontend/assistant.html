@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+         <meta charset="UTF-8">
+         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+         <title>SANJAYA — Voice Assistant</title>
+         <link rel="preconnect" href="https://fonts.googleapis.com">
+         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+         <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+Devanagari:wght@400;500;600&family=Noto+Sans+Bengali:wght@400;500;600&display=swap"
+                  rel="stylesheet">
+         <style>
+                  :root {
+                           --bg-deep: #050914;
+                           --bg-mid: #0d1938;
+                           --bg-glow: rgba(90, 140, 235, 0.22);
+                           --accent: #5b8def;
+                           --accent-soft: #8fb2f0;
+                           --accent-dim: rgba(91, 141, 239, 0.16);
+                           --text-primary: #f2f4fa;
+                           --text-secondary: rgba(242, 244, 250, 0.66);
+                           --text-faint: rgba(242, 244, 250, 0.38);
+                           --hairline: rgba(255, 255, 255, 0.12);
+                           --surface: rgba(255, 255, 255, 0.035);
+                           --surface-strong: rgba(255, 255, 255, 0.06);
+                           --bubble-user: rgba(91, 141, 239, 0.18);
+                           --bubble-assistant: rgba(255, 255, 255, 0.05);
+                           --danger: #e6785e;
+                  }
+
+                  * {
+                           box-sizing: border-box;
+                  }
+
+                  html,
+                  body {
+                           margin: 0;
+                           padding: 0;
+                  }
+
+                  body {
+                           background:
+                                    radial-gradient(1100px 700px at 8% -8%, var(--bg-glow), transparent 60%),
+                                    linear-gradient(120deg, var(--bg-mid) 0%, #0a1330 38%, var(--bg-deep) 78%);
+                           color: var(--text-primary);
+                           font-family: 'Inter', -apple-system, sans-serif;
+                           min-height: 100vh;
+                           overflow-x: hidden;
+                           position: relative;
+                  }
+
+                  [lang-bn] {
+                           font-family: 'Noto Sans Bengali', 'Inter', sans-serif;
+                  }
+
+                  [lang-hi] {
+                           font-family: 'Noto Sans Devanagari', 'Inter', sans-serif;
+                  }
+
+                  /* decorative arcs, echoing the reference backdrop */
+                  .arc {
+                           position: absolute;
+                           border-radius: 50%;
+                           border: 1px solid rgba(255, 255, 255, 0.08);
+                           pointer-events: none;
+                  }
+
+                  .arc-1 {
+                           width: 900px;
+                           height: 900px;
+                           top: -420px;
+                           left: -260px;
+                  }
+
+                  .arc-2 {
+                           width: 1400px;
+                           height: 1400px;
+                           top: -680px;
+                           left: -560px;
+                           border-color: rgba(255, 255, 255, 0.045);
+                  }
+
+                  @media (max-width:880px) {
+
+                           .arc-1,
+                           .arc-2 {
+                                    display: none;
+                           }
+                  }
+
+                  .wrap {
+                           position: relative;
+                           z-index: 1;
+                           max-width: 1240px;
+                           margin: 0 auto;
+                           padding: 34px 40px 60px;
+                  }
+
+                  @media (max-width:640px) {
+                           .wrap {
+                                    padding: 24px 20px 40px;
+                           }
+                  }
+
+                  /* top bar */
+                  .topbar {
+                           display: flex;
+                           align-items: center;
+                           justify-content: space-between;
+                           margin-bottom: 64px;
+                           gap: 20px;
+                           flex-wrap: wrap;
+                  }
+
+                  .wordmark {
+                           display: flex;
+                           align-items: center;
+                           gap: 10px;
+                           font-family: 'Fraunces', serif;
+                           font-style: italic;
+                           font-weight: 500;
+                           font-size: 22px;
+                           letter-spacing: 0.01em;
+                  }
+
+                  .wordmark .dot {
+                           width: 7px;
+                           height: 7px;
+                           border-radius: 50%;
+                           background: var(--accent);
+                           box-shadow: 0 0 0 5px var(--accent-dim);
+                  }
+
+                  .lang-switch {
+                           display: flex;
+                           gap: 4px;
+                           padding: 4px;
+                           border-radius: 999px;
+                           background: var(--surface);
+                           border: 1px solid var(--hairline);
+                  }
+
+                  .lang-switch button {
+                           appearance: none;
+                           border: none;
+                           background: transparent;
+                           color: var(--text-secondary);
+                           font-family: 'Inter', sans-serif;
+                           font-size: 13px;
+                           font-weight: 600;
+                           letter-spacing: 0.02em;
+                           padding: 8px 16px;
+                           border-radius: 999px;
+                           cursor: pointer;
+                           transition: all .2s ease;
+                  }
+
+                  .lang-switch button.active {
+                           background: var(--accent);
+                           color: #08101f;
+                  }
+
+                  .lang-switch button:hover:not(.active) {
+                           color: var(--text-primary);
+                  }
+
+                  .lang-switch button:focus-visible {
+                           outline: 2px solid var(--accent-soft);
+                           outline-offset: 2px;
+                  }
+
+                  /* hero */
+                  .eyebrow {
+                           display: flex;
+                           align-items: center;
+                           gap: 10px;
+                           font-size: 12px;
+                           font-weight: 600;
+                           letter-spacing: 0.16em;
+                           text-transform: uppercase;
+                           color: var(--accent-soft);
+                           margin-bottom: 22px;
+                  }
+
+                  .eyebrow .line {
+                           width: 22px;
+                           height: 1px;
+                           background: var(--accent-soft);
+                  }
+
+                  h1.headline {
+                           font-family: 'Fraunces', serif;
+                           font-weight: 400;
+                           font-style: normal;
+                           font-size: clamp(38px, 5.4vw, 64px);
+                           line-height: 1.05;
+                           letter-spacing: -0.01em;
+                           margin: 0 0 24px;
+                           max-width: 640px;
+                  }
+
+                  h1.headline em {
+                           font-style: italic;
+                           font-weight: 500;
+                           color: var(--accent-soft);
+                  }
+
+                  .subtext {
+                           font-size: 16px;
+                           line-height: 1.65;
+                           color: var(--text-secondary);
+                           max-width: 480px;
+                           margin: 0;
+                  }
+
+                  .hero {
+                           margin-bottom: 56px;
+                  }
+
+                  /* main grid: steps + assistant panel */
+                  .grid {
+                           display: grid;
+                           grid-template-columns: 0.85fr 1.15fr;
+                           gap: 56px;
+                           align-items: start;
+                  }
+
+                  @media (max-width:960px) {
+                           .grid {
+                                    grid-template-columns: 1fr;
+                                    gap: 40px;
+                           }
+                  }
+
+                  .steps {
+                           border-top: 1px solid var(--hairline);
+                  }
+
+                  .step {
+                           display: flex;
+                           gap: 20px;
+                           padding: 26px 0;
+                           border-bottom: 1px solid var(--hairline);
+                  }
+
+                  .step .num {
+                           font-family: 'IBM Plex Mono', monospace;
+                           font-size: 13px;
+                           color: var(--accent-soft);
+                           padding-top: 3px;
+                           min-width: 26px;
+                  }
+
+                  .step h3 {
+                           margin: 0 0 6px;
+                           font-size: 16px;
+                           font-weight: 600;
+                  }
+
+                  .step p {
+                           margin: 0;
+                           font-size: 14px;
+                           line-height: 1.55;
+                           color: var(--text-secondary);
+                  }
+
+                  /* assistant panel */
+                  .panel {
+                           background: var(--surface);
+                           border: 1px solid var(--hairline);
+                           border-radius: 18px;
+                           overflow: hidden;
+                           backdrop-filter: blur(6px);
+                           display: flex;
+                           flex-direction: column;
+                           height: 600px;
+                  }
+
+                  @media (max-width:640px) {
+                           .panel {
+                                    height: 560px;
+                           }
+                  }
+
+                  .panel-head {
+                           display: flex;
+                           align-items: center;
+                           justify-content: space-between;
+                           padding: 18px 22px;
+                           border-bottom: 1px solid var(--hairline);
+                           background: rgba(255, 255, 255, 0.02);
+                  }
+
+                  .panel-head .who {
+                           display: flex;
+                           align-items: center;
+                           gap: 10px;
+                  }
+
+                  .who-orb {
+                           width: 9px;
+                           height: 9px;
+                           border-radius: 50%;
+                           background: #54e08a;
+                           box-shadow: 0 0 0 4px rgba(84, 224, 138, 0.18);
+                  }
+
+                  .who-orb.busy {
+                           background: var(--accent-soft);
+                           box-shadow: 0 0 0 4px var(--accent-dim);
+                  }
+
+                  .who-text .name {
+                           font-size: 14px;
+                           font-weight: 600;
+                  }
+
+                  .who-text .status {
+                           font-size: 11.5px;
+                           color: var(--text-faint);
+                  }
+
+                  .messages {
+                           flex: 1;
+                           overflow-y: auto;
+                           padding: 22px;
+                           display: flex;
+                           flex-direction: column;
+                           gap: 14px;
+                  }
+
+                  .messages::-webkit-scrollbar {
+                           width: 6px;
+                  }
+
+                  .messages::-webkit-scrollbar-thumb {
+                           background: rgba(255, 255, 255, 0.12);
+                           border-radius: 4px;
+                  }
+
+                  .msg {
+                           max-width: 82%;
+                           padding: 11px 15px;
+                           border-radius: 14px;
+                           font-size: 14.5px;
+                           line-height: 1.55;
+                  }
+
+                  .msg.assistant {
+                           background: var(--bubble-assistant);
+                           border: 1px solid var(--hairline);
+                           align-self: flex-start;
+                           border-bottom-left-radius: 4px;
+                  }
+
+                  .msg.user {
+                           background: var(--bubble-user);
+                           border: 1px solid rgba(91, 141, 239, 0.3);
+                           align-self: flex-end;
+                           border-bottom-right-radius: 4px;
+                           color: #eef3ff;
+                  }
+
+                  .msg .ref {
+                           font-family: 'IBM Plex Mono', monospace;
+                           color: var(--accent-soft);
+                  }
+
+                  .composer {
+                           border-top: 1px solid var(--hairline);
+                           padding: 14px 16px;
+                           display: flex;
+                           align-items: center;
+                           gap: 10px;
+                           background: rgba(255, 255, 255, 0.015);
+                  }
+
+                  .composer input {
+                           flex: 1;
+                           background: transparent;
+                           border: none;
+                           outline: none;
+                           color: var(--text-primary);
+                           font-family: inherit;
+                           font-size: 14.5px;
+                           padding: 10px 4px;
+                  }
+                  
+                  .mark {
+                           display: grid;
+                           width: 34px;
+                           height: 34px;
+                           place-items: center;
+                           border: 1px solid rgba(255, 255, 255, .3);
+                           border-radius: 10px 10px 2px 10px;
+                           color: #0b1530;
+                           background: linear-gradient(145deg, #d3e3ff, #669aff);
+                           font: 1.25rem var(--serif);
+                  }
+                  .brand {
+                           display: inline-flex;
+                           align-items: center;
+                           gap: .72rem;
+                  }
+                  .brand-text {
+                           font-size: .83rem;
+                           font-weight: 700;
+                           letter-spacing: .15em;
+                  }
+
+                  .brand-text small {
+                           display: block;
+                           margin-top: .12rem;
+                           color: #91a4c5;
+                           font: .5rem var(--mono);
+                           letter-spacing: .1em;
+                  }
+                  .composer input::placeholder {
+                           color: var(--text-faint);
+                  }
+
+                  .icon-btn {
+                           appearance: none;
+                           border: none;
+                           cursor: pointer;
+                           border-radius: 50%;
+                           width: 40px;
+                           height: 40px;
+                           display: flex;
+                           align-items: center;
+                           justify-content: center;
+                           background: var(--surface-strong);
+                           color: var(--text-secondary);
+                           transition: all .2s ease;
+                           flex-shrink: 0;
+                  }
+
+                  .icon-btn:hover {
+                           color: var(--text-primary);
+                           background: rgba(255, 255, 255, 0.1);
+                  }
+
+                  .icon-btn:focus-visible {
+                           outline: 2px solid var(--accent-soft);
+                           outline-offset: 2px;
+                  }
+
+                  .icon-btn svg {
+                           width: 17px;
+                           height: 17px;
+                  }
+
+                  .mic-btn {
+                           position: relative;
+                           background: var(--accent);
+                           color: #07101f;
+                  }
+
+                  .mic-btn:hover {
+                           background: var(--accent-soft);
+                           color: #07101f;
+                  }
+
+                  .mic-btn.listening {
+                           background: var(--danger);
+                           color: #1a0906;
+                  }
+
+                  .mic-btn .ring {
+                           position: absolute;
+                           inset: -6px;
+                           border-radius: 50%;
+                           border: 1.5px solid var(--accent-soft);
+                           opacity: 0;
+                           pointer-events: none;
+                  }
+
+                  .mic-btn.listening .ring {
+                           animation: pulse 1.4s ease-out infinite;
+                           border-color: var(--danger);
+                  }
+
+                  @keyframes pulse {
+                           0% {
+                                    transform: scale(0.85);
+                                    opacity: 0.7;
+                           }
+
+                           100% {
+                                    transform: scale(1.6);
+                                    opacity: 0;
+                           }
+                  }
+
+                  @media (prefers-reduced-motion:reduce) {
+                           .mic-btn.listening .ring {
+                                    animation: none;
+                                    opacity: 0.4;
+                           }
+                  }
+
+                  .mute-row {
+                           display: flex;
+                           align-items: center;
+                           gap: 8px;
+                           padding: 0 16px 14px;
+                  }
+
+                  .mute-row label {
+                           font-size: 12px;
+                           color: var(--text-faint);
+                           display: flex;
+                           align-items: center;
+                           gap: 7px;
+                           cursor: pointer;
+                  }
+
+                  .mute-row input[type=checkbox] {
+                           accent-color: var(--accent);
+                  }
+
+                  .foot-note {
+                           margin-top: 26px;
+                           font-size: 12.5px;
+                           color: var(--text-faint);
+                           line-height: 1.6;
+                           max-width: 620px;
+                  }
+
+                  .visually-hidden {
+                           position: absolute;
+                           width: 1px;
+                           height: 1px;
+                           overflow: hidden;
+                           clip: rect(0, 0, 0, 0);
+                           white-space: nowrap;
+                  }
+         </style>
+</head>
+
+<body>
+
+         <div class="arc arc-2"></div>
+         <div class="arc arc-1"></div>
+
+         <div class="wrap">
+
+                  <div class="topbar">
+                           <a class="brand" href="index.html" aria-label="SANJAYA home"><span class="mark">S</span><span
+                                             class="brand-text">SANJAYA<small>CIVIC INTELLIGENCE</small></span></a>
+                           <div class="lang-switch" role="group" aria-label="Choose language">
+                                    <button type="button" class="active" data-lang="en">English</button>
+                                    <button type="button" data-lang="hi">हिंदी</button>
+                                    <button type="button" data-lang="bn">বাংলা</button>
+                           </div>
+                  </div>
+
+                  <div class="hero">
+                           <div class="eyebrow"><span class="line"></span><span id="eyebrow-text">THE SANJAYA
+                                             LAYER</span></div>
+                           <h1 class="headline" id="headline">Just say what's <em>wrong</em>.</h1>
+                           <p class="subtext" id="subtext">Speak or type your civic problem. SANJAYA listens, finds the
+                                    right department, and helps you file a report — in the language you're comfortable
+                                    in.</p>
+                  </div>
+
+                  <div class="grid">
+                           <div class="steps" id="steps">
+                                    <div class="step">
+                                             <div class="num">01</div>
+                                             <div>
+                                                      <h3 data-k="step1_h">Speak in your language</h3>
+                                                      <p data-k="step1_p">English, Hindi, or Bengali — say it the way
+                                                               you'd say it to a neighbour.</p>
+                                             </div>
+                                    </div>
+                                    <div class="step">
+                                             <div class="num">02</div>
+                                             <div>
+                                                      <h3 data-k="step2_h">We match the right department</h3>
+                                                      <p data-k="step2_p">Water, roads, sanitation, power — SANJAYA
+                                                               identifies who's responsible.</p>
+                                             </div>
+                                    </div>
+                                    <div class="step">
+                                             <div class="num">03</div>
+                                             <div>
+                                                      <h3 data-k="step3_h">File the report, done</h3>
+                                                      <p data-k="step3_p">A reference number, in seconds, no forms to
+                                                               hunt for.</p>
+                                             </div>
+                                    </div>
+                           </div>
+
+                           <div class="panel">
+                                    <div class="panel-head">
+                                             <div class="who">
+                                                      <div class="who-orb" id="orb"></div>
+                                                      <div class="who-text">
+                                                               <div class="name">SANJAYA</div>
+                                                               <div class="status" id="status-text">Ready</div>
+                                                      </div>
+                                             </div>
+                                    </div>
+
+                                    <div class="messages" id="messages" aria-live="polite"></div>
+
+                                    <div class="mute-row">
+                                             <label><input type="checkbox" id="voice-toggle" checked> <span
+                                                               id="voice-toggle-label">Reply with voice</span></label>
+                                    </div>
+
+                                    <div class="composer">
+                                             <input type="text" id="text-input" placeholder="Type your problem…"
+                                                      autocomplete="off">
+                                             <button type="button" class="icon-btn mic-btn" id="mic-btn"
+                                                      aria-label="Speak">
+                                                      <span class="ring"></span>
+                                                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                               stroke-width="2" stroke-linecap="round">
+                                                               <path
+                                                                        d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
+                                                               <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+                                                               <line x1="12" y1="19" x2="12" y2="23" />
+                                                               <line x1="8" y1="23" x2="16" y2="23" />
+                                                      </svg>
+                                             </button>
+                                             <button type="button" class="icon-btn" id="send-btn" aria-label="Send">
+                                                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                               stroke-width="2" stroke-linecap="round"
+                                                               stroke-linejoin="round">
+                                                               <line x1="22" y1="2" x2="11" y2="13" />
+                                                               <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                                                      </svg>
+                                             </button>
+                                    </div>
+                           </div>
+                  </div>
+
+                  <p class="foot-note" id="foot-note">Voice input needs microphone permission and works best in Chrome
+                           or Edge. Reports are stored on this device for this demo and are not sent anywhere.</p>
+
+         </div>
+
+         <script>
+                  (function () {
+
+                           /* ---------------- i18n copy ---------------- */
+                           const UI = {
+                                    en: {
+                                             eyebrow: "THE SANJAYA LAYER",
+                                             headline: 'Just say what\'s <em>wrong</em>.',
+                                             subtext: "Speak or type your civic problem. SANJAYA listens, finds the right department, and helps you file a report — in the language you're comfortable in.",
+                                             steps: [
+                                                      ["Speak in your language", "English, Hindi, or Bengali — say it the way you'd say it to a neighbour."],
+                                                      ["We match the right department", "Water, roads, sanitation, power — SANJAYA identifies who's responsible."],
+                                                      ["File the report, done", "A reference number, in seconds, no forms to hunt for."]
+                                             ],
+                                             placeholder: "Type your problem…",
+                                             voiceLabel: "Reply with voice",
+                                             statusReady: "Ready", statusListening: "Listening…", statusSpeaking: "Speaking…", statusThinking: "Thinking…",
+                                             footNote: "Voice input needs microphone permission and works best in Chrome or Edge. Reports are stored on this device for this demo and are not sent anywhere.",
+                                             greeting: "Hello. I'm SANJAYA. Tell me what's going on — a broken streetlight, a water problem, anything — and I'll point you to the right department. Say \"file a report\" whenever you're ready to log it.",
+                                             matched: d => `This sounds like a matter for the ${d}. Want me to file a report? Just say "file a report" or type it.`,
+                                             fallback: "I couldn't quite place that. Try mentioning water, roads, garbage, streetlights, drainage, noise, or power — or just say \"file a report\" and I'll log it under general civic issues.",
+                                             askDesc: "Tell me briefly what's happening.",
+                                             askLoc: "Where is this? An area, street, or landmark works.",
+                                             confirm: (id, dept, desc, loc) => `Got it. Reference ${id} filed with the ${dept} for: "${desc}", near ${loc}. Someone will follow up.`,
+                                             micUnsupported: "Voice input isn't supported in this browser. You can still type your problem below.",
+                                             micError: "I didn't catch that — mic access may be blocked. Try typing instead."
+                                    },
+                                    hi: {
+                                             eyebrow: "द सांजया लेयर",
+                                             headline: 'बस बताइए, क्या <em>गड़बड़</em> है।',
+                                             subtext: "अपनी नागरिक समस्या बोलकर या लिखकर बताएं। सांजया सुनता है, सही विभाग ढूंढता है, और आपकी शिकायत दर्ज करने में मदद करता है — आपकी अपनी भाषा में।",
+                                             steps: [
+                                                      ["अपनी भाषा में बोलें", "अंग्रेज़ी, हिंदी या बंगाली — जैसे अपने पड़ोसी से कहेंगे।"],
+                                                      ["सही विभाग की पहचान", "पानी, सड़क, सफाई, बिजली — सांजया बताता है कौन ज़िम्मेदार है।"],
+                                                      ["शिकायत दर्ज, बस इतना ही", "कुछ ही सेकंड में एक संदर्भ संख्या, कोई फॉर्म ढूंढने की ज़रूरत नहीं।"]
+                                             ],
+                                             placeholder: "अपनी समस्या लिखें…",
+                                             voiceLabel: "आवाज़ में जवाब दें",
+                                             statusReady: "तैयार", statusListening: "सुन रहा हूं…", statusSpeaking: "बोल रहा हूं…", statusThinking: "सोच रहा हूं…",
+                                             footNote: "आवाज़ इनपुट के लिए माइक्रोफ़ोन अनुमति चाहिए और यह क्रोम या एज में सबसे अच्छा काम करता है। इस डेमो में शिकायतें केवल आपके डिवाइस पर सहेजी जाती हैं, कहीं भेजी नहीं जातीं।",
+                                             greeting: "नमस्ते। मैं सांजया हूं। बताइए क्या समस्या है — टूटी स्ट्रीट लाइट, पानी की दिक्कत, कुछ भी — मैं आपको सही विभाग बताऊंगा। जब चाहें \"शिकायत दर्ज करें\" कहें।",
+                                             matched: d => `यह मामला ${d} से जुड़ा लगता है। क्या मैं शिकायत दर्ज करूं? "शिकायत दर्ज करें" कहें या लिखें।`,
+                                             fallback: "मैं ठीक से समझ नहीं पाया। पानी, सड़क, कचरा, स्ट्रीट लाइट, नाली, शोर या बिजली का ज़िक्र करें — या \"शिकायत दर्ज करें\" कहें, मैं इसे सामान्य नागरिक मुद्दों में दर्ज कर दूंगा।",
+                                             askDesc: "संक्षेप में बताएं क्या हो रहा है।",
+                                             askLoc: "यह कहां है? इलाका, सड़क या कोई पहचान बताएं।",
+                                             confirm: (id, dept, desc, loc) => `ठीक है। संदर्भ संख्या ${id}, ${dept} के पास दर्ज: "${desc}", ${loc} के पास। जल्द संपर्क किया जाएगा।`,
+                                             micUnsupported: "इस ब्राउज़र में आवाज़ इनपुट उपलब्ध नहीं है। आप नीचे टाइप कर सकते हैं।",
+                                             micError: "मैं समझ नहीं पाया — माइक की अनुमति ब्लॉक हो सकती है। कृपया टाइप करें।"
+                                    },
+                                    bn: {
+                                             eyebrow: "দ্য সানজায়া লেয়ার",
+                                             headline: 'শুধু বলুন, কী <em>ভুল</em> হয়েছে।',
+                                             subtext: "আপনার নাগরিক সমস্যা বলুন বা লিখুন। সানজায়া শোনে, সঠিক দপ্তর খুঁজে বের করে, এবং আপনার অভিযোগ দায়ের করতে সাহায্য করে — আপনার নিজের ভাষায়।",
+                                             steps: [
+                                                      ["নিজের ভাষায় বলুন", "ইংরেজি, হিন্দি বা বাংলা — যেভাবে প্রতিবেশীকে বলতেন।"],
+                                                      ["সঠিক দপ্তর মিলিয়ে দেওয়া", "জল, রাস্তা, পরিচ্ছন্নতা, বিদ্যুৎ — সানজায়া বলে দেয় কে দায়ী।"],
+                                                      ["অভিযোগ দায়ের, ব্যস", "কয়েক সেকেন্ডে একটি রেফারেন্স নম্বর, কোনো ফর্ম খোঁজার দরকার নেই।"]
+                                             ],
+                                             placeholder: "আপনার সমস্যা লিখুন…",
+                                             voiceLabel: "কণ্ঠে উত্তর দিন",
+                                             statusReady: "প্রস্তুত", statusListening: "শুনছি…", statusSpeaking: "বলছি…", statusThinking: "ভাবছি…",
+                                             footNote: "ভয়েস ইনপুটের জন্য মাইক্রোফোন অনুমতি দরকার এবং এটি ক্রোম বা এজ-এ সবচেয়ে ভালো কাজ করে। এই ডেমোতে অভিযোগ শুধু আপনার ডিভাইসে সংরক্ষিত হয়, কোথাও পাঠানো হয় না।",
+                                             greeting: "নমস্কার। আমি সানজায়া। বলুন কী সমস্যা হচ্ছে — খারাপ স্ট্রিটলাইট, জলের সমস্যা, যা কিছু — আমি সঠিক দপ্তর বলে দেব। যখন ইচ্ছা \"অভিযোগ দায়ের করুন\" বলুন।",
+                                             matched: d => `এটি ${d}-এর বিষয় বলে মনে হচ্ছে। আমি কি অভিযোগ দায়ের করব? "অভিযোগ দায়ের করুন" বলুন বা লিখুন।`,
+                                             fallback: "ঠিক বুঝতে পারলাম না। জল, রাস্তা, আবর্জনা, রাস্তার আলো, নর্দমা, শব্দ বা বিদ্যুতের কথা বলুন — অথবা \"অভিযোগ দায়ের করুন\" বলুন, আমি এটি সাধারণ বিষয় হিসেবে নথিভুক্ত করব।",
+                                             askDesc: "সংক্ষেপে বলুন কী ঘটছে।",
+                                             askLoc: "এটা কোথায়? এলাকা, রাস্তা বা কোনো চিহ্ন বলুন।",
+                                             confirm: (id, dept, desc, loc) => `ঠিক আছে। রেফারেন্স ${id}, ${dept}-এ দায়ের করা হয়েছে: "${desc}", ${loc}-এর কাছে। শীঘ্রই যোগাযোগ করা হবে।`,
+                                             micUnsupported: "এই ব্রাউজারে ভয়েস ইনপুট সমর্থিত নয়। আপনি নিচে টাইপ করতে পারেন।",
+                                             micError: "বুঝতে পারিনি — মাইক অনুমতি ব্লক থাকতে পারে। অনুগ্রহ করে টাইপ করুন।"
+                                    }
+                           };
+
+                           const SPEECH_LANG = { en: "en-IN", hi: "hi-IN", bn: "bn-IN" };
+                           const FONT_ATTR = { en: null, hi: "lang-hi", bn: "lang-bn" };
+
+                           /* ---------------- department knowledge base ---------------- */
+                           const DEPARTMENTS = [
+                                    {
+                                             id: "water", name: { en: "Water Supply & Sewerage Board", hi: "जल आपूर्ति एवं सीवरेज बोर्ड", bn: "জল সরবরাহ ও নিকাশি বোর্ড" },
+                                             kw: {
+                                                      en: ["water", "pipeline", "supply", "tap", "tanker", "drink", "contaminated", "no water"],
+                                                      hi: ["पानी", "नल", "पाइप", "सप्लाई", "टंकी"],
+                                                      bn: ["জল", "পানি", "কল", "পাইপ", "সরবরাহ"]
+                                             }
+                                    },
+                                    {
+                                             id: "garbage", name: { en: "Solid Waste Management Dept.", hi: "ठोस अपशिष्ट प्रबंधन विभाग", bn: "কঠিন বর্জ্য ব্যবস্থাপনা দপ্তর" },
+                                             kw: {
+                                                      en: ["garbage", "trash", "waste", "dump", "dustbin", "litter", "not collected"],
+                                                      hi: ["कचरा", "कूड़ा", "गंदगी", "सफाई नहीं"],
+                                                      bn: ["আবর্জনা", "ময়লা", "বর্জ্য"]
+                                             }
+                                    },
+                                    {
+                                             id: "roads", name: { en: "Roads & Infrastructure Dept.", hi: "सड़क एवं अवसंरचना विभाग", bn: "সড়ক ও পরিকাঠামো দপ্তর" },
+                                             kw: {
+                                                      en: ["road", "pothole", "street damage", "footpath", "pavement", "broken road"],
+                                                      hi: ["सड़क", "गड्ढा", "रास्ता टूटा", "फुटपाथ"],
+                                                      bn: ["রাস্তা", "গর্ত", "ফুটপাথ"]
+                                             }
+                                    },
+                                    {
+                                             id: "streetlight", name: { en: "Street Lighting Division", hi: "स्ट्रीट लाइटिंग प्रभाग", bn: "রাস্তার আলো বিভাগ" },
+                                             kw: {
+                                                      en: ["streetlight", "street light", "lamp post", "dark street", "bulb fused"],
+                                                      hi: ["स्ट्रीट लाइट", "बत्ती", "अंधेरा", "बल्ब"],
+                                                      bn: ["রাস্তার আলো", "বাতি", "অন্ধকার"]
+                                             }
+                                    },
+                                    {
+                                             id: "drainage", name: { en: "Drainage & Sewerage Dept.", hi: "जल निकासी एवं सीवरेज विभाग", bn: "নিকাশি দপ্তর" },
+                                             kw: {
+                                                      en: ["drain", "sewage", "flood", "waterlogging", "manhole", "overflow"],
+                                                      hi: ["नाली", "सीवर", "जलभराव", "मैनहोल"],
+                                                      bn: ["নর্দমা", "ড্রেন", "জলাবদ্ধতা", "ম্যানহোল"]
+                                             }
+                                    },
+                                    {
+                                             id: "animals", name: { en: "Animal Control Unit", hi: "पशु नियंत्रण इकाई", bn: "প্রাণী নিয়ন্ত্রণ ইউনিট" },
+                                             kw: {
+                                                      en: ["stray dog", "stray cow", "animal bite", "cattle", "stray animal"],
+                                                      hi: ["कुत्ता", "आवारा", "गाय", "जानवर"],
+                                                      bn: ["কুকুর", "গরু", "প্রাণী", "বেওয়ারিশ"]
+                                             }
+                                    },
+                                    {
+                                             id: "construction", name: { en: "Building & Encroachment Cell", hi: "भवन एवं अतिक्रमण प्रकोष्ठ", bn: "নির্মাণ ও দখল সেল" },
+                                             kw: {
+                                                      en: ["illegal construction", "encroachment", "unauthorised building"],
+                                                      hi: ["अवैध निर्माण", "अतिक्रमण"],
+                                                      bn: ["অবৈধ নির্মাণ", "দখল"]
+                                             }
+                                    },
+                                    {
+                                             id: "noise", name: { en: "Noise Pollution Control", hi: "ध्वनि प्रदूषण नियंत्रण", bn: "শব্দ দূষণ নিয়ন্ত্রণ" },
+                                             kw: {
+                                                      en: ["noise", "loudspeaker", "loud music", "horn"],
+                                                      hi: ["शोर", "आवाज़", "स्पीकर", "हॉर्न"],
+                                                      bn: ["শব্দ", "আওয়াজ", "স্পিকার", "হর্ন"]
+                                             }
+                                    },
+                                    {
+                                             id: "power", name: { en: "Electricity Distribution Dept.", hi: "विद्युत वितरण विभाग", bn: "বিদ্যুৎ বিতরণ দপ্তর" },
+                                             kw: {
+                                                      en: ["power cut", "electricity", "outage", "transformer", "live wire"],
+                                                      hi: ["बिजली", "ट्रांसफार्मर", "कटौती", "तार"],
+                                                      bn: ["বিদ্যুৎ", "ট্রান্সফরমার", "তার"]
+                                             }
+                                    }
+                           ];
+                           const GENERAL_DEPT = { name: { en: "General Civic Helpdesk", hi: "सामान्य नागरिक सहायता केंद्र", bn: "সাধারণ নাগরিক সহায়তা কেন্দ্র" } };
+                           const FILE_TRIGGERS = {
+                                    en: ["file a report", "file report", "file complaint", "register complaint", "report this", "log a complaint"],
+                                    hi: ["शिकायत दर्ज", "रिपोर्ट दर्ज", "शिकायत करें", "दर्ज करें"],
+                                    bn: ["অভিযোগ দায়ের", "রিপোর্ট করুন", "দায়ের করুন"]
+                           };
+
+                           /* ---------------- state ---------------- */
+                           let lang = "en";
+                           let flowState = "idle";   // idle | await_desc | await_loc
+                           let pendingDept = null;
+                           let pendingDesc = "";
+                           let recognizing = false;
+                           let voices = [];
+
+                           const els = {
+                                    messages: document.getElementById("messages"),
+                                    input: document.getElementById("text-input"),
+                                    sendBtn: document.getElementById("send-btn"),
+                                    micBtn: document.getElementById("mic-btn"),
+                                    statusText: document.getElementById("status-text"),
+                                    orb: document.getElementById("orb"),
+                                    voiceToggle: document.getElementById("voice-toggle"),
+                                    voiceLabel: document.getElementById("voice-toggle-label"),
+                                    langBtns: document.querySelectorAll(".lang-switch button"),
+                                    eyebrow: document.getElementById("eyebrow-text"),
+                                    headline: document.getElementById("headline"),
+                                    subtext: document.getElementById("subtext"),
+                                    footNote: document.getElementById("foot-note"),
+                                    stepEls: document.querySelectorAll("#steps .step")
+                           };
+
+                           function t(key) { return UI[lang][key]; }
+
+                           function applyLangToStaticUI() {
+                                    els.eyebrow.textContent = t("eyebrow");
+                                    els.headline.innerHTML = t("headline");
+                                    els.subtext.textContent = t("subtext");
+                                    els.input.placeholder = t("placeholder");
+                                    els.voiceLabel.textContent = t("voiceLabel");
+                                    els.footNote.textContent = t("footNote");
+                                    els.statusText.textContent = t("statusReady");
+                                    UI[lang].steps.forEach((pair, i) => {
+                                             const step = els.stepEls[i];
+                                             step.querySelector("h3").textContent = pair[0];
+                                             step.querySelector("p").textContent = pair[1];
+                                    });
+                                    const cls = FONT_ATTR[lang];
+                                    document.body.className = cls || "";
+                           }
+
+                           function setStatus(kind) {
+                                    els.statusText.textContent = t(kind === "listening" ? "statusListening" : kind === "speaking" ? "statusSpeaking" : kind === "thinking" ? "statusThinking" : "statusReady");
+                                    els.orb.classList.toggle("busy", kind !== "ready");
+                           }
+
+                           function addMessage(text, sender, opts) {
+                                    const div = document.createElement("div");
+                                    div.className = "msg " + sender;
+                                    div.textContent = text;
+                                    els.messages.appendChild(div);
+                                    els.messages.scrollTop = els.messages.scrollHeight;
+                                    return div;
+                           }
+
+                           function speak(text) {
+                                    if (!els.voiceToggle.checked) return;
+                                    if (!("speechSynthesis" in window)) return;
+                                    window.speechSynthesis.cancel();
+                                    const utter = new SpeechSynthesisUtterance(text);
+                                    utter.lang = SPEECH_LANG[lang];
+                                    const match = voices.find(v => v.lang && v.lang.toLowerCase().startsWith(lang === "en" ? "en" : SPEECH_LANG[lang].split("-")[0]));
+                                    if (match) utter.voice = match;
+                                    utter.onstart = () => setStatus("speaking");
+                                    utter.onend = () => setStatus("ready");
+                                    utter.onerror = () => setStatus("ready");
+                                    window.speechSynthesis.speak(utter);
+                           }
+
+                           function loadVoices() { voices = window.speechSynthesis ? window.speechSynthesis.getVoices() : []; }
+                           if ("speechSynthesis" in window) {
+                                    loadVoices();
+                                    window.speechSynthesis.onvoiceschanged = loadVoices;
+                           }
+
+                           function reply(text) {
+                                    addMessage(text, "assistant");
+                                    speak(text);
+                           }
+
+                           function findDept(lowerText) {
+                                    for (const dept of DEPARTMENTS) {
+                                             const list = dept.kw[lang] || [];
+                                             for (const kw of list) {
+                                                      if (lowerText.indexOf(kw.toLowerCase()) !== -1) return dept;
+                                             }
+                                    }
+                                    return null;
+                           }
+
+                           function containsFileTrigger(lowerText) {
+                                    return FILE_TRIGGERS[lang].some(p => lowerText.indexOf(p.toLowerCase()) !== -1);
+                           }
+
+                           function makeRefId() {
+                                    const n = Date.now().toString().slice(-6);
+                                    const r = Math.floor(10 + Math.random() * 89);
+                                    return "SNJ-" + n + r;
+                           }
+
+                           function handleUserText(raw) {
+                                    const text = raw.trim();
+                                    if (!text) return;
+                                    addMessage(text, "user");
+                                    setStatus("thinking");
+
+                                    window.setTimeout(() => {
+                                             const lower = text.toLowerCase();
+
+                                             if (flowState === "await_desc") {
+                                                      pendingDesc = text;
+                                                      flowState = "await_loc";
+                                                      reply(t("askLoc"));
+                                                      return;
+                                             }
+                                             if (flowState === "await_loc") {
+                                                      const dept = pendingDept ? pendingDept.name[lang] : GENERAL_DEPT.name[lang];
+                                                      const id = makeRefId();
+                                                      reply(t("confirm")(id, dept, pendingDesc, text));
+                                                      flowState = "idle"; pendingDept = null; pendingDesc = "";
+                                                      return;
+                                             }
+
+                                             // idle state
+                                             const matched = findDept(lower);
+                                             const wantsFile = containsFileTrigger(lower);
+                                             if (matched) pendingDept = matched;
+
+                                             if (wantsFile) {
+                                                      if (!pendingDept) pendingDept = null; // general
+                                                      flowState = "await_desc";
+                                                      reply(t("askDesc"));
+                                                      return;
+                                             }
+                                             if (matched) {
+                                                      reply(t("matched")(matched.name[lang]));
+                                                      return;
+                                             }
+                                             reply(t("fallback"));
+                                    }, 380);
+                           }
+
+                           /* ---------------- events ---------------- */
+                           els.sendBtn.addEventListener("click", () => {
+                                    const val = els.input.value;
+                                    els.input.value = "";
+                                    handleUserText(val);
+                           });
+                           els.input.addEventListener("keydown", (e) => {
+                                    if (e.key === "Enter") {
+                                             const val = els.input.value;
+                                             els.input.value = "";
+                                             handleUserText(val);
+                                    }
+                           });
+
+                           els.langBtns.forEach(btn => {
+                                    btn.addEventListener("click", () => {
+                                             els.langBtns.forEach(b => b.classList.remove("active"));
+                                             btn.classList.add("active");
+                                             lang = btn.getAttribute("data-lang");
+                                             flowState = "idle"; pendingDept = null; pendingDesc = "";
+                                             applyLangToStaticUI();
+                                             addMessage(t("greeting"), "assistant");
+                                    });
+                           });
+
+                           /* ---------------- speech recognition ---------------- */
+                           const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+                           let recognizer = null;
+                           if (SR) {
+                                    recognizer = new SR();
+                                    recognizer.continuous = false;
+                                    recognizer.interimResults = false;
+                                    recognizer.maxAlternatives = 1;
+
+                                    recognizer.onstart = () => {
+                                             recognizing = true;
+                                             els.micBtn.classList.add("listening");
+                                             setStatus("listening");
+                                    };
+                                    recognizer.onend = () => {
+                                             recognizing = false;
+                                             els.micBtn.classList.remove("listening");
+                                             if (els.statusText.textContent === t("statusListening")) setStatus("ready");
+                                    };
+                                    recognizer.onerror = () => {
+                                             recognizing = false;
+                                             els.micBtn.classList.remove("listening");
+                                             setStatus("ready");
+                                             addMessage(t("micError"), "assistant");
+                                    };
+                                    recognizer.onresult = (event) => {
+                                             const transcript = event.results[0][0].transcript;
+                                             handleUserText(transcript);
+                                    };
+                           }
+
+                           els.micBtn.addEventListener("click", () => {
+                                    if (!recognizer) {
+                                             addMessage(t("micUnsupported"), "assistant");
+                                             return;
+                                    }
+                                    if (recognizing) {
+                                             recognizer.stop();
+                                             return;
+                                    }
+                                    recognizer.lang = SPEECH_LANG[lang];
+                                    try { recognizer.start(); } catch (e) { /* already started */ }
+                           });
+
+                           /* ---------------- init ---------------- */
+                           applyLangToStaticUI();
+                           addMessage(t("greeting"), "assistant");
+
+                  })();
+         </script>
+</body>
+
+</html>
