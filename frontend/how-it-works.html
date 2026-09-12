@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Discover how SANJAYA transforms citizen signals into accountable municipal action through triage, de-duplication, and verified completion." />
+  <meta name="theme-color" content="#160D12" />
+  <title>How It Works — SANJAYA Civic Portal</title>
+  
+  <!-- Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <div class="site-texture" aria-hidden="true"></div>
+  <div class="site-glow" aria-hidden="true"></div>
+
+  <!-- Shared Header -->
+  <header class="site-header">
+    <div class="shell header-inner">
+      <a href="index.html" class="brand" aria-label="SANJAYA Civic Portal Home">
+        <div class="brand-mark" aria-hidden="true">SJ</div>
+        <div class="brand-text">
+          <span class="brand-name">SANJAYA</span>
+          <span class="brand-tagline">Civic Public Portal</span>
+        </div>
+      </a>
+
+      <nav class="nav-desktop" aria-label="Primary Navigation">
+        <a href="report.html" class="btn btn-primary" style="padding: 0.55rem 1.15rem; min-height: 38px;">Report an issue</a>
+        <a href="track.html" class="btn btn-outline" style="padding: 0.55rem 1.15rem; min-height: 38px;">Track</a>
+        <a href="how-it-works.html" class="nav-link is-active">How it works</a>
+        <a href="civic-guide.html" class="nav-link">Civic guide</a>
+
+        <div class="nav-dropdown">
+          <button class="dropdown-trigger" aria-expanded="false" aria-haspopup="true">
+            <span>More</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="dropdown-menu" role="menu">
+            <a href="stories.html" class="dropdown-item" role="menuitem">Public stories</a>
+            <a href="help.html" class="dropdown-item" role="menuitem">Help centre</a>
+            <a href="assistant.html" class="dropdown-item" role="menuitem">Ask SANJAYA</a>
+            <a href="about.html" class="dropdown-item" role="menuitem">About SANJAYA</a>
+            <a href="login.html" class="dropdown-item authority-link" role="menuitem">Authority access ↗</a>
+          </div>
+        </div>
+      </nav>
+
+      <div class="header-actions">
+        <div class="lang-selector" aria-label="Language">
+          <span class="lang-btn is-active" style="cursor: default;">English</span>
+        </div>
+
+        <button class="menu-toggle" aria-label="Open mobile navigation menu" aria-expanded="false">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <aside class="mobile-drawer" aria-hidden="true" role="dialog" aria-label="Mobile Navigation">
+    <div class="drawer-content">
+      <div class="drawer-header">
+        <a href="index.html" class="brand">
+          <div class="brand-mark" aria-hidden="true">SJ</div>
+          <span class="brand-name" style="font-size: 1.25rem;">SANJAYA</span>
+        </a>
+        <button class="drawer-close" aria-label="Close menu">✕</button>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 1.5rem;">
+        <a href="report.html" class="btn btn-primary" style="width: 100%;">Report an issue</a>
+        <a href="track.html" class="btn btn-outline" style="width: 100%;">Track a complaint</a>
+      </div>
+
+      <nav class="drawer-nav">
+        <a href="index.html" class="drawer-link"><span>Home</span> <span>→</span></a>
+        <a href="how-it-works.html" class="drawer-link is-active"><span>How it works</span> <span>→</span></a>
+        <a href="civic-guide.html" class="drawer-link"><span>Civic guide</span> <span>→</span></a>
+        <a href="stories.html" class="drawer-link"><span>Public stories</span> <span>→</span></a>
+        <a href="help.html" class="drawer-link"><span>Help centre</span> <span>→</span></a>
+        <a href="assistant.html" class="drawer-link"><span>Ask SANJAYA</span> <span>→</span></a>
+        <a href="about.html" class="drawer-link"><span>About SANJAYA</span> <span>→</span></a>
+      </nav>
+
+      <div class="drawer-footer">
+        <a href="login.html" class="btn btn-secondary" style="font-size: 0.85rem; width: 100%;">Authority login</a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main id="main-content" style="padding-block: 3.5rem 5rem;">
+    <div class="shell" style="max-width: 860px;">
+      
+      <!-- Page Header -->
+      <div style="margin-bottom: 3.5rem;">
+        <div class="eyebrow">Municipal Workflow Architecture</div>
+        <h1 class="section-title">From resident signal <em>to accountable action</em></h1>
+        <p class="section-lead">
+          Civic participation should never feel like tossing words into a dark void. SANJAYA structures the journey from citizen notification to physical remediation with dignity and mutual clarity.
+        </p>
+      </div>
+
+      <!-- Comparison Section: What We Ask vs What SANJAYA Does (PRD Section 6.4) -->
+      <section style="margin-bottom: 4rem;">
+        <div class="eyebrow">Mutual Commitment</div>
+        <h2 style="font-family: var(--font-serif); font-size: 2rem; color: var(--parchment); margin-bottom: 1.5rem;">
+          The civic pact: what we ask from you / what SANJAYA does next
+        </h2>
+
+        <div style="overflow-x: auto; background: var(--surface-card); border: 1px solid var(--line-gold); border-radius: var(--radius-md);">
+          <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.95rem;">
+            <thead>
+              <tr style="border-bottom: 2px solid var(--line-gold); background: rgba(75, 23, 36, 0.4);">
+                <th style="padding: 1rem 1.25rem; font-family: var(--font-serif); font-size: 1.15rem; color: var(--warm-yellow); width: 45%;">What We Ask From You</th>
+                <th style="padding: 1rem 1.25rem; font-family: var(--font-serif); font-size: 1.15rem; color: var(--parchment); width: 55%;">What SANJAYA Does Next</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom: 1px solid var(--line-parchment);">
+                <td style="padding: 1.2rem 1.25rem; color: var(--parchment); vertical-align: top;">
+                  <strong>1. Specific Physical Location</strong><br />
+                  <span style="font-size: 0.85rem; color: var(--muted-parchment);">A landmark, lamp pole number, or GPS pin.</span>
+                </td>
+                <td style="padding: 1.2rem 1.25rem; color: var(--muted-parchment); vertical-align: top;">
+                  <strong>Instant Jurisdictional Mapping</strong><br />
+                  Directly routes to the exact local borough and ward engineering office without routing bottlenecks.
+                </td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--line-parchment);">
+                <td style="padding: 1.2rem 1.25rem; color: var(--parchment); vertical-align: top;">
+                  <strong>2. Clear Contextual Evidence</strong><br />
+                  <span style="font-size: 0.85rem; color: var(--muted-parchment);">A wide photograph or clear written description.</span>
+                </td>
+                <td style="padding: 1.2rem 1.25rem; color: var(--muted-parchment); vertical-align: top;">
+                  <strong>Material & Equipment Triage</strong><br />
+                  Enables engineers to prepare the right machinery (cold asphalt vs hot roller vs desilting jet) before traveling.
+                </td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--line-parchment);">
+                <td style="padding: 1.2rem 1.25rem; color: var(--parchment); vertical-align: top;">
+                  <strong>3. Patience for Proper Curing</strong><br />
+                  <span style="font-size: 0.85rem; color: var(--muted-parchment);">Quality civil work requires dry conditions.</span>
+                </td>
+                <td style="padding: 1.2rem 1.25rem; color: var(--muted-parchment); vertical-align: top;">
+                  <strong>Transparent Milestone Tracking</strong><br />
+                  Explains weather shifts or scheduled night-repair windows in plain language rather than silent delays.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- The 4 Stages Editorial Journey Line -->
+      <section style="margin-bottom: 4rem;">
+        <div class="eyebrow">The System Journey</div>
+        <h2 style="font-family: var(--font-serif); font-size: 2rem; color: var(--parchment); margin-bottom: 2rem;">
+          How a report travels through the municipal machine
+        </h2>
+
+        <div style="display: flex; flex-direction: column; gap: 2rem;">
+          <!-- Stage 1 -->
+          <div style="display: grid; grid-template-columns: 60px 1fr; gap: 1.5rem; background: var(--surface-card); border: 1px solid var(--line-gold); border-radius: var(--radius-md); padding: 1.75rem;">
+            <div style="font-family: var(--font-serif); font-size: 2.25rem; color: var(--warm-yellow); line-height: 1;">01</div>
+            <div>
+              <h3 style="font-family: var(--font-serif); font-size: 1.45rem; color: var(--parchment); margin: 0 0 0.5rem;">Intake & De-duplication</h3>
+              <p style="color: var(--muted-parchment); font-size: 0.95rem; line-height: 1.6; margin: 0 0 0.75rem;">
+                When an issue is filed, SANJAYA immediately scans a 35-meter radius for existing reports under the same category. If neighbors have already signaled the same defect, the reports are intelligently clustered into one master action order.
+              </p>
+              <div style="font-size: 0.85rem; color: var(--warm-yellow);">
+                Benefit: Municipal staff are not bombarded with five different calls for one road pit; resources stay focused on repairs.
+              </div>
+            </div>
+          </div>
+
+          <!-- Stage 2 -->
+          <div style="display: grid; grid-template-columns: 60px 1fr; gap: 1.5rem; background: var(--surface-card); border: 1px solid var(--line-gold); border-radius: var(--radius-md); padding: 1.75rem;">
+            <div style="font-family: var(--font-serif); font-size: 2.25rem; color: var(--warm-yellow); line-height: 1;">02</div>
+            <div>
+              <h3 style="font-family: var(--font-serif); font-size: 1.45rem; color: var(--parchment); margin: 0 0 0.5rem;">Coordination & Priority Review</h3>
+              <p style="color: var(--muted-parchment); font-size: 0.95rem; line-height: 1.6; margin: 0 0 0.75rem;">
+                A duty coordinator checks whether the issue borders a metro line, tram track, or state highway to prevent jurisdictional passing-the-buck. Priority scores factor in road classification, pedestrian traffic density, and weather risk.
+              </p>
+              <div style="font-size: 0.85rem; color: var(--warm-yellow);">
+                Benefit: Critical hazards near schools and hospitals receive expedited rapid-response mobilization.
+              </div>
+            </div>
+          </div>
+
+          <!-- Stage 3 -->
+          <div style="display: grid; grid-template-columns: 60px 1fr; gap: 1.5rem; background: var(--surface-card); border: 1px solid var(--line-gold); border-radius: var(--radius-md); padding: 1.75rem;">
+            <div style="font-family: var(--font-serif); font-size: 2.25rem; color: var(--warm-yellow); line-height: 1;">03</div>
+            <div>
+              <h3 style="font-family: var(--font-serif); font-size: 1.45rem; color: var(--parchment); margin: 0 0 0.5rem;">Field Dispatch & Work In Progress</h3>
+              <p style="color: var(--muted-parchment); font-size: 0.95rem; line-height: 1.6; margin: 0 0 0.75rem;">
+                The task moves to the field crew's daily dispatch schedule. Heavy civil works (like asphalt resurfacing) are typically batched for nocturnal shifts (22:00 to 05:00) to avoid paralyzing daylight public transit.
+              </p>
+              <div style="font-size: 0.85rem; color: var(--warm-yellow);">
+                Benefit: Residents can see the scheduled work shift on their ticket timeline.
+              </div>
+            </div>
+          </div>
+
+          <!-- Stage 4 -->
+          <div style="display: grid; grid-template-columns: 60px 1fr; gap: 1.5rem; background: var(--surface-card); border: 1px solid var(--line-gold); border-radius: var(--radius-md); padding: 1.75rem;">
+            <div style="font-family: var(--font-serif); font-size: 2.25rem; color: var(--warm-yellow); line-height: 1;">04</div>
+            <div>
+              <h3 style="font-family: var(--font-serif); font-size: 1.45rem; color: var(--parchment); margin: 0 0 0.5rem;">Inspection, Photo Verification & Archival</h3>
+              <p style="color: var(--muted-parchment); font-size: 0.95rem; line-height: 1.6; margin: 0 0 0.75rem;">
+                A case cannot be marked 'Resolved' through paperwork alone. Field supervisors log a site inspection with photographic verification before the ticket is formally closed and archived into the public transparency record.
+              </p>
+              <div style="font-size: 0.85rem; color: var(--warm-yellow);">
+                Benefit: Accountable sign-off that builds neighborhood trust.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Why Clear Reports Help (PRD Section 6.4) -->
+      <section style="background: linear-gradient(135deg, rgba(75, 23, 36, 0.45), rgba(22, 13, 18, 0.85)); border: 1px solid var(--line-gold); border-radius: var(--radius-lg); padding: 2.5rem; margin-bottom: 4rem;">
+        <div class="eyebrow">Editorial Insight</div>
+        <h2 style="font-family: var(--font-serif); font-size: 1.85rem; color: var(--parchment); margin-bottom: 1rem;">
+          Why a clear report helps a responsible office act faster
+        </h2>
+        <p style="color: var(--muted-parchment); line-height: 1.7; margin-bottom: 1.5rem;">
+          Municipal workers frequently express that vague reports ("the road near the market is broken") require half a day of detective work just to locate the site. When a resident provides a photo with a distinctive background building, landmark, and exact ward, the duty officer can assign materials and schedule a crew in under ten minutes.
+        </p>
+        <a href="civic-guide.html" class="btn btn-primary">
+          <span>Read the Civic Reporting Guide</span>
+          <span class="btn-arrow">→</span>
+        </a>
+      </section>
+
+      <!-- CTA -->
+      <div style="text-align: center;">
+        <h3 style="font-family: var(--font-serif); font-size: 1.75rem; color: var(--parchment); margin-bottom: 1rem;">
+          Ready to make a local issue visible?
+        </h3>
+        <div style="display: flex; justify-content: center; gap: 1rem;">
+          <a href="report.html" class="btn btn-primary">Report an issue now</a>
+          <a href="track.html" class="btn btn-outline">Track existing complaint</a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Shared Footer -->
+  <footer class="site-footer">
+    <div class="shell">
+      <div class="footer-grid">
+        <div class="footer-brand-col">
+          <div class="brand">
+            <div class="brand-mark">SJ</div>
+            <span class="brand-name">SANJAYA</span>
+          </div>
+          <p>A dignified, public-facing civic portal designed to connect resident signals with municipal action through evidence, transparency, and respect.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Public Action</h4>
+          <ul>
+            <li><a href="report.html">Report an issue</a></li>
+            <li><a href="track.html">Track a complaint</a></li>
+            <li><a href="how-it-works.html">How it works</a></li>
+            <li><a href="civic-guide.html">Civic reporting guide</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Knowledge & Support</h4>
+          <ul>
+            <li><a href="stories.html">Public civic stories</a></li>
+            <li><a href="help.html">Help & FAQ</a></li>
+            <li><a href="assistant.html">Ask SANJAYA (Assistant)</a></li>
+            <li><a href="about.html">About SANJAYA</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Governance & Desk</h4>
+          <ul>
+            <li><a href="login.html">Authority access</a></li>
+            <li><a href="about.html#principles">Civic principles</a></li>
+            <li><a href="about.html#accessibility">Accessibility posture</a></li>
+            <li><a href="about.html#privacy">Resident privacy</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="prototype-notice">
+          <strong>Civic Demonstration:</strong> This is a frontend prototype for the SANJAYA civic project.
+        </div>
+        <div>
+          <span>© 2026 SANJAYA Project. Built with Civic Dignity.</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/adapter.js"></script>
+  <script src="js/shared.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

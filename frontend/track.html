@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Track your civic incident report status with transparent progress milestones from report submission to site resolution." />
+  <meta name="theme-color" content="#160D12" />
+  <title>Track a Complaint — SANJAYA Civic Portal</title>
+  
+  <!-- Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <div class="site-texture" aria-hidden="true"></div>
+  <div class="site-glow" aria-hidden="true"></div>
+
+  <!-- Shared Header -->
+  <header class="site-header">
+    <div class="shell header-inner">
+      <a href="index.html" class="brand" aria-label="SANJAYA Civic Portal Home">
+        <div class="brand-mark" aria-hidden="true">SJ</div>
+        <div class="brand-text">
+          <span class="brand-name">SANJAYA</span>
+          <span class="brand-tagline">Civic Public Portal</span>
+        </div>
+      </a>
+
+      <nav class="nav-desktop" aria-label="Primary Navigation">
+        <a href="report.html" class="btn btn-primary" style="padding: 0.55rem 1.15rem; min-height: 38px;">Report an issue</a>
+        <a href="track.html" class="btn btn-outline" style="padding: 0.55rem 1.15rem; min-height: 38px;">Track</a>
+        <a href="how-it-works.html" class="nav-link">How it works</a>
+        <a href="civic-guide.html" class="nav-link">Civic guide</a>
+
+        <div class="nav-dropdown">
+          <button class="dropdown-trigger" aria-expanded="false" aria-haspopup="true">
+            <span>More</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="dropdown-menu" role="menu">
+            <a href="stories.html" class="dropdown-item" role="menuitem">Public stories</a>
+            <a href="help.html" class="dropdown-item" role="menuitem">Help centre</a>
+            <a href="assistant.html" class="dropdown-item" role="menuitem">Ask SANJAYA</a>
+            <a href="about.html" class="dropdown-item" role="menuitem">About SANJAYA</a>
+            <a href="login.html" class="dropdown-item authority-link" role="menuitem">Authority access ↗</a>
+          </div>
+        </div>
+      </nav>
+
+      <div class="header-actions">
+        <div class="lang-selector" aria-label="Language">
+          <span class="lang-btn is-active" style="cursor: default;">English</span>
+        </div>
+
+        <button class="menu-toggle" aria-label="Open mobile navigation menu" aria-expanded="false">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <aside class="mobile-drawer" aria-hidden="true" role="dialog" aria-label="Mobile Navigation">
+    <div class="drawer-content">
+      <div class="drawer-header">
+        <a href="index.html" class="brand">
+          <div class="brand-mark" aria-hidden="true">SJ</div>
+          <span class="brand-name" style="font-size: 1.25rem;">SANJAYA</span>
+        </a>
+        <button class="drawer-close" aria-label="Close menu">✕</button>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 1.5rem;">
+        <a href="report.html" class="btn btn-primary" style="width: 100%;">Report an issue</a>
+        <a href="track.html" class="btn btn-outline" style="width: 100%;">Track a complaint</a>
+      </div>
+
+      <nav class="drawer-nav">
+        <a href="index.html" class="drawer-link"><span>Home</span> <span>→</span></a>
+        <a href="how-it-works.html" class="drawer-link"><span>How it works</span> <span>→</span></a>
+        <a href="civic-guide.html" class="drawer-link"><span>Civic guide</span> <span>→</span></a>
+        <a href="stories.html" class="drawer-link"><span>Public stories</span> <span>→</span></a>
+        <a href="help.html" class="drawer-link"><span>Help centre</span> <span>→</span></a>
+        <a href="assistant.html" class="drawer-link"><span>Ask SANJAYA</span> <span>→</span></a>
+        <a href="about.html" class="drawer-link"><span>About SANJAYA</span> <span>→</span></a>
+      </nav>
+
+      <div class="drawer-footer">
+        <a href="login.html" class="btn btn-secondary" style="font-size: 0.85rem; width: 100%;">Authority login</a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main id="main-content" style="padding-block: 2.5rem 5rem;">
+    <div class="shell" style="max-width: 820px;">
+      
+      <!-- Hero Tracker Input (PRD Section 6.3) -->
+      <div class="track-hero">
+        <div class="eyebrow">Status Transparency</div>
+        <h1 class="section-title">Know what happens <em>next</em></h1>
+        <p class="section-lead" style="margin-inline: auto; margin-bottom: 2rem;">
+          Enter your ticket identifier to view the chronological timeline, current status, responsible department, and next expected step.
+        </p>
+
+        <!-- Search Form -->
+        <form id="ticket-search-form" class="ticket-search-box" role="search">
+          <label for="ticket-search-input" class="sr-only" style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0;">Enter ticket identifier</label>
+          <input 
+            type="text" 
+            id="ticket-search-input" 
+            class="ticket-input" 
+            placeholder="e.g. SJ-2026-8492" 
+            autocomplete="off"
+            spellcheck="false"
+            required
+          />
+          <button type="submit" class="btn btn-primary" style="padding-inline: 1.5rem;">
+            <span>Track status</span>
+            <span class="btn-arrow">→</span>
+          </button>
+        </form>
+
+        <!-- Quick Sample Chips for Immediate Testing -->
+        <div class="quick-samples">
+          <span>Try sample tickets:</span>
+          <button type="button" class="sample-chip" data-ticket="SJ-2026-8492">SJ-2026-8492 (Road - In Progress)</button>
+          <button type="button" class="sample-chip" data-ticket="SJ-2026-1044">SJ-2026-1044 (Waste - Resolved)</button>
+          <button type="button" class="sample-chip" data-ticket="SJ-2026-3091">SJ-2026-3091 (Drainage - Review)</button>
+          <button type="button" class="sample-chip" data-ticket="SJ-2026-0012">SJ-2026-0012 (Lighting - Assigned)</button>
+        </div>
+      </div>
+
+      <!-- ====================================================================
+           THE 6 FIRST-CLASS STATES (PRD Section 6.3)
+           ==================================================================== -->
+
+      <!-- STATE 1: Empty Initial State -->
+      <section id="tracker-state-empty" class="state-panel is-active" aria-label="Tracker Instructions">
+        <div class="state-box">
+          <div class="state-icon state-icon-empty">🔍</div>
+          <h2 style="font-family: var(--font-serif); font-size: 1.6rem; color: var(--parchment); margin: 0 0 0.75rem;">
+            Enter a ticket identifier to begin
+          </h2>
+          <p style="color: var(--muted-parchment); line-height: 1.6; margin-bottom: 1.5rem;">
+            When you submit a civic report, SANJAYA issues a reference code such as <code style="font-family: var(--font-mono); color: var(--warm-yellow);">SJ-2026-8492</code>. You can search anytime to see what has happened, what is scheduled next, and which office has ownership.
+          </p>
+          <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+            <a href="report.html" class="btn btn-primary">Report a new issue</a>
+            <a href="help.html" class="btn btn-outline">Need help finding ticket?</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- STATE 2: Loading State -->
+      <section id="tracker-state-loading" class="state-panel" aria-label="Loading Status">
+        <div class="state-box" style="text-align: left;">
+          <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem;">
+            <div class="state-icon state-icon-loading" style="margin: 0;">⏳</div>
+            <div>
+              <div style="font-family: var(--font-serif); font-size: 1.35rem; color: var(--parchment);">Locating municipal record...</div>
+              <div style="font-size: 0.85rem; color: var(--muted-parchment);">Querying public tracking registry</div>
+            </div>
+          </div>
+          <div class="shimmer-line" style="width: 45%;"></div>
+          <div class="shimmer-line" style="width: 80%;"></div>
+          <div class="shimmer-line" style="width: 65%;"></div>
+          <div class="shimmer-line" style="width: 90%; height: 60px; margin-top: 1.5rem;"></div>
+        </div>
+      </section>
+
+      <!-- STATE 3: Success State (Full Incident Details & Vertical Timeline) -->
+      <section id="tracker-state-success" class="state-panel" aria-label="Ticket Status Result">
+        <!-- Ticket Overview Card -->
+        <div class="ticket-card" style="margin-bottom: 2rem;">
+          <div class="ticket-header">
+            <div class="ticket-id-group">
+              <span id="ticket-result-id" class="ticket-id">SJ-2026-8492</span>
+              <button type="button" class="ticket-copy-btn" data-copy="ticket-result-id" title="Copy tracking ID">
+                Copy 📋
+              </button>
+            </div>
+            <span id="ticket-result-badge" class="badge badge-progress">
+              <span class="badge-dot"></span>
+              <span>Work in progress</span>
+            </span>
+          </div>
+
+          <div class="ticket-meta-grid">
+            <div>
+              <span class="meta-label">Category</span>
+              <span id="ticket-result-category" class="meta-value">Roads & Pavements</span>
+            </div>
+            <div>
+              <span class="meta-label">Location / Ward</span>
+              <span id="ticket-result-ward" class="meta-value">Ward 14</span>
+            </div>
+            <div>
+              <span class="meta-label">Assigned Directorate</span>
+              <span id="ticket-result-dept" class="meta-value">Road Infrastructure Wing</span>
+            </div>
+            <div>
+              <span class="meta-label">Last Updated</span>
+              <span id="ticket-result-updated" class="meta-value">Today</span>
+            </div>
+          </div>
+
+          <!-- Description Snippet -->
+          <div style="margin-bottom: 1.5rem;">
+            <span class="meta-label">Citizen Description</span>
+            <div id="ticket-result-desc" style="color: var(--parchment); font-size: 0.95rem; line-height: 1.6; background: rgba(22, 13, 18, 0.5); padding: 0.85rem; border-radius: var(--radius-sm); border: 1px solid var(--line-parchment);">
+              —
+            </div>
+          </div>
+
+          <!-- Next Expected Step Box -->
+          <div style="background: rgba(201, 154, 61, 0.12); border-left: 3px solid var(--warm-yellow); padding: 1rem; border-radius: 0 var(--radius-sm) var(--radius-sm) 0;">
+            <strong style="color: var(--warm-yellow); display: block; font-size: 0.8125rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.25rem;">
+              Next Expected Step:
+            </strong>
+            <span id="ticket-result-nextstep" style="color: var(--parchment); font-size: 0.95rem;">
+              Bitumen hot-mix resurfacing scheduled.
+            </span>
+          </div>
+        </div>
+
+        <!-- Vertical Timeline Header -->
+        <div style="margin-bottom: 1rem;">
+          <div class="eyebrow">Milestone Progress</div>
+          <h2 class="section-title" style="font-size: 1.85rem;">Action Timeline</h2>
+        </div>
+
+        <!-- Vertical Chronological Timeline (PRD Section 6.3) -->
+        <div id="ticket-result-timeline" class="timeline">
+          <!-- Populated by track.js -->
+        </div>
+
+        <!-- Prototype Label -->
+        <div id="ticket-prototype-notice" style="margin-top: 2rem; text-align: center; font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted-parchment); background: rgba(22, 13, 18, 0.6); padding: 0.65rem; border-radius: var(--radius-sm); border: 1px solid var(--line-gold);">
+          Representative Prototype Record: Data structured according to municipal workflow standards.
+        </div>
+      </section>
+
+      <!-- STATE 4: Malformed Ticket State -->
+      <section id="tracker-state-malformed" class="state-panel" aria-label="Malformed Ticket Format">
+        <div class="state-box">
+          <div class="state-icon state-icon-error">⚠️</div>
+          <h2 style="font-family: var(--font-serif); font-size: 1.6rem; color: var(--error); margin: 0 0 0.75rem;">
+            Ticket format appears incorrect
+          </h2>
+          <p style="color: var(--muted-parchment); line-height: 1.6; margin-bottom: 1.5rem;">
+            SANJAYA ticket codes typically consist of uppercase letters, numbers, and hyphens (for example: <strong style="color: var(--parchment);">SJ-2026-8492</strong> or <strong style="color: var(--parchment);">SNY-000001</strong>). Please check for accidental spaces or typos.
+          </p>
+          <button type="button" class="btn btn-outline" onclick="document.getElementById('ticket-search-input').focus();">
+            Try entering again
+          </button>
+        </div>
+      </section>
+
+      <!-- STATE 5: Not Found State -->
+      <section id="tracker-state-notfound" class="state-panel" aria-label="Ticket Not Found">
+        <div class="state-box">
+          <div class="state-icon state-icon-error">✕</div>
+          <h2 style="font-family: var(--font-serif); font-size: 1.6rem; color: var(--parchment); margin: 0 0 0.75rem;">
+            No record found for <span id="notfound-ticket-display" style="color: var(--warm-yellow); font-family: var(--font-mono);">—</span>
+          </h2>
+          <p style="color: var(--muted-parchment); line-height: 1.6; margin-bottom: 1.5rem;">
+            We could not find an active or historical record matching this tracking code. It is possible the submission is still in initial queue syncing, or was entered differently.
+          </p>
+          <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+            <a href="report.html" class="btn btn-primary">File a new report</a>
+            <a href="help.html" class="btn btn-outline">Check Help Centre</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- STATE 6: Temporary Unavailable State -->
+      <section id="tracker-state-unavailable" class="state-panel" aria-label="Tracker Unavailable">
+        <div class="state-box">
+          <div class="state-icon state-icon-error">⚡</div>
+          <h2 style="font-family: var(--font-serif); font-size: 1.6rem; color: var(--parchment); margin: 0 0 0.75rem;">
+            Tracking service temporarily unavailable
+          </h2>
+          <p style="color: var(--muted-parchment); line-height: 1.6; margin-bottom: 1.5rem;">
+            We are currently unable to reach the municipal records service. Please check your network connection or try your query again in a moment.
+          </p>
+          <button type="button" class="btn btn-primary" onclick="window.location.reload();">
+            Retry lookup
+          </button>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Shared Footer -->
+  <footer class="site-footer">
+    <div class="shell">
+      <div class="footer-grid">
+        <div class="footer-brand-col">
+          <div class="brand">
+            <div class="brand-mark">SJ</div>
+            <span class="brand-name">SANJAYA</span>
+          </div>
+          <p>A dignified, public-facing civic portal designed to connect resident signals with municipal action through evidence, transparency, and respect.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Public Action</h4>
+          <ul>
+            <li><a href="report.html">Report an issue</a></li>
+            <li><a href="track.html">Track a complaint</a></li>
+            <li><a href="how-it-works.html">How it works</a></li>
+            <li><a href="civic-guide.html">Civic reporting guide</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Knowledge & Support</h4>
+          <ul>
+            <li><a href="stories.html">Public civic stories</a></li>
+            <li><a href="help.html">Help & FAQ</a></li>
+            <li><a href="assistant.html">Ask SANJAYA (Assistant)</a></li>
+            <li><a href="about.html">About SANJAYA</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Governance & Desk</h4>
+          <ul>
+            <li><a href="login.html">Authority access</a></li>
+            <li><a href="about.html#principles">Civic principles</a></li>
+            <li><a href="about.html#accessibility">Accessibility posture</a></li>
+            <li><a href="about.html#privacy">Resident privacy</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="prototype-notice">
+          <strong>Civic Demonstration:</strong> This is a frontend prototype for the SANJAYA civic project.
+        </div>
+        <div>
+          <span>© 2026 SANJAYA Project. Built with Civic Dignity.</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/adapter.js"></script>
+  <script src="js/shared.js"></script>
+  <script src="js/track.js"></script>
+</body>
+</html>

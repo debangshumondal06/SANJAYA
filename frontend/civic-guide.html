@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="An evergreen practical guide for residents on writing actionable civic reports, taking useful photo evidence, landmark identification, safety, and understanding status terms." />
+  <meta name="theme-color" content="#160D12" />
+  <title>Civic Reporting Guide — SANJAYA Civic Portal</title>
+  
+  <!-- Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <div class="site-texture" aria-hidden="true"></div>
+  <div class="site-glow" aria-hidden="true"></div>
+
+  <!-- Shared Header -->
+  <header class="site-header">
+    <div class="shell header-inner">
+      <a href="index.html" class="brand" aria-label="SANJAYA Civic Portal Home">
+        <div class="brand-mark" aria-hidden="true">SJ</div>
+        <div class="brand-text">
+          <span class="brand-name">SANJAYA</span>
+          <span class="brand-tagline">Civic Public Portal</span>
+        </div>
+      </a>
+
+      <nav class="nav-desktop" aria-label="Primary Navigation">
+        <a href="report.html" class="btn btn-primary" style="padding: 0.55rem 1.15rem; min-height: 38px;">Report an issue</a>
+        <a href="track.html" class="btn btn-outline" style="padding: 0.55rem 1.15rem; min-height: 38px;">Track</a>
+        <a href="how-it-works.html" class="nav-link">How it works</a>
+        <a href="civic-guide.html" class="nav-link is-active">Civic guide</a>
+
+        <div class="nav-dropdown">
+          <button class="dropdown-trigger" aria-expanded="false" aria-haspopup="true">
+            <span>More</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="dropdown-menu" role="menu">
+            <a href="stories.html" class="dropdown-item" role="menuitem">Public stories</a>
+            <a href="help.html" class="dropdown-item" role="menuitem">Help centre</a>
+            <a href="assistant.html" class="dropdown-item" role="menuitem">Ask SANJAYA</a>
+            <a href="about.html" class="dropdown-item" role="menuitem">About SANJAYA</a>
+            <a href="login.html" class="dropdown-item authority-link" role="menuitem">Authority access ↗</a>
+          </div>
+        </div>
+      </nav>
+
+      <div class="header-actions">
+        <div class="lang-selector" aria-label="Language">
+          <span class="lang-btn is-active" style="cursor: default;">English</span>
+        </div>
+
+        <button class="menu-toggle" aria-label="Open mobile navigation menu" aria-expanded="false">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <aside class="mobile-drawer" aria-hidden="true" role="dialog" aria-label="Mobile Navigation">
+    <div class="drawer-content">
+      <div class="drawer-header">
+        <a href="index.html" class="brand">
+          <div class="brand-mark" aria-hidden="true">SJ</div>
+          <span class="brand-name" style="font-size: 1.25rem;">SANJAYA</span>
+        </a>
+        <button class="drawer-close" aria-label="Close menu">✕</button>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 1.5rem;">
+        <a href="report.html" class="btn btn-primary" style="width: 100%;">Report an issue</a>
+        <a href="track.html" class="btn btn-outline" style="width: 100%;">Track a complaint</a>
+      </div>
+
+      <nav class="drawer-nav">
+        <a href="index.html" class="drawer-link"><span>Home</span> <span>→</span></a>
+        <a href="how-it-works.html" class="drawer-link"><span>How it works</span> <span>→</span></a>
+        <a href="civic-guide.html" class="drawer-link is-active"><span>Civic guide</span> <span>→</span></a>
+        <a href="stories.html" class="drawer-link"><span>Public stories</span> <span>→</span></a>
+        <a href="help.html" class="drawer-link"><span>Help centre</span> <span>→</span></a>
+        <a href="assistant.html" class="drawer-link"><span>Ask SANJAYA</span> <span>→</span></a>
+        <a href="about.html" class="drawer-link"><span>About SANJAYA</span> <span>→</span></a>
+      </nav>
+
+      <div class="drawer-footer">
+        <a href="login.html" class="btn btn-secondary" style="font-size: 0.85rem; width: 100%;">Authority login</a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main id="main-content">
+    <div class="shell">
+      
+      <!-- Guide Layout: Anchored TOC on Desktop / Accordion Friendly -->
+      <div class="guide-layout">
+        
+        <!-- Table of Contents (Desktop Sticky) -->
+        <aside class="guide-toc" aria-label="Guide Sections">
+          <h4>Guide Contents</h4>
+          <ul>
+            <li><a href="#section-writing">1. Report-Writing Tips</a></li>
+            <li><a href="#section-evidence">2. Evidence & Photography</a></li>
+            <li><a href="#section-location">3. Pinpointing Location</a></li>
+            <li><a href="#section-safety">4. Resident Safety First</a></li>
+            <li><a href="#section-accessibility">5. Accessibility & Inclusivity</a></li>
+            <li><a href="#section-glossary">6. Glossary of Status Terms</a></li>
+          </ul>
+
+          <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--line-parchment);">
+            <a href="report.html" class="btn btn-primary" style="width: 100%; font-size: 0.85rem;">
+              <span>Ready to Report</span>
+              <span class="btn-arrow">→</span>
+            </a>
+          </div>
+        </aside>
+
+        <!-- Main Guide Articles -->
+        <article class="guide-content">
+          <div style="margin-bottom: 2.5rem;">
+            <div class="eyebrow">Evergreen Public Resource</div>
+            <h1 class="section-title">Civic Reporting <em>Handbook</em></h1>
+            <p class="section-lead">
+              A practical resource to help residents write reports that municipal engineers can act on immediately, safely, and effectively.
+            </p>
+          </div>
+
+          <!-- Section 1: Report Writing Tips -->
+          <section id="section-writing" class="guide-section">
+            <h2>1. Report-Writing Tips</h2>
+            <p>
+              When writing a description, you do not need formal bureaucratic terminology. Ordinary, concrete language is always most helpful for municipal supervisors.
+            </p>
+
+            <div class="guide-tip-box">
+              <strong style="color: var(--warm-yellow); display: block; margin-bottom: 0.4rem;">The Three Helpful Elements:</strong>
+              <ul style="margin: 0; padding-left: 1.25rem; color: var(--parchment); line-height: 1.7;">
+                <li><strong>What:</strong> What is physically damaged? (e.g. "Sunken paver", "Cracked concrete slab", "Overflowing organic food waste").</li>
+                <li><strong>Scale:</strong> Approximate size (e.g. "About 1 meter wide, knee-deep", "Spilling onto two lanes of traffic").</li>
+                <li><strong>Consequence:</strong> How does it impact people? (e.g. "Pedestrians forced into vehicle lane", "Two-wheelers losing balance").</li>
+              </ul>
+            </div>
+
+            <p>
+              <strong>Good example:</strong> <em>"Deep pothole roughly 1.2m across on the northbound lane right outside the medical store. Water has filled it so motorcyclists cannot see the depth at night."</em>
+            </p>
+          </section>
+
+          <!-- Section 2: Evidence & Photography -->
+          <section id="section-evidence" class="guide-section">
+            <h2>2. Evidence & Photography Guidelines</h2>
+            <p>
+              A single well-framed photograph is worth a dozen phone calls. It allows the dispatch engineer to verify whether they need manual shovels, cold asphalt, or heavy steamrollers before leaving the yard.
+            </p>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-block: 1.5rem;">
+              <div style="background: rgba(75, 23, 36, 0.4); border: 1px solid var(--line-gold); padding: 1.25rem; border-radius: var(--radius-md);">
+                <div style="color: var(--success); font-weight: 700; margin-bottom: 0.5rem;">✓ Recommended: Step Back 2 Paces</div>
+                <p style="font-size: 0.85rem; color: var(--muted-parchment); margin: 0; line-height: 1.5;">
+                  Take a medium-distance photo showing both the defect and the street context (such as a shop sign, building gate, or road curb).
+                </p>
+              </div>
+
+              <div style="background: rgba(75, 23, 36, 0.4); border: 1px solid var(--line-gold); padding: 1.25rem; border-radius: var(--radius-md);">
+                <div style="color: var(--error); font-weight: 700; margin-bottom: 0.5rem;">✕ Avoid: Extreme Close-ups</div>
+                <p style="font-size: 0.85rem; color: var(--muted-parchment); margin: 0; line-height: 1.5;">
+                  A photo showing only broken gravel with zero surroundings leaves the inspection officer wondering where on a 2-kilometer road the hole actually is.
+                </p>
+              </div>
+            </div>
+
+            <p>
+              <strong>Lighting Tip:</strong> If taking photos at dusk or night, try to frame a nearby streetlight or building light in the shot to improve contrast, or turn on your device camera flash.
+            </p>
+          </section>
+
+          <!-- Section 3: Pinpointing Location -->
+          <section id="section-location" class="guide-section">
+            <h2>3. Pinpointing Accurate Location</h2>
+            <p>
+              GPS satellites can sometimes drift by 20 to 50 meters in dense urban streets with tall apartment buildings. Always combine GPS coordinates with physical text anchors:
+            </p>
+            <ul style="color: var(--muted-parchment); line-height: 1.7; padding-left: 1.25rem;">
+              <li><strong>Street Pole Number:</strong> Most metal or concrete street lamps have a stenciled number (e.g., #LP-42). Mentioning this is foolproof.</li>
+              <li><strong>Opposite Landmark:</strong> Name a permanent structure (bank, post office, temple, school gate) rather than a temporary roadside vendor.</li>
+              <li><strong>Intersection Names:</strong> Mention cross-streets (e.g. "Southern Avenue near junction of Lake Temple Road").</li>
+            </ul>
+          </section>
+
+          <!-- Section 4: Resident Safety First -->
+          <section id="section-safety" class="guide-section">
+            <h2>4. Resident Safety Guidelines</h2>
+            <div style="background: rgba(217, 121, 106, 0.12); border-left: 3px solid var(--error); padding: 1.25rem; border-radius: 0 var(--radius-md) var(--radius-md) 0; margin-bottom: 1.5rem;">
+              <strong style="color: var(--error); font-size: 1rem; display: block; margin-bottom: 0.35rem;">⚠️ Critical Safety Rule</strong>
+              <span style="color: var(--parchment); font-size: 0.95rem; line-height: 1.6;">
+                Never risk physical injury or enter traffic flow to take a photo. A text description from the safe perimeter of a sidewalk is always sufficient.
+              </span>
+            </div>
+            <ul style="color: var(--muted-parchment); line-height: 1.7; padding-left: 1.25rem;">
+              <li><strong>Electrical Wires:</strong> If an electric cable or transformer is sparking or sagging near water, stay at least 10 meters away. Call 112 or the electric emergency utility immediately.</li>
+              <li><strong>Flooded Gully Pits:</strong> Never step into opaque standing floodwater to investigate whether a manhole lid is displaced.</li>
+              <li><strong>Heavy Traffic:</strong> Stand safely on the footpath or island when taking pictures.</li>
+            </ul>
+          </section>
+
+          <!-- Section 5: Accessibility & Inclusivity -->
+          <section id="section-accessibility" class="guide-section">
+            <h2>5. Accessibility & Inclusivity</h2>
+            <p>
+              SANJAYA is engineered to comply with WCAG 2.2 AA accessibility standards. We believe every resident has an equal right to civic redress:
+            </p>
+            <ul style="color: var(--muted-parchment); line-height: 1.7; padding-left: 1.25rem;">
+              <li><strong>Voice Note Support:</strong> If typing is difficult or inconvenient on a mobile keyboard, simply tap the "Record Voice Note" button in the report flow.</li>
+              <li><strong>Regional Languages:</strong> SANJAYA supports English, Hindi, and Bengali. Use the language selector at the top right anytime.</li>
+              <li><strong>Keyboard & Screen Reader Accessible:</strong> All buttons, category selectors, and progress steps can be navigated purely via Tab, Enter, and Space keys.</li>
+            </ul>
+          </section>
+
+          <!-- Section 6: Glossary of Status Terms -->
+          <section id="section-glossary" class="guide-section">
+            <h2>6. Glossary of Status Terms</h2>
+            <p>
+              What does each milestone on your ticket timeline mean in real municipal terms?
+            </p>
+
+            <div style="display: flex; flex-direction: column; gap: 1rem; margin-top: 1.5rem;">
+              <div class="accordion is-open">
+                <div style="padding: 1rem 1.25rem; background: rgba(75, 23, 36, 0.4); display: flex; align-items: center; gap: 0.75rem;">
+                  <span class="badge badge-received"><span class="badge-dot"></span>Received</span>
+                  <strong style="color: var(--parchment);">Report Authenticated into Registry</strong>
+                </div>
+                <div style="padding: 1rem 1.25rem; font-size: 0.9rem; color: var(--muted-parchment); line-height: 1.6;">
+                  Your report has entered the central intake pool. The location coordinates have been parsed and an initial fraud/spam check passed.
+                </div>
+              </div>
+
+              <div class="accordion is-open">
+                <div style="padding: 1rem 1.25rem; background: rgba(75, 23, 36, 0.4); display: flex; align-items: center; gap: 0.75rem;">
+                  <span class="badge badge-review"><span class="badge-dot"></span>Being reviewed</span>
+                  <strong style="color: var(--parchment);">Jurisdiction & Duplicate Check</strong>
+                </div>
+                <div style="padding: 1rem 1.25rem; font-size: 0.9rem; color: var(--muted-parchment); line-height: 1.6;">
+                  A regional coordinator checks whether the issue falls under municipal jurisdiction (vs state highway or railway land) and merges any existing reports from neighbors.
+                </div>
+              </div>
+
+              <div class="accordion is-open">
+                <div style="padding: 1rem 1.25rem; background: rgba(75, 23, 36, 0.4); display: flex; align-items: center; gap: 0.75rem;">
+                  <span class="badge badge-assigned"><span class="badge-dot"></span>Sent to responsible team</span>
+                  <strong style="color: var(--parchment);">Work Order Dispatched</strong>
+                </div>
+                <div style="padding: 1rem 1.25rem; font-size: 0.9rem; color: var(--muted-parchment); line-height: 1.6;">
+                  A formal job order has been placed into the specialized field unit's schedule (e.g. Asphalt Maintenance Team, Conservancy Compactor Crew).
+                </div>
+              </div>
+
+              <div class="accordion is-open">
+                <div style="padding: 1rem 1.25rem; background: rgba(75, 23, 36, 0.4); display: flex; align-items: center; gap: 0.75rem;">
+                  <span class="badge badge-progress"><span class="badge-dot"></span>Work in progress</span>
+                  <strong style="color: var(--parchment);">Crew Mobilized On Site</strong>
+                </div>
+                <div style="padding: 1rem 1.25rem; font-size: 0.9rem; color: var(--muted-parchment); line-height: 1.6;">
+                  Barricades erected, excavation, desilting, or hot-mix asphalt application is actively underway during the assigned work shift.
+                </div>
+              </div>
+
+              <div class="accordion is-open">
+                <div style="padding: 1rem 1.25rem; background: rgba(75, 23, 36, 0.4); display: flex; align-items: center; gap: 0.75rem;">
+                  <span class="badge badge-resolved"><span class="badge-dot"></span>Resolved</span>
+                  <strong style="color: var(--parchment);">Inspection & Case Archival</strong>
+                </div>
+                <div style="padding: 1rem 1.25rem; font-size: 0.9rem; color: var(--muted-parchment); line-height: 1.6;">
+                  Post-remediation inspection logged by supervisor with photographic verification. Barricades cleared and case safely closed.
+                </div>
+              </div>
+            </div>
+          </section>
+
+        </article>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Shared Footer -->
+  <footer class="site-footer">
+    <div class="shell">
+      <div class="footer-grid">
+        <div class="footer-brand-col">
+          <div class="brand">
+            <div class="brand-mark">SJ</div>
+            <span class="brand-name">SANJAYA</span>
+          </div>
+          <p>A dignified, public-facing civic portal designed to connect resident signals with municipal action through evidence, transparency, and respect.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Public Action</h4>
+          <ul>
+            <li><a href="report.html">Report an issue</a></li>
+            <li><a href="track.html">Track a complaint</a></li>
+            <li><a href="how-it-works.html">How it works</a></li>
+            <li><a href="civic-guide.html">Civic reporting guide</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Knowledge & Support</h4>
+          <ul>
+            <li><a href="stories.html">Public civic stories</a></li>
+            <li><a href="help.html">Help & FAQ</a></li>
+            <li><a href="assistant.html">Ask SANJAYA (Assistant)</a></li>
+            <li><a href="about.html">About SANJAYA</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Governance & Desk</h4>
+          <ul>
+            <li><a href="login.html">Authority access</a></li>
+            <li><a href="about.html#principles">Civic principles</a></li>
+            <li><a href="about.html#accessibility">Accessibility posture</a></li>
+            <li><a href="about.html#privacy">Resident privacy</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="prototype-notice">
+          <strong>Civic Demonstration:</strong> This is a frontend prototype for the SANJAYA civic project.
+        </div>
+        <div>
+          <span>© 2026 SANJAYA Project. Built with Civic Dignity.</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/adapter.js"></script>
+  <script src="js/shared.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

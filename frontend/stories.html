@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Ask SANJAYA is a multilingual voice and text civic assistant helping residents report issues, track tickets, and understand municipal procedures." />
+  <meta name="description" content="Editorial civic journal showcasing real neighborhood improvements achieved when residents and municipal teams work together." />
   <meta name="theme-color" content="#160D12" />
-  <title>Ask SANJAYA — Voice & Text Civic Assistant</title>
+  <title>Public Stories — SANJAYA Civic Portal</title>
   
   <!-- Typography -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Instrument+Serif:ital@0;1&family=Noto+Sans+Devanagari:wght@400;500;600&family=Noto+Sans+Bengali:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
 
   <!-- Stylesheets -->
   <link rel="stylesheet" href="css/tokens.css" />
@@ -46,9 +46,9 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
           </button>
           <div class="dropdown-menu" role="menu">
-            <a href="stories.html" class="dropdown-item" role="menuitem">Public stories</a>
+            <a href="stories.html" class="dropdown-item is-active" role="menuitem">Public stories</a>
             <a href="help.html" class="dropdown-item" role="menuitem">Help centre</a>
-            <a href="assistant.html" class="dropdown-item is-active" role="menuitem">Ask SANJAYA</a>
+            <a href="assistant.html" class="dropdown-item" role="menuitem">Ask SANJAYA</a>
             <a href="about.html" class="dropdown-item" role="menuitem">About SANJAYA</a>
             <a href="login.html" class="dropdown-item authority-link" role="menuitem">Authority access ↗</a>
           </div>
@@ -87,9 +87,9 @@
         <a href="index.html" class="drawer-link"><span>Home</span> <span>→</span></a>
         <a href="how-it-works.html" class="drawer-link"><span>How it works</span> <span>→</span></a>
         <a href="civic-guide.html" class="drawer-link"><span>Civic guide</span> <span>→</span></a>
-        <a href="stories.html" class="drawer-link"><span>Public stories</span> <span>→</span></a>
+        <a href="stories.html" class="drawer-link is-active"><span>Public stories</span> <span>→</span></a>
         <a href="help.html" class="drawer-link"><span>Help centre</span> <span>→</span></a>
-        <a href="assistant.html" class="drawer-link is-active"><span>Ask SANJAYA</span> <span>→</span></a>
+        <a href="assistant.html" class="drawer-link"><span>Ask SANJAYA</span> <span>→</span></a>
         <a href="about.html" class="drawer-link"><span>About SANJAYA</span> <span>→</span></a>
       </nav>
 
@@ -100,78 +100,44 @@
   </aside>
 
   <!-- Main Content -->
-  <main id="main-content" style="padding-block: 2.5rem 5rem;">
-    <div class="shell assistant-shell">
+  <main id="main-content" style="padding-block: 3.5rem 5rem;">
+    <div class="shell">
       
       <!-- Page Header -->
-      <div style="margin-bottom: 2rem; text-align: center;">
-        <div class="eyebrow">Civic Voice Assistant</div>
-        <h1 class="section-title">Ask in the way <em>that works for you</em></h1>
-        <p class="section-lead" style="margin-inline: auto; margin-bottom: 1.5rem;">
-          Type or speak naturally in English. Ask questions about reporting issues, tracking tickets, or municipal services.
+      <div style="margin-bottom: 2.5rem; text-align: center; max-width: 760px; margin-inline: auto;">
+        <div class="eyebrow">Civic Journal</div>
+        <h1 class="section-title">See what visible improvement <em>can look like</em></h1>
+        <p class="section-lead" style="margin-inline: auto;">
+          An editorial record of neighborhood issues resolved through citizen notification, evidence sharing, and dedicated municipal follow-through.
         </p>
-      </div>
 
-      <!-- Chat Shell (PRD Section 6.7) -->
-      <div class="chat-box" role="region" aria-label="Civic Assistant Conversation">
-        <!-- Chat Header -->
-        <div class="chat-header">
-          <div style="display: flex; align-items: center; gap: 0.75rem;">
-            <div style="width: 10px; height: 10px; border-radius: 50%; background: var(--success);"></div>
-            <strong style="color: var(--parchment); font-family: var(--font-serif); font-size: 1.15rem;">Ask SANJAYA Assistant</strong>
-          </div>
-          <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--warm-yellow);">Voice & Text Enabled</span>
-        </div>
-
-        <!-- Chat Messages Live Region -->
-        <div id="chat-messages" class="chat-messages" role="log" aria-live="polite">
-          <div class="chat-msg msg-assistant">
-            Greetings. I am SANJAYA's civic assistant. How may I assist you today? You can tap any suggested prompt below or type your question.
-          </div>
-        </div>
-
-        <!-- Suggested Prompt Chips (PRD Section 6.7) -->
-        <div class="chat-prompts-bar" aria-label="Suggested questions">
-          <button type="button" class="prompt-chip">What can I report?</button>
-          <button type="button" class="prompt-chip">How do I find my ticket?</button>
-          <button type="button" class="prompt-chip">Can I report without a photo?</button>
-          <button type="button" class="prompt-chip">What does 'Sent to responsible team' mean?</button>
-          <button type="button" class="prompt-chip">How are duplicate reports handled?</button>
-        </div>
-
-        <!-- Chat Input Bar -->
-        <div class="chat-input-bar">
-          <button type="button" id="chat-mic-btn" class="chat-mic-btn" aria-label="Record voice question" title="Speak question">
-            🎤
-          </button>
-          <input 
-            type="text" 
-            id="chat-input" 
-            class="chat-input" 
-            placeholder="Type your civic question in English..." 
-            autocomplete="off"
-          />
-          <button type="button" id="chat-send-btn" class="btn btn-primary" style="padding-inline: 1.25rem;">
-            <span>Ask</span>
-          </button>
+        <!-- Category Filters -->
+        <div style="display: flex; justify-content: center; gap: 0.5rem; flex-wrap: wrap; margin-top: 1.5rem;">
+          <button type="button" class="btn btn-primary story-filter is-active" data-filter="all" style="padding: 0.45rem 1rem; font-size: 0.85rem; min-height: 36px;">All Stories</button>
+          <button type="button" class="btn btn-outline story-filter" data-filter="roads" style="padding: 0.45rem 1rem; font-size: 0.85rem; min-height: 36px;">Roads & Pavements</button>
+          <button type="button" class="btn btn-outline story-filter" data-filter="waste" style="padding: 0.45rem 1rem; font-size: 0.85rem; min-height: 36px;">Solid Waste</button>
+          <button type="button" class="btn btn-outline story-filter" data-filter="water" style="padding: 0.45rem 1rem; font-size: 0.85rem; min-height: 36px;">Drainage</button>
+          <button type="button" class="btn btn-outline story-filter" data-filter="lighting" style="padding: 0.45rem 1rem; font-size: 0.85rem; min-height: 36px;">Street Lighting</button>
         </div>
       </div>
 
-      <!-- Quick Guidance Notes -->
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-top: 2rem;">
-        <div style="background: var(--surface-card); border: 1px solid var(--line-gold); padding: 1.25rem; border-radius: var(--radius-md);">
-          <div style="color: var(--warm-yellow); font-weight: 600; margin-bottom: 0.35rem;">🎙️ Voice Guidance</div>
-          <p style="font-size: 0.85rem; color: var(--muted-parchment); margin: 0; line-height: 1.5;">
-            Tap the microphone button and speak clearly. The assistant will transcribe your speech and respond with audio synthesis.
-          </p>
-        </div>
+      <!-- Stories Grid (Populated from SANJAYA_DATA.stories) -->
+      <div id="stories-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 2rem; margin-bottom: 4rem;">
+        <!-- Populated via script -->
+      </div>
 
-        <div style="background: var(--surface-card); border: 1px solid var(--line-gold); padding: 1.25rem; border-radius: var(--radius-md);">
-          <div style="color: var(--warm-yellow); font-weight: 600; margin-bottom: 0.35rem;">🔒 Citizen Privacy</div>
-          <p style="font-size: 0.85rem; color: var(--muted-parchment); margin: 0; line-height: 1.5;">
-            Queries are processed for civic guidance without storing personal credentials or private recordings.
-          </p>
-        </div>
+      <!-- Bottom Callout -->
+      <div style="background: linear-gradient(135deg, rgba(75, 23, 36, 0.45), rgba(22, 13, 18, 0.85)); border: 1px solid var(--line-gold); border-radius: var(--radius-lg); padding: 2.5rem; text-align: center;">
+        <h3 style="font-family: var(--font-serif); font-size: 1.85rem; color: var(--parchment); margin-bottom: 0.75rem;">
+          Have you noticed something in your ward?
+        </h3>
+        <p style="color: var(--muted-parchment); max-width: 580px; margin-inline: auto; margin-bottom: 1.75rem; line-height: 1.6;">
+          Your notification can become the next community improvement story. It takes less than two minutes to file a report with evidence.
+        </p>
+        <a href="report.html" class="btn btn-primary" style="padding: 0.85rem 1.75rem;">
+          <span>Start a Civic Report</span>
+          <span class="btn-arrow">→</span>
+        </a>
       </div>
 
     </div>
@@ -231,6 +197,61 @@
   <script src="js/data.js"></script>
   <script src="js/adapter.js"></script>
   <script src="js/shared.js"></script>
-  <script src="js/assistant.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const container = document.getElementById("stories-container");
+      const filterBtns = document.querySelectorAll(".story-filter");
+
+      function renderStories(filter = "all") {
+        const filtered = filter === "all" 
+          ? SANJAYA_DATA.stories 
+          : SANJAYA_DATA.stories.filter(s => s.categoryKey === filter);
+
+        container.innerHTML = filtered.map(story => `
+          <article class="story-card">
+            <div class="story-image-wrap">
+              <img src="${story.image}" alt="${story.title}" loading="lazy" />
+              <div class="story-prototype-tag">${story.prototypeTag}</div>
+            </div>
+            <div class="story-body">
+              <div class="story-meta">
+                <span>${story.ward}</span> • <span>${story.category}</span> • <span>${story.date}</span>
+              </div>
+              <h2 class="story-title">${story.title}</h2>
+              <p class="story-desc">${story.summary}</p>
+              
+              <div style="background: rgba(22, 13, 18, 0.5); border: 1px solid var(--line-parchment); border-radius: var(--radius-sm); padding: 0.85rem; margin-bottom: 1rem; font-size: 0.85rem;">
+                <div style="color: var(--warm-yellow); font-weight: 600; margin-bottom: 0.25rem;">Resident Contribution:</div>
+                <div style="color: var(--muted-parchment);">${story.sharedByResidents}</div>
+              </div>
+
+              <div style="background: rgba(22, 13, 18, 0.5); border: 1px solid var(--line-parchment); border-radius: var(--radius-sm); padding: 0.85rem; margin-bottom: 1.25rem; font-size: 0.85rem;">
+                <div style="color: var(--parchment); font-weight: 600; margin-bottom: 0.25rem;">What Changed:</div>
+                <div style="color: var(--muted-parchment);">${story.whatChanged}</div>
+              </div>
+
+              <div class="story-outcome">
+                <strong>Outcome:</strong> ${story.outcome}
+              </div>
+            </div>
+          </article>
+        `).join("");
+      }
+
+      filterBtns.forEach(btn => {
+        btn.addEventListener("click", () => {
+          filterBtns.forEach(b => {
+            b.classList.remove("btn-primary", "is-active");
+            b.classList.add("btn-outline");
+          });
+          btn.classList.add("btn-primary", "is-active");
+          btn.classList.remove("btn-outline");
+          renderStories(btn.dataset.filter);
+        });
+      });
+
+      renderStories();
+    });
+  </script>
 </body>
 </html>

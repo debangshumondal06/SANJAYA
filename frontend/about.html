@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Learn about SANJAYA's mission, civic thesis, design principles, accessibility posture, and governance." />
+  <meta name="theme-color" content="#160D12" />
+  <title>About SANJAYA — Civic Dignity, Transparency & Action</title>
+  
+  <!-- Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <div class="site-texture" aria-hidden="true"></div>
+  <div class="site-glow" aria-hidden="true"></div>
+
+  <!-- Shared Header -->
+  <header class="site-header">
+    <div class="shell header-inner">
+      <a href="index.html" class="brand" aria-label="SANJAYA Civic Portal Home">
+        <div class="brand-mark" aria-hidden="true">SJ</div>
+        <div class="brand-text">
+          <span class="brand-name">SANJAYA</span>
+          <span class="brand-tagline">Civic Public Portal</span>
+        </div>
+      </a>
+
+      <nav class="nav-desktop" aria-label="Primary Navigation">
+        <a href="report.html" class="btn btn-primary" style="padding: 0.55rem 1.15rem; min-height: 38px;">Report an issue</a>
+        <a href="track.html" class="btn btn-outline" style="padding: 0.55rem 1.15rem; min-height: 38px;">Track</a>
+        <a href="how-it-works.html" class="nav-link">How it works</a>
+        <a href="civic-guide.html" class="nav-link">Civic guide</a>
+
+        <div class="nav-dropdown">
+          <button class="dropdown-trigger" aria-expanded="false" aria-haspopup="true">
+            <span>More</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="dropdown-menu" role="menu">
+            <a href="stories.html" class="dropdown-item" role="menuitem">Public stories</a>
+            <a href="help.html" class="dropdown-item" role="menuitem">Help centre</a>
+            <a href="assistant.html" class="dropdown-item" role="menuitem">Ask SANJAYA</a>
+            <a href="about.html" class="dropdown-item is-active" role="menuitem">About SANJAYA</a>
+            <a href="login.html" class="dropdown-item authority-link" role="menuitem">Authority access ↗</a>
+          </div>
+        </div>
+      </nav>
+
+      <div class="header-actions">
+        <div class="lang-selector" aria-label="Language">
+          <span class="lang-btn is-active" style="cursor: default;">English</span>
+        </div>
+
+        <button class="menu-toggle" aria-label="Open mobile navigation menu" aria-expanded="false">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <aside class="mobile-drawer" aria-hidden="true" role="dialog" aria-label="Mobile Navigation">
+    <div class="drawer-content">
+      <div class="drawer-header">
+        <a href="index.html" class="brand">
+          <div class="brand-mark" aria-hidden="true">SJ</div>
+          <span class="brand-name" style="font-size: 1.25rem;">SANJAYA</span>
+        </a>
+        <button class="drawer-close" aria-label="Close menu">✕</button>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 1.5rem;">
+        <a href="report.html" class="btn btn-primary" style="width: 100%;">Report an issue</a>
+        <a href="track.html" class="btn btn-outline" style="width: 100%;">Track a complaint</a>
+      </div>
+
+      <nav class="drawer-nav">
+        <a href="index.html" class="drawer-link"><span>Home</span> <span>→</span></a>
+        <a href="how-it-works.html" class="drawer-link"><span>How it works</span> <span>→</span></a>
+        <a href="civic-guide.html" class="drawer-link"><span>Civic guide</span> <span>→</span></a>
+        <a href="stories.html" class="drawer-link"><span>Public stories</span> <span>→</span></a>
+        <a href="help.html" class="drawer-link"><span>Help centre</span> <span>→</span></a>
+        <a href="assistant.html" class="drawer-link"><span>Ask SANJAYA</span> <span>→</span></a>
+        <a href="about.html" class="drawer-link is-active"><span>About SANJAYA</span> <span>→</span></a>
+      </nav>
+
+      <div class="drawer-footer">
+        <a href="login.html" class="btn btn-secondary" style="font-size: 0.85rem; width: 100%;">Authority login</a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main id="main-content" style="padding-block: 3.5rem 5rem;">
+    <div class="shell" style="max-width: 840px;">
+      
+      <!-- Page Header -->
+      <div style="margin-bottom: 3.5rem;">
+        <div class="eyebrow">Public Purpose & Principles</div>
+        <h1 class="section-title">A civic tool built around <em>clarity and respect</em></h1>
+        <p class="section-lead">
+          SANJAYA was conceived to close the distance between citizen observation and municipal remediation. We believe that public infrastructure redresses should inspire trust rather than fatigue.
+        </p>
+      </div>
+
+      <!-- Product Thesis (PRD Section 1 & 2) -->
+      <section style="background: linear-gradient(135deg, rgba(75, 23, 36, 0.55), rgba(22, 13, 18, 0.95)); border: 2px solid var(--antique-gold); border-radius: var(--radius-lg); padding: 2.5rem; margin-bottom: 4rem; box-shadow: var(--shadow-md);">
+        <div class="eyebrow" style="color: var(--warm-yellow);">The SANJAYA Product Thesis</div>
+        <blockquote style="margin: 0 0 1.25rem; font-family: var(--font-serif); font-size: 1.6rem; color: var(--parchment); line-height: 1.45;">
+          "SANJAYA should make civic participation feel clear, dignified, and consequential. The interface should help a resident understand what to do next within seconds, while making the system's values—evidence, transparency, accountability, and respect—visible in every screen."
+        </blockquote>
+        <div style="font-family: var(--font-mono); font-size: 0.8125rem; color: var(--warm-yellow);">
+          — Product Requirements Document, September 2026
+        </div>
+      </section>
+
+      <!-- The 6 Core Design Principles (PRD Section 3.2) -->
+      <section id="principles" style="margin-bottom: 4rem; scroll-margin-top: 100px;">
+        <div class="eyebrow">Foundational Principles</div>
+        <h2 style="font-family: var(--font-serif); font-size: 2.25rem; color: var(--parchment); margin-bottom: 2rem;">
+          How SANJAYA is designed to behave
+        </h2>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+          <!-- Principle 1 -->
+          <div style="background: var(--surface-card); border: 1px solid var(--line-gold); border-radius: var(--radius-md); padding: 1.75rem;">
+            <div style="font-family: var(--font-serif); font-size: 1.35rem; color: var(--parchment); margin-bottom: 0.5rem;">1. Civic Dignity</div>
+            <p style="font-size: 0.9rem; color: var(--muted-parchment); line-height: 1.6; margin: 0;">
+              Use calm language, generous space, and clear ownership. Never make a resident feel like an anonymous ticket number in a cold bureaucratic queue.
+            </p>
+          </div>
+
+          <!-- Principle 2 -->
+          <div style="background: var(--surface-card); border: 1px solid var(--line-gold); border-radius: var(--radius-md); padding: 1.75rem;">
+            <div style="font-family: var(--font-serif); font-size: 1.35rem; color: var(--parchment); margin-bottom: 0.5rem;">2. Public Before Operational</div>
+            <p style="font-size: 0.9rem; color: var(--muted-parchment); line-height: 1.6; margin: 0;">
+              The default portal helps residents act, report, and understand. Complex internal dispatch dashboards remain visually and navigationally separated.
+            </p>
+          </div>
+
+          <!-- Principle 3 -->
+          <div style="background: var(--surface-card); border: 1px solid var(--line-gold); border-radius: var(--radius-md); padding: 1.75rem;">
+            <div style="font-family: var(--font-serif); font-size: 1.35rem; color: var(--parchment); margin-bottom: 0.5rem;">3. Classical, Not Nostalgic</div>
+            <p style="font-size: 0.9rem; color: var(--muted-parchment); line-height: 1.6; margin: 0;">
+              Use proportion, heritage maroon tones, antique gold accents, and typographic texture to evoke institutional gravitas without faux-official seals or clutter.
+            </p>
+          </div>
+
+          <!-- Principle 4 -->
+          <div style="background: var(--surface-card); border: 1px solid var(--line-gold); border-radius: var(--radius-md); padding: 1.75rem;">
+            <div style="font-family: var(--font-serif); font-size: 1.35rem; color: var(--parchment); margin-bottom: 0.5rem;">4. Visible Progress</div>
+            <p style="font-size: 0.9rem; color: var(--muted-parchment); line-height: 1.6; margin: 0;">
+              Always show what happens next, what has happened so far, and what the resident can do now. Eliminate the anxiety of dead-end submission screens.
+            </p>
+          </div>
+
+          <!-- Principle 5 -->
+          <div style="background: var(--surface-card); border: 1px solid var(--line-gold); border-radius: var(--radius-md); padding: 1.75rem;">
+            <div style="font-family: var(--font-serif); font-size: 1.35rem; color: var(--parchment); margin-bottom: 0.5rem;">5. Evidence with Empathy</div>
+            <p style="font-size: 0.9rem; color: var(--muted-parchment); line-height: 1.6; margin: 0;">
+              Request only necessary information and explain clearly why it helps municipal crews. Support photo, text, location, and multilingual voice recordings.
+            </p>
+          </div>
+
+          <!-- Principle 6 -->
+          <div style="background: var(--surface-card); border: 1px solid var(--line-gold); border-radius: var(--radius-md); padding: 1.75rem;">
+            <div style="font-family: var(--font-serif); font-size: 1.35rem; color: var(--parchment); margin-bottom: 0.5rem;">6. Quiet Confidence</div>
+            <p style="font-size: 0.9rem; color: var(--muted-parchment); line-height: 1.6; margin: 0;">
+              Use motion and polish to reinforce hierarchy, not to compete with the civic task. Avoid distracting animated confetti or flashing counters.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Accessibility Commitment (PRD Section 8) -->
+      <section id="accessibility" style="margin-bottom: 4rem; scroll-margin-top: 100px;">
+        <div class="eyebrow">Inclusivity Commitment</div>
+        <h2 style="font-family: var(--font-serif); font-size: 2rem; color: var(--parchment); margin-bottom: 1rem;">
+          Accessibility Posture (WCAG 2.2 AA)
+        </h2>
+        <p style="color: var(--muted-parchment); line-height: 1.7; margin-bottom: 1.5rem;">
+          Civic infrastructure belongs to everyone. SANJAYA has been engineered from the ground up to support residents of diverse physical abilities, devices, and digital confidence:
+        </p>
+        <ul style="color: var(--parchment); line-height: 1.8; padding-left: 1.25rem;">
+          <li><strong>High Contrast Palette:</strong> Parchment text (`#F6E7BF`) on deep maroon surfaces (`#160D12` & `#4B1724`) exceeds AA contrast ratios.</li>
+          <li><strong>Dual Information Coding:</strong> Statuses are never conveyed by color alone; every state is paired with clear text and distinctive iconography.</li>
+          <li><strong>Keyboard & Focus Navigation:</strong> Interactive elements feature a visible double-ring outline (`#F0C75E`) and complete Tab key traversability.</li>
+          <li><strong>Touch Target Sizing:</strong> All buttons and interactive hit-targets meet or exceed the 44 × 44 pixel mobile standard.</li>
+          <li><strong>Screen Reader Ready:</strong> Explicit ARIA live regions for assistant replies and ticket search updates.</li>
+        </ul>
+      </section>
+
+      <!-- Resident Privacy Posture (PRD Section 3.2 & 6.9) -->
+      <section id="privacy" style="margin-bottom: 4rem; scroll-margin-top: 100px;">
+        <div class="eyebrow">Resident Privacy</div>
+        <h2 style="font-family: var(--font-serif); font-size: 2rem; color: var(--parchment); margin-bottom: 1rem;">
+          Privacy by Design
+        </h2>
+        <p style="color: var(--muted-parchment); line-height: 1.7; margin-bottom: 1rem;">
+          Reporting a dangerous pothole or overflowing trash vat should not require surrendering personal biographical data.
+        </p>
+        <div style="background: var(--surface-card); border: 1px solid var(--line-gold); border-radius: var(--radius-md); padding: 1.5rem;">
+          <ul style="margin: 0; padding-left: 1.25rem; color: var(--muted-parchment); line-height: 1.7;">
+            <li><strong>No Compulsory Login:</strong> Citizens can report issues and track tickets without creating accounts.</li>
+            <li><strong>Optional Contact Details:</strong> Name and phone number fields are completely voluntary and only used if a road engineer needs on-site clarification.</li>
+            <li><strong>No Tracking Cookies:</strong> The public portal does not utilize commercial advertising cookies or user profiling trackers.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Prototype Notice & Handoff Note (PRD Section 11) -->
+      <div style="background: rgba(201, 154, 61, 0.1); border: 1px solid var(--line-gold); border-radius: var(--radius-md); padding: 2rem; text-align: center;">
+        <div class="eyebrow" style="color: var(--warm-yellow);">Project Prototype Notice</div>
+        <h3 style="font-family: var(--font-serif); font-size: 1.5rem; color: var(--parchment); margin-bottom: 0.5rem;">
+          SANJAYA Civic Demonstration
+        </h3>
+        <p style="color: var(--muted-parchment); font-size: 0.9rem; max-width: 600px; margin-inline: auto; margin-bottom: 1.5rem; line-height: 1.6;">
+          This web application is a frontend demonstration prototype prepared for the SANJAYA civic project. While it can connect to local municipal APIs when running, in standalone mode it operates with localized fixtures and browser storage.
+        </p>
+        <a href="report.html" class="btn btn-primary">Try the Public Experience</a>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Shared Footer -->
+  <footer class="site-footer">
+    <div class="shell">
+      <div class="footer-grid">
+        <div class="footer-brand-col">
+          <div class="brand">
+            <div class="brand-mark">SJ</div>
+            <span class="brand-name">SANJAYA</span>
+          </div>
+          <p>A dignified, public-facing civic portal designed to connect resident signals with municipal action through evidence, transparency, and respect.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Public Action</h4>
+          <ul>
+            <li><a href="report.html">Report an issue</a></li>
+            <li><a href="track.html">Track a complaint</a></li>
+            <li><a href="how-it-works.html">How it works</a></li>
+            <li><a href="civic-guide.html">Civic reporting guide</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Knowledge & Support</h4>
+          <ul>
+            <li><a href="stories.html">Public civic stories</a></li>
+            <li><a href="help.html">Help & FAQ</a></li>
+            <li><a href="assistant.html">Ask SANJAYA (Assistant)</a></li>
+            <li><a href="about.html">About SANJAYA</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Governance & Desk</h4>
+          <ul>
+            <li><a href="login.html">Authority access</a></li>
+            <li><a href="about.html#principles">Civic principles</a></li>
+            <li><a href="about.html#accessibility">Accessibility posture</a></li>
+            <li><a href="about.html#privacy">Resident privacy</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="prototype-notice">
+          <strong>Civic Demonstration:</strong> This is a frontend prototype for the SANJAYA civic project.
+        </div>
+        <div>
+          <span>© 2026 SANJAYA Project. Built with Civic Dignity.</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/adapter.js"></script>
+  <script src="js/shared.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

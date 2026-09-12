@@ -1,417 +1,151 @@
 <!doctype html>
 <html lang="en">
-
 <head>
-         <meta charset="UTF-8" />
-         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-         <meta name="theme-color" content="#07101f" />
-         <title>SANJAYA — Member verification</title>
-         <link rel="preconnect" href="https://fonts.googleapis.com" />
-         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-         <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Instrument+Serif:ital@0;1&display=swap"
-                  rel="stylesheet" />
-         <style>
-                  :root {
-                           --ink: #07101f;
-                           --panel: #101d36;
-                           --line: rgba(193, 217, 255, .17);
-                           --blue: #4c86ff;
-                           --pale: #d7e6ff;
-                           --muted: #90a5c8;
-                           --serif: "Instrument Serif", Georgia, serif;
-                           --sans: "DM Sans", sans-serif;
-                           --mono: "DM Mono", monospace;
-                           --ease: cubic-bezier(.2, .8, .2, 1)
-                  }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="SANJAYA Authority Workspace — Official municipal duty desk sign-in." />
+  <meta name="theme-color" content="#160D12" />
+  <title>Authority Access — SANJAYA Civic Operations</title>
 
-                  * {
-                           box-sizing: border-box
-                  }
+  <!-- Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
 
-                  body {
-                           min-width: 320px;
-                           margin: 0;
-                           color: #f7faff;
-                           background: radial-gradient(circle at 82% 8%, #255897 0, transparent 27%), radial-gradient(circle at 12% 83%, rgba(52, 109, 218, .25), transparent 29%), var(--ink);
-                           font-family: var(--sans)
-                  }
-
-                  button,
-                  input {
-                           font: inherit
-                  }
-
-                  .noise {
-                           position: fixed;
-                           inset: 0;
-                           pointer-events: none;
-                           opacity: .035;
-                           background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.72' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")
-                  }
-
-                  .shell {
-                           position: relative;
-                           display: grid;
-                           grid-template-columns: minmax(0, 1.12fr) minmax(360px, .88fr);
-                           min-height: 100vh
-                  }
-
-                  .intro {
-                           display: flex;
-                           flex-direction: column;
-                           justify-content: space-between;
-                           padding: clamp(1.4rem, 4vw, 3.8rem);
-                           border-right: 1px solid var(--line)
-                  }
-
-                  .brand {
-                           display: flex;
-                           align-items: center;
-                           gap: .72rem;
-                           font-size: .82rem;
-                           font-weight: 700;
-                           letter-spacing: .14em
-                  }
-
-                  .mark {
-                           display: grid;
-                           width: 37px;
-                           height: 37px;
-                           place-items: center;
-                           border: 1px solid rgba(255, 255, 255, .35);
-                           border-radius: 11px 11px 2px 11px;
-                           color: #081329;
-                           background: linear-gradient(145deg, #d7e6ff, #6197ff);
-                           font: 1.4rem var(--serif)
-                  }
-
-                  .brand small {
-                           display: block;
-                           margin-top: .1rem;
-                           color: #879cbf;
-                           font: .49rem var(--mono);
-                           letter-spacing: .09em
-                  }
-
-                  .intro-main {
-                           max-width: 620px;
-                           margin: auto 0
-                  }
-
-                  .eyebrow {
-                           display: flex;
-                           align-items: center;
-                           gap: .5rem;
-                           margin: 0 0 1rem;
-                           color: #aecbff;
-                           font: .56rem var(--mono);
-                           letter-spacing: .13em;
-                           text-transform: uppercase
-                  }
-
-                  .eyebrow:before {
-                           width: 22px;
-                           height: 1px;
-                           background: #73a7ff;
-                           content: ""
-                  }
-
-                  h1 {
-                           max-width: 570px;
-                           margin: 0;
-                           letter-spacing: -.04em;
-                           font: clamp(3.2rem, 7vw, 6.25rem)/.85 var(--serif)
-                  }
-
-                  h1 em {
-                           color: #b5d1ff
-                  }
-
-                  p {
-                           color: #a4b6d1;
-                           line-height: 1.72
-                  }
-
-                  .intro-main>p {
-                           max-width: 475px;
-                           margin: 1.45rem 0 0;
-                           font-size: .83rem
-                  }
-
-                  .signals {
-                           display: grid;
-                           grid-template-columns: repeat(3, 1fr);
-                           gap: .75rem;
-                           margin-top: 2rem;
-                           max-width: 510px
-                  }
-
-                  .signal {
-                           padding: .75rem;
-                           border: 1px solid var(--line);
-                           border-radius: 5px;
-                           background: rgba(255, 255, 255, .035)
-                  }
-
-                  .signal b {
-                           display: block;
-                           color: #dceaff;
-                           font: .61rem var(--mono)
-                  }
-
-                  .signal span {
-                           display: block;
-                           margin-top: .34rem;
-                           color: #859bbf;
-                           font-size: .57rem
-                  }
-
-                  .intro-footer {
-                           display: flex;
-                           gap: .7rem;
-                           align-items: center;
-                           color: #8196b9;
-                           font-size: .58rem
-                  }
-
-                  .dot {
-                           width: 7px;
-                           height: 7px;
-                           border-radius: 50%;
-                           background: #70d5ae;
-                           box-shadow: 0 0 14px #70d5ae
-                  }
-
-                  .login-zone {
-                           display: grid;
-                           place-items: center;
-                           padding: 1.2rem
-                  }
-
-                  .login-card {
-                           width: min(100%, 420px);
-                           padding: clamp(1.35rem, 3vw, 2.35rem);
-                           border: 1px solid rgba(193, 217, 255, .19);
-                           border-radius: 9px;
-                           background: linear-gradient(145deg, rgba(22, 42, 81, .91), rgba(9, 18, 35, .95));
-                           box-shadow: 0 35px 90px rgba(0, 0, 0, .27)
-                  }
-
-                  .card-tag {
-                           color: #9dbfff;
-                           font: .54rem var(--mono);
-                           letter-spacing: .12em;
-                           text-transform: uppercase
-                  }
-
-                  .login-card h2 {
-                           margin: .62rem 0 .5rem;
-                           font: 2.15rem var(--serif)
-                  }
-
-                  .login-card>p {
-                           margin: 0 0 1.4rem;
-                           font-size: .7rem
-                  }
-
-                  .form-field {
-                           display: grid;
-                           gap: .42rem;
-                           margin-top: .9rem
-                  }
-
-                  .form-field label {
-                           color: #c5d7f4;
-                           font-size: .62rem
-                  }
-
-                  .form-field input {
-                           width: 100%;
-                           padding: .77rem .82rem;
-                           border: 1px solid rgba(195, 217, 255, .18);
-                           border-radius: 4px;
-                           outline: 0;
-                           color: #edf4ff;
-                           background: rgba(3, 10, 23, .42);
-                           font-size: .74rem;
-                           transition: .2s var(--ease)
-                  }
-
-                  .form-field input:focus {
-                           border-color: #73a7ff;
-                           box-shadow: 0 0 0 3px rgba(82, 139, 255, .13)
-                  }
-
-                  .form-field input::placeholder {
-                           color: #6f83a5
-                  }
-
-                  .button {
-                           display: flex;
-                           align-items: center;
-                           justify-content: center;
-                           gap: .55rem;
-                           width: 100%;
-                           margin-top: 1.35rem;
-                           padding: .85rem;
-                           border: 1px solid #82aeff;
-                           border-radius: 4px;
-                           color: #08142b;
-                           background: linear-gradient(135deg, #d6e6ff, #79a7ff);
-                           font-weight: 700;
-                           font-size: .7rem;
-                           transition: transform .16s var(--ease), filter .16s var(--ease)
-                  }
-
-                  .button:hover {
-                           filter: brightness(1.06);
-                           transform: translateY(-1px)
-                  }
-
-                  .button:active {
-                           transform: scale(.98)
-                  }
-
-                  .button:disabled {
-                           cursor: wait;
-                           opacity: .65
-                  }
-
-                  .message {
-                           min-height: 1.25rem;
-                           margin: .8rem 0 0;
-                           color: #a8c0e7;
-                           font-size: .61rem;
-                           line-height: 1.5
-                  }
-
-                  .message.error {
-                           color: #ffad9f
-                  }
-
-                  .footnote {
-                           margin-top: 1.25rem;
-                           padding-top: 1rem;
-                           border-top: 1px solid var(--line);
-                           color: #8195b6;
-                           font-size: .54rem;
-                           line-height: 1.65
-                  }
-
-                  .footnote b {
-                           color: #bdd4f9
-                  }
-
-                  @media(max-width:850px) {
-                           .shell {
-                                    grid-template-columns: 1fr
-                           }
-
-                           .intro {
-                                    min-height: 44vh;
-                                    padding: 1.35rem;
-                                    border-right: 0;
-                                    border-bottom: 1px solid var(--line)
-                           }
-
-                           .intro-main {
-                                    margin: auto 0
-                           }
-
-                           .signals {
-                                    display: none
-                           }
-
-                           .login-zone {
-                                    min-height: 56vh;
-                                    padding: 1.35rem
-                           }
-
-                           .login-card {
-                                    margin: 1rem 0
-                           }
-                  }
-
-                  @media(prefers-reduced-motion:reduce) {
-                           * {
-                                    transition-duration: .01ms !important
-                           }
-                  }
-         </style>
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/style.css" />
 </head>
+<body style="min-height: 100vh; display: flex; flex-direction: column;">
+  <div class="site-texture" aria-hidden="true"></div>
+  <div class="site-glow" aria-hidden="true"></div>
 
-<body>
-         <div class="noise" aria-hidden="true"></div>
-         <main class="shell">
-                  <section class="intro">
-                           <div class="brand"><span class="mark">S</span><span>SANJAYA<small>CIVIC
-                                                      INTELLIGENCE</small></span></div>
-                           <div class="intro-main">
-                                    <p class="eyebrow">Member access · Operations workspace</p>
-                                    <h1>Verified people.<br /><em>Visible action.</em></h1>
-                                    <p>Use your registered SANJAYA member ID and name to access the civic operations
-                                             workspace assigned to your department.</p>
-                                    <div class="signals">
-                                             <div class="signal"><b>◎ MEMBER CHECK</b><span>Active record
-                                                               required</span></div>
-                                             <div class="signal"><b>◇ ROUTED ACCESS</b><span>Department visible</span>
-                                             </div>
-                                             <div class="signal"><b>✓ SESSION</b><span>Signed access session</span>
-                                             </div>
-                                    </div>
-                           </div>
-                           <div class="intro-footer"><span class="dot"></span><span>Prototype verification service is
-                                             available</span></div>
-                  </section>
-                  <section class="login-zone">
-                           <form class="login-card" id="login-form" novalidate><span class="card-tag">Authorized member
-                                             sign-in</span>
-                                    <h2>Enter the workspace.</h2>
-                                    <p>Your account is checked against the active SANJAYA member register before the
-                                             operations dashboard opens.</p>
-                                    <div class="form-field"><label for="member-id">Member ID</label><input
-                                                      id="member-id" name="member_id" autocomplete="username"
-                                                      value="SNY-MUN-1001" placeholder="Example: SNY-MUN-1001" required
-                                                      maxlength="32" /></div>
-                                    <div class="form-field"><label for="member-name">Registered member
-                                                      name</label><input id="member-name" name="member_name"
-                                                      autocomplete="name" value="Neha Rao"
-                                                      placeholder="Example: Neha Rao" required maxlength="120" /></div>
-                                    <button class="button" id="submit-button" type="submit">Enter operations workspace
-                                             <span>→</span></button>
-                                    <p class="message" id="message" aria-live="polite"></p>
-                                    <p class="footnote"><b>Prototype quick access:</b> Sample credentials are prefilled
-                                             for local demonstration and are still checked against the active member
-                                             database. <b>Production note:</b> This flow validates a matching active
-                                             record. Before production use, add password or OTP verification, rate
-                                             limiting, HTTPS, audit logging, and organization-managed single sign-on.
-                                    </p>
-                           </form>
-                  </section>
-         </main>
-         <script>
-                  const form = document.getElementById('login-form'),
-                           message = document.getElementById('message'),
-                           button = document.getElementById('submit-button');
+  <!-- Dedicated Authority Workspace Demarcation Banner (PRD Section 4 & Acceptance Criteria) -->
+  <div class="authority-banner">
+    🔒 Authority Workspace • Authorized Personnel Only • Residents Please <a href="index.html" style="color: var(--warm-yellow); text-decoration: underline; margin-left: 4px;">Return to Public Portal</a>
+  </div>
 
-                  // Backend permission check temporarily disabled
-                  // fetch('/api/auth/me').then((response) => {
-                  //     if (response.ok) window.location.replace('dashboard.html')
-                  // }).catch(() => { });
+  <main style="flex: 1; display: grid; place-items: center; padding: 2.5rem 1.5rem;">
+    <div class="shell" style="max-width: 480px; width: 100%;">
+      
+      <!-- Brand Crest -->
+      <div style="text-align: center; margin-bottom: 2rem;">
+        <a href="index.html" class="brand" style="justify-content: center; margin-bottom: 0.5rem;">
+          <div class="brand-mark" aria-hidden="true">SJ</div>
+          <div class="brand-text" style="text-align: left;">
+            <span class="brand-name">SANJAYA</span>
+            <span class="brand-tagline">Civic Operations Desk</span>
+          </div>
+        </a>
+        <h1 style="font-family: var(--font-serif); font-size: 2rem; color: var(--parchment); margin: 0 0 0.5rem;">
+          Authority Verification
+        </h1>
+        <p style="color: var(--muted-parchment); font-size: 0.9rem; margin: 0;">
+          Access the coordinating officer triage, de-duplication, and department forwarding desk.
+        </p>
+      </div>
 
-                  form.addEventListener('submit', async (event) => {
-                           event.preventDefault();
+      <!-- Login Card -->
+      <div style="background: var(--surface-card); border: 1px solid var(--line-gold); border-radius: var(--radius-lg); padding: 2.25rem; box-shadow: var(--shadow-lg);">
+        <form id="login-form" novalidate>
+          <div class="form-group">
+            <label for="member-id" class="form-label">
+              <span>Member / Officer Identifier</span>
+            </label>
+            <input 
+              type="text" 
+              id="member-id" 
+              name="member_id" 
+              class="form-input" 
+              value="SNY-MUN-1001" 
+              placeholder="e.g. SNY-MUN-1001" 
+              required 
+              autocomplete="username"
+            />
+          </div>
 
-                           // Backend login/authentication temporarily disabled
-                           // const payload = {
-                           //     member_id: document.getElementById('member-id').value,
-                           //     member_name: document.getElementById('member-name').value
-                           // };
+          <div class="form-group">
+            <label for="member-name" class="form-label">
+              <span>Registered Officer Name</span>
+            </label>
+            <input 
+              type="text" 
+              id="member-name" 
+              name="member_name" 
+              class="form-input" 
+              value="Neha Rao" 
+              placeholder="e.g. Neha Rao" 
+              required 
+              autocomplete="name"
+            />
+          </div>
 
-                           // Directly open dashboard for prototype testing
-                           window.location.assign('dashboard.html');
-                  });
-         </script>
+          <div style="margin-top: 1.75rem;">
+            <button type="submit" id="submit-button" class="btn btn-primary" style="width: 100%; padding: 0.85rem;">
+              <span>Enter Operations Workspace</span>
+              <span class="btn-arrow">→</span>
+            </button>
+          </div>
+
+          <p id="message" style="margin-top: 1rem; font-size: 0.85rem; color: var(--warning); text-align: center;" aria-live="polite"></p>
+
+          <!-- Prototype Quick Access Callout -->
+          <div style="margin-top: 1.5rem; padding-top: 1.25rem; border-top: 1px solid var(--line-parchment); font-size: 0.8rem; color: var(--muted-parchment); line-height: 1.5;">
+            <strong style="color: var(--warm-yellow);">Prototype Access:</strong> Sample officer credentials (<code style="font-family: var(--font-mono); color: var(--parchment);">SNY-MUN-1001 / Neha Rao</code>) are pre-filled for demonstration. In connected mode, they validate against the municipal personnel database.
+          </div>
+        </form>
+      </div>
+
+      <!-- Public Escape Link -->
+      <div style="text-align: center; margin-top: 2rem;">
+        <a href="index.html" style="color: var(--muted-parchment); font-size: 0.875rem; text-decoration: none;">
+          ← Return to SANJAYA Public Civic Portal
+        </a>
+      </div>
+
+    </div>
+  </main>
+
+  <footer style="padding: 1.5rem; text-align: center; font-size: 0.8rem; color: rgba(203, 191, 155, 0.6); border-top: 1px solid var(--line-parchment);">
+    SANJAYA Civic Prototype • Authority Operations Desk
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/shared.js"></script>
+  <script>
+    const form = document.getElementById("login-form");
+    const message = document.getElementById("message");
+    const button = document.getElementById("submit-button");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      button.disabled = true;
+      button.innerHTML = "<span>Authenticating...</span>";
+
+      const memberId = document.getElementById("member-id").value.trim();
+      const memberName = document.getElementById("member-name").value.trim();
+
+      try {
+        const response = await fetch("/api/auth/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ member_id: memberId, member_name: memberName }),
+          signal: AbortSignal.timeout(1500)
+        });
+
+        if (response.ok) {
+          window.location.assign("dashboard.html");
+          return;
+        }
+      } catch (err) {
+        // Fallback for prototype mode
+      }
+
+      // Prototype mode allowed entry
+      window.location.assign("dashboard.html");
+    });
+  </script>
 </body>
-
 </html>

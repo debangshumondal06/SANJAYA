@@ -1,0 +1,521 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Report a local municipal issue in your neighborhood with voice message or evidence and clear location. No account required." />
+  <meta name="theme-color" content="#160D12" />
+  <title>Report an Issue — SANJAYA Civic Portal</title>
+  
+  <!-- Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <div class="site-texture" aria-hidden="true"></div>
+  <div class="site-glow" aria-hidden="true"></div>
+
+  <!-- Shared Header -->
+  <header class="site-header">
+    <div class="shell header-inner">
+      <a href="index.html" class="brand" aria-label="SANJAYA Civic Portal Home">
+        <div class="brand-mark" aria-hidden="true">SJ</div>
+        <div class="brand-text">
+          <span class="brand-name">SANJAYA</span>
+          <span class="brand-tagline">Civic Public Portal</span>
+        </div>
+      </a>
+
+      <nav class="nav-desktop" aria-label="Primary Navigation">
+        <a href="report.html" class="btn btn-primary" style="padding: 0.55rem 1.15rem; min-height: 38px;">Report an issue</a>
+        <a href="track.html" class="btn btn-outline" style="padding: 0.55rem 1.15rem; min-height: 38px;">Track</a>
+        <a href="how-it-works.html" class="nav-link">How it works</a>
+        <a href="civic-guide.html" class="nav-link">Civic guide</a>
+
+        <div class="nav-dropdown">
+          <button class="dropdown-trigger" aria-expanded="false" aria-haspopup="true">
+            <span>More</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="dropdown-menu" role="menu">
+            <a href="stories.html" class="dropdown-item" role="menuitem">Public stories</a>
+            <a href="help.html" class="dropdown-item" role="menuitem">Help centre</a>
+            <a href="assistant.html" class="dropdown-item" role="menuitem">Ask SANJAYA</a>
+            <a href="about.html" class="dropdown-item" role="menuitem">About SANJAYA</a>
+            <a href="login.html" class="dropdown-item authority-link" role="menuitem">Authority access ↗</a>
+          </div>
+        </div>
+      </nav>
+
+      <div class="header-actions">
+        <!-- Single English Language Display -->
+        <div class="lang-selector" aria-label="Language">
+          <span class="lang-btn is-active" style="cursor: default;">English</span>
+        </div>
+
+        <button class="menu-toggle" aria-label="Open mobile navigation menu" aria-expanded="false">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <aside class="mobile-drawer" aria-hidden="true" role="dialog" aria-label="Mobile Navigation">
+    <div class="drawer-content">
+      <div class="drawer-header">
+        <a href="index.html" class="brand">
+          <div class="brand-mark" aria-hidden="true">SJ</div>
+          <span class="brand-name" style="font-size: 1.25rem;">SANJAYA</span>
+        </a>
+        <button class="drawer-close" aria-label="Close menu">✕</button>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 1.5rem;">
+        <a href="report.html" class="btn btn-primary" style="width: 100%;">Report an issue</a>
+        <a href="track.html" class="btn btn-outline" style="width: 100%;">Track a complaint</a>
+      </div>
+
+      <nav class="drawer-nav">
+        <a href="index.html" class="drawer-link"><span>Home</span> <span>→</span></a>
+        <a href="how-it-works.html" class="drawer-link"><span>How it works</span> <span>→</span></a>
+        <a href="civic-guide.html" class="drawer-link"><span>Civic guide</span> <span>→</span></a>
+        <a href="stories.html" class="drawer-link"><span>Public stories</span> <span>→</span></a>
+        <a href="help.html" class="drawer-link"><span>Help centre</span> <span>→</span></a>
+        <a href="assistant.html" class="drawer-link"><span>Ask SANJAYA</span> <span>→</span></a>
+        <a href="about.html" class="drawer-link"><span>About SANJAYA</span> <span>→</span></a>
+      </nav>
+
+      <div class="drawer-footer">
+        <a href="login.html" class="btn btn-secondary" style="font-size: 0.85rem; width: 100%;">Authority login</a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main id="main-content" style="padding-block: 2.5rem 5rem;">
+    <div class="shell" style="max-width: 820px;">
+      
+      <!-- Page Header -->
+      <div style="text-align: center; margin-bottom: 2.5rem;">
+        <div class="eyebrow">Civic Incident Intake</div>
+        <h1 class="section-title">Your signal deserves <em>a clear path</em></h1>
+        <p class="section-lead" style="margin-inline: auto; margin-bottom: 1.5rem;">
+          Take four simple steps to bring attention to a local issue. No account, login, or password required.
+        </p>
+      </div>
+
+      <!-- Report Flow Container -->
+      <div id="report-wizard">
+        <!-- 4-Step Stepper (PRD Section 6.2) -->
+        <nav class="stepper" aria-label="Report Progress">
+          <div class="step-item is-current" data-step-indicator="1">
+            <div class="step-circle">1</div>
+            <span class="step-title">Understand Issue</span>
+          </div>
+          <div class="step-item" data-step-indicator="2">
+            <div class="step-circle">2</div>
+            <span class="step-title">Add Evidence</span>
+          </div>
+          <div class="step-item" data-step-indicator="3">
+            <div class="step-circle">3</div>
+            <span class="step-title">Confirm Location</span>
+          </div>
+          <div class="step-item" data-step-indicator="4">
+            <div class="step-circle">4</div>
+            <span class="step-title">Review & Send</span>
+          </div>
+        </nav>
+
+        <!-- STEP 1: Understand the Issue -->
+        <section class="report-step-panel is-active" data-step="1" aria-labelledby="step1-title">
+          <h2 id="step1-title" style="font-family: var(--font-serif); font-size: 1.75rem; color: var(--parchment); margin-bottom: 0.5rem;">
+            Step 1: What kind of issue are you observing?
+          </h2>
+          <p style="color: var(--muted-parchment); margin-bottom: 1.75rem;">
+            Select the category that best matches the situation on the ground.
+          </p>
+
+          <div class="category-grid" role="radiogroup" aria-label="Incident Categories">
+            <!-- Roads -->
+            <label class="category-card is-selected" data-category="roads">
+              <input type="radio" name="incident_category" value="roads" checked />
+              <div class="category-icon">🚧</div>
+              <h3 class="category-name">Roads</h3>
+              <p class="category-desc">Potholes, broken asphalt, damaged curbs, or dangerous sunken pavers.</p>
+            </label>
+
+            <!-- Waste -->
+            <label class="category-card" data-category="waste">
+              <input type="radio" name="incident_category" value="waste" />
+              <div class="category-icon">🗑️</div>
+              <h3 class="category-name">Waste</h3>
+              <p class="category-desc">Overflowing public vats, roadside garbage piles, or missed collection.</p>
+            </label>
+
+            <!-- Water -->
+            <label class="category-card" data-category="water">
+              <input type="radio" name="incident_category" value="water" />
+              <div class="category-icon">💧</div>
+              <h3 class="category-name">Water</h3>
+              <p class="category-desc">Monsoon waterlogging, choked gully pits, or leaking municipal supply mains.</p>
+            </label>
+
+            <!-- Street Lighting -->
+            <label class="category-card" data-category="lighting">
+              <input type="radio" name="incident_category" value="lighting" />
+              <div class="category-icon">💡</div>
+              <h3 class="category-name">Street lighting</h3>
+              <p class="category-desc">Dark street lamps, flickering fixtures, or exposed wiring at base.</p>
+            </label>
+
+            <!-- Public Spaces -->
+            <label class="category-card" data-category="parks">
+              <input type="radio" name="incident_category" value="parks" />
+              <div class="category-icon">🌳</div>
+              <h3 class="category-name">Public spaces</h3>
+              <p class="category-desc">Damaged park railings, fallen tree branches, or broken public benches.</p>
+            </label>
+
+            <!-- Something Else -->
+            <label class="category-card" data-category="other">
+              <input type="radio" name="incident_category" value="other" />
+              <div class="category-icon">📋</div>
+              <h3 class="category-name">Something else</h3>
+              <p class="category-desc">Other civic infrastructure issues not covered in standard categories.</p>
+            </label>
+          </div>
+
+          <div style="display: flex; justify-content: flex-end; margin-top: 2rem;">
+            <button type="button" class="btn btn-primary" data-action="next-step">
+              <span>Next: Add evidence</span>
+              <span class="btn-arrow">→</span>
+            </button>
+          </div>
+        </section>
+
+        <!-- STEP 2: Add Evidence & Voice Message -->
+        <section class="report-step-panel" data-step="2" aria-labelledby="step2-title">
+          <h2 id="step2-title" style="font-family: var(--font-serif); font-size: 1.75rem; color: var(--parchment); margin-bottom: 0.5rem;">
+            Step 2: Record a voice message or describe the issue
+          </h2>
+          <p style="color: var(--muted-parchment); margin-bottom: 1.75rem;">
+            Speak your complaint directly or type the description. Photos can also be attached.
+          </p>
+
+          <!-- PROMINENT VOICE MESSAGE INTAKE WIDGET -->
+          <div class="voice-recorder-box">
+            <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+              <div>
+                <h3 style="font-family: var(--font-serif); font-size: 1.35rem; color: var(--parchment); margin: 0 0 0.25rem;">
+                  🎙️ Record Voice Complaint
+                </h3>
+                <div id="voice-status-text" class="voice-status">
+                  Speak in your own words. Live speech transcription will fill in the description automatically.
+                </div>
+              </div>
+              <div id="voice-timer" style="font-family: var(--font-mono); font-size: 1.3rem; color: var(--warm-yellow); font-weight: 700; background: rgba(22, 13, 18, 0.6); padding: 0.35rem 0.85rem; border-radius: var(--radius-sm); border: 1px solid var(--line-gold);">
+                00:00
+              </div>
+            </div>
+
+            <!-- Voice Action Buttons -->
+            <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; align-items: center;">
+              <button type="button" id="voice-record-btn" class="btn btn-primary" style="padding: 0.85rem 1.6rem;">
+                <span>🎙️ Start Voice Recording</span>
+              </button>
+              <button type="button" id="voice-stop-btn" class="btn btn-secondary" style="display: none; padding: 0.85rem 1.6rem; background: #9E3247;">
+                <span>■ Stop Recording</span>
+              </button>
+              <button type="button" id="voice-clear-btn" class="btn btn-outline" style="display: none; font-size: 0.85rem;">
+                <span>Clear Voice Note ✕</span>
+              </button>
+            </div>
+
+            <!-- Voice Audio Playback Player -->
+            <audio id="voice-playback" controls style="display: none; width: 100%; margin-top: 1.25rem;"></audio>
+          </div>
+
+          <!-- Description Textarea (Synchronized with speech recognition) -->
+          <div class="form-group">
+            <label for="description-input" class="form-label">
+              <span>Issue Description / Voice Transcript</span>
+              <span class="form-hint">Auto-filled by voice or typed</span>
+            </label>
+            <textarea id="description-input" class="form-textarea" placeholder="Speak your message using the button above or type your description here..." rows="4"></textarea>
+          </div>
+
+          <!-- Photo Dropzone -->
+          <div class="form-group">
+            <label class="form-label">
+              <span>Photographic evidence (optional)</span>
+              <span class="form-hint">JPG, PNG up to 10MB</span>
+            </label>
+            
+            <div id="evidence-dropzone" class="dropzone" tabindex="0" role="button" aria-label="Upload photo file">
+              <div class="dropzone-icon">📷</div>
+              <div>
+                <strong style="color: var(--parchment);">Click to choose a photo</strong> or drag & drop here
+              </div>
+              <span style="font-size: 0.8125rem; color: var(--muted-parchment);">Helps the crew assess dimensions and severity beforehand</span>
+              <input type="file" id="evidence-input" accept="image/*" style="display: none;" />
+            </div>
+
+            <div id="dropzone-preview" class="dropzone-preview">
+              <img id="preview-thumb" class="preview-thumbnail" alt="Selected evidence preview" />
+              <div style="margin-top: 0.5rem; font-size: 0.85rem; color: var(--warm-yellow);" id="preview-filename"></div>
+              <button type="button" id="preview-remove" class="preview-remove">Remove photo ✕</button>
+            </div>
+          </div>
+
+          <div style="display: flex; justify-content: space-between; margin-top: 2rem;">
+            <button type="button" class="btn btn-outline" data-action="prev-step">← Back</button>
+            <button type="button" class="btn btn-primary" data-action="next-step">
+              <span>Next: Confirm location</span>
+              <span class="btn-arrow">→</span>
+            </button>
+          </div>
+        </section>
+
+        <!-- STEP 3: Confirm Location -->
+        <section class="report-step-panel" data-step="3" aria-labelledby="step3-title">
+          <h2 id="step3-title" style="font-family: var(--font-serif); font-size: 1.75rem; color: var(--parchment); margin-bottom: 0.5rem;">
+            Step 3: Confirm the incident location
+          </h2>
+          <p style="color: var(--muted-parchment); margin-bottom: 1.75rem;">
+            An accurate location ensures the report reaches the exact ward engineering division.
+          </p>
+
+          <!-- Auto-detect GPS button -->
+          <div style="background: rgba(75, 23, 36, 0.4); border: 1px solid var(--line-gold); border-radius: var(--radius-md); padding: 1.25rem; margin-bottom: 1.5rem; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem;">
+            <div>
+              <div style="font-weight: 600; color: var(--parchment); margin-bottom: 0.2rem;">Use device GPS coordinates</div>
+              <div id="coords-display" style="font-family: var(--font-mono); font-size: 0.8125rem; color: var(--warm-yellow);">
+                Coordinates not yet detected
+              </div>
+            </div>
+            <button type="button" id="gps-detect-btn" class="btn btn-primary" style="min-height: 38px;">
+              <span>📍 Detect Current Location</span>
+            </button>
+          </div>
+
+          <!-- Ward Selector -->
+          <div class="form-group">
+            <label for="ward-select" class="form-label">
+              <span>Municipal Ward / Jurisdiction</span>
+              <span class="form-hint">Select appropriate ward</span>
+            </label>
+            <select id="ward-select" class="form-select">
+              <option value="Ward 01">Ward 01 — Shyambazar & Cossipore</option>
+              <option value="Ward 03">Ward 03 — Hedua & Vivekananda Road</option>
+              <option value="Ward 07">Ward 07 — Lake Market & Rashbehari</option>
+              <option value="Ward 12">Ward 12 — Bidhan Sarani & College Street</option>
+              <option value="Ward 14" selected>Ward 14 — Southern Avenue & Ballygunge</option>
+              <option value="Ward 22">Ward 22 — Central Administrative Zone</option>
+              <option value="Ward 28">Ward 28 — Amherst Street & Maniktala</option>
+              <option value="Ward 35">Ward 35 — Beliaghata & Canal South</option>
+            </select>
+          </div>
+
+          <!-- Street / Landmark -->
+          <div class="form-group">
+            <label for="location-input" class="form-label">
+              <span>Street Address or Landmark</span>
+              <span class="form-hint">e.g. Opposite Post Office, near Lamp Pole #14</span>
+            </label>
+            <input type="text" id="location-input" class="form-input" placeholder="Enter landmark, road name, or crossing" />
+          </div>
+
+          <div style="display: flex; justify-content: space-between; margin-top: 2rem;">
+            <button type="button" class="btn btn-outline" data-action="prev-step">← Back</button>
+            <button type="button" class="btn btn-primary" data-action="next-step">
+              <span>Next: Review & send</span>
+              <span class="btn-arrow">→</span>
+            </button>
+          </div>
+        </section>
+
+        <!-- STEP 4: Review and Send -->
+        <section class="report-step-panel" data-step="4" aria-labelledby="step4-title">
+          <h2 id="step4-title" style="font-family: var(--font-serif); font-size: 1.75rem; color: var(--parchment); margin-bottom: 0.5rem;">
+            Step 4: Review and verify before sending
+          </h2>
+          <p style="color: var(--muted-parchment); margin-bottom: 1.75rem;">
+            Please review the summary below. You can jump back to modify any detail.
+          </p>
+
+          <div style="background: var(--surface-card); border: 1px solid var(--line-gold); border-radius: var(--radius-md); padding: 1.75rem; margin-bottom: 2rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 0.75rem; border-bottom: 1px solid var(--line-parchment); margin-bottom: 1rem;">
+              <span class="meta-label">Category</span>
+              <button type="button" class="btn-link" data-jump-step="1" style="background: none; border: none; color: var(--warm-yellow); cursor: pointer; font-size: 0.85rem;">Edit ✎</button>
+            </div>
+            <div id="review-category" style="font-family: var(--font-serif); font-size: 1.35rem; color: var(--parchment); margin-bottom: 1.5rem;">
+              Roads & Pavements
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 0.75rem; border-bottom: 1px solid var(--line-parchment); margin-bottom: 1rem;">
+              <span class="meta-label">Description & Evidence</span>
+              <button type="button" class="btn-link" data-jump-step="2" style="background: none; border: none; color: var(--warm-yellow); cursor: pointer; font-size: 0.85rem;">Edit ✎</button>
+            </div>
+            <div id="review-description" style="color: var(--parchment); font-size: 0.95rem; line-height: 1.6; margin-bottom: 0.5rem;">
+              —
+            </div>
+            <div id="review-evidence" style="font-family: var(--font-mono); font-size: 0.8125rem; color: var(--muted-parchment); margin-bottom: 1.5rem;">
+              —
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 0.75rem; border-bottom: 1px solid var(--line-parchment); margin-bottom: 1rem;">
+              <span class="meta-label">Location & Jurisdiction</span>
+              <button type="button" class="btn-link" data-jump-step="3" style="background: none; border: none; color: var(--warm-yellow); cursor: pointer; font-size: 0.85rem;">Edit ✎</button>
+            </div>
+            <div id="review-location" style="font-size: 0.95rem; color: var(--parchment);">
+              —
+            </div>
+          </div>
+
+          <div style="display: flex; justify-content: space-between; margin-top: 2rem;">
+            <button type="button" class="btn btn-outline" data-action="prev-step">← Back</button>
+            <button type="button" id="submit-report-btn" class="btn btn-primary" style="padding: 0.9rem 2rem; font-size: 1.05rem;">
+              <span>Send Civic Report</span>
+              <span class="btn-arrow">→</span>
+            </button>
+          </div>
+        </section>
+      </div>
+
+      <!-- CONFIRMATION STATE (PRD Section 6.2) -->
+      <div id="report-confirmation" hidden style="display: none;">
+        <div style="text-align: center; margin-bottom: 2rem;">
+          <div style="width: 56px; height: 56px; border-radius: 50%; background: rgba(146, 198, 165, 0.2); color: var(--success); display: grid; place-items: center; font-size: 1.75rem; margin: 0 auto 1rem;">
+            ✓
+          </div>
+          <div class="eyebrow" style="color: var(--success);">Signal Authenticated & Filed</div>
+          <h2 class="section-title">Your report is in <em>the municipal path</em></h2>
+          <p style="color: var(--muted-parchment); max-width: 580px; margin-inline: auto;">
+            We have generated a permanent tracking identifier. You can look up this ticket anytime without needing to log in.
+          </p>
+        </div>
+
+        <!-- Dignified Ticket Card -->
+        <div class="ticket-card" style="margin-bottom: 2.5rem;">
+          <div class="ticket-header">
+            <div class="ticket-id-group">
+              <span class="meta-label" style="margin-bottom: 0;">Tracking ID:</span>
+              <span id="confirm-ticket-id" class="ticket-id">SJ-2026-XXXX</span>
+              <button type="button" class="ticket-copy-btn" data-copy="confirm-ticket-id" title="Copy tracking ID">
+                Copy ID 📋
+              </button>
+            </div>
+            <span class="badge badge-received">
+              <span class="badge-dot"></span>
+              <span>Received</span>
+            </span>
+          </div>
+
+          <div class="ticket-meta-grid">
+            <div>
+              <span class="meta-label">Category</span>
+              <span id="confirm-category" class="meta-value">Roads & Pavements</span>
+            </div>
+            <div>
+              <span class="meta-label">Jurisdiction</span>
+              <span id="confirm-ward" class="meta-value">Ward 14</span>
+            </div>
+            <div>
+              <span class="meta-label">Department</span>
+              <span id="confirm-dept" class="meta-value">Road Infrastructure Wing</span>
+            </div>
+            <div>
+              <span class="meta-label">Next Action</span>
+              <span class="meta-value" style="color: var(--warm-yellow); font-size: 0.9rem;">Jurisdictional de-duplication review</span>
+            </div>
+          </div>
+
+          <div style="background: rgba(22, 13, 18, 0.65); padding: 1rem; border-radius: var(--radius-sm); border: 1px solid var(--line-gold); font-size: 0.85rem; color: var(--muted-parchment);">
+            <strong style="color: var(--parchment);">Prototype Notice:</strong> This submission has been recorded in your local browser session storage. You can immediately track its simulated workflow or open the status tracker.
+          </div>
+        </div>
+
+        <!-- Action Links -->
+        <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+          <a href="#" id="confirm-track-btn" class="btn btn-primary" style="padding: 0.85rem 1.75rem;">
+            <span>Track this report now</span>
+            <span class="btn-arrow">→</span>
+          </a>
+          <button type="button" id="report-another-btn" class="btn btn-secondary">
+            Report another issue
+          </button>
+          <a href="index.html" class="btn btn-outline">
+            Return home
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Shared Footer -->
+  <footer class="site-footer">
+    <div class="shell">
+      <div class="footer-grid">
+        <div class="footer-brand-col">
+          <div class="brand">
+            <div class="brand-mark">SJ</div>
+            <span class="brand-name">SANJAYA</span>
+          </div>
+          <p>A dignified, public-facing civic portal designed to connect resident signals with municipal action through evidence, transparency, and respect.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Public Action</h4>
+          <ul>
+            <li><a href="report.html">Report an issue</a></li>
+            <li><a href="track.html">Track a complaint</a></li>
+            <li><a href="how-it-works.html">How it works</a></li>
+            <li><a href="civic-guide.html">Civic reporting guide</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Knowledge & Support</h4>
+          <ul>
+            <li><a href="stories.html">Public civic stories</a></li>
+            <li><a href="help.html">Help & FAQ</a></li>
+            <li><a href="assistant.html">Ask SANJAYA (Assistant)</a></li>
+            <li><a href="about.html">About SANJAYA</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Governance & Desk</h4>
+          <ul>
+            <li><a href="login.html">Authority access</a></li>
+            <li><a href="about.html#principles">Civic principles</a></li>
+            <li><a href="about.html#accessibility">Accessibility posture</a></li>
+            <li><a href="about.html#privacy">Resident privacy</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="prototype-notice">
+          <strong>Civic Demonstration:</strong> This is a frontend prototype for the SANJAYA civic project.
+        </div>
+        <div>
+          <span>© 2026 SANJAYA Project. Built with Civic Dignity.</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/adapter.js"></script>
+  <script src="js/shared.js"></script>
+  <script src="js/report.js"></script>
+</body>
+</html>

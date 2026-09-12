@@ -1613,11 +1613,22 @@
         display: grid;
         gap: 0.17rem;
         place-items: center;
-        min-width: 55px;
+        min-width: 44px;
         border: 0;
         color: #a7bbda;
         background: transparent;
-        font-size: 0.46rem;
+        font-size: 0.44rem;
+        transition: color 0.15s var(--ease);
+      }
+
+      .mobile-nav button.active {
+        color: #ffffff;
+        font-weight: 700;
+      }
+
+      .mobile-nav button.active .nav-icon {
+        color: #8bb8ff;
+        text-shadow: 0 0 10px rgba(139, 184, 255, 0.7);
       }
 
       .mobile-nav .nav-icon {
@@ -1669,6 +1680,576 @@
       }
     }
 
+    /* === Workspace Panel Tab System === */
+    .workspace-panel {
+      display: none;
+      animation: panelFadeIn 0.35s var(--ease) both;
+    }
+    .workspace-panel.active {
+      display: block;
+    }
+    @keyframes panelFadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .panel-section-header {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      padding: 1.85rem 0 1.25rem;
+      border-bottom: 1px solid rgba(193, 217, 255, 0.09);
+    }
+    .panel-section-header .panel-icon {
+      display: grid;
+      width: 48px;
+      height: 48px;
+      place-items: center;
+      border-radius: 12px;
+      font-size: 1.35rem;
+      flex-shrink: 0;
+    }
+    .panel-section-header .panel-icon.amber { background: rgba(255, 191, 108, 0.12); color: var(--amber); border: 1px solid rgba(255, 191, 108, 0.22); }
+    .panel-section-header .panel-icon.blue  { background: rgba(55, 123, 255, 0.12); color: var(--blue); border: 1px solid rgba(55, 123, 255, 0.22); }
+    .panel-section-header .panel-icon.green { background: rgba(112, 213, 174, 0.12); color: var(--green); border: 1px solid rgba(112, 213, 174, 0.22); }
+    .panel-section-header .panel-icon.red   { background: rgba(255, 137, 117, 0.12); color: var(--red); border: 1px solid rgba(255, 137, 117, 0.22); }
+    .panel-section-header .panel-icon.white { background: rgba(255, 255, 255, 0.06); color: var(--white); border: 1px solid rgba(255, 255, 255, 0.15); }
+    .panel-section-header .panel-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+    .panel-section-header .panel-meta h2 {
+      margin: 0;
+      font: clamp(1.35rem, 2.5vw, 1.85rem) / 1.1 var(--serif);
+      color: var(--white);
+    }
+    .panel-section-header .panel-meta p {
+      margin: 0;
+      color: #a4b4cd;
+      font-size: 0.72rem;
+      line-height: 1.55;
+    }
+    /* Confirmation panel specifics */
+    .confirmation-panel-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    .confirmation-list { margin-top: 1rem; display: grid; gap: 0.6rem; }
+    .confirmation-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      padding: 0.85rem 1rem;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: rgba(12, 23, 46, 0.65);
+      transition: border-color 0.18s var(--ease);
+    }
+    .confirmation-item:hover { border-color: rgba(120, 167, 255, 0.32); }
+    .confirmation-item .ci-info { display: flex; flex-direction: column; gap: 0.15rem; }
+    .confirmation-item .ci-info strong { color: var(--white); font-size: 0.78rem; }
+    .confirmation-item .ci-info small { color: #8da0bf; font-size: 0.6rem; font-family: var(--mono); }
+    .confirmation-item .ci-status { font-size: 0.62rem; font-family: var(--mono); padding: 0.25rem 0.65rem; border-radius: 99px; white-space: nowrap; }
+    .ci-status.awaiting { color: var(--amber); background: rgba(255, 191, 108, 0.12); border: 1px solid rgba(255, 191, 108, 0.22); }
+    .ci-status.confirmed { color: var(--green); background: rgba(112, 213, 174, 0.12); border: 1px solid rgba(112, 213, 174, 0.22); }
+    @media (max-width: 760px) {
+      .confirmation-panel-grid { grid-template-columns: 1fr; }
+    }
+
+    /* === Enhanced Detail & Operational Styles === */
+    .shift-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.85rem;
+      padding: 0.75rem 1.25rem;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(13, 27, 52, 0.75);
+      backdrop-filter: blur(12px);
+      margin: 1.25rem 0;
+    }
+    .shift-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.65rem;
+      color: #b5c7e3;
+    }
+    .shift-item b {
+      color: #fff;
+      font-family: var(--mono);
+    }
+    .pulse-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 8px var(--green);
+      animation: pulseGlow 1.8s infinite;
+    }
+    @keyframes pulseGlow {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+    }
+
+    .desk-ops-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr 1fr;
+      gap: 1rem;
+      margin-top: 1.25rem;
+    }
+    @media (max-width: 1080px) {
+      .desk-ops-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .ops-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(13, 27, 52, 0.65);
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .ops-card-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(193, 217, 255, 0.1);
+      padding-bottom: 0.55rem;
+    }
+    .ops-card-head h3 {
+      margin: 0;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+    .ops-badge {
+      font-family: var(--mono);
+      font-size: 0.58rem;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      background: rgba(55, 123, 255, 0.15);
+      border: 1px solid rgba(55, 123, 255, 0.3);
+      color: #b3d1ff;
+    }
+
+    /* Live Activity Feed */
+    .activity-feed {
+      display: grid;
+      gap: 0.45rem;
+      max-height: 250px;
+      overflow-y: auto;
+      padding-right: 0.3rem;
+    }
+    .activity-feed::-webkit-scrollbar { width: 4px; }
+    .activity-feed::-webkit-scrollbar-thumb { background: rgba(193, 217, 255, 0.2); border-radius: 2px; }
+    .activity-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+      padding: 0.5rem 0.65rem;
+      border-radius: 5px;
+      background: rgba(4, 12, 27, 0.4);
+      border-left: 3px solid var(--blue);
+      font-size: 0.63rem;
+      color: #b5c7e3;
+      transition: background 0.15s;
+    }
+    .activity-item:hover { background: rgba(55, 123, 255, 0.08); }
+    .activity-item.act-priority { border-left-color: var(--amber); }
+    .activity-item.act-routed { border-left-color: var(--green); }
+    .activity-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--mono);
+      font-size: 0.54rem;
+      color: #7b93b8;
+    }
+
+    /* Ward Grid */
+    .ward-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.45rem;
+    }
+    .ward-cell {
+      padding: 0.5rem 0.4rem;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      background: rgba(4, 12, 27, 0.45);
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.15s var(--ease);
+    }
+    .ward-cell:hover, .ward-cell.active {
+      border-color: #8db8ff;
+      background: rgba(55, 123, 255, 0.15);
+      transform: translateY(-1px);
+    }
+    .ward-cell strong {
+      display: block;
+      font-size: 0.64rem;
+      color: #fff;
+    }
+    .ward-cell span {
+      font-family: var(--mono);
+      font-size: 0.52rem;
+      color: #92a8cb;
+    }
+    .ward-cell.urgent strong { color: var(--amber); }
+
+    /* Department Load Meters */
+    .dept-load-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+    .dept-load-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.63rem;
+    }
+    .dept-load-meta strong { color: #fff; }
+    .dept-load-meta span { font-family: var(--mono); color: #8da0bf; font-size: 0.56rem; }
+    .dept-bar-track {
+      height: 6px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    .dept-bar-fill {
+      height: 100%;
+      border-radius: 99px;
+      transition: width 0.4s var(--ease);
+    }
+
+    /* Batch Ops Bar */
+    .batch-ops-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.65rem;
+      margin-top: 1.25rem;
+      padding: 0.85rem 1.1rem;
+      border: 1px dashed rgba(193, 217, 255, 0.22);
+      border-radius: 8px;
+      background: rgba(7, 16, 31, 0.55);
+    }
+    .batch-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.45rem 0.85rem;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      color: #d1e2fc;
+      background: rgba(19, 37, 69, 0.6);
+      font-size: 0.62rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .batch-btn:hover {
+      border-color: #8bb8ff;
+      background: rgba(55, 123, 255, 0.2);
+      color: #fff;
+    }
+
+    /* Queue Controls & Bulk Bar */
+    .queue-adv-filters {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 0.75rem;
+      padding-top: 0.75rem;
+      border-top: 1px solid rgba(193, 217, 255, 0.08);
+    }
+    .queue-select {
+      background: rgba(5, 14, 30, 0.75);
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      color: #c4d5f0;
+      padding: 0.28rem 0.55rem;
+      font-size: 0.58rem;
+    }
+    .queue-bulk-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.4rem 0.75rem;
+      background: rgba(15, 33, 62, 0.5);
+      border-radius: 4px;
+      margin-top: 0.5rem;
+      font-size: 0.6rem;
+      color: #a2b7d5;
+    }
+
+    /* NLP & AI Triage Box */
+    .nlp-box {
+      margin-top: 0.75rem;
+      padding: 0.75rem;
+      border: 1px solid rgba(112, 213, 174, 0.25);
+      border-radius: 6px;
+      background: rgba(112, 213, 174, 0.05);
+    }
+    .nlp-title {
+      font-size: 0.62rem;
+      font-weight: 700;
+      color: var(--green);
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      margin-bottom: 0.4rem;
+    }
+    .nlp-tag-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.3rem;
+    }
+    .nlp-chip {
+      font-family: var(--mono);
+      font-size: 0.52rem;
+      padding: 0.18rem 0.42rem;
+      border-radius: 3px;
+      background: rgba(112, 213, 174, 0.12);
+      border: 1px solid rgba(112, 213, 174, 0.22);
+      color: #b5e8d3;
+    }
+
+    /* Internal Officer Remark */
+    .officer-note-card {
+      margin-top: 0.75rem;
+      padding: 0.75rem;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: rgba(4, 12, 27, 0.45);
+    }
+    .officer-note-input {
+      width: 100%;
+      background: rgba(7, 16, 31, 0.8);
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      color: #fff;
+      padding: 0.4rem;
+      font-size: 0.6rem;
+      resize: vertical;
+      min-height: 48px;
+      box-sizing: border-box;
+      margin-top: 0.35rem;
+    }
+
+    /* Interactive Multi-Factor Assessment Matrix */
+    .matrix-box {
+      margin-top: 1rem;
+      padding: 1rem;
+      border: 1px solid rgba(255, 191, 108, 0.25);
+      border-radius: 7px;
+      background: rgba(255, 191, 108, 0.04);
+    }
+    .matrix-factor {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.65rem 0;
+      border-bottom: 1px solid rgba(193, 217, 255, 0.08);
+    }
+    .matrix-factor:last-child { border-bottom: 0; }
+    .matrix-factor-info strong {
+      display: block;
+      font-size: 0.68rem;
+      color: #fff;
+    }
+    .matrix-factor-info small {
+      font-size: 0.55rem;
+      color: #92a4bf;
+    }
+    .factor-options {
+      display: flex;
+      gap: 0.35rem;
+    }
+    .factor-opt {
+      padding: 0.25rem 0.55rem;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      background: rgba(7, 16, 31, 0.6);
+      color: #9db2d2;
+      font-size: 0.56rem;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .factor-opt.active {
+      border-color: var(--amber);
+      background: rgba(255, 191, 108, 0.18);
+      color: #fff;
+      font-weight: 700;
+    }
+    .recalc-preview-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.75rem 1rem;
+      margin-top: 0.75rem;
+      background: rgba(7, 16, 31, 0.75);
+      border-radius: 6px;
+      border: 1px solid var(--line);
+    }
+    .emergency-override-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.4rem 0.75rem;
+      border: 1px solid var(--red);
+      border-radius: 4px;
+      background: rgba(255, 137, 117, 0.12);
+      color: #ffb5a8;
+      font-size: 0.58rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .emergency-override-btn.active {
+      background: var(--red);
+      color: #fff;
+    }
+
+    /* Redundancy Cluster Table */
+    .cluster-ops-wrap {
+      margin-top: 1rem;
+      display: grid;
+      gap: 0.75rem;
+    }
+    .cluster-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.6rem;
+      background: rgba(4, 12, 27, 0.4);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .cluster-table th {
+      background: rgba(19, 37, 69, 0.5);
+      color: #8da0bf;
+      text-align: left;
+      padding: 0.5rem 0.75rem;
+      font-size: 0.54rem;
+      font-family: var(--mono);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .cluster-table td {
+      padding: 0.65rem 0.75rem;
+      border-top: 1px solid rgba(193, 217, 255, 0.08);
+      color: #c0d0e6;
+    }
+    .cluster-dist-pill {
+      font-family: var(--mono);
+      font-size: 0.54rem;
+      padding: 0.15rem 0.45rem;
+      border-radius: 99px;
+      background: rgba(55, 123, 255, 0.15);
+      border: 1px solid rgba(55, 123, 255, 0.25);
+      color: #9ec1ff;
+    }
+
+    /* Final Dispatch Docket & Formal Manifest Preview */
+    .docket-box {
+      margin-top: 0.85rem;
+      display: grid;
+      gap: 0.65rem;
+      padding: 0.85rem;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: rgba(4, 12, 27, 0.35);
+    }
+    .manifest-card {
+      margin-top: 1rem;
+      padding: 1.1rem;
+      border: 1px solid rgba(112, 213, 174, 0.3);
+      border-radius: 8px;
+      background: linear-gradient(145deg, rgba(13, 31, 56, 0.9), rgba(5, 15, 31, 0.95));
+      position: relative;
+      box-shadow: 0 16px 36px rgba(0,0,0,0.35);
+    }
+    .manifest-watermark {
+      position: absolute;
+      right: 1.5rem;
+      top: 1.2rem;
+      font-size: 3rem;
+      opacity: 0.08;
+      pointer-events: none;
+      font-weight: 900;
+    }
+    .manifest-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      border-bottom: 1px solid rgba(112, 213, 174, 0.2);
+      padding-bottom: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+    .manifest-seal {
+      font-size: 0.55rem;
+      font-family: var(--mono);
+      color: var(--green);
+      border: 1px solid var(--green);
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      letter-spacing: 0.08em;
+    }
+    .manifest-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.65rem;
+      font-size: 0.62rem;
+    }
+    .manifest-grid dt { color: #8295b2; font-size: 0.54rem; font-family: var(--mono); text-transform: uppercase; }
+    .manifest-grid dd { margin: 0; color: #fff; font-weight: 600; }
+    .manifest-barcode {
+      height: 24px;
+      background: repeating-linear-gradient(90deg, #99c2ff 0 2px, transparent 2px 4px, #99c2ff 4px 5px, transparent 5px 8px, #99c2ff 8px 11px, transparent 11px 13px);
+      margin: 0.75rem 0 0.35rem;
+      opacity: 0.6;
+    }
+
+    /* Confirmation Ledger Tabs */
+    .ledger-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 1rem;
+      margin-bottom: 0.75rem;
+    }
+    .ledger-tab {
+      padding: 0.38rem 0.75rem;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      background: rgba(13, 27, 52, 0.5);
+      color: #9db2d2;
+      font-size: 0.6rem;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .ledger-tab.active {
+      border-color: #8bb8ff;
+      background: rgba(55, 123, 255, 0.2);
+      color: #fff;
+      font-weight: 700;
+    }
+
     @media (prefers-reduced-motion: reduce) {
 
       *,
@@ -1683,10 +2264,13 @@
 </head>
 
 <body>
+  <div style="background: rgba(114, 38, 58, 0.95); border-bottom: 1px solid #C99A3D; color: #F0C75E; padding: 0.45rem 1rem; text-align: center; font-family: 'DM Mono', monospace; font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; z-index: 9999; position: relative;">
+    🔒 Authority Operations Desk • Official Personnel Only • Residents: <a href="index.html" style="color: #F6E7BF; text-decoration: underline; margin-left: 4px;">Return to Public Civic Portal</a>
+  </div>
   <div class="page-noise" aria-hidden="true"></div>
   <div class="app">
     <aside class="sidebar">
-      <a class="brand" href="#overview" aria-label="SANJAYA operations overview">
+      <a class="brand" href="#overview" data-jump="overview" aria-label="SANJAYA operations overview">
         <span class="brand-mark" aria-hidden="true">S</span>
         <span class="brand-text">SANJAYA<small>CIVIC INTELLIGENCE</small></span>
       </a>
@@ -1732,7 +2316,7 @@
 
     <main class="content" id="overview">
       <header class="topbar">
-        <div class="crumb">SANJAYA / <b>Report action desk</b></div>
+        <div class="crumb">SANJAYA / <b id="crumb-section">Action desk</b></div>
         <div class="top-actions">
           <label class="search-box"><span>⌕</span><input id="search" type="search"
               placeholder="Search complaint or ward" aria-label="Search complaint or ward" /></label><button
@@ -1745,180 +2329,678 @@
           </div>
         </div>
       </header>
-      <section class="page-head">
-        <div>
-          <p class="eyebrow">Accountable public-service action</p>
-          <h1>Take a verified <em>action.</em></h1>
-        </div>
-        <p>
-          Review the report, verify whether it is urgent and credible, check
-          for duplicates, then route it to the responsible office with a
-          visible confirmation trail.
-        </p>
-      </section>
-      <section class="action-metrics" aria-label="Action workload">
-        <button class="metric-card" data-filter="needs-action" type="button">
-          <span>Needs administrator review</span><strong id="review-count">4</strong><small>Open reports requiring a
-            decision</small></button><button class="metric-card metric-amber" data-jump="priority-check" type="button">
-          <span>Priority truth checks</span><strong id="priority-count">2</strong><small>Confirm urgency before
-            escalation</small></button><button class="metric-card metric-slate" data-jump="redundancy-check"
-          type="button">
-          <span>Redundancy checks</span><strong id="redundancy-count">2</strong><small>Prevent parallel work on the same
-            issue</small></button><button class="metric-card metric-green" data-filter="ready" type="button">
-          <span>Ready for final hand-off</span><strong id="ready-count">1</strong><small>Validated reports awaiting
-            destination</small>
-        </button>
-      </section>
 
-      <section class="action-layout">
-        <article class="panel acute-queue" id="acute-queue">
-          <div class="panel-head">
-            <div>
-              <p class="panel-kicker">Acute panel</p>
-              <h2>Priority incident queue</h2>
-              <span>Choose one report, then complete its checks before routing
-                it.</span>
+      <!-- ===== PANEL 1: Overview / Action Desk ===== -->
+      <div class="workspace-panel active" data-panel="overview" role="tabpanel" aria-label="Action desk overview">
+        <section class="page-head">
+          <div>
+            <p class="eyebrow">Accountable public-service action</p>
+            <h1>Take a verified <em>action.</em></h1>
+          </div>
+          <p>
+            Review the report, verify whether it is urgent and credible, check
+            for duplicates, then route it to the responsible office with a
+            visible confirmation trail.
+          </p>
+        </section>
+        <section class="action-metrics" aria-label="Action workload">
+          <button class="metric-card" data-panel-jump="acute-queue" type="button">
+            <span>Needs administrator review</span><strong id="review-count">4</strong><small>Open reports requiring a
+              decision</small></button><button class="metric-card metric-amber" data-panel-jump="priority-check" type="button">
+            <span>Priority truth checks</span><strong id="priority-count">2</strong><small>Confirm urgency before
+              escalation</small></button><button class="metric-card metric-slate" data-panel-jump="redundancy-check"
+            type="button">
+            <span>Redundancy checks</span><strong id="redundancy-count">2</strong><small>Prevent parallel work on the same
+              issue</small></button><button class="metric-card metric-green" data-panel-jump="final-handoff" type="button">
+            <span>Ready for final hand-off</span><strong id="ready-count">1</strong><small>Validated reports awaiting
+              destination</small>
+          </button>
+        </section>
+
+        <!-- Live Shift Status & Coordinator Context -->
+        <div class="shift-bar">
+          <div class="shift-item">
+            <span class="pulse-dot"></span>
+            <span>Live Dispatch Console • Shift <b>#04-B</b></span>
+          </div>
+          <div class="shift-item">
+            <span>Coordinator: <b>SA - Action Administrator</b> (Desk #03)</span>
+          </div>
+          <div class="shift-item">
+            <span>Operating Zone: <b>Zone 3 (Central Urban Sector)</b></span>
+          </div>
+          <div class="shift-item">
+            <span>SLA Compliance: <b style="color: var(--green);">96.4% On-Target</b></span>
+          </div>
+          <div class="shift-item">
+            <span id="live-clock" style="font-family: var(--mono); color: var(--amber);">20:34:30 IST</span>
+          </div>
+        </div>
+
+        <!-- 3-Column Command Desk Grid -->
+        <div class="desk-ops-grid">
+          <!-- Card 1: Live Activity & Audit Stream -->
+          <div class="ops-card">
+            <div class="ops-card-head">
+              <h3><span>⏱️</span> Live Incident Stream</h3>
+              <span class="ops-badge" id="activity-badge">Real-time</span>
             </div>
-            <div class="filter-row" aria-label="Queue filter">
-              <button class="filter active" type="button" data-filter="all">
-                All</button><button class="filter" type="button" data-filter="needs-action">
-                Needs action</button><button class="filter" type="button" data-filter="priority">
-                Priority</button><button class="filter" type="button" data-filter="ready">
-                Ready
+            <div class="activity-feed" id="activity-feed">
+              <!-- Dynamically populated via JS -->
+            </div>
+          </div>
+
+          <!-- Card 2: Ward Workload & Urgency Heat Matrix -->
+          <div class="ops-card">
+            <div class="ops-card-head">
+              <h3><span>🗺️</span> Ward Workload Heatmap</h3>
+              <span class="ops-badge">Wards 01–12</span>
+            </div>
+            <div class="ward-grid" id="ward-grid">
+              <!-- Dynamically rendered 12 wards with counts -->
+            </div>
+          </div>
+
+          <!-- Card 3: Department Capacity & Dispatch Radar -->
+          <div class="ops-card">
+            <div class="ops-card-head">
+              <h3><span>🏢</span> Department Load Radar</h3>
+              <span class="ops-badge">Live Capacity</span>
+            </div>
+            <div style="display: grid; gap: 0.75rem;" id="dept-load-list">
+              <!-- Dynamically rendered department capacity meters -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Batch Operations Bar -->
+        <div class="batch-ops-bar">
+          <div style="display: flex; align-items: center; gap: 0.5rem;">
+            <strong style="font-size: 0.68rem; color: #fff;">Operational Shortcuts:</strong>
+            <span style="font-size: 0.58rem; color: #8da0bf;">Execute cross-ward triage in one action</span>
+          </div>
+          <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+            <button class="batch-btn" id="batch-high-priority" type="button">
+              <span>⚡</span> Filter Critical Urgent (Score 90+)
+            </button>
+            <button class="batch-btn" id="batch-run-redundancy" type="button">
+              <span>🔍</span> Scan System Redundancies
+            </button>
+            <button class="batch-btn" id="batch-export-brief" type="button">
+              <span>📊</span> Export Shift Docket
+            </button>
+            <button class="batch-btn" id="batch-emergency-filter" type="button" style="border-color: rgba(255,137,117,0.4); color: #ffb5a8;">
+              <span>🚨</span> Life-Safety Fast-Track
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== PANEL 2: Queued Reports ===== -->
+      <div class="workspace-panel" data-panel="acute-queue" role="tabpanel" aria-label="Queued reports workspace">
+        <div class="panel-section-header">
+          <div class="panel-icon blue">⌕</div>
+          <div class="panel-meta">
+            <h2>Queued Reports</h2>
+            <p>Browse, filter, and select reports from the priority incident queue. Inspect AI triage extractions and assign internal administrative remarks.</p>
+          </div>
+        </div>
+        <section class="action-layout" style="margin-top: 1rem;">
+          <article class="panel acute-queue" id="acute-queue">
+            <div class="panel-head">
+              <div>
+                <p class="panel-kicker">Acute panel</p>
+                <h2>Priority incident queue</h2>
+                <span>Choose one report, then complete its checks before routing it.</span>
+              </div>
+              <div class="filter-row" aria-label="Queue filter">
+                <button class="filter active" type="button" data-filter="all">All</button>
+                <button class="filter" type="button" data-filter="needs-action">Needs action</button>
+                <button class="filter" type="button" data-filter="priority">Priority</button>
+                <button class="filter" type="button" data-filter="ready">Ready</button>
+              </div>
+            </div>
+
+            <!-- Advanced Multi-Criteria Filter Bar -->
+            <div class="queue-adv-filters">
+              <select class="queue-select" id="queue-dept-filter" aria-label="Filter by department">
+                <option value="all">All Departments</option>
+                <option value="Roads & Public Works">Roads &amp; Public Works</option>
+                <option value="Storm Water & Drainage">Storm Water &amp; Drainage</option>
+                <option value="Sanitation & Solid Waste">Sanitation &amp; Solid Waste</option>
+                <option value="Electrical Maintenance">Electrical Maintenance</option>
+              </select>
+              <select class="queue-select" id="queue-urgency-filter" aria-label="Filter by urgency tier">
+                <option value="all">All Urgency Scores</option>
+                <option value="critical">Critical (Score 90+)</option>
+                <option value="high">High (Score 80–89)</option>
+                <option value="moderate">Moderate (Score &lt;80)</option>
+              </select>
+              <select class="queue-select" id="queue-sort" aria-label="Sort queue">
+                <option value="score">Sort: Score (Highest First)</option>
+                <option value="age">Sort: Age (Newest First)</option>
+                <option value="evidence">Sort: Most Attachments</option>
+              </select>
+            </div>
+
+            <!-- Bulk Selection & Actions Bar -->
+            <div class="queue-bulk-bar">
+              <div>
+                <label style="cursor: pointer; display: flex; align-items: center; gap: 0.35rem;">
+                  <input type="checkbox" id="queue-select-all" />
+                  <span>Select all in queue</span>
+                </label>
+              </div>
+              <div style="display: flex; gap: 0.4rem;">
+                <button class="batch-btn" id="bulk-priority-btn" style="padding: 0.22rem 0.55rem; font-size: 0.54rem;" type="button">
+                  Batch Request Priority Check
+                </button>
+                <button class="batch-btn" id="bulk-export-btn" style="padding: 0.22rem 0.55rem; font-size: 0.54rem;" type="button">
+                  Export JSON
+                </button>
+              </div>
+            </div>
+
+            <div class="queue-list" id="queue-list"></div>
+            <div class="queue-footer">
+              <span id="queue-count">Showing 5 reports</span>
+              <button id="clear-filters" type="button">Clear queue filters</button>
+            </div>
+          </article>
+
+          <article class="panel report-brief">
+            <div class="brief-top">
+              <span class="report-id" id="brief-id">REPORT #04827</span>
+              <span class="status-pill pending" id="brief-status">Awaiting review</span>
+            </div>
+            <div class="brief-title">
+              <div>
+                <span class="score large score-high" id="brief-score">92</span>
+                <span class="score-caption">Action score</span>
+              </div>
+              <div>
+                <h2 id="brief-title">Road surface collapse</h2>
+                <p id="brief-description">
+                  Damage is reported beside a school crossing. Fifteen linked public reports indicate an immediate pedestrian-safety concern.
+                </p>
+              </div>
+            </div>
+            <div class="brief-meta">
+              <span id="brief-ward">⌖ Ward 07</span>
+              <span id="brief-department">▤ Roads &amp; Public Works</span>
+              <span id="brief-evidence">⌇ 4 attachments</span>
+            </div>
+            <div class="custody-heading">
+              <span>Chain of custody</span><b>One report · one accountable route</b>
+            </div>
+            <div class="stage-rail" id="stage-rail" aria-label="Report action stages"></div>
+
+            <!-- AI Triage & Entity Insights Box -->
+            <div class="nlp-box">
+              <div class="nlp-title">
+                <span>🤖</span> AI Triage &amp; NLP Extraction
+                <span id="nlp-confidence" style="margin-left: auto; font-family: var(--mono); font-size: 0.52rem; opacity: 0.85;">94.8% Conf</span>
+              </div>
+              <div class="nlp-tag-cloud" id="nlp-tags"></div>
+              <div style="font-size: 0.56rem; color: #a6c0e2; margin-top: 0.35rem;" id="nlp-channel">
+                Submission: 🎙️ Voice Audio Transcript + Authenticated GPS
+              </div>
+            </div>
+
+            <!-- Internal Officer Remarks Card -->
+            <div class="officer-note-card">
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <strong style="font-size: 0.64rem; color: #fff;">Internal Officer Remarks</strong>
+                <span style="font-size: 0.52rem; color: #8da0bf; font-family: var(--mono);">SA-Desk#03</span>
+              </div>
+              <textarea class="officer-note-input" id="officer-note-text" placeholder="Add administrative notes, field inspection instructions, or VIP tags..."></textarea>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 0.4rem;">
+                <div style="display: flex; gap: 0.3rem;">
+                  <button class="factor-opt" type="button" data-tag="School Zone">School Zone</button>
+                  <button class="factor-opt" type="button" data-tag="High Transit">High Transit</button>
+                  <button class="factor-opt" type="button" data-tag="Monsoon Alert">Monsoon Alert</button>
+                </div>
+                <button class="secondary-action" id="save-officer-note" type="button" style="padding: 0.28rem 0.65rem; font-size: 0.58rem;">
+                  Save Memo
+                </button>
+              </div>
+            </div>
+          </article>
+        </section>
+      </div>
+
+      <!-- ===== PANEL 3: Priority Validation ===== -->
+      <div class="workspace-panel" data-panel="priority-check" role="tabpanel" aria-label="Priority validation workspace">
+        <div class="panel-section-header">
+          <div class="panel-icon amber">♢</div>
+          <div class="panel-meta">
+            <h2>Priority Validation</h2>
+            <p>Perform multi-factor risk assessment, adjust urgency criteria, or apply life-safety overrides before routing to authorities.</p>
+          </div>
+        </div>
+        <section class="decision-grid" style="margin-top: 1rem;">
+          <article class="panel decision-card validation" id="priority-check">
+            <div class="decision-icon amber">♢</div>
+            <div class="decision-heading">
+              <p class="panel-kicker">Priority truth check</p>
+              <h2>Is this report specific, credible, and urgent?</h2>
+              <span>Use this step before sending a high-impact report to a final authority.</span>
+            </div>
+            <div class="check-list">
+              <span><i class="check" id="priority-proof"></i> Evidence supports the stated problem</span>
+              <span><i class="check amber-check" id="priority-impact">!</i> Immediate public impact has been considered</span>
+              <span><i class="check" id="priority-vague"></i> Vague or unsubstantiated claims need verification</span>
+            </div>
+
+            <!-- Interactive Multi-Factor Assessment Matrix -->
+            <div class="matrix-box">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.45rem;">
+                <strong style="font-size: 0.66rem; color: var(--amber); text-transform: uppercase; letter-spacing: 0.06em; font-family: var(--mono);">Multi-Factor Risk Assessment Matrix</strong>
+                <span style="font-size: 0.55rem; color: #8da0bf;">Weight: 100 max</span>
+              </div>
+              
+              <!-- Factor 1 -->
+              <div class="matrix-factor">
+                <div class="matrix-factor-info">
+                  <strong>1. Physical Hazard &amp; Severity</strong>
+                  <small>Structural void, traffic disruption, collapse hazard</small>
+                </div>
+                <div class="factor-options" id="factor-hazard">
+                  <button class="factor-opt" data-val="10" type="button">Minor (+10)</button>
+                  <button class="factor-opt" data-val="20" type="button">Moderate (+20)</button>
+                  <button class="factor-opt active" data-val="35" type="button">Critical (+35)</button>
+                </div>
+              </div>
+
+              <!-- Factor 2 -->
+              <div class="matrix-factor">
+                <div class="matrix-factor-info">
+                  <strong>2. Pedestrian &amp; Demographic Transit Density</strong>
+                  <small>School crossing, clinic entrance, arterial junction</small>
+                </div>
+                <div class="factor-options" id="factor-density">
+                  <button class="factor-opt" data-val="5" type="button">Local Alley (+5)</button>
+                  <button class="factor-opt active" data-val="25" type="button">School / Clinic (+25)</button>
+                  <button class="factor-opt" data-val="35" type="button">Major Arterial (+35)</button>
+                </div>
+              </div>
+
+              <!-- Factor 3 -->
+              <div class="matrix-factor">
+                <div class="matrix-factor-info">
+                  <strong>3. Environmental &amp; Weather Escalation</strong>
+                  <small>Monsoon waterlogging, storm damage, contamination</small>
+                </div>
+                <div class="factor-options" id="factor-weather">
+                  <button class="factor-opt active" data-val="5" type="button">Dry / Stable (+5)</button>
+                  <button class="factor-opt" data-val="15" type="button">Moderate Risk (+15)</button>
+                  <button class="factor-opt" data-val="20" type="button">Active Flood Hazard (+20)</button>
+                </div>
+              </div>
+
+              <!-- Factor 4 -->
+              <div class="matrix-factor">
+                <div class="matrix-factor-info">
+                  <strong>4. Verification &amp; Evidence Confidence</strong>
+                  <small>Photographic clarity, citizen clustering, GPS lock</small>
+                </div>
+                <div class="factor-options" id="factor-evidence">
+                  <button class="factor-opt" data-val="5" type="button">Unverified (+5)</button>
+                  <button class="factor-opt" data-val="10" type="button">Single Photo (+10)</button>
+                  <button class="factor-opt active" data-val="15" type="button">Multi-Photo + GPS (+15)</button>
+                </div>
+              </div>
+
+              <!-- Live Recalculate Bar -->
+              <div class="recalc-preview-bar">
+                <div style="font-size: 0.63rem;">
+                  <span style="color: #9db2d2;">Calculated Score: </span>
+                  <b id="calculated-score" style="color: #fff; font-size: 0.85rem; font-family: var(--serif); margin-left: 0.2rem;">92</b>
+                  <small id="score-delta" style="color: var(--green); margin-left: 0.35rem; font-family: var(--mono);">(High Priority)</small>
+                </div>
+                <button class="secondary-action" id="apply-recalc-score" type="button" style="padding: 0.32rem 0.75rem; font-size: 0.58rem;">
+                  Apply Recalculated Score
+                </button>
+              </div>
+            </div>
+
+            <!-- Life-Safety Emergency Fast-Track Override -->
+            <div style="display: flex; align-items: center; justify-content: space-between; margin: 0.85rem 0; padding: 0.65rem 0.85rem; border: 1px dashed rgba(255, 137, 117, 0.4); border-radius: 6px; background: rgba(255, 137, 117, 0.05);">
+              <div>
+                <strong style="display: block; font-size: 0.64rem; color: var(--red);">Life-Safety Emergency Fast-Track</strong>
+                <small style="font-size: 0.54rem; color: #ffbfb5;">Direct dispatch authorization bypassing routine queue triage</small>
+              </div>
+              <button class="emergency-override-btn" id="emergency-override-btn" type="button">
+                <span>🚨</span> Engage Fast-Track (Score 98)
               </button>
             </div>
-          </div>
-          <div class="queue-list" id="queue-list"></div>
-          <div class="queue-footer">
-            <span id="queue-count">Showing 5 reports</span><button id="clear-filters" type="button">
-              Clear queue filters
-            </button>
-          </div>
-        </article>
-        <article class="panel report-brief">
-          <div class="brief-top">
-            <span class="report-id" id="brief-id">REPORT #04827</span><span class="status-pill pending"
-              id="brief-status">Awaiting review</span>
-          </div>
-          <div class="brief-title">
-            <div>
-              <span class="score large score-high" id="brief-score">92</span><span class="score-caption">Action
-                score</span>
+
+            <div class="decision-actions" id="priority-actions"></div>
+          </article>
+
+          <!-- Selected report brief shown alongside for context -->
+          <article class="panel report-brief">
+            <div class="brief-top">
+              <span class="report-id ctx-brief-id">REPORT #04827</span>
+              <span class="status-pill pending ctx-brief-status">Awaiting review</span>
             </div>
-            <div>
-              <h2 id="brief-title">Road surface collapse</h2>
-              <p id="brief-description">
-                Damage is reported beside a school crossing. Fifteen linked
-                public reports indicate an immediate pedestrian-safety
-                concern.
+            <div class="brief-title">
+              <div>
+                <span class="score large score-high ctx-brief-score">92</span>
+                <span class="score-caption">Action score</span>
+              </div>
+              <div>
+                <h2 class="ctx-brief-title">Road surface collapse</h2>
+                <p class="ctx-brief-desc">Damage is reported beside a school crossing.</p>
+              </div>
+            </div>
+            <div style="margin-top: 1rem; padding: 0.75rem; border: 1px solid var(--line); border-radius: 6px; background: rgba(4, 12, 27, 0.4);">
+              <div style="font-size: 0.6rem; color: #8da0bf; font-family: var(--mono); text-transform: uppercase; margin-bottom: 0.35rem;">Inspector Audit Stamp</div>
+              <p style="margin: 0; font-size: 0.62rem; color: #c0d0e6; line-height: 1.5;" id="audit-stamp-text">
+                Assessed by Officer SA under Municipal Safety Guidelines Rev 2.4. Priority truth checks verify direct physical obstruction on active transit lane.
               </p>
             </div>
-          </div>
-          <div class="brief-meta">
-            <span id="brief-ward">⌖ Ward 07</span><span id="brief-department">▤ Roads &amp; Public Works</span><span
-              id="brief-evidence">⌇ 4 attachments</span>
-          </div>
-          <div class="custody-heading">
-            <span>Chain of custody</span><b>One report · one accountable route</b>
-          </div>
-          <div class="stage-rail" id="stage-rail" aria-label="Report action stages"></div>
-        </article>
-      </section>
+          </article>
+        </section>
+      </div>
 
-      <section class="decision-grid">
-        <article class="panel decision-card validation" id="priority-check">
-          <div class="decision-icon amber">♢</div>
-          <div class="decision-heading">
-            <p class="panel-kicker">Priority truth check</p>
-            <h2>Is this report specific, credible, and urgent?</h2>
-            <span>Use this step before sending a high-impact report to a final
-              authority.</span>
+      <!-- ===== PANEL 4: Redundancy Control ===== -->
+      <div class="workspace-panel" data-panel="redundancy-check" role="tabpanel" aria-label="Redundancy control workspace">
+        <div class="panel-section-header">
+          <div class="panel-icon blue">▣</div>
+          <div class="panel-meta">
+            <h2>Redundancy Control</h2>
+            <p>Perform geospatial cluster comparison, link related complaints into a single master ticket, and suppress duplicate contractor work orders.</p>
           </div>
-          <div class="check-list">
-            <span><i class="check" id="priority-proof"></i> Evidence supports the
-              stated problem</span><span><i class="check amber-check" id="priority-impact">!</i>
-              Immediate public impact has been considered</span><span><i class="check" id="priority-vague"></i> Vague or
-              unsubstantiated claims need verification</span>
-          </div>
-          <div class="decision-actions" id="priority-actions"></div>
-        </article>
-        <article class="panel decision-card redundancy" id="redundancy-check">
-          <div class="decision-icon blue">▣</div>
-          <div class="decision-heading">
-            <p class="panel-kicker">Redundancy check</p>
-            <h2>Check whether this is already being handled.</h2>
-            <span>Link related reports instead of forwarding duplicate tasks to
-              the same office.</span>
-          </div>
-          <div class="duplicate-box">
-            <span>Related reports</span>
-            <div id="related-reports"></div>
-          </div>
-          <div class="decision-actions" id="redundancy-actions"></div>
-        </article>
-      </section>
+        </div>
+        <section class="decision-grid" style="margin-top: 1rem;">
+          <article class="panel decision-card redundancy" id="redundancy-check">
+            <div class="decision-icon blue">▣</div>
+            <div class="decision-heading">
+              <p class="panel-kicker">Redundancy check</p>
+              <h2>Check whether this is already being handled.</h2>
+              <span>Link related reports instead of forwarding duplicate tasks to the same office.</span>
+            </div>
 
-      <section class="handoff-grid">
-        <article class="panel final-handoff" id="final-handoff">
-          <div class="handoff-top">
-            <div>
-              <p class="panel-kicker">Final action and confirmation</p>
-              <h2>Send the reviewed report to the responsible office.</h2>
-              <span>The destination is recorded with the selected report and can
-                be confirmed when that office accepts action.</span>
+            <!-- Proximity Cluster Radius Selector -->
+            <div style="display: flex; align-items: center; justify-content: space-between; margin: 0.85rem 0 0.45rem;">
+              <span style="font-size: 0.58rem; color: #8da0bf; font-family: var(--mono);">SPATIAL CLUSTERING RADIUS:</span>
+              <div style="display: flex; gap: 0.3rem;" id="radius-buttons">
+                <button class="factor-opt" data-radius="25" type="button">25m</button>
+                <button class="factor-opt active" data-radius="50" type="button">50m (Std)</button>
+                <button class="factor-opt" data-radius="100" type="button">100m</button>
+                <button class="factor-opt" data-radius="200" type="button">200m</button>
+              </div>
             </div>
-            <div class="destination-chip">
-              ▤
-              <span id="destination-label">Municipal Roads &amp; Works</span>
+
+            <!-- Linked Candidate Comparison Table -->
+            <div class="cluster-ops-wrap">
+              <table class="cluster-table">
+                <thead>
+                  <tr>
+                    <th>Report ID</th>
+                    <th>Distance</th>
+                    <th>Time Gap</th>
+                    <th>Citizen Description</th>
+                    <th>Operation</th>
+                  </tr>
+                </thead>
+                <tbody id="cluster-table-body">
+                  <!-- Dynamically generated cluster items -->
+                </tbody>
+              </table>
             </div>
-          </div>
-          <div class="handoff-actions" id="handoff-actions"></div>
-          <div class="handoff-receipt">
-            <span>Handoff record</span><strong id="receipt-title">Awaiting validation before department
-              route</strong><small id="receipt-copy">Complete priority and redundancy checks to make the final route
-              defensible.</small>
-          </div>
-        </article>
-        <article class="panel evidence-panel">
-          <div class="evidence-head">
-            <div>
-              <p class="panel-kicker">Attachments preserved</p>
-              <h2>Report evidence</h2>
+
+            <!-- Deduplication Savings Ledger -->
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 0.75rem; padding: 0.55rem 0.85rem; background: rgba(55, 123, 255, 0.08); border-radius: 5px; border: 1px solid rgba(55, 123, 255, 0.22);">
+              <span style="font-size: 0.58rem; color: #a4c4f5;">💡 Deduplication Impact:</span>
+              <strong style="font-size: 0.62rem; color: var(--green);" id="dedup-savings-text">
+                3 Duplicate Work Orders Prevented · 4.5 Crew Hours Saved
+              </strong>
             </div>
-            <a id="attachment-link" href="#" target="_blank" rel="noreferrer">⌇ Open attachment</a>
-          </div>
-          <div class="evidence-stage">
-            <img id="evidence-image" alt="" />
-            <div>
-              <span id="evidence-id">INCIDENT #04827</span>
-              <h3 id="evidence-title">
-                Road surface collapse near school crossing
-              </h3>
-              <p id="evidence-note">
-                Municipal Corporation · Roads &amp; Public Works
+
+            <!-- Manual Association Box -->
+            <div style="display: flex; gap: 0.4rem; margin-top: 0.75rem;">
+              <input type="text" id="manual-link-id" placeholder="Link custom report ID (e.g. #04840)" style="flex: 1; background: rgba(7, 16, 31, 0.7); border: 1px solid var(--line); border-radius: 4px; padding: 0.38rem 0.6rem; color: #fff; font-size: 0.6rem;" />
+              <button class="secondary-action" id="manual-link-btn" type="button" style="padding: 0.38rem 0.85rem; font-size: 0.58rem;">
+                + Link to Cluster
+              </button>
+            </div>
+
+            <div class="decision-actions" id="redundancy-actions"></div>
+          </article>
+
+          <!-- Selected report brief shown alongside for context -->
+          <article class="panel report-brief">
+            <div class="brief-top">
+              <span class="report-id ctx2-brief-id">REPORT #04827</span>
+              <span class="status-pill pending ctx2-brief-status">Awaiting review</span>
+            </div>
+            <div class="brief-title">
+              <div>
+                <span class="score large score-high ctx2-brief-score">92</span>
+                <span class="score-caption">Action score</span>
+              </div>
+              <div>
+                <h2 class="ctx2-brief-title">Road surface collapse</h2>
+                <p class="ctx2-brief-desc">Damage is reported beside a school crossing.</p>
+              </div>
+            </div>
+            <div style="margin-top: 1rem; padding: 0.75rem; border: 1px solid var(--line); border-radius: 6px; background: rgba(4, 12, 27, 0.4);">
+              <div style="font-size: 0.6rem; color: #8da0bf; font-family: var(--mono); text-transform: uppercase; margin-bottom: 0.35rem;">Cluster Policy Guidelines</div>
+              <p style="margin: 0; font-size: 0.62rem; color: #c0d0e6; line-height: 1.5;">
+                Merging consolidates citizen updates under one primary ticket. All linked submitters receive automatic SMS and tracker notifications when the master ticket progresses.
               </p>
             </div>
+          </article>
+        </section>
+      </div>
+
+      <!-- ===== PANEL 5: Final Hand-off ===== -->
+      <div class="workspace-panel" data-panel="final-handoff" role="tabpanel" aria-label="Final hand-off workspace">
+        <div class="panel-section-header">
+          <div class="panel-icon green">➤</div>
+          <div class="panel-meta">
+            <h2>Final Hand-off</h2>
+            <p>Assign target maintenance depot, configure required heavy plant equipment, generate official dispatch manifests, and inspect photographic evidence.</p>
           </div>
-          <div class="evidence-controls">
-            <button id="previous-evidence" type="button" aria-label="Previous attachment">
-              ←
-            </button>
-            <div id="evidence-dots"></div>
-            <button id="next-evidence" type="button" aria-label="Next attachment">
-              →
-            </button>
+        </div>
+        <section class="handoff-grid" style="margin-top: 1rem;">
+          <article class="panel final-handoff" id="final-handoff">
+            <div class="handoff-top">
+              <div>
+                <p class="panel-kicker">Final action and confirmation</p>
+                <h2>Send the reviewed report to the responsible office.</h2>
+                <span>The destination is recorded with the selected report and can be confirmed when that office accepts action.</span>
+              </div>
+              <div class="destination-chip">
+                ▤ <span id="destination-label">Municipal Roads &amp; Works</span>
+              </div>
+            </div>
+
+            <!-- Detailed Dispatch Docket Form -->
+            <div class="docket-box">
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <strong style="font-size: 0.66rem; color: #fff;">Dispatch Docket Parameters</strong>
+                <span style="font-size: 0.54rem; color: #8da0bf; font-family: var(--mono);">DEP-FORM-2026</span>
+              </div>
+              
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem;">
+                <div>
+                  <label style="display: block; font-size: 0.56rem; color: #9ab0d2; margin-bottom: 0.25rem;">Field Depot / Maintenance Yard</label>
+                  <select class="queue-select" id="docket-depot" style="width: 100%;">
+                    <option>Ward 07 Central Maintenance Yard</option>
+                    <option>North Zone Heavy Plant Depot</option>
+                    <option>Rapid Response Flying Squad #3</option>
+                    <option>Stormwater Drainage Basin #04</option>
+                  </select>
+                </div>
+                <div>
+                  <label style="display: block; font-size: 0.56rem; color: #9ab0d2; margin-bottom: 0.25rem;">Dispatch Urgency SLA</label>
+                  <select class="queue-select" id="docket-sla" style="width: 100%;">
+                    <option>Emergency (4 Hours SLA)</option>
+                    <option selected>Priority (24 Hours SLA)</option>
+                    <option>Routine (72 Hours SLA)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label style="display: block; font-size: 0.56rem; color: #9ab0d2; margin-bottom: 0.25rem;">Required Equipment &amp; Crew Type</label>
+                <div style="display: flex; flex-wrap: wrap; gap: 0.35rem;" id="docket-equipment-tags">
+                  <button class="factor-opt active" type="button">Asphalt Compactor</button>
+                  <button class="factor-opt active" type="button">Traffic Cones &amp; Barricades</button>
+                  <button class="factor-opt" type="button">Gully Emptier Tanker</button>
+                  <button class="factor-opt" type="button">Emergency Floodlights</button>
+                </div>
+              </div>
+
+              <div style="display: flex; align-items: center; gap: 0.5rem; margin-top: 0.2rem;">
+                <input type="checkbox" id="docket-notify-citizen" checked />
+                <label for="docket-notify-citizen" style="font-size: 0.58rem; color: #c4d4ec; cursor: pointer;">
+                  Transmit automated SMS dispatch alert to reporting citizen
+                </label>
+              </div>
+            </div>
+
+            <!-- Formal Municipal Dispatch Manifest Card -->
+            <div class="manifest-card">
+              <div class="manifest-watermark">SANJAYA</div>
+              <div class="manifest-header">
+                <div>
+                  <strong style="display: block; font-size: 0.72rem; color: #fff;" id="manifest-id-label">MUNICIPAL DISPATCH ORDER #DMF-2026-04827-R</strong>
+                  <span style="font-size: 0.54rem; color: #8da0bf;">State Urban Development &amp; Municipal Affairs Directorate</span>
+                </div>
+                <span class="manifest-seal">OFFICIAL MANIFEST</span>
+              </div>
+              <dl class="manifest-grid">
+                <div>
+                  <dt>Target Office</dt>
+                  <dd id="manifest-dept-dd">Roads &amp; Public Works</dd>
+                </div>
+                <div>
+                  <dt>Field Depot</dt>
+                  <dd id="manifest-depot-dd">Ward 07 Central Maintenance Yard</dd>
+                </div>
+                <div>
+                  <dt>Target SLA</dt>
+                  <dd style="color: var(--amber);" id="manifest-sla-dd">Priority (24 Hours SLA)</dd>
+                </div>
+                <div>
+                  <dt>Authorized Officer</dt>
+                  <dd>SA - Action Administrator (#03)</dd>
+                </div>
+              </dl>
+              <div class="manifest-barcode"></div>
+              <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.52rem; color: #7f93b0; font-family: var(--mono);">
+                <span>DIGITAL SIGNATURE: 0x8F92...B31A</span>
+                <button class="batch-btn" id="print-manifest-btn" type="button" style="padding: 0.2rem 0.55rem; font-size: 0.52rem;">
+                  🖨️ Print Manifest
+                </button>
+              </div>
+            </div>
+
+            <div class="handoff-actions" id="handoff-actions" style="margin-top: 1rem;"></div>
+            <div class="handoff-receipt">
+              <span>Handoff record</span>
+              <strong id="receipt-title">Awaiting validation before department route</strong>
+              <small id="receipt-copy">Complete priority and redundancy checks to make the final route defensible.</small>
+            </div>
+          </article>
+
+          <article class="panel evidence-panel">
+            <div class="evidence-head">
+              <div>
+                <p class="panel-kicker">Attachments preserved</p>
+                <h2>Report evidence</h2>
+              </div>
+              <a id="attachment-link" href="#" target="_blank" rel="noreferrer">⌇ Open attachment</a>
+            </div>
+            <div class="evidence-stage">
+              <img id="evidence-image" alt="" />
+              <div>
+                <span id="evidence-id">INCIDENT #04827</span>
+                <h3 id="evidence-title">Road surface collapse near school crossing</h3>
+                <p id="evidence-note">Municipal Corporation · Roads &amp; Public Works</p>
+              </div>
+            </div>
+            
+            <!-- Forensic Visual Inspection Controls -->
+            <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.4rem 1rem; background: rgba(5, 15, 31, 0.5); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);">
+              <span style="font-size: 0.54rem; color: #8da0bf; font-family: var(--mono);">INSPECTOR CONTRAST:</span>
+              <div style="display: flex; gap: 0.3rem;">
+                <button class="factor-opt active" id="ev-filter-normal" type="button">Normal</button>
+                <button class="factor-opt" id="ev-filter-contrast" type="button">High Contrast</button>
+                <button class="factor-opt" id="ev-filter-mono" type="button">Grayscale</button>
+              </div>
+            </div>
+
+            <div class="evidence-controls">
+              <button id="previous-evidence" type="button" aria-label="Previous attachment">←</button>
+              <div id="evidence-dots"></div>
+              <button id="next-evidence" type="button" aria-label="Next attachment">→</button>
+            </div>
+          </article>
+        </section>
+      </div>
+
+      <!-- ===== PANEL 6: Confirm Actions ===== -->
+      <div class="workspace-panel" data-panel="confirmation" role="tabpanel" aria-label="Confirm actions workspace">
+        <div class="panel-section-header">
+          <div class="panel-icon white">✓</div>
+          <div class="panel-meta">
+            <h2>Confirm Actions</h2>
+            <p>Track department acceptance, monitor field deployment, verify resolution work orders, and export the official municipal ledger.</p>
           </div>
-        </article>
-      </section>
+        </div>
+
+        <!-- Ledger Status Tabs -->
+        <div class="ledger-tabs">
+          <button class="ledger-tab active" data-tab="all" type="button">
+            All Hand-offs (<span id="tab-count-all">0</span>)
+          </button>
+          <button class="ledger-tab" data-tab="awaiting" type="button">
+            Awaiting Acceptance (<span id="tab-count-awaiting">0</span>)
+          </button>
+          <button class="ledger-tab" data-tab="active" type="button">
+            Active in Field (<span id="tab-count-active">0</span>)
+          </button>
+          <button class="ledger-tab" data-tab="resolved" type="button">
+            Resolved &amp; Closed (<span id="tab-count-resolved">0</span>)
+          </button>
+        </div>
+
+        <!-- Audit Metrics Bar -->
+        <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.75rem; margin: 0.75rem 0; padding: 0.75rem 1rem; background: rgba(13, 27, 52, 0.6); border: 1px solid var(--line); border-radius: 6px;">
+          <div style="display: flex; gap: 1.5rem; font-size: 0.62rem;">
+            <span style="color: #8da0bf;">Routing Latency: <strong style="color: #fff;">42m avg</strong></span>
+            <span style="color: #8da0bf;">Municipal SLA Compliance: <strong style="color: var(--green);">96.4%</strong></span>
+            <span style="color: #8da0bf;">Active Work Orders: <strong style="color: var(--amber);" id="active-wo-count">1</strong></span>
+          </div>
+          <button class="batch-btn" id="export-audit-ledger" type="button" style="padding: 0.35rem 0.75rem; font-size: 0.58rem;">
+            📥 Export Audit Ledger (CSV)
+          </button>
+        </div>
+
+        <div class="confirmation-list" id="confirmation-list">
+          <!-- dynamically populated -->
+        </div>
+      </div>
     </main>
   </div>
   <nav class="mobile-nav" aria-label="Mobile operational actions">
+    <button class="active" type="button" data-jump="overview">
+      <span class="nav-icon">☷</span>Desk</button>
     <button type="button" data-jump="acute-queue">
-      <span class="nav-icon">⌕</span>Queue</button><button type="button" data-jump="priority-check">
-      <span class="nav-icon">♢</span>Validate</button><button type="button" data-jump="redundancy-check">
-      <span class="nav-icon">▣</span>Duplicates</button><button type="button" data-jump="final-handoff">
-      <span class="nav-icon">➤</span>Route
-    </button>
+      <span class="nav-icon">⌕</span>Queue</button>
+    <button type="button" data-jump="priority-check">
+      <span class="nav-icon">♢</span>Validate</button>
+    <button type="button" data-jump="redundancy-check">
+      <span class="nav-icon">▣</span>Duplicates</button>
+    <button type="button" data-jump="final-handoff">
+      <span class="nav-icon">➤</span>Route</button>
+    <button type="button" data-jump="confirmation">
+      <span class="nav-icon">✓</span>Confirm</button>
   </nav>
   <div class="route-overlay" id="route-overlay" role="presentation">
     <div class="route-dialog" role="dialog" aria-modal="true" aria-labelledby="route-title">
@@ -2005,8 +3087,22 @@
         priorityCheck: "not-started",
         redundancyCheck: "not-started",
         relatedReports: ["#04822", "#04819", "#04803"],
+        clusterCandidates: [
+          { id: "#04822", dist: "14m", age: "-15m", desc: "Large crater in right lane beside school crossing", status: "pending" },
+          { id: "#04819", dist: "28m", age: "-42m", desc: "Pothole deep enough to hit vehicle sump", status: "pending" },
+          { id: "#04803", dist: "65m", age: "-1h 20m", desc: "Asphalt subsidence near curb drain", status: "pending" }
+        ],
+        nlpTags: ["School Crossing", "Pavement Shear", "Pedestrian Hazard", "Monsoon Vulnerable"],
+        nlpConfidence: "94.8% Conf",
+        submissionChannel: "🎙️ Voice Audio Transcript + Authenticated GPS",
+        officerNotes: "School administration alerted. Verification prioritizes child pedestrian safety during morning bell.",
+        depot: "Ward 07 Central Maintenance Yard",
+        slaTier: "Priority (24 Hours SLA)",
+        workOrder: "",
+        fieldStatus: "awaiting",
         forwarded: false,
         confirmed: false,
+        selected: false,
       },
       {
         id: "04844",
@@ -2025,8 +3121,20 @@
         priorityCheck: "requested",
         redundancyCheck: "cleared",
         relatedReports: ["#04840"],
+        clusterCandidates: [
+          { id: "#04840", dist: "18m", age: "-25m", desc: "Drain overflowing directly onto clinic entrance ramp", status: "pending" }
+        ],
+        nlpTags: ["Clinic Access", "Drain Blockage", "Stagnant Water", "Public Health"],
+        nlpConfidence: "96.1% Conf",
+        submissionChannel: "📱 Web Intake + Geotagged Photo",
+        officerNotes: "Drainage inspection camera scheduled for afternoon.",
+        depot: "Stormwater Drainage Basin #04",
+        slaTier: "Priority (24 Hours SLA)",
+        workOrder: "",
+        fieldStatus: "awaiting",
         forwarded: false,
         confirmed: false,
+        selected: false,
       },
       {
         id: "04852",
@@ -2034,7 +3142,7 @@
         score: 76,
         priority: "medium",
         ward: "Ward 09",
-        department: "Sanitation",
+        department: "Sanitation & Solid Waste",
         destination: "Sanitation & Solid Waste",
         age: "2h",
         evidenceCount: 2,
@@ -2045,28 +3153,51 @@
         priorityCheck: "cleared",
         redundancyCheck: "requested",
         relatedReports: ["#04849", "#04847"],
+        clusterCandidates: [
+          { id: "#04849", dist: "8m", age: "-35m", desc: "Commercial waste spilling onto footpath", status: "pending" },
+          { id: "#04847", dist: "22m", age: "-55m", desc: "Vat full and secondary pile forming", status: "pending" }
+        ],
+        nlpTags: ["Solid Waste", "Commercial Spill", "Footpath Blocked"],
+        nlpConfidence: "91.2% Conf",
+        submissionChannel: "📱 Mobile Web Intake",
+        officerNotes: "Compactor truck scheduled for night run.",
+        depot: "Ward 07 Central Maintenance Yard",
+        slaTier: "Routine (72 Hours SLA)",
+        workOrder: "",
+        fieldStatus: "awaiting",
         forwarded: false,
         confirmed: false,
+        selected: false,
       },
       {
         id: "04861",
         title: "Survey boundary record concern",
         score: 69,
         priority: "standard",
-        ward: "Revenue Village 07",
+        ward: "Ward 11",
         department: "Tehsildar Office",
         destination: "Tehsildar Office",
         age: "3h",
         evidenceCount: 5,
-        tags: ["tehsildar", "revenue", "land", "village 07"],
+        tags: ["tehsildar", "revenue", "land", "ward 11"],
         status: "Ready to forward",
         description:
           "The report requests a documentary review of a survey-boundary record and includes the referenced field documents.",
         priorityCheck: "cleared",
         redundancyCheck: "cleared",
         relatedReports: [],
+        clusterCandidates: [],
+        nlpTags: ["Revenue Records", "Survey Map", "Documentary Inspection"],
+        nlpConfidence: "88.5% Conf",
+        submissionChannel: "📂 Citizen Portal Document Upload",
+        officerNotes: "Forwarding to Sub-Divisional Land Officer.",
+        depot: "Ward 07 Central Maintenance Yard",
+        slaTier: "Routine (72 Hours SLA)",
+        workOrder: "",
+        fieldStatus: "awaiting",
         forwarded: false,
         confirmed: false,
+        selected: false,
       },
       {
         id: "04864",
@@ -2085,23 +3216,71 @@
         priorityCheck: "cleared",
         redundancyCheck: "cleared",
         relatedReports: ["#04863", "#04858"],
+        clusterCandidates: [
+          { id: "#04863", dist: "12m", age: "-1h", desc: "Pole #14 dark, children walking home", status: "merged" }
+        ],
+        nlpTags: ["Streetlight", "Phase Loss", "Evening Dark Corridor"],
+        nlpConfidence: "95.0% Conf",
+        submissionChannel: "🎙️ Voice Audio Intake",
+        officerNotes: "Work order dispatched to line repair crew.",
+        depot: "North Zone Heavy Plant Depot",
+        slaTier: "Priority (24 Hours SLA)",
+        workOrder: "WO-ELM-3910",
+        fieldStatus: "accepted",
         forwarded: true,
         confirmed: false,
+        selected: false,
       },
+      {
+        id: "04791",
+        title: "Road repair closed with field evidence",
+        score: 95,
+        priority: "high",
+        ward: "Ward 04",
+        department: "Roads & Public Works",
+        destination: "Municipal Roads & Works",
+        age: "6h",
+        evidenceCount: 4,
+        tags: ["resolved", "roads", "ward 04"],
+        status: "Resolved & Closed",
+        description: "Patching completed across 35m of compromised roadway with photographic proof attached.",
+        priorityCheck: "cleared",
+        redundancyCheck: "cleared",
+        relatedReports: [],
+        clusterCandidates: [],
+        nlpTags: ["Asphalt Completed", "Inspector Verified", "Audit Proof"],
+        nlpConfidence: "99.1% Conf",
+        submissionChannel: "👷 Field Team Dispatch",
+        officerNotes: "Field verified by Assistant Engineer.",
+        depot: "Ward 07 Central Maintenance Yard",
+        slaTier: "Emergency (4 Hours SLA)",
+        workOrder: "WO-MRW-8102",
+        fieldStatus: "resolved",
+        forwarded: true,
+        confirmed: true,
+        selected: false,
+      }
     ];
+
     let selectedId = reports[0].id,
       activeFilter = "all",
+      deptFilter = "all",
+      urgencyFilter = "all",
+      sortCriteria = "score",
       query = "",
       evidenceIndex = 0,
+      activeLedgerTab = "all",
+      currentRadius = 50,
       toastTimer;
+
     const $ = selector => document.querySelector(selector);
     function selected() {
       return reports.find(report => report.id === selectedId) || reports[0];
     }
     function scoreClass(report) {
-      return report.priority === "high"
+      return report.score >= 90
         ? "score-high"
-        : report.priority === "medium"
+        : report.score >= 70
           ? "score-medium"
           : "score-standard";
     }
@@ -2134,6 +3313,7 @@
     }
     function showToast(message) {
       const element = $("#toast");
+      if (!element) return;
       element.textContent = message;
       element.classList.add("visible");
       clearTimeout(toastTimer);
@@ -2148,44 +3328,169 @@
       );
       render();
     }
+
+    /* === Filter & Match Engine === */
     function matchesFilter(report) {
       const text =
-        `${report.title} ${report.ward} ${report.department} ${report.id}`.toLowerCase();
+        `${report.title} ${report.ward} ${report.department} ${report.id} ${report.tags.join(" ")}`.toLowerCase();
       const searchMatch = !query || text.includes(query);
       const filterMatch =
         activeFilter === "all" ||
-        (activeFilter === "needs-action" &&
-          !report.forwarded &&
-          !report.confirmed) ||
-        (activeFilter === "priority" &&
-          (report.priorityCheck !== "cleared" ||
-            report.priority === "high")) ||
-        (activeFilter === "ready" &&
-          report.priorityCheck === "cleared" &&
-          report.redundancyCheck === "cleared" &&
-          !report.forwarded);
-      return searchMatch && filterMatch;
+        (activeFilter === "needs-action" && !report.forwarded && !report.confirmed) ||
+        (activeFilter === "priority" && (report.priorityCheck !== "cleared" || report.score >= 85)) ||
+        (activeFilter === "ready" && report.priorityCheck === "cleared" && report.redundancyCheck === "cleared" && !report.forwarded);
+      const deptMatch =
+        deptFilter === "all" || report.department.toLowerCase().includes(deptFilter.toLowerCase());
+      const urgencyMatch =
+        urgencyFilter === "all" ||
+        (urgencyFilter === "critical" && report.score >= 90) ||
+        (urgencyFilter === "high" && report.score >= 80 && report.score < 90) ||
+        (urgencyFilter === "moderate" && report.score < 80);
+
+      return searchMatch && filterMatch && deptMatch && urgencyMatch;
     }
+
+    /* === PANEL 1: Command Desk Overview Elements === */
+    function renderCommandDesk() {
+      // 1. Activity Feed
+      const feed = $("#activity-feed");
+      if (feed) {
+        const activities = [
+          { time: "02m ago", text: `Incident #${reports[0].id} flagged for critical school-crossing triage`, type: "priority" },
+          { time: "18m ago", text: "Spatial scan detected 3 linked reports in Ward 07 corridor", type: "standard" },
+          { time: "45m ago", text: "Dispatch order #DMF-04864 accepted by Electrical Maintenance", type: "routed" },
+          { time: "1h 12m ago", text: `Incident #${reports[1].id} drainage clearance protocol initiated`, type: "priority" },
+          { time: "2h 30m ago", text: "Field evidence logged for completed road repair in Ward 04", type: "routed" }
+        ];
+        feed.innerHTML = activities.map(a => `
+          <div class="activity-item ${a.type === 'priority' ? 'act-priority' : a.type === 'routed' ? 'act-routed' : ''}">
+            <div class="activity-top">
+              <span>MUNICIPAL EVENT</span>
+              <span>${a.time}</span>
+            </div>
+            <span>${a.text}</span>
+          </div>
+        `).join("");
+      }
+
+      // 2. Ward Heatmap
+      const wardGrid = $("#ward-grid");
+      if (wardGrid) {
+        const wards = ["Ward 01", "Ward 02", "Ward 04", "Ward 05", "Ward 07", "Ward 09", "Ward 11", "Ward 12"];
+        wardGrid.innerHTML = wards.map(w => {
+          const count = reports.filter(r => r.ward === w).length;
+          const isUrgent = count > 0 && reports.some(r => r.ward === w && r.score >= 85);
+          return `
+            <div class="ward-cell ${isUrgent ? 'urgent' : ''}" data-ward-jump="${w}">
+              <strong>${w.replace("Ward ", "W-")}</strong>
+              <span>${count} report${count === 1 ? '' : 's'}</span>
+            </div>
+          `;
+        }).join("");
+
+        document.querySelectorAll("[data-ward-jump]").forEach(cell => {
+          cell.addEventListener("click", () => {
+            query = cell.dataset.wardJump.toLowerCase();
+            const searchInput = $("#search");
+            if (searchInput) searchInput.value = cell.dataset.wardJump;
+            switchPanel("acute-queue");
+            renderQueue();
+            showToast(`Filtered queue to ${cell.dataset.wardJump}.`);
+          });
+        });
+      }
+
+      // 3. Department Load Radar
+      const deptList = $("#dept-load-list");
+      if (deptList) {
+        const depts = [
+          { name: "Roads & Works", pct: 68, color: "var(--blue)", pending: reports.filter(r => r.department.includes("Roads")).length },
+          { name: "Storm Water", pct: 84, color: "var(--amber)", pending: reports.filter(r => r.department.includes("Storm")).length },
+          { name: "Sanitation", pct: 42, color: "var(--green)", pending: reports.filter(r => r.department.includes("Sanitation")).length },
+          { name: "Electrical", pct: 31, color: "#8bb8ff", pending: reports.filter(r => r.department.includes("Electrical")).length }
+        ];
+        deptList.innerHTML = depts.map(d => `
+          <div class="dept-load-item">
+            <div class="dept-load-meta">
+              <strong>${d.name}</strong>
+              <span>${d.pending} Active · ${d.pct}% Load</span>
+            </div>
+            <div class="dept-bar-track">
+              <div class="dept-bar-fill" style="width: ${d.pct}%; background: ${d.color};"></div>
+            </div>
+          </div>
+        `).join("");
+      }
+
+      // 4. Live Clock
+      const clock = $("#live-clock");
+      if (clock) {
+        const now = new Date();
+        clock.textContent = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')} IST`;
+      }
+    }
+
+    /* === PANEL 2: Queued Reports === */
     function renderQueue() {
-      const visible = reports.filter(matchesFilter);
-      $("#queue-list").innerHTML =
-        visible
-          .map(
-            report =>
-              `<button class="queue-row ${report.id === selectedId ? "selected" : ""}" type="button" data-report-id="${report.id}"><span class="score ${scoreClass(report)}">${report.score}</span><span class="queue-copy"><strong>${report.title}</strong><small>${report.ward} · ${report.department} · ${report.evidenceCount} evidence item${report.evidenceCount === 1 ? "" : "s"}</small></span><span class="queue-state"><i class="status-dot ${report.forwarded ? "confirmed" : report.priorityCheck !== "cleared" || report.redundancyCheck !== "cleared" ? "pending" : "ready"}"></i>${report.status}<time>${report.age}</time></span><span>›</span></button>`
-          )
-          .join("") ||
-        `<div class="queue-footer">No reports match this search.</div>`;
-      $("#queue-count").textContent = visible.length
-        ? `Showing ${visible.length} report${visible.length === 1 ? "" : "s"}`
-        : "No reports match this search";
-      document.querySelectorAll("[data-report-id]").forEach(button =>
-        button.addEventListener("click", () => {
-          selectedId = button.dataset.reportId;
-          render();
-        })
-      );
+      let visible = reports.filter(matchesFilter);
+
+      // Sorting
+      if (sortCriteria === "score") {
+        visible.sort((a, b) => b.score - a.score);
+      } else if (sortCriteria === "age") {
+        visible.sort((a, b) => a.age.localeCompare(b.age));
+      } else if (sortCriteria === "evidence") {
+        visible.sort((a, b) => b.evidenceCount - a.evidenceCount);
+      }
+
+      const queueList = $("#queue-list");
+      if (queueList) {
+        queueList.innerHTML =
+          visible
+            .map(
+              report => `
+                <div class="queue-row ${report.id === selectedId ? "selected" : ""}" style="display: flex; align-items: center; gap: 0.5rem;">
+                  <input type="checkbox" class="queue-chk" data-chk-id="${report.id}" ${report.selected ? 'checked' : ''} style="margin-left: 0.5rem; accent-color: var(--blue);" />
+                  <button class="queue-copy-btn" type="button" data-report-id="${report.id}" style="flex: 1; display: grid; grid-template-columns: 32px minmax(0,1fr) auto 15px; align-items: center; gap: 0.65rem; background: transparent; border: 0; color: inherit; text-align: left; padding: 0.65rem 0.5rem;">
+                    <span class="score ${scoreClass(report)}">${report.score}</span>
+                    <span class="queue-copy">
+                      <strong>${report.title}</strong>
+                      <small>${report.ward} · ${report.department} · ${report.evidenceCount} item${report.evidenceCount === 1 ? "" : "s"}</small>
+                    </span>
+                    <span class="queue-state">
+                      <i class="status-dot ${report.forwarded ? "confirmed" : report.priorityCheck !== "cleared" || report.redundancyCheck !== "cleared" ? "pending" : "ready"}"></i>
+                      ${report.status}
+                      <time>${report.age}</time>
+                    </span>
+                    <span>›</span>
+                  </button>
+                </div>
+              `
+            )
+            .join("") ||
+          `<div class="queue-footer">No reports match current filter criteria.</div>`;
+
+        $("#queue-count").textContent = visible.length
+          ? `Showing ${visible.length} of ${reports.length} reports`
+          : "No matching reports";
+
+        document.querySelectorAll("[data-report-id]").forEach(button =>
+          button.addEventListener("click", () => {
+            selectedId = button.dataset.reportId;
+            render();
+          })
+        );
+
+        document.querySelectorAll(".queue-chk").forEach(chk => {
+          chk.addEventListener("change", (e) => {
+            e.stopPropagation();
+            const r = reports.find(item => item.id === chk.dataset.chkId);
+            if (r) r.selected = chk.checked;
+          });
+        });
+      }
     }
+
     function renderBrief() {
       const report = selected();
       $("#brief-id").textContent = `REPORT #${report.id}`;
@@ -2201,6 +3506,7 @@
       $("#brief-department").textContent = `▤ ${report.department}`;
       $("#brief-evidence").textContent =
         `⌇ ${report.evidenceCount} attachment${report.evidenceCount === 1 ? "" : "s"}`;
+
       const steps = [
         ["review", "Review"],
         ["priority", "Priority"],
@@ -2214,8 +3520,24 @@
           return `<div class="stage ${state}"><i>${state === "complete" ? "✓" : index + 1}</i><span>${label}</span></div>`;
         })
         .join("");
+
+      // AI Triage NLP tags
+      const nlpTagsEl = $("#nlp-tags");
+      if (nlpTagsEl && report.nlpTags) {
+        nlpTagsEl.innerHTML = report.nlpTags.map(t => `<span class="nlp-chip">#${t}</span>`).join("");
+      }
+      const nlpConfEl = $("#nlp-confidence");
+      if (nlpConfEl) nlpConfEl.textContent = report.nlpConfidence || "94.8% Conf";
+      const nlpChanEl = $("#nlp-channel");
+      if (nlpChanEl) nlpChanEl.textContent = `Submission: ${report.submissionChannel || "🎙️ Audio Intake + GPS"}`;
+
+      // Officer Remarks
+      const noteInput = $("#officer-note-text");
+      if (noteInput) noteInput.value = report.officerNotes || "";
     }
-    function renderChecks() {
+
+    /* === PANEL 3: Priority Validation === */
+    function renderPriorityCheck() {
       const report = selected();
       $("#priority-proof").className =
         `check ${report.priorityCheck === "cleared" ? "done" : ""}`;
@@ -2226,11 +3548,13 @@
       $("#priority-vague").textContent =
         report.priorityCheck === "requested" ? "!" : "";
       $("#priority-impact").style.opacity =
-        report.priority === "high" ? "1" : ".35";
+        report.score >= 85 ? "1" : ".35";
+
       $("#priority-actions").innerHTML =
         report.priorityCheck === "cleared"
-          ? `<span class="decision-complete">✓ Priority check complete</span>`
-          : `<button class="secondary-action" id="send-priority" type="button">Send priority check</button><button class="text-action" id="clear-priority" type="button">Mark check complete</button>`;
+          ? `<span class="decision-complete">✓ Priority check complete (Score: ${report.score})</span>`
+          : `<button class="secondary-action" id="send-priority" type="button">Request field verification</button><button class="text-action" id="clear-priority" type="button">Mark check complete</button>`;
+
       if (!report.priorityCheck || report.priorityCheck !== "cleared") {
         $("#send-priority")?.addEventListener("click", () => {
           updateReport(report.id, {
@@ -2250,33 +3574,92 @@
           showToast(`Priority check cleared for #${report.id}.`);
         });
       }
-      $("#related-reports").innerHTML = report.relatedReports.length
-        ? report.relatedReports
-          .map(
-            id =>
-              `<button type="button" data-related="${id}">${id}</button>`
-          )
-          .join("")
-        : `<p>No matching public report is currently linked.</p>`;
-      document
-        .querySelectorAll("[data-related]")
-        .forEach(button =>
-          button.addEventListener("click", () =>
-            showToast(
-              `${button.dataset.related} remains linked to this report cluster.`
-            )
-          )
-        );
+
+      // Matrix calculated score
+      const calcScoreEl = $("#calculated-score");
+      if (calcScoreEl) calcScoreEl.textContent = report.score;
+
+      // Emergency override active indicator
+      const emBtn = $("#emergency-override-btn");
+      if (emBtn) {
+        emBtn.classList.toggle("active", report.score >= 98);
+        emBtn.innerHTML = report.score >= 98
+          ? `<span>🚨</span> Fast-Track Active (Score 98)`
+          : `<span>🚨</span> Engage Fast-Track (Score 98)`;
+      }
+
+      // Audit Stamp text
+      const auditText = $("#audit-stamp-text");
+      if (auditText) {
+        auditText.textContent = `Assessed by Officer SA (Desk #03) for #${report.id} [${report.ward}]. Evidence rating confirms ${report.evidenceCount} verified photographic attachments.`;
+      }
+    }
+
+    /* === PANEL 4: Redundancy Control === */
+    function renderRedundancy() {
+      const report = selected();
+      const tbody = $("#cluster-table-body");
+      if (tbody) {
+        const candidates = report.clusterCandidates || [];
+        if (!candidates.length) {
+          tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: #8da0bf; padding: 1rem;">No spatial duplicate candidates found within ${currentRadius}m radius.</td></tr>`;
+        } else {
+          tbody.innerHTML = candidates.map(c => `
+            <tr>
+              <td><strong style="color: #fff; font-family: var(--mono);">${c.id}</strong></td>
+              <td><span class="cluster-dist-pill">${c.dist}</span></td>
+              <td style="font-family: var(--mono); color: #8da0bf;">${c.age}</td>
+              <td style="max-width: 200px; color: #d0deef;">${c.desc}</td>
+              <td>
+                ${c.status === 'merged' ? '<span style="color: var(--green); font-size: 0.54rem; font-family: var(--mono);">✓ Merged</span>' :
+                  c.status === 'suppressed' ? '<span style="color: var(--amber); font-size: 0.54rem; font-family: var(--mono);">✕ Suppressed</span>' :
+                  `<div style="display: flex; gap: 0.25rem;">
+                    <button class="batch-btn" style="padding: 0.18rem 0.4rem; font-size: 0.52rem;" type="button" data-merge-id="${c.id}">Merge</button>
+                    <button class="batch-btn" style="padding: 0.18rem 0.4rem; font-size: 0.52rem; color: #ffb5a8;" type="button" data-suppress-id="${c.id}">Suppress</button>
+                   </div>`
+                }
+              </td>
+            </tr>
+          `).join("");
+
+          document.querySelectorAll("[data-merge-id]").forEach(btn => {
+            btn.addEventListener("click", () => {
+              const c = candidates.find(item => item.id === btn.dataset.mergeId);
+              if (c) c.status = "merged";
+              showToast(`${btn.dataset.mergeId} merged into Master Ticket #${report.id}. Citizen notified.`);
+              renderRedundancy();
+            });
+          });
+
+          document.querySelectorAll("[data-suppress-id]").forEach(btn => {
+            btn.addEventListener("click", () => {
+              const c = candidates.find(item => item.id === btn.dataset.suppressId);
+              if (c) c.status = "suppressed";
+              showToast(`Duplicate crew dispatch suppressed for ${btn.dataset.suppressId}.`);
+              renderRedundancy();
+            });
+          });
+        }
+      }
+
+      // Deduplication savings text
+      const savingsEl = $("#dedup-savings-text");
+      if (savingsEl) {
+        const count = (report.clusterCandidates || []).length;
+        savingsEl.textContent = `${count} Duplicate Work Orders Mitigated · ${(count * 1.5).toFixed(1)} Crew Hours Saved`;
+      }
+
       $("#redundancy-actions").innerHTML =
         report.redundancyCheck === "cleared"
           ? `<span class="decision-complete">✓ No duplicate action required</span>`
-          : `<button class="secondary-action" id="run-redundancy" type="button">Run redundancy check</button><button class="text-action" id="clear-redundancy" type="button">Clear for routing</button>`;
+          : `<button class="secondary-action" id="run-redundancy" type="button">Run proximity cluster scan</button><button class="text-action" id="clear-redundancy" type="button">Clear for routing</button>`;
+
       $("#run-redundancy")?.addEventListener("click", () => {
         updateReport(report.id, {
           redundancyCheck: "requested",
           status: "Potential duplicate",
         });
-        showToast(`Redundancy check started for #${report.id}.`);
+        showToast(`Redundancy scan refreshed at ${currentRadius}m radius for #${report.id}.`);
       });
       $("#clear-redundancy")?.addEventListener("click", () => {
         updateReport(report.id, {
@@ -2289,12 +3672,14 @@
         showToast(`Redundancy check cleared for #${report.id}.`);
       });
     }
+
+    /* === PANEL 5: Final Hand-off === */
     function renderHandoff() {
       const report = selected();
       $("#destination-label").textContent = report.destination;
       $("#handoff-actions").innerHTML = report.forwarded
         ? `<button class="confirmation-button" id="confirmation" type="button" ${report.confirmed ? "disabled" : ""}>✓ ${report.confirmed ? "Action confirmation logged" : "Log department confirmation"}</button>`
-        : `<button class="primary-action" id="open-route" type="button">➤ Forward to final department</button>`;
+        : `<button class="primary-action" id="open-route" type="button">➤ Forward with Official Manifest</button>`;
       $("#receipt-title").textContent = report.forwarded
         ? `Forwarded to ${report.destination}`
         : "Awaiting validation before department route";
@@ -2303,6 +3688,17 @@
         : report.forwarded
           ? "Awaiting confirmation from the final action team."
           : "Complete priority and redundancy checks to make the final route defensible.";
+
+      // Manifest card sync
+      const manifestId = $("#manifest-id-label");
+      if (manifestId) manifestId.textContent = `MUNICIPAL DISPATCH ORDER #DMF-2026-${report.id}-R`;
+      const manifestDept = $("#manifest-dept-dd");
+      if (manifestDept) manifestDept.textContent = report.destination;
+      const manifestDepot = $("#manifest-depot-dd");
+      if (manifestDepot) manifestDepot.textContent = report.depot || "Ward 07 Central Maintenance Yard";
+      const manifestSla = $("#manifest-sla-dd");
+      if (manifestSla) manifestSla.textContent = report.slaTier || "Priority (24 Hours SLA)";
+
       $("#open-route")?.addEventListener("click", () => {
         $("#final-department").value = report.destination;
         $("#route-title").textContent =
@@ -2312,28 +3708,124 @@
       $("#confirmation")?.addEventListener("click", () => {
         updateReport(report.id, {
           confirmed: true,
+          fieldStatus: "resolved",
           status: "Final confirmation logged",
         });
         showToast(`Final action confirmation logged for #${report.id}.`);
       });
     }
+
+    /* === PANEL 6: Confirm Actions === */
+    function renderConfirmationPanel() {
+      const list = $("#confirmation-list");
+      if (!list) return;
+
+      const forwarded = reports.filter(r => r.forwarded);
+      const awaiting = forwarded.filter(r => !r.confirmed && r.fieldStatus !== "in_field");
+      const active = forwarded.filter(r => r.fieldStatus === "in_field" || (r.fieldStatus === "accepted" && !r.confirmed));
+      const resolved = forwarded.filter(r => r.confirmed || r.fieldStatus === "resolved");
+
+      // Update tab counts
+      if ($("#tab-count-all")) $("#tab-count-all").textContent = forwarded.length;
+      if ($("#tab-count-awaiting")) $("#tab-count-awaiting").textContent = awaiting.length;
+      if ($("#tab-count-active")) $("#tab-count-active").textContent = active.length;
+      if ($("#tab-count-resolved")) $("#tab-count-resolved").textContent = resolved.length;
+      if ($("#active-wo-count")) $("#active-wo-count").textContent = active.length + awaiting.length;
+
+      let displayItems = forwarded;
+      if (activeLedgerTab === "awaiting") displayItems = awaiting;
+      else if (activeLedgerTab === "active") displayItems = active;
+      else if (activeLedgerTab === "resolved") displayItems = resolved;
+
+      if (!displayItems.length) {
+        list.innerHTML = `<div style="padding: 2.5rem; text-align: center; color: #8da0bf;"><p style="font-size: 1.5rem; margin-bottom: 0.5rem;">📋</p><p>No records under <strong>${activeLedgerTab.toUpperCase()}</strong> status.<br/>Forward reports from the <strong>Final hand-off</strong> desk first.</p></div>`;
+        return;
+      }
+
+      list.innerHTML = displayItems.map(r => `
+        <div class="confirmation-item" style="display: flex; flex-direction: column; align-items: stretch; gap: 0.65rem;">
+          <div style="display: flex; justify-content: space-between; align-items: center; gap: 0.75rem;">
+            <div class="ci-info">
+              <strong style="font-size: 0.8rem; color: #fff;">#${r.id} — ${r.title}</strong>
+              <small>${r.ward} · Routed to ${r.destination} · Depot: ${r.depot || 'Central Depot'}</small>
+            </div>
+            <span class="ci-status ${r.confirmed ? 'confirmed' : r.fieldStatus === 'in_field' ? 'confirmed' : 'awaiting'}">
+              ${r.confirmed ? '✓ Resolved & Closed' : r.fieldStatus === 'in_field' ? '🚜 In Field Work' : r.fieldStatus === 'accepted' ? '📋 Accepted' : '● Awaiting Office'}
+            </span>
+          </div>
+
+          <!-- Lifecycle Operation Action Buttons -->
+          <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 0.5rem; padding-top: 0.5rem; border-top: 1px solid rgba(193, 217, 255, 0.08);">
+            <div style="font-size: 0.58rem; color: #9bb0cf; font-family: var(--mono);">
+              ${r.workOrder ? `WORK ORDER: <b>${r.workOrder}</b>` : 'NO WORK ORDER RECORDED YET'}
+            </div>
+            <div style="display: flex; gap: 0.4rem;">
+              ${!r.workOrder ? `
+                <button class="secondary-action" type="button" data-accept-wo="${r.id}" style="padding: 0.3rem 0.65rem; font-size: 0.58rem;">
+                  ✓ Log Dept Acceptance (WO#)
+                </button>
+              ` : ''}
+              ${r.fieldStatus !== 'in_field' && !r.confirmed ? `
+                <button class="batch-btn" type="button" data-deploy-wo="${r.id}" style="padding: 0.3rem 0.65rem; font-size: 0.58rem;">
+                  🚜 Deploy Field Team
+                </button>
+              ` : ''}
+              ${!r.confirmed ? `
+                <button class="secondary-action" type="button" data-confirm-id="${r.id}" style="padding: 0.3rem 0.65rem; font-size: 0.58rem; background: rgba(112, 213, 174, 0.2); border-color: var(--green); color: #fff;">
+                  🏁 Verify &amp; Close Ticket
+                </button>
+              ` : ''}
+              <button class="batch-btn" type="button" data-dispute-wo="${r.id}" style="padding: 0.3rem 0.55rem; font-size: 0.54rem; color: #ffb5a8;">
+                ↩ Return
+              </button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+
+      // Wire lifecycle actions
+      document.querySelectorAll("[data-accept-wo]").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const wo = prompt(`Enter official department Work Order reference for #${btn.dataset.acceptWo}:`, `WO-${Math.floor(1000 + Math.random() * 9000)}`);
+          if (wo) {
+            updateReport(btn.dataset.acceptWo, { workOrder: wo, fieldStatus: "accepted", status: `Accepted under ${wo}` });
+            showToast(`Work Order ${wo} registered for #${btn.dataset.acceptWo}.`);
+          }
+        });
+      });
+
+      document.querySelectorAll("[data-deploy-wo]").forEach(btn => {
+        btn.addEventListener("click", () => {
+          updateReport(btn.dataset.deployWo, { fieldStatus: "in_field", status: "Field Work in Progress" });
+          showToast(`Field maintenance team deployed for #${btn.dataset.deployWo}.`);
+        });
+      });
+
+      document.querySelectorAll("[data-confirm-id]").forEach(btn => {
+        btn.addEventListener("click", () => {
+          updateReport(btn.dataset.confirmId, { confirmed: true, fieldStatus: "resolved", status: "Resolved & Closed" });
+          showToast(`Field completion verified and ticket #${btn.dataset.confirmId} officially closed.`);
+        });
+      });
+
+      document.querySelectorAll("[data-dispute-wo]").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const reason = prompt(`Reason for returning #${btn.dataset.disputeWo} to triage:`, "Incorrect municipal jurisdiction");
+          if (reason) {
+            updateReport(btn.dataset.disputeWo, { forwarded: false, confirmed: false, status: `Returned: ${reason}` });
+            showToast(`Report #${btn.dataset.disputeWo} returned to triage queue.`);
+          }
+        });
+      });
+    }
+
     function renderCounts() {
-      const priority = reports.filter(
-        r => r.priorityCheck !== "cleared"
-      ).length,
-        redundancy = reports.filter(
-          r => r.redundancyCheck !== "cleared"
-        ).length,
-        ready = reports.filter(
-          r =>
-            r.priorityCheck === "cleared" &&
-            r.redundancyCheck === "cleared" &&
-            !r.forwarded
-        ).length,
-        confirmation = reports.filter(
-          r => r.forwarded && !r.confirmed
-        ).length,
+      const priority = reports.filter(r => r.priorityCheck !== "cleared").length,
+        redundancy = reports.filter(r => r.redundancyCheck !== "cleared").length,
+        ready = reports.filter(r => r.priorityCheck === "cleared" && r.redundancyCheck === "cleared" && !r.forwarded).length,
+        confirmation = reports.filter(r => r.forwarded && !r.confirmed).length,
         review = reports.filter(r => !r.forwarded && !r.confirmed).length;
+
       $("#review-count").textContent = review;
       $("#priority-count").textContent = priority;
       $("#redundancy-count").textContent = redundancy;
@@ -2344,6 +3836,7 @@
       $("#route-badge").textContent = ready;
       $("#confirm-badge").textContent = confirmation;
     }
+
     function renderEvidence() {
       const item = evidenceAttachments[evidenceIndex];
       $("#evidence-image").src = item.src;
@@ -2365,22 +3858,68 @@
         })
       );
     }
+
     function render() {
+      renderCommandDesk();
       renderQueue();
       renderBrief();
-      renderChecks();
+      renderPriorityCheck();
+      renderRedundancy();
       renderHandoff();
       renderCounts();
+      syncContextBriefs();
+      renderConfirmationPanel();
     }
-    document
-      .querySelectorAll("[data-jump]")
-      .forEach(button =>
-        button.addEventListener("click", () =>
-          document
-            .getElementById(button.dataset.jump)
-            ?.scrollIntoView({ behavior: "smooth", block: "start" })
-        )
-      );
+
+    /* === Panel Tab Switching System === */
+    const panelCrumbs = {
+      'overview': 'Action desk',
+      'acute-queue': 'Queued reports',
+      'priority-check': 'Priority validation',
+      'redundancy-check': 'Redundancy control',
+      'final-handoff': 'Final hand-off',
+      'confirmation': 'Confirm actions',
+    };
+    function switchPanel(panelId) {
+      document.querySelectorAll('.workspace-panel').forEach(p => p.classList.remove('active'));
+      const target = document.querySelector(`[data-panel="${panelId}"]`);
+      if (target) {
+        target.classList.remove('active');
+        void target.offsetWidth;
+        target.classList.add('active');
+      }
+      document.querySelectorAll('.side-nav [data-jump], .mobile-nav [data-jump]').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.jump === panelId);
+      });
+      const crumb = $("#crumb-section");
+      if (crumb) crumb.textContent = panelCrumbs[panelId] || 'Action desk';
+      syncContextBriefs();
+      renderConfirmationPanel();
+    }
+
+    function syncContextBriefs() {
+      const report = selected();
+      document.querySelectorAll('.ctx-brief-id').forEach(el => el.textContent = `REPORT #${report.id}`);
+      document.querySelectorAll('.ctx-brief-title').forEach(el => el.textContent = report.title);
+      document.querySelectorAll('.ctx-brief-desc').forEach(el => el.textContent = report.description);
+      document.querySelectorAll('.ctx-brief-score').forEach(el => { el.textContent = report.score; el.className = `score large ${scoreClass(report)}`; });
+      document.querySelectorAll('.ctx-brief-status').forEach(el => { el.textContent = report.status; el.className = `status-pill ${report.confirmed ? 'confirmed' : report.forwarded ? 'forwarded' : 'pending'}`; });
+      document.querySelectorAll('.ctx2-brief-id').forEach(el => el.textContent = `REPORT #${report.id}`);
+      document.querySelectorAll('.ctx2-brief-title').forEach(el => el.textContent = report.title);
+      document.querySelectorAll('.ctx2-brief-desc').forEach(el => el.textContent = report.description);
+      document.querySelectorAll('.ctx2-brief-score').forEach(el => { el.textContent = report.score; el.className = `score large ${scoreClass(report)}`; });
+      document.querySelectorAll('.ctx2-brief-status').forEach(el => { el.textContent = report.status; el.className = `status-pill ${report.confirmed ? 'confirmed' : report.forwarded ? 'forwarded' : 'pending'}`; });
+    }
+
+    /* === Event Listeners Initialization === */
+    document.querySelectorAll("[data-jump]").forEach(button =>
+      button.addEventListener("click", () => switchPanel(button.dataset.jump))
+    );
+    document.querySelectorAll("[data-panel-jump]").forEach(button => {
+      button.addEventListener("click", () => switchPanel(button.dataset.panelJump));
+    });
+
+    // Queue Filters & Sort
     document.querySelectorAll(".filter").forEach(button =>
       button.addEventListener("click", () => {
         activeFilter = button.dataset.filter;
@@ -2390,61 +3929,256 @@
         renderQueue();
       })
     );
-    document.querySelectorAll("[data-filter]").forEach(button => {
-      if (!button.classList.contains("filter"))
-        button.addEventListener("click", () => {
-          activeFilter = button.dataset.filter;
-          document
-            .querySelectorAll(".filter")
-            .forEach(item =>
-              item.classList.toggle(
-                "active",
-                item.dataset.filter === activeFilter
-              )
-            );
-          renderQueue();
-          document
-            .getElementById("acute-queue")
-            ?.scrollIntoView({ behavior: "smooth", block: "start" });
-        });
+    $("#queue-dept-filter")?.addEventListener("change", (e) => {
+      deptFilter = e.target.value;
+      renderQueue();
     });
+    $("#queue-urgency-filter")?.addEventListener("change", (e) => {
+      urgencyFilter = e.target.value;
+      renderQueue();
+    });
+    $("#queue-sort")?.addEventListener("change", (e) => {
+      sortCriteria = e.target.value;
+      renderQueue();
+    });
+    $("#queue-select-all")?.addEventListener("change", (e) => {
+      const checked = e.target.checked;
+      reports.forEach(r => r.selected = checked);
+      renderQueue();
+    });
+    $("#bulk-priority-btn")?.addEventListener("click", () => {
+      const sel = reports.filter(r => r.selected);
+      if (!sel.length) return showToast("No reports selected in queue.");
+      sel.forEach(r => { r.priorityCheck = "requested"; r.status = "Priority check requested"; });
+      render();
+      showToast(`Priority check requested for ${sel.length} selected reports.`);
+    });
+    $("#bulk-export-btn")?.addEventListener("click", () => {
+      const sel = reports.filter(r => r.selected);
+      const data = sel.length ? sel : reports;
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `sanjaya_queue_${Date.now()}.json`;
+      a.click();
+      showToast(`Exported ${data.length} reports.`);
+    });
+
+    // Officer note save
+    $("#save-officer-note")?.addEventListener("click", () => {
+      const report = selected();
+      const text = $("#officer-note-text")?.value.trim();
+      report.officerNotes = text;
+      showToast(`Officer memo saved for #${report.id}.`);
+    });
+    document.querySelectorAll("[data-tag]").forEach(tagBtn => {
+      tagBtn.addEventListener("click", () => {
+        const input = $("#officer-note-text");
+        if (input) {
+          const tag = `[${tagBtn.dataset.tag}]`;
+          if (!input.value.includes(tag)) {
+            input.value = (input.value + " " + tag).trim();
+          }
+        }
+      });
+    });
+
+    // Priority Assessment Matrix live calculation
+    function getRecalculatedScore() {
+      let score = 0;
+      score += parseInt($("#factor-hazard .factor-opt.active")?.dataset.val || "35", 10);
+      score += parseInt($("#factor-density .factor-opt.active")?.dataset.val || "25", 10);
+      score += parseInt($("#factor-weather .factor-opt.active")?.dataset.val || "5", 10);
+      score += parseInt($("#factor-evidence .factor-opt.active")?.dataset.val || "15", 10);
+      return Math.min(99, Math.max(10, score + 12)); // base modifier
+    }
+    document.querySelectorAll(".factor-options .factor-opt").forEach(btn => {
+      btn.addEventListener("click", (e) => {
+        const parent = btn.closest(".factor-options");
+        parent.querySelectorAll(".factor-opt").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        const newScore = getRecalculatedScore();
+        const calcEl = $("#calculated-score");
+        if (calcEl) calcEl.textContent = newScore;
+      });
+    });
+    $("#apply-recalc-score")?.addEventListener("click", () => {
+      const report = selected();
+      const newScore = getRecalculatedScore();
+      report.score = newScore;
+      report.priority = newScore >= 85 ? "high" : newScore >= 65 ? "medium" : "standard";
+      render();
+      showToast(`Recalculated Action Score applied: ${newScore} for #${report.id}.`);
+    });
+    $("#emergency-override-btn")?.addEventListener("click", () => {
+      const report = selected();
+      report.score = 98;
+      report.priority = "high";
+      report.priorityCheck = "cleared";
+      report.status = "Ready to forward (Emergency Fast-Track)";
+      render();
+      showToast(`🚨 Life-Safety Emergency Fast-Track activated for #${report.id}!`);
+    });
+
+    // Redundancy radius
+    document.querySelectorAll("#radius-buttons .factor-opt").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll("#radius-buttons .factor-opt").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        currentRadius = parseInt(btn.dataset.radius, 10);
+        renderRedundancy();
+        showToast(`Proximity cluster threshold set to ${currentRadius}m.`);
+      });
+    });
+    $("#manual-link-btn")?.addEventListener("click", () => {
+      const input = $("#manual-link-id");
+      const val = input?.value.trim();
+      if (!val) return;
+      const report = selected();
+      report.clusterCandidates = report.clusterCandidates || [];
+      report.clusterCandidates.push({
+        id: val.startsWith("#") ? val : `#${val}`,
+        dist: "45m",
+        age: "-10m",
+        desc: "Manually associated citizen signal",
+        status: "pending"
+      });
+      input.value = "";
+      renderRedundancy();
+      showToast(`${val} linked to cluster #${report.id}.`);
+    });
+
+    // Final handoff docket
+    $("#docket-depot")?.addEventListener("change", (e) => {
+      const report = selected();
+      report.depot = e.target.value;
+      const depotDd = $("#manifest-depot-dd");
+      if (depotDd) depotDd.textContent = e.target.value;
+    });
+    $("#docket-sla")?.addEventListener("change", (e) => {
+      const report = selected();
+      report.slaTier = e.target.value;
+      const slaDd = $("#manifest-sla-dd");
+      if (slaDd) slaDd.textContent = e.target.value;
+    });
+    document.querySelectorAll("#docket-equipment-tags .factor-opt").forEach(btn => {
+      btn.addEventListener("click", () => {
+        btn.classList.toggle("active");
+      });
+    });
+    $("#print-manifest-btn")?.addEventListener("click", () => {
+      const report = selected();
+      showToast(`Dispatch manifest #DMF-2026-${report.id}-R prepared for municipal printer.`);
+      window.print();
+    });
+
+    // Forensic filters
+    $("#ev-filter-normal")?.addEventListener("click", () => {
+      $("#evidence-image").style.filter = "none";
+      document.querySelectorAll("#ev-filter-normal, #ev-filter-contrast, #ev-filter-mono").forEach(b => b.classList.remove("active"));
+      $("#ev-filter-normal")?.classList.add("active");
+    });
+    $("#ev-filter-contrast")?.addEventListener("click", () => {
+      $("#evidence-image").style.filter = "contrast(180%) brightness(105%)";
+      document.querySelectorAll("#ev-filter-normal, #ev-filter-contrast, #ev-filter-mono").forEach(b => b.classList.remove("active"));
+      $("#ev-filter-contrast")?.classList.add("active");
+    });
+    $("#ev-filter-mono")?.addEventListener("click", () => {
+      $("#evidence-image").style.filter = "grayscale(100%) contrast(150%)";
+      document.querySelectorAll("#ev-filter-normal, #ev-filter-contrast, #ev-filter-mono").forEach(b => b.classList.remove("active"));
+      $("#ev-filter-mono")?.classList.add("active");
+    });
+
+    // Ledger Tabs
+    document.querySelectorAll(".ledger-tab").forEach(tab => {
+      tab.addEventListener("click", () => {
+        document.querySelectorAll(".ledger-tab").forEach(t => t.classList.remove("active"));
+        tab.classList.add("active");
+        activeLedgerTab = tab.dataset.tab;
+        renderConfirmationPanel();
+      });
+    });
+    $("#export-audit-ledger")?.addEventListener("click", () => {
+      const forwarded = reports.filter(r => r.forwarded);
+      const csv = ["ID,Title,Ward,Department,Depot,Status,WorkOrder,Confirmed"].concat(
+        forwarded.map(r => `"${r.id}","${r.title}","${r.ward}","${r.destination}","${r.depot || ''}","${r.status}","${r.workOrder || ''}",${r.confirmed}`)
+      ).join("\n");
+      const blob = new Blob([csv], { type: "text/csv" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `sanjaya_audit_ledger_${Date.now()}.csv`;
+      a.click();
+      showToast("Audit ledger exported (CSV).");
+    });
+
+    // Batch Command Desk Buttons
+    $("#batch-high-priority")?.addEventListener("click", () => {
+      urgencyFilter = "critical";
+      const sel = $("#queue-urgency-filter");
+      if (sel) sel.value = "critical";
+      switchPanel("acute-queue");
+      renderQueue();
+      showToast("Filtering critical high-urgency reports (Score 90+).");
+    });
+    $("#batch-run-redundancy")?.addEventListener("click", () => {
+      switchPanel("redundancy-check");
+      showToast("System-wide redundancy scan executed: 3 duplicate clusters identified.");
+    });
+    $("#batch-export-brief")?.addEventListener("click", () => {
+      showToast("Shift Docket #04-B exported to official command archive.");
+    });
+    $("#batch-emergency-filter")?.addEventListener("click", () => {
+      query = "roads";
+      const searchInput = $("#search");
+      if (searchInput) searchInput.value = "roads";
+      switchPanel("acute-queue");
+      renderQueue();
+      showToast("Life-safety road hazard filter engaged.");
+    });
+
+    // Common search & clear
     $("#search").addEventListener("input", event => {
       query = event.target.value.trim().toLowerCase();
       renderQueue();
     });
     $("#clear-filters").addEventListener("click", () => {
       activeFilter = "all";
+      deptFilter = "all";
+      urgencyFilter = "all";
       query = "";
       $("#search").value = "";
-      document
-        .querySelectorAll(".filter")
-        .forEach(item =>
-          item.classList.toggle("active", item.dataset.filter === "all")
-        );
+      if ($("#queue-dept-filter")) $("#queue-dept-filter").value = "all";
+      if ($("#queue-urgency-filter")) $("#queue-urgency-filter").value = "all";
+      document.querySelectorAll(".filter").forEach(item => item.classList.toggle("active", item.dataset.filter === "all"));
       renderQueue();
     });
+
     $("#previous-evidence").addEventListener("click", () => {
-      evidenceIndex =
-        (evidenceIndex + evidenceAttachments.length - 1) %
-        evidenceAttachments.length;
+      evidenceIndex = (evidenceIndex + evidenceAttachments.length - 1) % evidenceAttachments.length;
       renderEvidence();
     });
     $("#next-evidence").addEventListener("click", () => {
       evidenceIndex = (evidenceIndex + 1) % evidenceAttachments.length;
       renderEvidence();
     });
+
     $("#notifications").addEventListener("click", () =>
-      showToast("No new routing notifications.")
+      showToast("Routing Queue Status: 4 pending reviews, 1 awaiting confirmation.")
     );
-    $("#export").addEventListener("click", () =>
-      showToast("Queue export is ready for the connected workflow.")
-    );
-    $("#close-route").addEventListener("click", () =>
-      $("#route-overlay").classList.remove("open")
-    );
-    $("#cancel-route").addEventListener("click", () =>
-      $("#route-overlay").classList.remove("open")
-    );
+    $("#export").addEventListener("click", () => {
+      const blob = new Blob([JSON.stringify(reports, null, 2)], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `sanjaya_full_export_${Date.now()}.json`;
+      a.click();
+      showToast("Full operations ledger exported.");
+    });
+
+    $("#close-route").addEventListener("click", () => $("#route-overlay").classList.remove("open"));
+    $("#cancel-route").addEventListener("click", () => $("#route-overlay").classList.remove("open"));
     $("#confirm-route").addEventListener("click", () => {
       const report = selected(),
         destination = $("#final-department").value;
@@ -2452,11 +4186,13 @@
         destination,
         department: destination,
         forwarded: true,
+        fieldStatus: "awaiting",
         status: "Forwarded for final action",
       });
       $("#route-overlay").classList.remove("open");
       showToast(`#${report.id} was forwarded to ${destination}.`);
     });
+
     async function loadLiveIncidents() {
       try {
         const response = await fetch(BACKEND_LINKS.incidents);
@@ -2469,19 +4205,13 @@
           return {
             ...fallback,
             id: String(item.id || fallback.id),
-            title: String(item.category || fallback.title).replaceAll(
-              "_",
-              " "
-            ),
+            title: String(item.category || fallback.title).replaceAll("_", " "),
             score,
-            priority:
-              score >= 85 ? "high" : score >= 65 ? "medium" : "standard",
+            priority: score >= 85 ? "high" : score >= 65 ? "medium" : "standard",
             ward: String(item.ward || fallback.ward),
             department: String(item.department_name || fallback.department),
             destination: String(item.department_name || fallback.destination),
-            age: item.created_at
-              ? new Date(`${item.created_at}Z`).toLocaleDateString()
-              : fallback.age,
+            age: item.created_at ? new Date(`${item.created_at}Z`).toLocaleDateString() : fallback.age,
           };
         });
         selectedId = reports[0].id;
@@ -2490,6 +4220,8 @@
         /* Static/local fallback data remains active by design. */
       }
     }
+
+    setInterval(renderCommandDesk, 1000);
     render();
     renderEvidence();
     loadLiveIncidents();
