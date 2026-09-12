@@ -1,16 +1,20 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Ask SANJAYA is a multilingual voice and text civic assistant helping residents report issues, track tickets, and understand municipal procedures." />
+  <meta name="description"
+    content="Ask SANJAYA is a multilingual voice and text civic assistant helping residents report issues, track tickets, and understand municipal procedures." />
   <meta name="theme-color" content="#160D12" />
   <title>Ask SANJAYA — Voice & Text Civic Assistant</title>
-  
+
   <!-- Typography -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Instrument+Serif:ital@0;1&family=Noto+Sans+Devanagari:wght@400;500;600&family=Noto+Sans+Bengali:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Instrument+Serif:ital@0;1&family=Noto+Sans+Devanagari:wght@400;500;600&family=Noto+Sans+Bengali:wght@400;500;600&display=swap"
+    rel="stylesheet" />
 
   <!-- Stylesheets -->
   <link rel="stylesheet" href="css/tokens.css" />
@@ -18,6 +22,7 @@
   <link rel="stylesheet" href="css/components.css" />
   <link rel="stylesheet" href="css/style.css" />
 </head>
+
 <body>
   <a href="#main-content" class="skip-link">Skip to main content</a>
   <div class="site-texture" aria-hidden="true"></div>
@@ -35,7 +40,8 @@
       </a>
 
       <nav class="nav-desktop" aria-label="Primary Navigation">
-        <a href="report.html" class="btn btn-primary" style="padding: 0.55rem 1.15rem; min-height: 38px;">Report an issue</a>
+        <a href="report.html" class="btn btn-primary" style="padding: 0.55rem 1.15rem; min-height: 38px;">Report an
+          issue</a>
         <a href="track.html" class="btn btn-outline" style="padding: 0.55rem 1.15rem; min-height: 38px;">Track</a>
         <a href="how-it-works.html" class="nav-link">How it works</a>
         <a href="civic-guide.html" class="nav-link">Civic guide</a>
@@ -43,7 +49,10 @@
         <div class="nav-dropdown">
           <button class="dropdown-trigger" aria-expanded="false" aria-haspopup="true">
             <span>More</span>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+              stroke-linejoin="round" aria-hidden="true">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
           </button>
           <div class="dropdown-menu" role="menu">
             <a href="stories.html" class="dropdown-item" role="menuitem">Public stories</a>
@@ -56,12 +65,20 @@
       </nav>
 
       <div class="header-actions">
-        <div class="lang-selector" aria-label="Language">
-          <span class="lang-btn is-active" style="cursor: default;">English</span>
+        <!-- Language Selector: English / Hindi / Bengali only -->
+        <div class="lang-selector" aria-label="Choose assistant language" role="group">
+          <button type="button" class="lang-btn is-active" data-lang="en" aria-pressed="true">EN</button>
+          <button type="button" class="lang-btn" data-lang="hi" aria-pressed="false" lang="hi">हिं</button>
+          <button type="button" class="lang-btn" data-lang="bn" aria-pressed="false" lang="bn">বাং</button>
         </div>
 
         <button class="menu-toggle" aria-label="Open mobile navigation menu" aria-expanded="false">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
         </button>
       </div>
     </div>
@@ -102,13 +119,14 @@
   <!-- Main Content -->
   <main id="main-content" style="padding-block: 2.5rem 5rem;">
     <div class="shell assistant-shell">
-      
+
       <!-- Page Header -->
       <div style="margin-bottom: 2rem; text-align: center;">
-        <div class="eyebrow">Civic Voice Assistant</div>
-        <h1 class="section-title">Ask in the way <em>that works for you</em></h1>
-        <p class="section-lead" style="margin-inline: auto; margin-bottom: 1.5rem;">
-          Type or speak naturally in English. Ask questions about reporting issues, tracking tickets, or municipal services.
+        <div class="eyebrow" data-i18n="eyebrow">Civic Voice Assistant</div>
+        <h1 class="section-title" data-i18n-html="title">Ask in the way <em>that works for you</em></h1>
+        <p class="section-lead" style="margin-inline: auto; margin-bottom: 1.5rem;" data-i18n="lead">
+          Type or speak naturally in English. Ask questions about reporting issues, tracking tickets, or municipal
+          services.
         </p>
       </div>
 
@@ -118,57 +136,64 @@
         <div class="chat-header">
           <div style="display: flex; align-items: center; gap: 0.75rem;">
             <div style="width: 10px; height: 10px; border-radius: 50%; background: var(--success);"></div>
-            <strong style="color: var(--parchment); font-family: var(--font-serif); font-size: 1.15rem;">Ask SANJAYA Assistant</strong>
+            <strong style="color: var(--parchment); font-family: var(--font-serif); font-size: 1.15rem;"
+              data-i18n="chatTitle">Ask SANJAYA Assistant</strong>
           </div>
-          <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--warm-yellow);">Voice & Text Enabled</span>
+          <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--warm-yellow);"
+            data-i18n="chatBadge">Voice & Text Enabled</span>
         </div>
 
         <!-- Chat Messages Live Region -->
         <div id="chat-messages" class="chat-messages" role="log" aria-live="polite">
-          <div class="chat-msg msg-assistant">
-            Greetings. I am SANJAYA's civic assistant. How may I assist you today? You can tap any suggested prompt below or type your question.
+          <div class="chat-msg msg-assistant" id="greeting-msg" data-i18n="greeting">
+            Greetings. I am SANJAYA's civic assistant. How may I assist you today? You can tap any suggested prompt
+            below or type your question.
           </div>
         </div>
 
         <!-- Suggested Prompt Chips (PRD Section 6.7) -->
         <div class="chat-prompts-bar" aria-label="Suggested questions">
-          <button type="button" class="prompt-chip">What can I report?</button>
-          <button type="button" class="prompt-chip">How do I find my ticket?</button>
-          <button type="button" class="prompt-chip">Can I report without a photo?</button>
-          <button type="button" class="prompt-chip">What does 'Sent to responsible team' mean?</button>
-          <button type="button" class="prompt-chip">How are duplicate reports handled?</button>
+          <button type="button" class="prompt-chip" data-i18n="chip1">What can I report?</button>
+          <button type="button" class="prompt-chip" data-i18n="chip2">How do I find my ticket?</button>
+          <button type="button" class="prompt-chip" data-i18n="chip3">Can I report without a photo?</button>
+          <button type="button" class="prompt-chip" data-i18n="chip4">What does 'Sent to responsible team'
+            mean?</button>
+          <button type="button" class="prompt-chip" data-i18n="chip5">How are duplicate reports handled?</button>
         </div>
 
         <!-- Chat Input Bar -->
         <div class="chat-input-bar">
-          <button type="button" id="chat-mic-btn" class="chat-mic-btn" aria-label="Record voice question" title="Speak question">
+          <button type="button" id="chat-mic-btn" class="chat-mic-btn" data-i18n-aria="micLabel"
+            data-i18n-title="micTitle" aria-label="Record voice question" title="Speak question">
             🎤
           </button>
-          <input 
-            type="text" 
-            id="chat-input" 
-            class="chat-input" 
-            placeholder="Type your civic question in English..." 
-            autocomplete="off"
-          />
+          <input type="text" id="chat-input" class="chat-input" data-i18n-placeholder="placeholder"
+            placeholder="Type your civic question in English..." autocomplete="off" />
           <button type="button" id="chat-send-btn" class="btn btn-primary" style="padding-inline: 1.25rem;">
-            <span>Ask</span>
+            <span data-i18n="send">Ask</span>
           </button>
         </div>
       </div>
 
       <!-- Quick Guidance Notes -->
       <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-top: 2rem;">
-        <div style="background: var(--surface-card); border: 1px solid var(--line-gold); padding: 1.25rem; border-radius: var(--radius-md);">
-          <div style="color: var(--warm-yellow); font-weight: 600; margin-bottom: 0.35rem;">🎙️ Voice Guidance</div>
-          <p style="font-size: 0.85rem; color: var(--muted-parchment); margin: 0; line-height: 1.5;">
-            Tap the microphone button and speak clearly. The assistant will transcribe your speech and respond with audio synthesis.
+        <div
+          style="background: var(--surface-card); border: 1px solid var(--line-gold); padding: 1.25rem; border-radius: var(--radius-md);">
+          <div style="color: var(--warm-yellow); font-weight: 600; margin-bottom: 0.35rem;" data-i18n="voiceGuideTitle">
+            🎙️ Voice Guidance</div>
+          <p style="font-size: 0.85rem; color: var(--muted-parchment); margin: 0; line-height: 1.5;"
+            data-i18n="voiceGuideText">
+            Tap the microphone button and speak clearly. The assistant will transcribe your speech and respond with
+            audio synthesis.
           </p>
         </div>
 
-        <div style="background: var(--surface-card); border: 1px solid var(--line-gold); padding: 1.25rem; border-radius: var(--radius-md);">
-          <div style="color: var(--warm-yellow); font-weight: 600; margin-bottom: 0.35rem;">🔒 Citizen Privacy</div>
-          <p style="font-size: 0.85rem; color: var(--muted-parchment); margin: 0; line-height: 1.5;">
+        <div
+          style="background: var(--surface-card); border: 1px solid var(--line-gold); padding: 1.25rem; border-radius: var(--radius-md);">
+          <div style="color: var(--warm-yellow); font-weight: 600; margin-bottom: 0.35rem;" data-i18n="privacyTitle">🔒
+            Citizen Privacy</div>
+          <p style="font-size: 0.85rem; color: var(--muted-parchment); margin: 0; line-height: 1.5;"
+            data-i18n="privacyText">
             Queries are processed for civic guidance without storing personal credentials or private recordings.
           </p>
         </div>
@@ -186,7 +211,8 @@
             <div class="brand-mark">SJ</div>
             <span class="brand-name">SANJAYA</span>
           </div>
-          <p>A dignified, public-facing civic portal designed to connect resident signals with municipal action through evidence, transparency, and respect.</p>
+          <p>A dignified, public-facing civic portal designed to connect resident signals with municipal action through
+            evidence, transparency, and respect.</p>
         </div>
         <div class="footer-col">
           <h4>Public Action</h4>
@@ -231,6 +257,8 @@
   <script src="js/data.js"></script>
   <script src="js/adapter.js"></script>
   <script src="js/shared.js"></script>
+  <script src="js/i18n.js"></script>
   <script src="js/assistant.js"></script>
 </body>
+
 </html>
