@@ -2392,6 +2392,30 @@
     .route-dialog h2 { color: #173B63; }
     .route-dialog select { color: #263238; background: #FFFFFF; border-color: #B8CDDC; }
 
+    .ask-sanjaya-fab {
+      position: fixed;
+      right: clamp(1rem, 2.5vw, 2rem);
+      bottom: clamp(1rem, 2.5vw, 2rem);
+      z-index: 9999;
+      display: inline-flex;
+      align-items: center;
+      gap: .55rem;
+      min-height: 46px;
+      padding: .55rem .85rem .55rem .6rem;
+      border: 1px solid #9BB7CB;
+      border-radius: 999px;
+      color: #fff;
+      background: #173B63;
+      box-shadow: 0 8px 20px rgba(23,59,99,.24);
+      font: 700 .78rem var(--sans);
+      text-decoration: none;
+      transition: transform .2s ease, background .2s ease, box-shadow .2s ease;
+    }
+    .ask-sanjaya-fab:hover { color: #fff; background: #2F6FA3; transform: translateY(-2px); box-shadow: 0 11px 24px rgba(23,59,99,.28); }
+    .ask-sanjaya-fab:focus-visible { outline: 3px solid #C9892B; outline-offset: 3px; }
+    .ask-sanjaya-fab-icon { display: grid; width: 28px; height: 28px; place-items: center; border-radius: 50%; color: #173B63; background: #fff; font-size: 1rem; font-weight: 800; }
+    @media (max-width: 520px) { .ask-sanjaya-fab { right: .75rem; bottom: .75rem; } .ask-sanjaya-fab span:last-child { font-size: .72rem; } }
+
     @media (prefers-reduced-motion: reduce) {
 
       *,
@@ -4368,6 +4392,11 @@
     renderEvidence();
     loadLiveIncidents();
   </script>
+
+  <a class="ask-sanjaya-fab" href="assistant.html#assistant-chat" aria-label="Ask SANJAYA assistant">
+    <span class="ask-sanjaya-fab-icon" aria-hidden="true">?</span>
+    <span>Ask SANJAYA</span>
+  </a>
 </body>
 
 </html>

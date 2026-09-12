@@ -822,3 +822,57 @@ body { color: #263238; background: #FFFFFF; }
   .guide-toc { position: relative; top: auto; }
   .guide-toc a { padding-block: 0.7rem; }
 }
+
+
+/* ==========================================================================\n   Persistent Ask SANJAYA floating action\n   ========================================================================== */
+.ask-sanjaya-fab {
+  position: fixed;
+  right: clamp(1rem, 2.5vw, 2rem);
+  bottom: clamp(1rem, 2.5vw, 2rem);
+  z-index: var(--z-toast);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  min-height: 46px;
+  padding: 0.55rem 0.85rem 0.55rem 0.6rem;
+  border: 1px solid #9BB7CB;
+  border-radius: 999px;
+  color: #FFFFFF;
+  background: #173B63;
+  box-shadow: 0 8px 20px rgba(23, 59, 99, 0.24);
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  transition: transform var(--transition-quick), background var(--transition-quick), box-shadow var(--transition-quick);
+}
+.ask-sanjaya-fab:hover {
+  color: #FFFFFF;
+  background: #2F6FA3;
+  transform: translateY(-2px);
+  box-shadow: 0 11px 24px rgba(23, 59, 99, 0.28);
+}
+.ask-sanjaya-fab:focus-visible {
+  outline: 3px solid #C9892B;
+  outline-offset: 3px;
+}
+.ask-sanjaya-fab-icon {
+  display: grid;
+  width: 28px;
+  height: 28px;
+  place-items: center;
+  border-radius: 50%;
+  color: #173B63;
+  background: #FFFFFF;
+  font-size: 1rem;
+  font-weight: 800;
+}
+@media (max-width: 520px) {
+  .ask-sanjaya-fab { right: 0.75rem; bottom: 0.75rem; }
+  .ask-sanjaya-fab span:last-child { font-size: 0.72rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ask-sanjaya-fab { transition: none; }
+  .ask-sanjaya-fab:hover { transform: none; }
+}
