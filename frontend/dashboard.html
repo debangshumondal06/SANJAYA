@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="SANJAYA civic report-action dashboard." />
-  <meta name="theme-color" content="#07101f" />
+  <meta name="theme-color" content="#173B63" />
   <title>SANJAYA — Civic Report Action Desk</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -14,18 +14,18 @@
     rel="stylesheet" />
   <style>
     :root {
-      --ink: #07101f;
-      --deep: #0b1730;
-      --panel: #0d1b34;
-      --panel-2: #132545;
-      --blue: #377bff;
-      --blue-soft: #b5d1ff;
-      --white: #f8fbff;
-      --muted: #8da0bf;
-      --line: rgba(193, 217, 255, 0.16);
-      --green: #70d5ae;
-      --amber: #ffbf6c;
-      --red: #ff8975;
+      --ink: #ffffff;
+      --deep: #f5f2fa;
+      --panel: #ffffff;
+      --panel-2: #f0ebf8;
+      --blue: #173B63;
+      --blue-soft: #a38bc9;
+      --white: #2d2545;
+      --muted: #655d78;
+      --line: rgba(47, 111, 163, 0.18);
+      --green: #2f7a59;
+      --amber: #8b641d;
+      --red: #b64d58;
       --serif: "Instrument Serif", Georgia, serif;
       --sans: "DM Sans", Arial, sans-serif;
       --mono: "DM Mono", monospace;
@@ -1175,7 +1175,7 @@
     }
 
     .primary-action {
-      color: #07101f;
+      color: #0f223d;
       background: linear-gradient(135deg, #b8d4ff, #5992ff);
     }
 
@@ -1275,7 +1275,7 @@
       position: relative;
       min-height: 178px;
       overflow: hidden;
-      background: #07101f;
+      background: #0f223d;
     }
 
     .evidence-stage img {
@@ -1458,7 +1458,7 @@
       border: 1px solid rgba(159, 194, 255, 0.25);
       border-radius: 4px;
       color: #edf5ff;
-      background: #0b1730;
+      background: #0b1a30;
       font-size: 0.62rem;
     }
 
@@ -2250,6 +2250,148 @@
       font-weight: 700;
     }
 
+    /* Public-service light workspace refinement */
+    body {
+      color: #2d2545;
+      background: #f8f6fc;
+    }
+    .page-noise { opacity: 0.012; }
+    .sidebar {
+      background: #ffffff;
+      border-right-color: #ddd5ed;
+      box-shadow: 2px 0 14px rgba(45, 37, 69, 0.05);
+    }
+    .brand-mark { color: #ffffff; background: linear-gradient(145deg, #8b6bc0, #173B63); box-shadow: 0 5px 12px rgba(115,82,168,.2); }
+    .brand-text, .page-head h1, .metric-card strong, .panel-head h2, .brief-title h2, .decision-heading h2, .handoff-top h2, .evidence-head h2 { color: #2d2545; }
+    .brand-text small, .workspace-label, .crumb, .topbar, .metric-card span, .panel-head span, .decision-heading span, .handoff-top span { color: #716a83; }
+    .nav-action { color: #655d78; }
+    .nav-action .nav-icon, .control-kicker, .panel-kicker, .eyebrow { color: #173B63; }
+    .nav-action:hover, .nav-action.active { color: #2d2545; border-color: #cfc3e5; background: #f0ebf8; }
+    .sidebar-control, .panel, .metric-card { border-color: #ddd5ed; background: #ffffff; box-shadow: 0 8px 20px rgba(45,37,69,.07); }
+    .sidebar-control { background: #f5f2fa; }
+    .sidebar-control strong { color: #2d2545; }
+    .sidebar-control p, .control-legend, .page-head > p { color: #655d78; }
+    .topbar, .page-head { border-bottom-color: #e5dff0; }
+    .search-box, .icon-button { border-color: #cfc3e5; background: #ffffff; color: #655d78; }
+    .search-box input, .operator strong { color: #2d2545; }
+    .operator small { color: #716a83; }
+    .metric-card { background: linear-gradient(145deg, #ffffff, #f5f2fa); }
+    .panel { background-color: #ffffff; }
+    .filter, .ledger-tab { border-color: #cfc3e5; color: #655d78; background: #ffffff; }
+    .filter:hover, .filter.active, .ledger-tab.active { border-color: #173B63; color: #ffffff; background: #173B63; }
+    .queue-row, .panel-head, .brief-card, .handoff-card { border-color: #e5dff0; }
+    .queue-row:hover { background: #f8f6fc; }
+    .page-head h1 em { color: #173B63; }
+
+    /* Recommended civic palette final pass */
+    body { color: #263238; background: #F3F7FA; }
+    .sidebar { background: #FFFFFF; border-right-color: #D2E0EA; }
+    .brand-mark { background: linear-gradient(145deg, #4F8CB9, #173B63); }
+    .brand-text, .page-head h1, .metric-card strong, .panel-head h2, .brief-title h2, .decision-heading h2, .handoff-top h2, .evidence-head h2 { color: #173B63; }
+    .brand-text small, .workspace-label, .crumb, .metric-card span, .panel-head span, .decision-heading span, .handoff-top span, .sidebar-control p, .control-legend, .page-head > p { color: #586A78; }
+    .nav-action { color: #586A78; }
+    .nav-action .nav-icon, .control-kicker, .panel-kicker, .eyebrow { color: #2F6FA3; }
+    .nav-action:hover, .nav-action.active { color: #173B63; border-color: #B8CDDC; background: #EAF2F8; }
+    .sidebar-control, .panel, .metric-card { border-color: #D2E0EA; background: #FFFFFF; box-shadow: 0 8px 20px rgba(23,59,99,.07); }
+    .sidebar-control { background: #F3F7FA; }
+    .topbar, .page-head { border-bottom-color: #DDE8EF; }
+    .search-box, .icon-button { border-color: #B8CDDC; background: #FFFFFF; color: #586A78; }
+    .search-box input, .operator strong { color: #263238; }
+    .operator small { color: #586A78; }
+    .metric-card { background: linear-gradient(145deg, #FFFFFF, #F3F7FA); }
+    .filter, .ledger-tab { border-color: #B8CDDC; color: #586A78; background: #FFFFFF; }
+    .filter:hover, .filter.active, .ledger-tab.active { border-color: #2F6FA3; color: #FFFFFF; background: #2F6FA3; }
+    .queue-row, .panel-head, .brief-card, .handoff-card { border-color: #DDE8EF; }
+    .queue-row:hover { background: #F8FBFD; }
+    .page-head h1 em { color: #2F6FA3; }
+    .metric-amber { border-left-color: #C9892B; }
+    .metric-amber small { color: #98691D; }
+
+    /* Authority desk readability pass: lower glare, stronger text hierarchy */
+    body { background: #EEF3F7; }
+    .content { background: #EEF3F7; }
+    .page-noise { opacity: 0; }
+    .panel, .metric-card, .sidebar-control { background: #FFFFFF; }
+    .panel-head h2, .brief-title h2, .decision-heading h2, .handoff-top h2, .evidence-head h2 { color: #173B63; }
+    .panel-head span, .decision-heading span, .handoff-top span { color: #526777; }
+    .queue-row { min-height: 62px; border-bottom-color: #D6E1E9; }
+    .queue-row:hover { background: #EAF2F8; }
+    .queue-row.selected { background: linear-gradient(90deg, #DCEBF5, #F3F7FA); box-shadow: inset 4px 0 0 #C9892B; }
+    .queue-copy strong { color: #173B63; font-size: .69rem; }
+    .queue-copy small, .queue-footer { color: #526777; }
+    .queue-state { color: #235B88; }
+    .queue-state time { color: #647987; }
+    .queue-footer button { color: #235B88; }
+    .score { color: #FFFFFF; background: #2F6FA3; }
+    .score-high { color: #FFFFFF; background: #B94A48; }
+    .score-medium { color: #FFFFFF; background: #98691D; }
+    .score-standard { color: #FFFFFF; background: #2F6FA3; }
+    .status-dot.ready { background: #2F6FA3; }
+    .filter, .ledger-tab { min-height: 30px; color: #355A72; }
+    .report-brief { border-top-color: #C9892B; }
+    .operator b { background: #173B63; color: #FFFFFF; }
+    .authority-banner, body > div:first-child { background: #173B63 !important; border-bottom-color: #C9892B !important; color: #FFFFFF !important; }
+    body > div:first-child a { color: #FFFFFF !important; }
+
+    /* Dense authority panels: readable contrast without high-glare white-on-white */
+    .workspace-panel { color: #263238; }
+    .panel-section-header { border-bottom-color: #D2E0EA; }
+    .panel-section-header .panel-meta h2 { color: #173B63; }
+    .panel-section-header .panel-meta p { color: #526777; }
+    .panel-section-header .panel-icon { background: #EAF2F8; color: #2F6FA3; border-color: #B8CDDC; }
+    .panel-section-header .panel-icon.amber { background: #FFF5E5; color: #98691D; border-color: #E4C98F; }
+    .panel-section-header .panel-icon.green { background: #E8F4EE; color: #2E7D5B; border-color: #AED1BE; }
+    .panel-section-header .panel-icon.red { background: #FBEDEE; color: #B94A48; border-color: #E1B4B5; }
+    .panel-section-header .panel-icon.white { background: #EAF2F8; color: #173B63; border-color: #B8CDDC; }
+    .ops-card, .shift-bar, .batch-ops-bar, .confirmation-item, .final-handoff, .evidence-panel, .matrix-box, .decision-panel, .decision-card {
+      color: #263238;
+      background: #F7FAFC;
+      border-color: #D2E0EA;
+      box-shadow: 0 4px 14px rgba(23,59,99,.06);
+    }
+    .ops-card-head { border-bottom-color: #D2E0EA; }
+    .ops-card-head h3, .decision-panel h3, .final-handoff h3, .evidence-panel h3 { color: #173B63; }
+    .ops-badge { color: #235B88; background: #EAF2F8; border-color: #B8CDDC; }
+    .shift-item, .shift-item span { color: #526777; }
+    .shift-item b { color: #173B63; }
+    .activity-item { color: #355A72; background: #FFFFFF; border-bottom-color: #DDE8EF; }
+    .activity-item:hover { background: #EAF2F8; }
+    .activity-top { color: #647987; }
+    .ward-cell { background: #FFFFFF; border-color: #D2E0EA; }
+    .ward-cell:hover, .ward-cell.active { background: #EAF2F8; border-color: #2F6FA3; }
+    .ward-cell strong, .dept-load-meta strong { color: #173B63; }
+    .ward-cell span, .dept-load-meta span { color: #647987; }
+    .dept-bar-track { background: #DDE8EF; }
+    .batch-ops-bar { background: #EAF2F8; border-color: #B8CDDC; }
+    .batch-ops-bar strong { color: #173B63 !important; }
+    .batch-ops-bar span { color: #526777 !important; }
+    .batch-btn { color: #235B88; background: #FFFFFF; border-color: #B8CDDC; }
+    .batch-btn:hover { color: #FFFFFF; background: #2F6FA3; border-color: #2F6FA3; }
+    .queue-adv-filters { border-top-color: #DDE8EF; }
+    .queue-select { color: #263238; background: #FFFFFF; border-color: #B8CDDC; }
+    .queue-bulk-bar { color: #355A72; background: #EAF2F8; }
+    .nlp-box { background: #EAF4EF; border-color: #AED1BE; }
+    .nlp-title { color: #2E7D5B; }
+    .nlp-chip { color: #276747; background: #DDEFE4; border-color: #AED1BE; }
+    .officer-note-card { background: #F7FAFC; border-color: #D2E0EA; }
+    .officer-note-input { color: #263238; background: #FFFFFF; border-color: #B8CDDC; }
+    .confirmation-item .ci-info strong { color: #173B63; }
+    .confirmation-item .ci-info small { color: #647987; }
+    .ci-status.awaiting { color: #8B5D15; background: #FFF5E5; border-color: #E4C98F; }
+    .ci-status.confirmed { color: #276747; background: #E8F4EE; border-color: #AED1BE; }
+    .decision-complete { color: #276747; background: #E8F4EE; border-color: #AED1BE; }
+    .primary-action, .confirmation-button { color: #FFFFFF; background: #173B63; border-color: #173B63; }
+    .primary-action:hover, .confirmation-button:hover { background: #2F6FA3; }
+    .secondary-action { color: #235B88; background: #EAF2F8; border-color: #B8CDDC; }
+    .text-action { color: #235B88; }
+    .evidence-head a { color: #235B88; }
+    .evidence-stage { background: #173B63; }
+    .evidence-controls { background: #EAF2F8; border-top-color: #B8CDDC; }
+    .evidence-controls > button { color: #173B63; }
+    .route-dialog { color: #263238; background: #FFFFFF; border-color: #B8CDDC; }
+    .route-dialog h2 { color: #173B63; }
+    .route-dialog select { color: #263238; background: #FFFFFF; border-color: #B8CDDC; }
+
     @media (prefers-reduced-motion: reduce) {
 
       *,
@@ -2264,8 +2406,8 @@
 </head>
 
 <body>
-  <div style="background: rgba(114, 38, 58, 0.95); border-bottom: 1px solid #C99A3D; color: #F0C75E; padding: 0.45rem 1rem; text-align: center; font-family: 'DM Mono', monospace; font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; z-index: 9999; position: relative;">
-    🔒 Authority Operations Desk • Official Personnel Only • Residents: <a href="index.html" style="color: #F6E7BF; text-decoration: underline; margin-left: 4px;">Return to Public Civic Portal</a>
+  <div style="background: #F0EBF8; border-bottom: 1px solid #DDD5ED; color: #2F6FA3; padding: 0.45rem 1rem; text-align: center; font-family: 'DM Mono', monospace; font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; z-index: 9999; position: relative;">
+    🔒 Authority Operations Desk • Official Personnel Only • Residents: <a href="index.html" style="color: #173B63; text-decoration: underline; margin-left: 4px;">Return to Public Civic Portal</a>
   </div>
   <div class="page-noise" aria-hidden="true"></div>
   <div class="app">

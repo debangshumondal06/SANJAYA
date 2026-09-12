@@ -1,40 +1,40 @@
 /* ==========================================================================
    SANJAYA Design System Tokens
-   Heritage Civic Aesthetic: Dark Maroon, Antique Gold & Warm Yellow
+   Public Service Aesthetic: Civic Blue, White & Saffron
    Strictly adheres to PRD specifications
    ========================================================================== */
 
 :root {
   /* --- Core Palette Tokens (PRD Section 7.1) --- */
-  --ink: #160D12;             /* Page background: Deep maroon-black foundation */
-  --maroon: #4B1724;          /* Primary surface: Cards, bands, navigation emphasis */
-  --burgundy: #72263A;        /* Interactive dark accent: Hover, selected states */
-  --antique-gold: #C99A3D;    /* Primary action: Buttons, active indicators, rules */
-  --warm-yellow: #F0C75E;     /* Attention highlight: Status hints, focused decoration */
-  --parchment: #F6E7BF;       /* Primary text: Headings and high-priority text */
-  --muted-parchment: #CBBF9B; /* Secondary text: Body copy, labels, helper text */
-  --success: #92C6A5;         /* Positive status: Always paired with icon + text */
-  --warning: #E6B85C;         /* Needs attention: Sparingly used */
-  --error: #D9796A;           /* Error state: Validation or unavailable states */
+  --ink: #173B63;             /* Primary text and high-contrast civic blue */
+  --maroon: #EAF2F8;          /* Pale blue surface */
+  --burgundy: #D7E6F1;        /* Selected and interactive pale blue */
+  --antique-gold: #C9892B;    /* Restrained saffron action accent */
+  --warm-yellow: #A86D16;     /* Strong saffron highlight */
+  --parchment: #263238;       /* Heading and high-priority text */
+  --muted-parchment: #586A78; /* Secondary text and helper copy */
+  --success: #2E7D5B;         /* Positive status */
+  --warning: #98691D;         /* Needs attention */
+  --error: #B94A48;           /* Validation or unavailable states */
 
   /* --- Derived Atmospheric Surfaces & Overlays --- */
-  --surface-base: #160D12;
-  --surface-card: #200E17;
-  --surface-maroon: #4B1724;
-  --surface-elevated: #2A131F;
-  --surface-overlay: rgba(22, 13, 18, 0.88);
-  --surface-glass: rgba(75, 23, 36, 0.45);
+  --surface-base: #FFFFFF;
+  --surface-card: #FFFFFF;
+  --surface-maroon: #F3F7FA;
+  --surface-elevated: #F8FBFD;
+  --surface-overlay: rgba(255, 255, 255, 0.96);
+  --surface-glass: rgba(234, 242, 248, 0.82);
   
   /* --- Borders & Rules --- */
-  --line-gold: rgba(201, 154, 61, 0.28);
-  --line-gold-strong: rgba(201, 154, 61, 0.65);
-  --line-parchment: rgba(246, 231, 191, 0.12);
-  --line-subtle: rgba(203, 191, 155, 0.15);
+  --line-gold: rgba(23, 59, 99, 0.2);
+  --line-gold-strong: rgba(23, 59, 99, 0.58);
+  --line-parchment: rgba(38, 50, 56, 0.13);
+  --line-subtle: rgba(88, 106, 120, 0.2);
 
   /* --- Radial & Ambient Glows --- */
-  --glow-gold: rgba(201, 154, 61, 0.16);
-  --glow-maroon: rgba(75, 23, 36, 0.45);
-  --glow-warm: rgba(240, 199, 94, 0.18);
+  --glow-gold: rgba(201, 137, 43, 0.14);
+  --glow-maroon: rgba(72, 127, 167, 0.18);
+  --glow-warm: rgba(201, 137, 43, 0.12);
 
   /* --- Typography (PRD Section 7.2) --- */
   --font-serif: "Instrument Serif", "Cinzel", "Noto Serif Display", Georgia, serif;
@@ -83,10 +83,10 @@
   --transition-entrance: 550ms var(--ease-smooth);
 
   /* --- Elevation & Shadows --- */
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.35);
-  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.45);
-  --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.55), 0 0 0 1px var(--line-gold);
-  --shadow-gold: 0 8px 25px rgba(201, 154, 61, 0.22);
+  --shadow-sm: 0 2px 8px rgba(23, 59, 99, 0.08);
+  --shadow-md: 0 8px 24px rgba(23, 59, 99, 0.12);
+  --shadow-lg: 0 16px 40px rgba(23, 59, 99, 0.16), 0 0 0 1px var(--line-gold);
+  --shadow-gold: 0 8px 25px rgba(201, 137, 43, 0.2);
 
   /* --- Z-Indices --- */
   --z-base: 1;
